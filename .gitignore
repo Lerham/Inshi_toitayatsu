@@ -14,6 +14,8 @@
 *.synctex.gz
 tex/**/answer.pdf
 /tex/main.pdf
+/Inshi_Taisaku_Note/*.pdf
+*.synctex(busy)
 
 # Local TeX cache and rendered QA images
 .tex-cache/
@@ -27,6 +29,17 @@ tex/**/answer.pdf
 # Unsorted source files remain local. Curated images under each answer's
 # source-images directory are intentionally public for transcription review.
 **/source-files/
+
+# Application reports include documents written by other people and must not
+# be published with the entrance-exam study notes.
+/Inshi_Taisaku_Note/[[]GANSHO_REPORT[]]/
+
+# Private or omitted chapters from the entrance-exam study notes.
+/Inshi_Taisaku_Note/[[]IroIro[]]/Research.tex
+/Inshi_Taisaku_Note/[[]IroIro[]]/PREVIOUS_EXAM.tex
+/Inshi_Taisaku_Note/[[]IroIro[]]/English.tex
+/Inshi_Taisaku_Note/[[]IroIro[]]/Zatta_Quiz.tex
+/Inshi_Taisaku_Note/[[]IroIro[]]/memo.tex
 
 # Local secrets and credentials
 .env

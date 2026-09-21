@@ -1,0 +1,106 @@
+\chapter{函数解析学}
+基礎事項は仮定する。必要ならば\href{}{講義ノート}を参照せよ。
+
+\section{定理命題覚え書き}
+定理と命題を証明なしで記す。
+
+\begin{theo} (\tf{有限次元ノルム空間の特徴付け})
+ノルム空間$X$について, 次は同値である。
+\ben
+\item $\dim{X} < \infty$
+\item $X_1 = \{ x\in X\mid \norm{x} \leq 1 \}$がコンパクト。
+\een
+\end{theo}
+
+\begin{theo} (\tf{直和分解定理})
+
+\end{theo}
+
+\begin{prop}
+$f:X\times X\to \mb{C}$をsesqui-linearとする。このとき, $i=\sqrt{-1}$として
+\[f(x,y) = \dfrac{1}{4} \sum_{k=0}^{3} i^{k}f(x+i^{k}y, x+i^{k}y)\]
+である。とくに, $f,g$がsesqui-linearで$f(x,x) = g(x,x)$がすべての$x\in X$で成り立つなら, $f=g$である。
+\end{prop}
+
+\begin{theo} (\tf{射影定理})
+
+\end{theo}
+
+\begin{prop} (\tf{Bessel不等式})
+
+\end{prop}
+
+\begin{theo} (\tf{Parseval等式})
+
+\end{theo}
+
+\begin{theo} (\tf{Rieszの表現定理})
+
+\end{theo}
+
+\begin{prac}
+$X$をBanach空間とする。列$\{ x_n \}\subset X$が任意の$\phi\in X^{\ast}$に対して$\phi(x_n)\to \phi(x)$をみたすとき, $\{ x_n \}$は$x$に弱収束するといい, $\wlim_{n\to \infty} x_n = x$と書く。$X$がHilbert空間のとき, $\wlim_{n\to \infty} x_n = x$であることは, 任意の$y\in H$に対して$\inpr{x_n}{y} \to \inpr{x}{y}$を満たすことと同値であることを示せ。
+\end{prac}
+
+
+\begin{theo}
+$H_i$はHilbert空間とする。$T\in B(H_1,H_2)$のとき, 
+\ben
+\item $R(T)^{\bot} = \ker{T^{\ast}}$, $\ovl{R(T)} = (\ker{T^{\ast}})^{\bot}$
+\een
+\end{theo}
+
+\begin{theo} 
+$1\leq p<\infty$のとき, 
+\[L^{p}(\Omega,\mu) \ni g \mapsto  \phi_{g}\in L^{p}(\Omega,\mu)^{\ast}\]
+は等長同型である。ただし, 
+\[\phi_g(f) = \int_{\Omega} fg\, d\mu\]
+\end{theo}
+
+\begin{theo} (\tf{一様有界性原理})
+
+\end{theo}
+
+\begin{theo} (\tf{閉グラフ定理})
+
+\end{theo}
+
+\begin{theo} (\tf{Banach-Steinhousの定理})
+
+\end{theo}
+
+\begin{cor} 
+弱収束列はノルム有界である。
+\end{cor}
+
+
+
+\subsection{演習問題}
+
+\subsubsection{Level A}
+\subsubsection{Level B}
+\subsubsection{Level C}
+
+\section{例題}
+
+\begin{prob} (H28東北選択) \label{prob:H28_tohoku_sentaku_6}
+$C_{c}(\mb{R})$を$\mb{R}$上のコンパクト台実数値連続関数の集合とする。$f\in C_{c}(\mb{R})$は非負かつ$f\neq 0$とし, 任意の$u\in L^2(\mb{R})$に対して
+\[(Fu)(x) :=  \int_{-\infty}^{\infty} f(x-y)u(y)\, dy\]
+\[(Gu)(X) := e^{-|x|/2}(Fu)(x)\]
+とおく。
+\ben
+\item $\rho\in C_{c}(\mb{R})$も非負かつ$\rho\neq 0$とする。$\{ u_n \}_{n=1}^{\infty}$を$u_n = \rho(x+n)$で定義する。$\{ u_n \}$は$L^2(\mb{R})$で$0$に弱収束するが$\{ Fu_n \}$は$L^2(\mb{R})$で0に強収束しないことを示せ。
+\item $G$は有界作用素$L^2(\mb{R}) \to L^2(\mb{R})$であることを示せ。
+\item $\{ v_n \}\subset L^2(\mb{R})$が$L^2(\mb{R})$で$0$に弱収束するなら$\{ Gv_n \}$は$L^2(\mb{R})$で$0$に強収束することを示せ。
+\een
+\end{prob}
+
+
+
+
+
+
+
+
+
+

@@ -16,4 +16,15 @@ dvipdfmx main.dvi
 
 完成PDFは `output/pdf/大学院数学院試_答案集.pdf` として公開します。
 
+## 院試対策ノート
+
+過去問答案集とは別に、`Inshi_Taisaku_Note/exam.tex` を入口とする院試対策ノートがあります。
+
+```powershell
+Set-Location Inshi_Taisaku_Note
+latexmk exam.tex
+```
+
+完成PDFは `output/pdf/院試対策ノート.pdf` として公開します。`[GANSHO_REPORT]` は公開対象外のため、Gitの追跡から除外しています。
+
 

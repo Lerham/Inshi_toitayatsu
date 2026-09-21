@@ -1,0 +1,1092 @@
+
+\chapter{線形代数}
+\begin{tips}
+\href{https://ja.wolframalpha.com/examples/mathematics/algebra/matrices/}{Wolfram Alpha}によって対角化, 行列式, 固有値などの計算が確かめられる。
+\end{tips}
+\section{基礎}
+さまざまな基礎や典型問題についてまとめる. 
+
+\subsection{生成される空間}
+
+ベクトルがいくつか与えられて, それらで張られる空間の次元を求めるには, \tf{そのベクトルを行ベクトルに持つ行列を基本変形した行列のrankを計算するとよい.} rankは基本変形で不変な量である. 
+
+\begin{egprob} (2021基礎数学試験-2)
+実数$a$に対し, ベクトル
+\[v_1 = \bmat{a\\1\\1\\2}, v_2 = \bmat{2\\1\\0\\3}, v_3 = \bmat{3\\1\\-1\\4}, v_4 = \bmat{5\\1\\-3\\a+5}\]
+で生成される$\mb{R}^4$の部分空間の次元を求めよ. 
+\end{egprob}
+\begin{egans}
+\bealn{ 
+&A = \bmat{ 
+2&1&0&3\\ 
+3&1&-1&4\\
+a&1&1&2\\
+5&1&-3&a+5
+} 
+\to 
+\bmat{ 
+2&1&0&3\\ 
+1&0&-1&1\\
+a-2&0&1&-1\\
+3&0&-3&a+2
+}\\
+&\xrightarrow{2行で掃}
+\bmat{ 
+2&1&0&3\\ 
+1&0&-1&1\\
+a-1&0&0&0\\
+0&0&0&a-1
+}
+} 
+よって$a=1$のときrankは2で$a\neq 1$のときrankは4である. 
+\end{egans}
+\begin{rem} 
+最短の基本変形を目指すのもよいが, いつもそうしていると時に計算を間違える. やはり行基本変形はやり方が決まっているぶん安定するというものなので, そのへんはバランスを取りたい. 
+\end{rem}
+
+
+
+
+\subsection{さまざまな行列}
+まず基本的な行列の名前について覚えておこう. 後にも取り上げる事項もあるが, 固有値や対角化可能性についてもまとめておく. 
+\ben 
+\item 直交行列とは${}^{t}A\cdot A = I_n$を満たす行列のこと. [例] \tf{回転行列} $\sumib{\cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta}}$. この行列は実係数とされることが多い(?). \tf{固有値の絶対値は1.} 実成分であるとすれば, \tf{行列式}は$\pm 1$.  Euclid内積において\tf{各行は正規直交基底をなし, 各列も正規直交基底をなす.}
+\item ユニタリ行列とは${}^{t}\ovl{A} \cdot A = I_n$を満たす行列のこと. \tf{固有値は絶対値1の複素数}. 行列式も絶対値1の複素数.  Hermite内積において\tf{各行は正規直交基底をなし, 各列も正規直交基底をなす.}
+\item 対称行列とは${}^{t}A = A$を満たす行列のこと. Euclid内積で$\inpr{Au}{v} = \inpr{u}{Av}$とできる. \tf{直交行列で対角化可能.}(固有ベクトルの正規直交化を並べた行列と同値.)  
+\item Hermite行列とは${}^{t}\ovl{A} = A$を満たすものをいう. $\inpr{Au}{v} = \inpr{u}{Av}$ 左辺を$A^{\ast}$と書いたりすることもある. \tf{ユニタリ対角化可能.}(固有ベクトルの正規直交化を並べた行列と同値)
+\item 正定値行列とは, $A\in M_n(\mb{R})$であって, 任意の$0$でない列ベクトル${\bf x}$に対して, ${}^{T}{\bf x}A{\bf x}$が必ず正となるとに言う. 
+\item 正規行列とは$A^{\ast}A = AA^{\ast}$を満たすもの. (しかし正直, どこで使われてるのかわからない)
+\item 
+\een
+
+\begin{rem}
+いくつかの行列は\tf{内積と非常に相性が良い.} 
+\end{rem}
+
+\begin{egprob}
+$D\in M_{n}(\mb{R})$が歪Hermite行列, つまり$D^{\ast} = -D$を満たすとするとき, $D$の固有値は0か純虚数であることを示せ。とくに実歪対称行列$D$に関して主張が成り立つ($D^{\ast} = {}^{T} D$だから)。
+\end{egprob}
+\begin{egans}
+$Dv = \lambda v$とする($v\neq \ve{0}$)。$\mb{C}^{n}$の標準内積に関して$\inpr{Dv}{v} = \inpr{v}{D^{\ast}v}$が成り立ち, $D^{\ast} = -D$だから
+\beqn
+&&\lambda\inpr{v}{v} = \inpr{\lambda v}{v} = \inpr{Dv}{v}\\
+&=& \inpr{v}{D^{\ast}v} = -\inpr{v}{Dv} = -\inpr{v}{\lambda v}\\
+&=& -\ovl{\lambda} \inpr{v}{v}
+\eeqn
+よって$\lambda = -\ovl{\lambda}$なので実部が0でなければならない。\qed
+\end{egans}
+\begin{rem}
+元々, 歪Hermite行列だとか対称行列だとか直交行列だとか, いくつかの行列はその「行列の形」ではなく\tf{内積と絡めて}理解したほうがよい対象であったりする。たとえば, 実数上の内積では
+\[\lan Av, w\ran = \lan v, {}^{t}Aw\ran\]
+という関係式があったのだから, $\lan Av, Aw\ran = \lan v,w\ran$を満たすもの(つまり, 「直交性(内積0)を保つ行列」)として直交行列を定義すると思うと自然である。
+\end{rem}
+\begin{prac}
+対称行列の固有値が実数であることを示せ。
+\end{prac}
+\begin{prac}
+実の成分をもつ直交行列の固有値は, 絶対値1の複素数であることを示せ. 
+\end{prac}
+\begin{warning}
+固有値が$\pm 1$になるとは限らない! おそらく$\det{A} = \pm 1$との勘違い. 
+\end{warning}
+
+
+
+\subsection{固有値}
+
+\begin{prop} (トレースと行列式の性質)\\
+\ben
+\item $\tr{A+B} =\tr{B+A}$
+\item $\tr{AB} = \tr{BA}$
+\item $\det{AB} = \det{BA}$
+\item $\tr{A}$は$A$の固有値和である。
+\item $\det{A}$は$A$の固有値積である。
+\een
+\end{prop}
+
+
+
+\begin{egprob} (Quiz, by Shakayami)
+以下の行列の固有値を求めよ。
+\[\bep
+4 & 9 & 2\\
+3 & 5 & 7\\
+8 & 1 & 6
+\enp
+\]
+%魔法陣ですね
+%魔法陣なので、(1,1,1)が固有ベクトルになります(by shakayami)
+\end{egprob}
+\begin{egans} 
+行列を$A$として$A- \lambda I$を基本変形したとき
+\[
+\bep
+15-\lambda & 15-\lambda & 15-\lambda\\
+3 & 5-\lambda & 7\\
+8 & 1 & 6-\lambda
+\enp
+\]
+だから$\lambda = 15$は固有値\footnote{この行列は魔法陣であることに気づくと$(1,1,1)$が固有ベクトルとわかってそこから$15$が固有値であると気づくこともできる。}。$\lambda\neq 15$のとき上を$15-\lambda$で割って基本変形すると
+\[
+\bep 
+1 & 1 & 1\\
+0 & 2 - \lambda & 4\\
+0 & -7 & -2 - \lambda
+\enp
+\]
+なので行列式を取ると$(2-\lambda)(-2-\lambda) + 28 = \lambda^2 + 24$なので$\lambda = \pm 2\sqrt{6}i$が固有値である。よって
+\[\lambda = 15, \pm 2\sqrt{6}i\]
+\end{egans}
+上では15という非負実数の固有値を持っていた。実は次のようなことが知られている。線形代数の定理であるけれども, 実は幾何的な証明が知られている。
+\begin{theo} (\tf{Frobeniusの定理})\\
+各成分が負でない実数からなる$n$次正方行列は, 少なくとも一つ負でない実数の固有値をもつ。
+\end{theo}
+
+
+
+
+
+
+
+
+
+
+\subsection{次元}
+\begin{theo}
+$\dim{V} + \dim{W} = \dim{(V\cap W)} + \dim{(V+W)}$
+\end{theo}
+\begin{eg}
+$n$次元ベクトル空間$V$の$n-1$次元ベクトル空間$W_1,W_2$に対して,$W_1\cap W_2$の次元を求める。$W_1\neq W_2$であるならば$W_1+W_2 = V$なので$W_1\cap W_2$の次元は定理より$n-2$である。$W_1=W_2$ならば明らかに$n-1$次元である。
+\end{eg}
+線型代数でも準同型定理は大切である. 
+\begin{prop}
+線形写像$f:V\to W$があるとき$V/\ker{f} \cong \im{f}$. とくに, $\dim{V} - \dim{\ker{f}} = \dim{\im{f}}$である. 
+\end{prop}
+
+理論的に使うことがあるので, 次を示しておく. 
+\begin{egprob} \label{egprob:rank_ineq}
+$n\times n$行列$A,B$に対して, 次を示せ. 
+\[\rank{A} + \rank{B} \leq \rank{AB} + n\]
+\end{egprob}
+\begin{egans}
+$A|_{\im{B}}$に関して準同型定理を考えると
+$\rank{AB} = \rank{B} - \dim{(\ker{A} \cap \im{B})} $だから, 示すべき不等式は
+\[\rank{A} + \dim{(\ker{A}\cap \im{B})} \leq n\]
+である. これは確かに正しい. なぜなら, 
+\[n = \rank{A} + \dim{\ker{A}}\]
+と比較できるから. \qed 
+\qed 
+\end{egans}
+この不等式は後に対角化可能性を論じるときに用いられる. 
+\begin{egprob}
+$n\times n$行列$A$の最小多項式が重根を持たないとき, $A$の固有ベクトルよりなる基底が存在することを証明せよ. 
+\end{egprob}
+
+\begin{egans}
+$A$の相異なる固有値を$\lambda_1,\cdots, \lambda_s$とし, $W_{\lambda_i}$を固有値$\lambda_i$に関する固有空間とする. すなわち, $W_i = \ker{(A-\lambda_i I)}$である. このとき最小多項式は$\prod_{i=1}^{s}(X-\lambda_i)$となる. よって, 
+\[\prod_{i=1}^{s} (A-\lambda_i I) = O\]
+により, 
+\[\rank{\parena{\prod_{i=1}^{s} (A-\lambda_i I)} }= 0\]
+である. 先の不等式を$s-1$回用いると, 
+\bealn{ 
+0=\rank{\parena{\prod_{i=1}^{s} (A-\lambda_i I)}} &\geq -(s-1)n + \sum_{i=1}^{s} \rank{(A-\lambda_i s)}\\
+&= -\ao{ \sum_{i=1}^{s} (n-\rank{(A-\lambda_i I)}) + n}\\
+&= -\sum_{i=1}^{s} (\dim{W_{i}}) + n \quad (\because 準同型定理)
+}
+よって$\dim{\oplus_{i=1}^{s} W_i} = \sum_{i=1}^{s} \dim{W_i} \geq n$が得られる. 各$W_i$の基底を選び, それらの和集合を考えればそれは$n$本以上のベクトルを含み, かつ一次独立である. よって, それは実際には$n$本であり, $\mb{R}^{n} \cong W_1\oplus \cdots \oplus W_s$となる. ここから固有ベクトルよりなる基底が作れる. 
+\end{egans}
+
+次に刺される読者は多いのではなかろうか. 
+\tbox{ 
+\begin{egprob}
+$k=\mb{R},\mb{C}$とする. 任意の$k$成分の行列$A$に対し, $A$の行ベクトルの一次独立な本数$(\mr{row. rank}A)$と$A$の列ベクトルの一次独立な本数$(\mr{column. rank}A)$は一致することを示せ. 
+\end{egprob}
+}{}
+\begin{egans}
+$A$を$m\times n$行列とする. $A$は線形写像$k^n \to k^m$を定める. 線形写像$\Phi:k^m \to (k^m)^{\ast} = \mr{Hom}_{k}(k^m,k)$を次で定める.
+\[\Phi(y) = (k^n\ni x\mapsto \lan Ax,y \ran \in k)\]
+ただし$x=(x_i), y=(y_i)\in k^m$に対し$\lan x,y\ran = \sum_{i} x_iy_i$と定める. このとき, 次が成立することを示す. 
+\lefba{ 
+\begin{claim} $V = \im{A}\subset k^m$とするとき, 
+\[\ker{\Phi} = V^{\bot} = \ker{{}^{t}A}\]
+ただし$V^{\bot} = \set{x\in k^m\mid \forall v\in V,  \lan x, v\ran = 0}$である. 
+\end{claim}
+}
+\prf $k^n$の標準基底を$e_1,\dots, e_n$として
+\bealn{ 
+y\in \ker{\Phi} &\iff \forall x\in k^n, \lan Ax,y\ran = 0 \\
+&\iff \forall v=Ax \in V, \lan v,y\ran = 0 \\
+&\iff \forall x\in k^n, \lan x,{}^{t}Ay\ran = 0 \\
+&\iff {}^{t}Ay = 0\qquad (\because x=e_iとすればわかる) \\
+&\iff y\in \ker{{}^{t}A}
+}
+より成立する. (\tf{Claim証明終})\\
+これにより
+\bealn{ 
+\dim{\ker{\Phi}} &= \dim{V^{\bot}} \\
+&= m - \dim{V} = m - \mr{row.rank}A\\
+&= \dim{\ker{{}^t A}} = m-\dim{\im{{}^t A}}\\
+&= m - \mr{colmun.rank} A
+}
+により示される. 
+\end{egans}
+
+{\small 
+\begin{rem} 上の主張は$k$を一般の体にしても実はよいのだが, $\dim{V^{\bot}} = m - \dim{V}$に少し問題がある(それ以外は準同型定理や線形写像の話なので, 正しいはずである). もともとこの次元等式を示すにあたって, [佐武]などの教科書では$W\cap W^{\bot} = \set{0}$を示すであろう. この部分は$\mb{R},\mb{C}$に非退化なノルムが入ることを用いているので, 一般の体$k$では適用できない. \cite{SLA} Theorem6.4(145p)から次の定理を引用する. 
+\begin{theo} $k$を体, $V,V'$を$k$ベクトル空間として, 
+$V\times V'\to k$を双線型写像とし, $W$はこの双線型写像に関して$V'$と直交する元全体からなる$V$の部分空間とし(\tf{左での核}という), $W'\subset V'$も同様(\tf{右での核})とする. $V'/W'$が有限次元であるとき, 誘導される写像$V'/W'\to (V/W)^{\lor}$は同型写像である. 
+\end{theo}
+さて, 先の問題に戻って$\Phi$はもとより$k^n\times k^m \to k$, $(x,y)\mapsto \lan Ax,y\ran$という双線型写像から得られるものである. 左での核は$\ker{A}$であり, 右での核は$V^{\bot}$である. よって定理と, 有限次元の場合には双対を取っても次元が変わらないことから$n-\dim{\ker{A}} = m - \dim{V^{\bot}}$であり, 左辺は$\dim{\im{A}} = \dim{V}$だから$\dim{V} = m - \dim{V^{\bot}}$が得られる. 
+\end{rem}
+}
+
+
+
+\subsection{逆行列・余因子行列}
+
+\begin{prop} (\tf{クラメルの公式})
+
+\end{prop}
+次の問題はCramerの公式を覚える良い切っ掛けになるであろう。
+\begin{prob}(筑波大学大学院システム情報工学研究科経営・政策科学専攻・社会システム工学専攻)\\
+平面$\mb{R}^2$上の3点$(x_i,y_i)$ ($i=1,2,3$)は一直線上の点ではないとする。$x_1,x_2,x_3$が互いに異なる実数であるとき, 次の問いに答えよ。
+\ben
+\item $\det{\bep x_1^2 & x_1 & 1\\ x_2^2 & x_2 & 1\\ x_3^2 & x_3 & 1 \enp} \neq 0$であることを示せ。
+\item $\det{\bep x_1 & y_1 & 1\\ x_2 & y_2 & 1\\ x_3 & y_3 & 1 \enp} \neq 0$であることを示せ。
+\item 3点$(x_i,y_i)$ ($i=1,2,3$)を通る放物線
+\[y=ax^2+bx+c\quad (a,b,c\in \mb{R}, a\neq 0)\]
+が存在することを示せ。
+\een
+\end{prob}
+
+\newpage 
+\subsection{基本変形}
+基本変形は慎重にやろう. 基本変形で保たれるものは次の通りである. 
+\begin{prop} 正則行列$P$と(正方とは限らない)行列$A$を考える.  
+\ben 
+\item 積$PA$が定義できるとき, $\ker{PA} = \ker{A}$である. したがって\tf{行基本変形は$A\bolm{x} = \bolm{0}$の解空間を変えない. } 
+\item 積$AP$が定義できるとき, $\im{AP} = \im{A}$である. したがって, \tf{列基本変形は$A$の像を変えない.}
+\item 積$PA$が定義できれば$\rank{A} = \rank{PA}$であり, 積$AP$が定義できれば$\rank{A} = \rank{AP}$である. したがって, $\rank$は基本変形で不変な量である. 
+\een 
+\end{prop}
+
+
+
+
+
+
+\begin{egprob} (H31基礎科目7) \label{prob:H31kiso7}
+次の行列式を求めよ. 
+\[
+\bmat{ 
+0 & 1 & 2 & 3 & \cdots & n-1 \\
+1 & 0 & 1 & 2 & \cdots & n-2 \\
+2 & 1 & 0 & 1 & \cdots & n-3 \\
+3 & 2 & 1 & 0 & \cdots & n-4 \\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+n-1 & n-2 & n-3 & n-4 & \cdots & 0 
+}
+\]
+\end{egprob}
+
+\begin{egans}
+$n$行目から$n-1$行目を引く. $n-1$行目から$n-2$行目を引く. この順で, $i+1$行目から$i$行目を引き, 最後に$2$行目から1行目を引く. すると, 
+\[
+\bmat{ 
+0 & 1 & 2 & 3 & \cdots & \aka{\bolm{n-1}} \\
+\aka{\bolm{1}} & -1 & -1 & -1 & \cdots & -1 \\
+1 & \aka{\bolm{1}} & -1 & -1 & \cdots & -1 \\
+1 & 1 & \aka{\bolm{1}} & -1 & \cdots & -1 \\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & 1 & 1 & 1 & \cdots & -1 
+}
+\]
+を得る. $j$ 列目$(2\leq j\leq n)$に$1$列目をたすと, 1行目と1列目を除いた部分で「1」は「2」に変わり, 「$-1$」は「0」に変わる. こうして得られた行列の行列式は, もとの行列式とは変わっておらず, 上の赤字の部分の数をかけていくことで計算できる. そこには$n-1$が一つと, 1が一つと, 2が$n-2$個あり, 上の赤字の順番で掛けていくときの符号は$(-1)^{n-1}$なので, 答えは\bolm{(-1)^{n-1}2^{n-2}(n-1)}. 
+\end{egans}
+
+
+
+
+
+
+
+\subsection{($\heartsuit$)相似}
+群論でいうところの共役関係が相似である。相似であることによって最小多項式は一致し, det や tr, その他様々な性質が同期する。
+\besha 
+\begin{theo}
+$A,B\in \mr{Mat}(n,\mb{C})$が相似であることと, $A,B$のJordan標準形が並び替えを除いて一致することは同値である。
+\end{theo}
+\ensha 
+\begin{rem}
+相似であることを示すより相似でないことを示すほうが易しい。実際,Jordan標準形を見るまででも無く,  相似であることによって保存されるものを見て分かるケースが多いからである。たとえば$A,B$が相似であるなら, $A,B$の最初多項式や固有多項式は等しいということが容易に分かる。
+
+なお, この逆の主張は成り立たない。たとえば, $E_{ij}\in \mr{Mat}(4,\mb{C})$を$i$行$j$列のみが1であるような行列とすると, \[E_{12} + E_{34},\quad E_{12}\]
+は同じ最小多項式を持つが, 相似ではない(どちらも異なるJordan標準形になっているからである)。
+\end{rem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\subsection{演習問題}
+\subsubsection{Level A}
+
+
+\begin{prob} (H20基礎1) \label{prob:H20B1}
+次の二つの行列は相似であるか。
+\[
+\begin{pmatrix}
+1 & 1 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{pmatrix},\quad 
+\begin{pmatrix}
+1 & 0 & 0\\
+0 & -1 & 0\\
+0 & 0 & 1
+\end{pmatrix}
+\]
+\end{prob}
+
+\begin{prob} (H21基礎2) \label{prob:H21B2}
+$a,b$を複素数とし, 
+\[
+A=\begin{pmatrix}
+a & 1 & 6 & 8\\
+1 & a & -1 & 2\\
+0 & 0 & b & 7 \\
+0 & 0 & 0 & 2
+\end{pmatrix}
+,\quad 
+B=\begin{pmatrix}
+9 & 0 & 0 & 0\\
+-7 & 2 & 0 & 0\\
+4 & 1 & 7 & 0 \\
+-8 & 5 & 3 & 4
+\end{pmatrix}
+\]
+\ben
+\item $A,B$の固有値を求めよ。
+\item $P\in GL(4,\mb{C})$が存在して$B=PAP^{-1}$となるような$a,b$を求めよ。
+\een
+\end{prob}
+
+\begin{prob} (H9数学I-1)
+$A^2 + E_2 = O$を満たす二次実正方行列$A$の例を一つ与えよ. また, $B^2 + E_3 = O$を満たす3次実正方行列$B$は存在しないことを示せ. 
+\end{prob}
+
+%================================Level B===============
+\subsubsection{Level B}
+\begin{prob} (H24数学I, 1) \label{prob:H24-I-1}
+$A,B\in \mr{Mat}_{n}(\mb{C})$, 多項式$f(X)\in \mb{C}[X]$とする. $Af(B) = B$が成り立っているとする.次を証明せよ. 
+\ben 
+\item $f(B)$が正則ならば$A$と$B$は可換. 
+\item $f(B)$が正則でなければ$f(0) = 0$. 
+\een 
+\end{prob}
+
+
+
+
+\subsubsection{Level C}
+\begin{prob} (H9数学I-3)
+$A,B$を実$n$次正方行列とする. $P\in \mr{GL}_n(\mb{C})$があって$B=PAP^{-1}$とするとき, $Q\in \mr{GL}_{n}(\mb{R})$があって$B=QAQ^{-1}$となることを示せ. 
+\end{prob}
+
+
+\subsubsection{Hint・Answer}
+
+\begin{probans}
+
+\end{probans}
+\begin{probans}
+No. 固有多項式を見よ. 
+\end{probans}
+\begin{probans}
+
+\end{probans}
+\begin{probans}
+$A=\sumib{0&1\\ 1&0}$. $(\det{B})^2 = -1$より存在しない. 
+\end{probans}
+%=====================-Level B===================
+\begin{probans}
+(1):一般に, $AC = B$かつ$BC=CB$ならば$ABC=BAC$である. $C=f(B)$とせよ. \\
+(2): $f(B)v = 0$なるノンゼロなベクトル$v$を取る. 
+\end{probans}
+
+%=====================Level C====================
+\begin{probans}
+$R(z) := zP + \ovl{z}\ovl{P}$を考え, $\parena{\dfrac{d}{dz}}^n \det{R(z)} \neq 0$を示せ. 
+\end{probans}
+
+
+
+
+
+
+
+
+
+%==================================================
+\newpage 
+\section{対角化・Jordan標準形}
+まず, 対角化可能性について述べる。次に, 対角化の基本的な計算をし, 最後に対角化の威力がわかる問題をとりあげる。
+\subsection{対角化可能性}
+よく知られた対角化可能条件は3つある。
+\besha
+\begin{prop} (対角化可能判定法)\\
+$A\in M_n(\mb{C})$に対して次は同値である。
+\ben
+\item $A\in M_n(\mb{C})$は対角化可能である。
+\item $A$の最小多項式は重根を持たない。
+\item $A$の重複度$\mu_{\alpha}$の固有値$\alpha$に対する固有空間$V_{\alpha}$について$\dim{V_{\alpha}} = \mu_{\alpha}$が成立する。
+\item $A$には1次独立な$n$個の固有ベクトルが存在する。
+\een
+\end{prop}
+\ensha
+\begin{egprob} (対角化可能であるための十分条件)\\
+$A\in M_n(\mb{C})$が次のいずれかの条件をみたすとき$A$は対角化可能であることを示せ。\footnote{\cite{linalg1}演習問題108pより。}
+\ben
+\item $A$が$n$個の相異なる固有値を持つ。
+\item $A^{m} = I_n$を満たす自然数$m$が存在する。
+\item $A^2 = A$を満たす(冪等行列)。
+\item 
+\item 
+\een
+\end{egprob}%%～～～が対角化可能であることを示せ系の問題募集中！
+
+\begin{egans}
+(1):固有多項式が重根を持たないので最小多項式もそうであるから。(2):最小多項式は$x^{m}-1$を割り切ることから重根を持っていないことになるから。(3):最小多項式は$x(x-1)$を割り切るから(2)と同様。
+\end{egans}
+
+
+\newpage 
+\subsubsection{実対称行列の直交対角化可能性}
+\tbox{ 
+\begin{theo}
+$A$が$n$次\tf{実}正方行列とする. $A$が直交対角化可能であるための\tf{必要十分条件}は, $A$が\tf{実対称行列であること}である. 
+\end{theo}
+}{}
+\prf まず$A$が直交対角化可能であるとする. すなわち, 直交行列$T$が存在して$T^{-1}AT$が対角行列$D$であるとする. このとき$A = TDT^{-1}$の転置を考えると
+\[{}^t A = {}^t (T^{-1}) {}^t D {}^t T = ({}^t T)^{-1} D {}^t T = (T^{-1})^{-1} D t^{-1} =   TDT^{-1} = A\]
+だから$A$は実対称行列である.\par 
+逆に$A$が実対称行列であるとする. $n$に関する帰納法で示す. $n=1$のときは自明. $n>1$とする.  $A$の固有値$\alpha$(\tf{注:}$A$は実対称なので$\alpha$は必ず実数)と, その実固有空間$V(\alpha)\subset \mb{R}^n$を取り, \aka{$V(\alpha)$の直交補空間$V(\alpha)^{\bot}$を取る.} $V(\alpha)$の正規直交基底$\set{v_1,\dots, v_m}$と$V(\alpha)^{\bot}$の正規直交基底$\set{w_1,\dots, w_{n-m}}$を取ると, この二つの基底の和は$\mb{R}^n$の正規直交基底となる. よって, $T := [v_1 v_2 \, \dots \, v_m\, w_1\, \dots \, w_{n-m}]$とすると$T$は直交行列である. $\mb{R}^n$の標準基底を$\set{e_i}$とするとき, 
+\bealn{ 
+T^{-1}A T &= [T^{-1}Av_1\, \dots\, T^{-1}Av_m \, T^{-1}AT e_{m+1}\,\dots\, T^{-1}AT e_{n}] \\
+&= [\alpha T^{-1}v_1\, \dots\, \alpha T^{-1} v_m\, T^{-1}AT e_{m+1}\,\dots\, T^{-1}AT e_{n}]\\
+&= [\alpha e_1 \, \dots\, \alpha e_m\, T^{-1}AT e_{m+1}\, \dots\, T^{-1}AT e_{n}]\\
+&=: \alpha E_m \oplus A_1 
+}
+となる. $A$は対称行列で$T$は直交行列だから, 証明の最初の議論と同様に$T^{-1}AT$もまた対称行列である. よって$A_1$は実対称行列であるから, $A_1$が直交対角化できればよい. $A_1$のサイズは$n-m$なので, 帰納法の仮定で, ある$n-m$次直交行列$T_1$により$T_1^{-1}A_1T_1$は対角行列となる. よって, $P = T(E_m \oplus T_1)$とおくと\tf{$P$もまた直交行列}であって, $P^{-1} = (E_m \oplus T_1^{-1})T^{-1}$であり, 
+\bealn{
+P^{-1}AP &= (E_m\oplus T_1^{-1}) T^{-1} A T (E_m \oplus T_1) \\
+&= (E_m\oplus T_1^{-1}) (\alpha E_m \oplus A_1) (E_m \oplus T_1) \\
+&= \alpha E_m\oplus T_1^{-1}A_1T_1
+}
+となるので, $A$も直交対角化可能である. \qed 
+\tbox{ 
+\begin{theo}
+$A$が$n$次実正方行列とする. $A$が直交対角化可能であるための必要十分条件ｈ, $A$の固有ベクトルのみからなる$\mb{R}^n$の正規直交基底が存在することである. 
+\end{theo}
+}{} 
+\prf $A$が直交対角化可能とする. $P^{-1}AP = \mr{diag}(\alpha_1,\dots, \alpha_n)$が対角行列で$P = [p_1\, p_2\, \dots\, p_n]$が直交行列なら, \bolm{Ap_i = \alpha_i p_i}である. よって$p_i$はすべて$A$の固有ベクトルで, $P$が直交行列なので$\set{p_i}_{1\leq i\leq n}$は正規直交基底となり, 固有ベクトルからなる正規直交基底の存在が示せた. 逆は, この議論を逆に辿って$P$を構成すればよい. \qed 
+
+\begin{egprob}
+$A$が実対称行列とする. $A$の異なる固有値$\alpha,\beta$に属する固有ベクトルを$v,w$とすると$v$と$w$は直交することを示せ. 
+\end{egprob}
+\begin{egans} $\alpha\neq 0$とする. $\alpha \lan \alpha v,\beta w\ran  = \lan \alpha v, w\ran = $
+\end{egans}
+
+
+
+
+
+\subsubsection{Jordan標準形}
+
+
+Jordan標準形の「固有値$\lambda_i$の部分」の中のJordan Blockの最大のサイズが$l_i$だとすると, \tf{最小多項式の次数は$\sum l_i$になる。}なぜなら, 固有値$\lambda_i$の部分は
+\[
+\begin{pmatrix}
+\lambda_i &1 &0 &\cdots &0\\
+0 & \lambda_i & 0 & \cdots  & 0\\
+0 & 0 & \lambda_i & \cdots & 0\\
+0 & 0& 0 & \cdots & 0
+\end{pmatrix}
+\]
+という形をしていて(対角成分のひとつ上は1か0), $\mu_i$を$\lambda_i$の重複度とするとそこから$I_{\mu_i}$を差し引いて$l_i$乗したらJordan Blockがすべて消失するからだ。この行列論的な現象は大事であるから注意しておく: 
+\begin{prop}
+$A$をサイズ$n$上三角行列で対角成分がすべて0であるものとするとき, $A^{n} = O$である. 
+\end{prop}
+
+ブロック型の行列においては, 次のような状況が成り立つというのは予想されるが, しっかり示しておこう.
+\begin{prop}
+$A$を複素行列で$A=A_1\oplus A_2\oplus \dots \oplus A_n$というブロック型の行列とする. このとき, $A$が対角化可能であることと, すべての$A_k$が対角化可能であることは同値. 
+\end{prop}
+\prf 同じ「型」を持つ二つの行列の積において, ブロックの外側にある成分は計算に\tf{全く影響しない}ということに注意せよ!(小さいサイズで適当に調べて見よ). そのような型同士の積は, 対応するブロック同士で積を取れば良い. \par 
+したがって, $P_k^{-1}A_k P_k$が対角行列になるなら, $P=P_1\oplus \dots \oplus P_n$は$P^{-1}AP$を対角化することが分かる. \par 
+逆に$A$が対角化可能とせよ. $A_k$をJordan標準形にする$P_k$を取る. このとき先と同じ$P$を取って$P^{-1}AP$を考えるとこれはJordan標準形になるが, $A$が対角化可能なのでこれは対角行列である(!). よって$P_k^{-1}A_kP_k$ももともと対角行列である. \qed
+\begin{rem}
+$P^{-1}AP$が対角行列だとしても, $P$に余計な成分があちこちに入っていると$P$と$A$が同じ型を持たないということが起きるので, 「逆に」以降の議論は注意しなければならない. この議論は同時対角化でも通用する. 
+\end{rem}
+
+
+次のような手ごわい問題も過去問に存在する。
+\begin{egprob} (H11数学I)
+$V=\mb{C}^n$とする。$A\in M_{n}(\mb{C})$とする。$V$の部分ベクトル空間$W$は, 任意の$w\in W$に対して$Aw\in W$が成り立つとき, $A$-不変であるという。
+\ben 
+\item $A$が対角化可能であるための必要十分条件は, $V$の$A$不変部分空間はつねに$A$不変な補空間を持つことであることを示せ。
+\item $A$が対角化可能でかつ$A$の各固有値の重複度が1であるための必要十分条件は,$V$の$A$不変な部分ベクトル空間はつねにただ一つの$A$不変な補空間を持つことであることを示せ。
+\een
+\end{egprob}
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{標準形の計算}
+
+\begin{egprob} (H28基礎科目I)
+$a$を実数とする. $A = \bmat{a&1&2\\ 0&1&0 \\ -2 & 0 & 0}$について以下の問に答えよ. 
+\ben 
+\item $A$の固有値を求めよ. 
+\item $A$が対角化可能となる実数$a$をすべて求めよ. 
+\een
+\end{egprob}
+
+\begin{egprob}
+次の行列のJordan標準形を求めよ. 
+\[ 
+\bmat{
+1 & a & 0 \\
+0 & 1 & 0\\
+0 & 0 & 2
+} 
+\]
+
+\end{egprob}
+
+\begin{egprob}
+次の対称行列を直交行列により対角化せよ. 
+\[
+\bmat{1 & 2\\ 2 & 1}
+\]
+\end{egprob}
+
+
+
+\begin{egprob} (東工大H30基礎)
+変数$x,y$に関する3次斉次多項式全体のなす$\mb{R}$上のベクトル空間を$V$とする. すなわち, 
+\[V = \set{ax^3 + bx^2y + cxy^2 + dy^3\mid a,b,c,d\in \mb{R}}\]
+と定める. 
+\ben 
+\item $T$は線形変換であることを示せ. 
+\item $T$の固有ベクトルからなる$V$の基底を求めよ. 
+\een 
+\end{egprob}
+
+\begin{egans}
+(1)は読者に託す. (2)も対角化の要領でやればよいだろう. まず$V$の基底は$(x^3,x^2y,xy^2,y^3)$の順に取る. 
+\bealn{ 
+T(x^3) &= 3x^3 + 3x^2y  \\
+T(x^2y) &= (x+y)(2xy + x^2) = x^3 + 3x^2y + 2xy^2\\ 
+T(xy^2) &= 2x^2y + 3xy^2 + y^3\\
+T(y^3) &= 3xy^2 + 3y^3 
+}
+より表現行列は次の通り. 
+\[
+A = \bmat{ 
+3 & 1 & 0 & 0 \\
+3 & 3 & 2 & 0 \\
+0 & 2 & 3 & 3 \\
+0 & 0 & 1 & 3
+}
+\]
+$|A-xI|$を頑張って計算する. めんどくさい....
+\end{egans}
+
+
+\newpage 
+\subsection{($\heartsuit$)同時対角化}
+「$AX = XA$」とか可換性の式が出てくることが院試では非常に多い！！！ 可換なだけかと思いきや, これには「同時対角化可能」という概念が絡んでいる. とくに, 与えられた$A$に対し$XA=AX$を満たす$X$が何次元分だけあるかという問題は頻出である. \par 
+まず同時対角化可能性の主張は以下の通りである. 証明を覚えてほしい. 
+\tbox{ 
+\begin{theo}
+$A,B$を対角化可能な複素正方$n$次行列とする. このとき, 
+\[A,Bが同時対角化可能 \iff AB=BA\]
+\end{theo}
+}{title=同時対角化可能性}
+\prf (すむーずぷりん氏のツイートを大変参考にした)
+$(\Rightarrow)$は易しい. $(\Leftarrow)$を示す. $A$の固有値を$\lambda_1,\dots,\lambda_s$とし, 固有空間を$V_A(\lambda_i)$で表す.  $AB=BA$から次が言えるということを覚えておこう. 
+\lefba{\begin{prac} $\lambda$を$\lambda_i$のいずれかとする. $v\in V_A(\lambda)$なら$Bv \in V_{A}(\lambda)$であることを示せ. 
+\end{prac}}
+よって$B(V_A(\lambda)) \subset V_{A}(\lambda)$が言える. $A$は対角化可能なので $V_A(\lambda_i)$ ($i=1,\dots, s$)の基底$\set{v_{i1},\dots, v_{i\mu_i}}$が$\mb{R}^n$の基底をなす. $P$を$i=1,2,\dots, s$の順にこの基底を列ベクトルに並べた行列とすると, $P^{-1}AP$は(いつものように！)対角行列であり, 左上から$\lambda_1$が$\mu_1$個, ..., $\lambda_s$が$\mu_s$個並ぶ. \par 
+この$P$で$P^{-1}BP$を考えると $P^{-1}BP = P^{-1}\sumib{ Bv_{11} &\dots& Bv_{s\mu_s}}$ となるが, $B v_{ij} \in V_{A}(\lambda_i)$なので$Bv_{ij}$は基底$\set{v_{i1},\dots, v_{i\mu_i}}$で表示される. その表示を$P^{-1}$で引き戻せば標準基底に戻るので, $\set{v_{i1},\dots, v_{i\mu_i}}$たちで取った基底の順番に注意すると,  $P^{-1}BP$はサイズ$\mu_i$の行列$B_i$の直和になっている: 
+\[
+P^{-1}BP = B_1\oplus \dots \oplus B_s =  \bmat{B_1 & \\ & B_2 \\ && \ddots \\ &&& B_s }
+\]
+各$B_i$をJordan標準形にする行列$Q_i \in \mr{GL}_{\mu_i}(\mb{C})$が存在. このとき$Q = Q_1\oplus \dots \oplus Q_s$とすると$Q^{-1} = Q_1^{-1}\oplus \dots \oplus Q_s^{-1}$で, ブロックごとに計算すれば
+\[Q^{-1}(P^{-1}BP)Q = \bmat{Q_1^{-1}B_1Q_1 & \\ & Q_2^{-1}B_2Q_2 \\ && \ddots \\ &&& Q_s^{-1}B_sQ_s }\]
+であり, これは$B$のJordan標準形. $B$は対角化可能としているので, 実際は対角行列. 
+一方で, $I_k$がサイズ$k$の単位行列のとき
+\[Q^{-1}(P^{-1}A P) Q =  \bmat{Q_1^{-1}(\lambda_1I_{\mu_1})Q_1 & \\
+& \ddots \\ && Q_s^{-1}(\lambda_s I_{\mu_s})Q_s }\]
+で, 各ブロックはまた$\lambda_i I_{\mu_i}$であり, $PQ$により同時対角化される.\qed 
+
+
+\begin{egprob} (\tf{同時固有ベクトル})
+$AB=BA$であるとき, $A,B$は共通の固有ベクトルを持つことを証明せよ. 
+\end{egprob}
+\begin{egans}
+
+
+\end{egans}
+
+
+
+
+\begin{egprob} (東北大H29共通1)\label{tohoku-H29-C1}
+$Z\in M_{3}(\mb{R})$に対して
+\[V(Z) = \set{X\in M_3(\mb{R})\mid ZX=XZ}\]
+とおく。
+\ben
+\item $A = \bep 8 & -9 & -2\\ 6 & -7 & -2 \\ -6 & 9 & 4 \enp$のとき, $A$の固有値と各固有値に対する固有ベクトルを求めよ。
+\item $V(A)$の次元を求めよ。
+\item $B=\bep -1 & -2 & 1\\ 4 & 5 & -2 \\ 4 & 4 & -1 \enp$のとき, $V(B)$の次元を求めよ。
+\een
+\end{egprob}
+
+\begin{egans} 本問は直接計算でもなんとかなってしまうが, さすがに同時対角化の証明でやったようなことを覚えておいた方が良い. \\
+(1): 各自計算せよ. 固有値は2, 1で, 固有空間$V_1$, $V_2$は
+\[V_1 = \lan \sumib{1\\1 \\ -1} \ran,  V_2 = \lan \sumib{3\\ 2 \\ 0}, \sumib{1 \\ 0 \\ 3} \ran \]
+(2): $X\in V(A)$のとき$AX=XA$である. $P = \sumib{1 & 3 & 1\\ 1 & 2 & 0 \\ -1 & 0 & 3}$により$P^{-1}AP = \mr{diag}(1,2,2)$である. 定理の証明で述べられたように, $v_1\in V_1$に対して$Xv_1\in V_1$, $Xv_2\in V_2$であるから $P^{-1}XP = \sumib{a&0&0\\ 0&b&c\\ 0&d&e}$という形になる. 逆にこの右辺の形をした行列$Y$を任意に取ると, その形から, これは$P^{-1}AP$と可換である. よって$PYP^{-1}$は$A$と可換である. 以上より,  $(k,l)$成分のみが1で他が0の行列を$E_{k,l}\in \mr{M}_{3}(\mb{R})$とすると
+\[V(A) = P\lan E_{1,1}, E_{2,2}, E_{2,3}, E_{3,2}, E_{3,3} \ran P^{-1}\]
+であるから5次元である. \\
+(3): 真似してみよ. 
+\end{egans}
+\begin{prac}
+上の(1),(3)を解け. 
+\end{prac}
+
+\begin{egprob} (東京大H29 A 第5問) 
+$A\in M_{4}(\mb{R})$, $A^2 - 2A + 2I_4 =0$, $V_{A} = \{ X\in M_4(\mb{R})\mid AX=XA \}$ このとき$\dim V_{A}$を求めよ。
+\end{egprob}
+\begin{egans}
+$x^2 - 2x + 2 = 0$は実数解を持たないので$A$は単位行列の定数倍とはならない。よって$A$, および$A$に共役な行列の最小多項式は$x^2 - 2x + 2$である。これは$1\pm i$を根に持つから, $A$の固有値は$\lambda = 1 + i$, $\ovl{\lambda}$ですべてである。よって固有多項式$\det{(xI - A)}$としてあり得るのは
+\[(x- \lambda)(x-\ovl{\lambda})^{3}, (x-\lambda)^2(x-\ovl{\lambda})^2, (x-\lambda)^{3}(x-\ovl{\lambda})\]
+のいずれかだが, 左と右の可能性はない。なぜなら, 明らかに$\det{(xI - A)}\in \mb{R}[x]$だから。よって$\det{(xI - A)} = (x^2 - 2x + 2)^2$であり, 最小多項式は重根を持たないので$A$は対角化でき, 固有ベクトルを並べた行列$P$を取り
+\[
+P^{-1}AP = 
+\begin{pmatrix}
+\lambda & 0 & 0 & 0\\
+0& \lambda & 0 & 0\\
+0 & 0 & \ovl{\lambda} & 0 \\
+0 & 0 & 0& \ovl{\lambda}
+\end{pmatrix}
+\]
+とできる. さて, $X \in V_A$なら
+\[P^{-1}X P = \bmat{a& b \\  c&d \\ && e&f\\ && g& h},\quad (a,\dots, h\in \mb{C})\]
+の形に表せる. 逆に右辺の形の行列$Y$を与えるとき, それは$P^{-1}AP$と明らかに可換であり, $A$は$PYP^{-1}$と可換である. よって, 複素の行列$X$で$AX=XA$を満たすものは複素$8$次元(実16次元)だけあると分かる. \par
+ここからいつ実に収まるのか考えたくなるが,それはいろいろと難しかった. 東大の佐久間氏の院試シケプリを参考にしたところ, なんと\tf{複素化}をしていた. $\mb{R}$より$\mb{C}$のほうが嬉しいというものの, $\mb{R}$の議論を$\mb{C}$に変えるために複素化を行うというのは面白く, テンソルの威力を感じた\footnote{にしても, これがA問題であることは驚きである. }.  以下, 同氏のそのアイデアを述べる. \par 
+$\dim_{\mb{R}}V(A) = \dim_{\mb{C}} V(A)\tens_{\mb{R}}\mb{C}$であるから$V(A) \tens_{\mb{R}}\mb{C}$を調べればよい. $V(A)\tens_{\mb{R}}\mb{C}$はいかにも$\mr{M}_{4}(\mb{C})$における$\set{XA=AX}$を満たす$X$の全体の$\mb{C}$ベクトル空間$W$だと思われる. 実際それが正しい. なぜなら, $f:\mr{M}_{4}(\mb{R})\to \mr{M}_{4}(\mb{R})$を $f(X)= AX-XA$とするとき, $\ker{f} = V(A)$であることに注意して, 同一視$\mr{M}_{4}(\mb{R})\tens_{\mb{R}}\mb{C} \cong \mr{M}_{4}(\mb{C})$; $R \tens c \leftrightarrow cR$のもとで
+\[W = \ker{(f\tens \mr{id}_{\mb{C}})} = (V(A)\tens \mb{C} )\oplus \mr{M}_{4}(\mb{R})\tens \set{0} = V(A)\tens \mb{C} \]
+であるから. よって実8次元である. \qed 
+
+
+
+\begin{ans} (計算がしんどすぎてダメな方法)\\
+$v_1\neq 0$を取り, $Av_1 = v_2$とし, $v_1,v_2,v_3$が一次独立になるように$v_3$を取ってから$Av_3 = v_4$とする. 
+\lefba{ 
+\begin{claim}
+$v_1,\dots, v_4$は$\mb{R}$上一次独立である. 
+\end{claim}
+\prf これらで張られる空間が3次元であることは分かっている. 
+$c_1v_1 + c_2 v_2 + c_3 v_3 + c_4 v_4 = 0$を非自明な関係式とする. $c_4\neq 0$が必要である.  $A$を作用させると, $Av_2 = A^2v_1 = 2v_2 - 2v_1$, $Av_4 = 2v_4 - 2v_3$だから
+\[-2c_2v_1 + (c_1+2c_2)v_2 - 2c_4v_3 + (c_3 + 2c_4)v_4 = 0 \]
+もし$c_3 + 2c_4 = 0$なら$c_1=\dots = c_4 = 0$が分かる. そうではないとき, 上の式に$\dfrac{c_4}{c_3  +  2c_4}$をかけたものと最初の式は$c_4v_4$が共通するので, それを引くことで$v_1,v_2,v_3$の線形関係式を得るから, それらの係数は0でなければならない. したがって, 
+\[c_1 = \dfrac{-2c_2c_4}{c_3 + 2c_4},  c_2 = \dfrac{c_4(c_1 + 2c_2)}{c_3 + 2c_4}, c_3= \dfrac{-2c_4^2}{c_3 + 2c_4}\]
+$a_i = c_i/c_4$とすると
+\[a_1 = \dfrac{-2a_2}{a_3 + 2}, a_2 = \dfrac{a_1 + 2a_2}{a_3 + 2}, a_3 = \dfrac{-2}{a_3 + 2}\]
+最後の式は$a_3^2 + 2a_3 + 2 = 0$で, 実数で成り立つ式ではない. よって矛盾. 
+\qed 
+}
+したがって$P = \sumib{v_1 & v_2  & v_3 & v_4}$は可逆. $A^2 = 2A - 2I_4$だから
+\[P^{-1}AP = \bmat{ 0 &-2 & & \\ 1&2&& \\ &&0&-2 \\ &&1&2
+}\]
+$V(A)\cong V(P^{-1}AP)$であるから上の行列$B:=P^{-1}AP$で同じ問題を調べればよい. $X=(x_{ij})_{i,j}\in\mr{M}_{4}(\mb{R})$とすると
+\[XB = \bmat{ x_{12} & -2x_{11} + 2x_{12} & x_{14} & -2x_{13} + 2x_{14} \\
+x_{22}& -2x_{21} + 2x_{22}& x_{24} & -2x_{23} + 2x_{24}\\
+x_{32} & -2x_{31} + 2x_{32} & x_{34} & -2x_{33} + 2x_{34} \\
+x_{42}& -2x_{41} + 2x_{42}& x_{44} & -2x_{43} + 2x_{44}
+}\]
+\[BX = \bmat{ -2x_{21} & - 2x_{22} &-2x_{23}& - 2x_{24}\\
+x_{11} + 2x_{21}& x_{12} + 2x_{22}& x_{13} + 2x_{23}& x_{14} + 2x_{24} \\
+-2x_{41} & - 2x_{42} &-2x_{43}& - 2x_{44}\\
+x_{31} + 2x_{41}& x_{32} + 2x_{42}& x_{33} + 2x_{43}& x_{34}+ 2x_{44} \\
+
+
+}\]
+ここから次元を計算すればできる. でもできない...
+\end{ans}
+
+\begin{comment}
+$\Lambda = P^{-1}A P $であるとすると, $X\in M_{4}(\mb{R})$に関して
+\[XA = AX \iff (P^{-1}XP)\Lambda = \lambda (P^{-1}XP)\]
+だから
+\beqn
+V_A &=& \set{ X \in M_4(\mb{R}) \mid (P^{-1}XP)\Lambda = \Lambda (P^{-1}XP)}\\
+&=& \set{X \in M_4(\mb{C}) \mid (P^{-1}XP)\Lambda = \Lambda (P^{-1}XP), X = \ovl{X}}
+\eeqn
+$Y\in M_{4}(\mb{C})$が$Y\Lambda = \Lambda Y$を満たすとして
+\[
+Y = 
+\begin{pmatrix} 
+A_{11} & A_{12} \\
+A_{21} & A_{22}
+\end{pmatrix}
+\]
+であるとすると
+\[\lambda A_{12} = \ovl{\lambda}A_{12}, \lambda A_{21} = \ovl{\lambda}A_{21}\]
+だから$A_{12} = A_{21} = O$であり, 
+\[
+X=
+P
+\begin{pmatrix}
+A_{11} & O \\
+O & A_{22}
+\end{pmatrix}
+P^{-1}
+\]
+を得る。
+\end{comment}
+
+\end{egans}
+
+
+\begin{egprob} (仮想面接問題) \\
+対角化可能な$A$に対し, $\set{XA = AX}$なる$A$と同サイズの$X$の全体の$\mb{C}$ベクトル空間の次元は固有値の重複度を用いて表すとどのようになりますか? 
+\end{egprob}
+
+
+
+
+
+
+\subsection{演習問題Part2}
+\subsubsection{Level A}
+\begin{prob} (2019前期 微分方程式レポート)\\
+$A=
+\bep
+6 & -3 & -7\\
+-1 & 2 & 1\\
+5 & -3 & -6
+\enp$
+を対角化し, $\ve{x}(t) = \bep x_1(t)\\ x_2(t)\\ x_3(t) \enp$に対する微分方程式$\dfrac{d\ve{x}}{dt} = A\ve{x}$を解け。
+\end{prob}
+
+
+\begin{prob} (H28基礎科目II,2)
+$A,B$を複素三次正方行列とする. $A$の最小多項式は$x^3-1$, $B$の最小多項式は$(x-1)^3$とする. このとき$AB\neq BA$であることを示せ. 
+\end{prob}
+
+%=======================%
+\subsubsection{Level B}
+
+\begin{prob} (H21 RIMS 基礎)
+$A\in \mr{M}_{n}(\mb{C})$に対し, $X\in \mr{M}_n(\mb{C})$で$AX=XA$なるもの全体の複素ベクトル空間$V$の次元は$n$以上であることを証明せよ. 
+\end{prob}
+
+
+\begin{prob} (東北大H28共同) \href{https://drive.google.com/file/d/1anaTAHLXhDH8Ng_6pvw6pPFb4MDD5v7i/view?usp=sharing}{解答}
+$3$次実正方行列
+\[
+A = \bep 0 & 2 & 1\\ 2 & 3 & 2 \\ 1 & 2 & 0 \enp
+\]
+に対して, 以下の問いに答えよ。
+\ben
+\item $A$の固有値をすべて求めよ。
+\item (1)で求めた固有値に対し, その固有値に対する固有空間の基底を一組求めよ。
+\item $n$を正の整数とするとき, $A^{n} \bep 1\\ 0 \\ 0 \enp$を$n$で表せ。
+\item 次の2条件を満たす$3$次実正方行列$B$が存在することを示せ。
+\[AB=BA,\quad B^2 = A\]
+\een
+\end{prob}
+
+\begin{prob} (H30東北大共同1)\label{prob:tohoku_H30_kyodo1}
+$a$を実数, $A$を行列
+\[\bep 
+2 & a & -1\\
+0 & 2 & 1\\
+-1 & 8 & -1
+\enp\]
+に対して, 線形写像$f_{A}:\mb{R}^{3}\to\mb{R}^{3}$を$f_A(v)=Av$で定める。
+\ben
+\item 行列$A$の固有多項式$p_{A}(x)$を求めよ。
+\item 行列$A$を複素行列によって対角化できないような実数$a$をすべて求めよ。
+\item $a$を(2)で求めたものとする。$\mb{R}^{3}$の一次元部分空間$W$で
+\ben[label=(\alph*)]
+\item $f_{A}(W)  \subset  W$
+\item $f_A$が誘導する線形写像$\witi{f}_{A}:\mb{R}^{3}/W\to \mb{R}^{3}/W$の表現行列は対角化可能である。
+\een
+\een
+\end{prob}
+
+
+
+\subsubsection{Level C} 
+\begin{prob} (H31基礎科目5) \label{prob:H31kiso5}
+$n$を2以上の整数, $A$を$n$次複素正方行列とする. $A^{n-1}$は対角化可能でないが$A^n$が対角化可能であるとき, $A^n=O$であることを示せ. 
+\end{prob}
+
+
+
+\subsection{Hint・Answer}
+{\small
+\begin{probans}
+$x' = kx$は$x=ce^{kx}$が解. 対角化してから微分方程式を解き, 基底を戻す. 
+\end{probans}
+
+\begin{probans}
+$A$は対角化可能. もし$AB=BA$なら$B$も対角化可能で, 最小多項式に関する条件に反する.\\ 
+\fbox{同時対角化の知識を避けたい場合} $AB=BA$とする. $\omega$が1の3乗根, $v_k$を固有値$\omega^k $に属する$A$の固有ベクトルとする. このとき$A(Bv_k) = \omega^k Bv_k$なので$Bv_k$も$A$の$\omega^k$に属する固有ベクトルとなる. $V_A(\omega^k)$は一次元なので$Bv_k = b_kv_k$なる$b_k \in \mb{C}$が存在. $b_k$は$B$の固有値なので$b_k=1$である. よって$v_0,v_1,v_2\in V_B(1)$. $\set{v_0,v_1,v_2}$は$A$では異なる固有値に属する固有ベクトルなので, 一次独立である. よって$P=[v_0 \, v_1\, v_2]$は正則で, $P^{-1}BP = P^{-1}[Bv_0\, Bv_1\, Bv_2] = P^{-1}[v_0\, v_1\, v_2] = I$なので 最小多項式は$x-1$でなければならない. これは矛盾. (\tf{ポイント:} $A$を対角化する行列$P$で$P^{-1}BP$を考えること.)
+\end{probans}
+
+%==================================Level B================
+
+\begin{probans}
+$A$がJordan標準形の場合に示せばよくなる. なぜか. さらに, $A$がJordan Blockの形の行列にして示せば一般の場合にも示せる. なぜか. さらに, $A=\lambda I + A'$と分ければ, $A'X = XA'$となるから$\lambda = 0$の場合のみ見ればよい. この特別な$A$に対して主張が示せるか? 
+\end{probans}
+
+
+
+\begin{probans}
+
+\end{probans}
+
+\begin{probans}
+
+\end{probans}
+
+\begin{probans}
+
+\end{probans}
+
+
+%===========Level C===================
+
+\begin{probans}
+$A$をJordan標準形に取り替えてよい.\par  $J(c,m)$を\tf{サイズ2以上の}Jordan Blockの任意の一つとする.  $A^n$は対角化可能なので, そのBlockとしてある$J(c,m)^n$も対角化可能. よって$J(c,m)^n$の最小多項式に重根がないが, $J(c,m)^n$の固有値は$c^n$のみだから最小多項式は$T-c^n$である. よって$J(c,m)^n = c^n I$を得るが, 1行2列の成分比較から$nc^{n-1}=0$なので$c=0$である. よってBlockを並び替えると(並び替える操作は共役類を保つ), $A=D \oplus N$あるいは$A=N$という形にしてよい. ここで$D$は正則な対角行列で, $N$は$J(0,m)$の形の行列のいくつかの直和であるが, $A$にノンゼロな固有値が元から無い場合には$A=N$である. さて, 仮に$D$のサイズが1以上であったなら$N$のサイズは$n-1$以下だから, $N^{n-1} = O$. よって$A^{n-1} = D^{n-1}\oplus N^{n-1} = D^{n-1}\oplus O$は対角行列なので仮定に矛盾. よって$A=N$だが確かに$A^n = O$である. \qed \\
+
+\begin{comment}
+ $A$の固有値を$\lambda_i$ ($i=1,\dots, s$)とする. このとき, $s=1$である. [証明] $s\geq 2$ならJordan Blockはすべてサイズ$n$未満である.  $A^{k}$は常にブロック型の行列である. $A^{n-1}$が対角化可能でないので, あるブロック$J(c,m)$が$n-1$乗で対角化可能でない. しかし$A^n$が対角化可能なので, そのブロック$J(c,m)$は$n$乗で対角化可能である. よって$J(c,m)^n = c^nI$だが, 左辺の1行2列目が$nc^{n-1}$なので$c=0$でなければならない. しかし$m<n$なので$J(c,m)^{n-1} = O$であり, 対角行列なのでおかしい.[終] \par
+ よって$s=1$であり, $A$の固有値は1種類しかないので, それを$c$とおく.  このとき, $A^n = c^nI$である. $A$のJordan Blockが$r$個あるとする. このとき$r=1$である. [証明] $r\geq 2$とせよ. Block $J(c,m)$を任意に一つ取ると$m<n$である. $A^n = c^n I$により$J(c,m)^n = c^n I$であるべきだが, 先と同様の成分比較で$c=0$でなければならない. しかしこのとき$m<n$により$J(0,m)^{n-1} = O$である. $J(c,m)$は任意のJordan Blockなので$A^{n-1}$が対角化可能となり不適. [終] よって$r=1$なので$A=J(c,n)$と書ける. $A^{n} = c^n I$で同様の成分比較により$c=0$を得る. このとき確かに$A^n = J(0,n)^{n} = O$である.
+ \end{comment}
+ 
+\end{probans}
+}
+
+
+
+
+\clearpage
+\section{extra}%ためておくとこ
+
+
+\subsection{演習問題extra}
+
+\begin{prob} (京大H21-I)\\
+$K$を標数$0$の体, $V$を$K$上の有限次元ベクトル空間, $T$を一次変換で
+\[T^3=\mr{id}_{V}, \tr{T}=0\]
+を満たすものとする。このとき, $V$の次元は$3$の倍数であることを示せ。
+\end{prob}
+\begin{prob} (仮想面接試験問題)\\
+上の問題において,標数が$p>0$であるときの反例はありますか？また, $3$を素数$p$にした場合に上の問題を解いて下さい。
+\end{prob}
+
+
+\clearpage 
+\section{行列群の共役類}
+次の問題は, 意外だろう.
+\begin{egprob} (H9数学I-3)
+$A,B$を$n$次実正方行列とする. ある$P\in \mr{GL}_{n}(\mb{C})$が存在して$B=PAP^{-1}$であるとき, ある$Q\in \mr{GL}_{n}(\mb{R})$が存在して$B=QAQ^{-1}$であることを示せ. 
+\end{egprob}
+\begin{egans}
+$P$の実部を集めた行列$X$と, 虚部を集めた行列$Y$を考える. $X+iY = P$である. $t$を複素数として, $A+tB$を考える. $BP=PA$で, $A,B$が実であるから$BX=XA, BY=YA$である. よって$B(X+tY) = A(X+tY)$である. $\det{(X+tY)}$は$t$の多項式であるが, $t=i$のときに$\det{P} \neq 0$となるので, この多項式は零多項式とは異なる. したがって$t$を実数の範囲に制限して,$\det{(X+tY)}\neq 0$になるような$t$を見つけることができ, それを$Q$とおけばよい. \qed 
+\end{egans}
+
+
+
+
+\subsection{(旧)$\mr{GL}_{2}(K)$の考察}
+この節では$\mr{GL}_{2}(K)$の共役類について論じる. アイデアについては, \href{https://math.stackexchange.com/questions/1416055/classification-of-all-conjugacy-classes-of-gl-2-mathbbr-gl-2-mathbbq}{Stack}を参考にした.\par 
+Jordan標準形は, 代数閉体$K$に対して行列群の共役類を決定していた. たとえば$K=\mb{C}$で$\mr{GL}_{2}(\mb{C})$の共役類は, $\sumib{a&0\\ 0&b}$に代表されるもの, $\sumib{a&1\\ 0&a}$に代表されるものになる. この共役類上で最小多項式や固有多項式やトレースや行列式が一致する. \par 
+ところが代数閉体でない場合はやはり話が変わる. というのも, Jordan標準形にする行列$P$は固有ベクトルを並べて構成されたけれども, その固有ベクトルが$K$に値を持つかは不明で, $P$が考えている群に収まらないことがあるからだ.
+
+\begin{eg} $\mr{GL}_{2}(\mb{R})$において$X=\sumib{1&2\\
+-1&-1}$を考える. 固有多項式は$T^2+1$であり, 実根を持たない. $X-iI = \sumib{1-i & 2\\ -1 & -1-i}$の$\mb{C}$上の固有空間は$\sumib{1+i\\ -1}$で生成される1次元空間である. しかし, $\mb{R}$では固有ベクトルが\tf{存在しない.} 
+\end{eg}
+
+では, 一般の体$K$上ではどのように分類するとよいか. Jordan標準形が考えられる部分はもちろんあるが, 問題はその外側である. 先ほどの例では, 固有値が$\mb{R}$に属さないことが問題であると思われた. 実際にここが大きな問題点である. なぜなら, 逆に, $X \in \mr{GL}_{2}(K)$の固有値$\lambda$が$K$に取れる場合は, $X-\lambda I$もまた$K$成分なので, それの核を求める(= 右辺0の連立方程式を解く)ことは$K$の中で行えるし, 固有値が相異なるかどうかに限らず, Jordan標準形にする$P$が$K$成分で取れることになる.  したがって, このときの固有値は再び共役類を決定する. \par 
+\begin{rem} \tf{GLの場合, 固有値が基礎体$K$に入らないのに$K$成分の固有ベクトルが取れるといったような"奇跡"みたいなことは起こらない.}  実際, $A\in \mr{GL}_{2}(K)$の固有値$\lambda\notin K$はノンゼロで, $v\in K^2\setminus{0}$に対し$Av = \lambda v$だとすると左辺は$K$成分だが, 右辺はそうではない. $v = \sumib{k_1 \\ k_2}$とでもおいてやれば, $\lambda$が$K$に入ってしまうことになるというのが分かるであろう.  
+\end{rem}
+したがって, GLの場合には, $K$に固有ベクトルを持たないことと$K$内の固有値を持たないことは同値になる. 
+
+\lefba{
+\begin{prop} \label{prop:when_eigen_doesnot_exist}
+$K$は体とする. 
+$A\in \mr{GL}_{2}(K)$が$K$に固有ベクトルを持たないとする. このとき, $A$は次の行列に共役である. 
+\[\bmat{ 0 & -\det{A} \\ 1 & \tr{A}} \]
+したがって, 同じ最小多項式を持つ$\mr{GL}_{2}(K)$の元同士は共役である. 
+\end{prop}
+}
+\prf ($P$の作り方は必読!) $v_1\in K^2$を0でないベクトルとし, $v_2 = Av_1$とする. \tf{$A$が固有ベクトルを$K$に持たないから, $v_1$と$v_2$は平行ではない.} したがって$v_1,v_2$は一次独立である. よって$P=\sumib{v_1 & v_2}$とおくと, $v_1,v_2$の一次独立性から$P\in \mr{GL}_{2}(K)$であって, $P$は標準基底$e_1,e_2$を$v_1,v_2$に送る変換であるから
+\bealn{ 
+P^{-1}AP &= P^{-1}\sumib{Av_1 & Av_2} = P^{-1}\sumib{v_2 & A^2v_1}\\
+& P^{-1}\ao{= \sumib{v_2 & (\tr{A}A - (\det{A})I) v_1 }}\\
+& = P^{-1}\sumib{v_2 & \tr{A} v_2 - (\det{A})v_1}\\
+& = \sumib{e_2 & \tr{A} e_2 - (\det{A})e_1}\\
+& = \bmat{0 & -\det{A} \\ 1 & \tr{A} }
+}
+\qed \\
+ここで, \aka{$K$が標数2ではないとする.} このときは二次多項式に対して平方完成をすることができる. 
+一般に$K$係数の二次方程式$T^2 - pT + q = 0$が$K$に根を持つための$p,q$に関する必要十分条件は, $(T-p/2)^2 = \frac{p^2-4q}{2^2}$と変形すれば分かるように, $p^2-4q$が$K$の平方元($k\in K$を用いて$k^2$と表せる元)であること, である. 
+$T^2 - pT +q$を固有多項式に持つ行列$X\in \mr{GL}_{2}(K)$は, $q=0$では存在しないが($\because \det{X} \neq 0$), $q\neq 0$ならば, 先の命題の行列を模倣して
+\[
+\bmat{
+0 & -q \\ 
+1 & p
+} \in \mr{GL}_{2}(K)
+\]
+というものが存在する. よって, $T^2- pT + q$で$p^2-4q$が平方元でないものに対し共役類が一つ割り当てられる. \par 
+最後に, $K$が\tf{標数2でなく}重複した固有値$\lambda$を持つ場合は, 固有値和$2\lambda$が$K$に属すので$\lambda\in K$となる. よって, それは$\sumib{\lambda & 0 \\ 0 & \lambda}, \sumib{\lambda & 1 \\ 0 & \lambda}\in \mr{GL}_{2}(K)$のどちらかに共役である. それぞれの場合で最小多項式(これは共役不変量！)は$T-\lambda$, $(T-\lambda)^2$である. 
+\par 
+以上をまとめる: 
+
+\lefba{ 
+\begin{prop}  $K$は標数2でない体とする. $\mr{GL}_{2}(K)$の元$A$に対して次が成り立つ. 
+\ben 
+\item $A$の最小多項式が$K$の範囲で根$\lambda_1,\lambda_2$を持ち, 重根を持たないならば, $A$は$\sumib{\lambda_1 & 0 \\ 0 & \lambda_2}$に共役である(固有値の順番は問題にならない). 
+\item $A$が重複した固有値を持つ場合, 自動的にその固有値$\lambda$は$K$に属し, $A$は$\sumib{\lambda & 1\\ 0 & \lambda}$に共役である. 
+\item $A$の固有多項式が$T^2 - \tr{A} T + \det{A}$で, これが$K$の中に根を持たないならば,(自動的にその根は相異なり)$A$は $\sumib{0 & -\det{A} \\ 1 & \tr{A}}$に共役である. 
+\een
+逆に, $(p,q)\in K^2$であって, $p^2 - 4q$が平方元でないかつ$q\neq 0$であるとき, 固有多項式が$T^2 - pT + q$であるような$\mr{GL}_{2}(K)$の元が存在する. たとえば, $\sumib{0 & -q \\ 1 & p}$がある. 
+
+\end{prop}
+}
+この命題を固有多項式から解釈すれば次のようになるであろう. 
+\begin{cor} (\tf{固有多項式から共役類を見つける方法})\\
+$K$は標数2でない体, $A \in \mr{GL}_{2}(K)$, 固有多項式が$T^2 - pT + q$であるとする($q\neq 0$).  
+\ben 
+\item $p^2 - 4q$が$0$ではない平方元であるとき, $A\sim \sumib{\lambda_1 & 0 \\ 0 & \lambda_2} \sim \sumib{\lambda_2 & 0 \\ 0 & \lambda_1}$ 
+\item $p^2 - 4q = 0$のとき, $A$の固有値は$p/2\in K$(重複度2)であり, $A\sim \sumib{p/2 & 0 \\ 0 & p/2}$ もしくは $A\sim \sumib{p/2 & 1\\ 0 & p/2}$である. この二つは最小多項式が$T-p/2$の何次であるかで分類できる. 
+\item $p^2 - 4q$が平方元でないとき, $A\sim \sumib{0 & -q \\ 1 & p}$. 
+\een
+\end{cor}
+\begin{egprob}
+$\mb{R}$における平方元とは, まさしく0以上の実数である. $\mr{GL}_{2}(\mb{R})$の共役類をすべて決定せよ. 
+\end{egprob}
+\begin{egans} $D = p^2-4q$とおく. $D>0$なら$T^2-pT + q$の相異なる根を$r_1,r_2$として$\sumib{r_1 & 0 \\ 0 & r_2}$の類$C_1$に属す. $D = 0$で最小多項式$T- p/2$なら$\sumib{p/2 & 0 \\ 0 & p/2}$の類$C_2$に属し, $(T-p/2)^2$なら$\sumib{p/2 & 1 \\ 0 & p/2}$の類$C_3$に属す. $D<0$なら$\sumib{0 & -q \\ 1 & p}$の類$C_{p,q}$に属す. 
+\end{egans}
+
+$K=\mb{F}_{2}$の場合については最後に補足する.
+
+
+過去問では有限体上で出題された. 
+\begin{egprob}
+
+\end{egprob}
+
+\begin{egans} 
+
+\end{egans}
+さて, 最後に$K=\mb{F}_{2^n}$の場合に$\mr{GL}_{2}(K)$の共役類について調べよう. 標数2なので, $T^2 - pT + q=0$が$K$に解を持つかはややこしい(平方元に関する特徴付けが効かなくなる). 固有多項式が相異なる2つの根を持つ場合か, 根を持たない場合については同様である. 重根を持つ場合を考えよう. $\lambda$が重根であるとすると, 固有多項式は$T^2 + \lambda^2$となる. $\lambda\notin K$でなくとも$\lambda^2 \in K$となることがある. もし$\lambda\in K$なら同様で, Jordanに直す$P$が$K$から取れる. $\lambda\notin K$の場合は固有ベクトルが$K$の中に取れないので, 同様の議論から$\sumib{0 & - \lambda^2 \\ 1 & 0}$に共役になる. したがって, 次のようにまとめられる. 
+
+\begin{prop} $K$が標数2の体であるとする. $A\in \mr{GL}_{2}(K)$とする. 
+\ben 
+\item $A$の最小多項式が$K$の範囲で相異なる根$\lambda_1,\lambda_2$を持つならば$A$は$\sumib{\lambda_1 & 0 \\ 0 & \lambda_2}$に共役である. 
+\item  $A$が\tf{$K$の範囲に}重複した固有値$\lambda\in K$を持つとする. もし最小多項式が$T-\lambda$なら$\sumib{\lambda & 0 \\ 0 & \lambda}$に共役で, $(T-\lambda)^2$なら$\sumib{\lambda & 1 \\ 0 & \lambda}$に共役である.
+\item $A$が$K$の範囲に固有値を持たない場合は, $\sumib{0 & -\det{A} \\ 1 & \tr{A}}$に共役である. とくに, $\lambda$が重複した固有値で$\lambda\notin K$かつ$\lambda^2 \in K$を満たす場合, $\sumib{0 & -\lambda^2 \\ 1 & 0}$に共役である. 
+\een 
+
+\end{prop}
+
+
+
+\subsection{$\mr{SL}_2(\mb{R})$の共役類}
+$\mr{SL}_{2}(\mb{R})$の共役類を調べる. $A\in \mr{SL}_{2}(\mb{R})$とする. $A$が相異なる実根$r_1,r_2$を持つとき, $A$は$P\in \mr{GL}_{2}(\mb{R})$で対角化できる: 
+\[P^{-1} A P = \bmat{r_1 & 0 \\ 0 & r_2}\]
+$P$がSLに入るか分からないが, $Q=\sumib{1&0 \\ 0 & -1/\det{P}}$とおくと$PQ\in \mr{SL}_{2}(\mb{R})$であり, $P^{-1} = \sumib{1 & 0 \\ 0 & -\det{P}}$である. よって, 
+\[(PQ)^{-1} A (PQ) = P^{-1}\bmat{r_1 & 0 \\ 0 & r_2}P = \bmat{r_1 & 0 \\ 0 & r_2}\]
+となるので, $\mr{SL}_{2}(\mb{R})$においても$A\sim \sumib{r_1 & 0 \\ 0 & r_2}$であるとわかる. \par 
+$A$が重根$r$を持つとき, SLなので$r=\pm 1$である. この場合でも, もし$A$が対角化可能なら$\mr{SL}_{2}(\mb{R})$において$rI$に共役である. 対角化可能ではないとき, $P\in \mr{GL}_{2}(\mb{R})$が存在して
+\[P^{-1}A P = \bmat{r & 1 \\ 0 & r}\]
+となる. $P$に$\dfrac{1}{\sqrt{|\det{P}|}}$をかけて取り替えれば, $\det{P} = \pm 1$としてよい. 先と同じ$Q = \sumib{1 & 0 \\ 0 & \pm 1}$を取ると$PQ\in \mr{SL}_{2}(\mb{R})$である. $Q^{-1} = Q$なので, 
+\[ 
+\bmat{ 
+1 & 0 \\ 0 & \pm 1
+} \bmat{r & 1 \\ 0 & r} \bmat{1 & 0 \\ 0 & \pm 1} = \bmat{r & \pm 1\\ 0 & r} 
+\]
+だから, 結局$A$は右辺のどちらかに共役である. 
+{\small 
+\lefba{ 
+\begin{prop} $r=\pm 1$のとき, 
+$P = \sumib{a&b \\ c&d}\in \mr{SL}_{2}(\mb{R})$によって$P\sumib{r & 1\\ 0 & r} = \sumib{r&-1 \\ 0 & r} P$となることはない. よって, これら二つの元で代表される共役類は相異なる. 
+\end{prop}
+\prf 
+両辺計算すれば
+\[\bmat{ar & a+br \\ cr & c+dr} = \bmat{ ar -c & br - d\\ cr & dr }\]
+だから$c=0, a=-d$を得る. すると$ad-bc = -a^2 \neq 1$だから共役にならない. 
+\qed 
+}
+}
+
+最後に, $A$が虚数の固有値$z,\ovl{z}$を持つときを考える. この場合は命題\ref{prop:when_eigen_doesnot_exists}と同様に, $P$を上手く取って$P^{-1}AP=\sumib{0 & -\det{A} \\ 1 & \tr{A}} = \sumib{0 & -1 \\ 1 & \tr{A}}$である. この$P$がSLに属すとは限らないが, $\dfrac{1}{\sqrt{|\det{P}|}}$倍と取り替えて$\det{P}=\pm 1$としてよい. $\det{P}=1$なら$A$はこの行列と共役である. $\det{P}=-1$なら$Q = \sumib{1 & 0 \\ 0 & -1}$として, $PQ\in \mr{SL}_{2}(\mb{R})$であり, 
+\[(PQ)^{-1} A (PQ) = \bmat{0 & 1 \\ -1 & \tr{A}}\]
+となるので$A$はこの右辺に共役である. こうして得られた二つの共役類が異なることが計算で示せる(\ref{linalg:prob:not_conjugate}). こうして, 次が得られた. 
+\lefba{ 
+\begin{prop} ($\mr{SL}_{2}(\mb{R})$の共役類) $A\in \mr{SL}_{2}(\mb{R})$の属す共役類は次のようになる.  
+\ben 
+\item $A$が相異なる二つの実固有値$r_1,r_2$を持つ場合, $A\sim \sumib{r_1 & 0 \\ 0 & r_2}$. 
+\item $A$が重複する固有値$r$を持つ場合, $r=\pm 1$であって, もし$A$の最小多項式が$T-r$なら$A\sim rI$であり, $(T-r)^2$ならば$A\sim \sumib{r & 1 \\ 0 & r}$である. 
+\item $A$が虚数の固有値$z,\ovl{z}$を持つとき, $|z| = 1$, $-2 < \mr{Re}z < 2$であって, $P = \sumib{v_1 & Av_1}$に関して$\det{P}>0$であるなら$A\sim \sumib{0 & -1 \\ 1 & \tr{A}}$であり, $\det{P}<0$なら$A\sim \sumib{0 & 1 \\ -1 & \tr{A}}$である. 
+\een
+したがって, $X$の共役類を$\set{X}$で表すと, 共役類は次ですべてである. 
+\[\parenb{\sumib{r & 0 \\ 0 & 1/r}}  \parenb{\sumib{1 & 1\\ 0 & 1}}, \parenb{\sumib{-1 & 1 \\ 0 & -1}}, \parenb{\sumib{0 & -1 \\ 1 & t}}, \parenb{\sumib{0 & 1\\ -1 & t}} )\]
+ただし, $r\in \mb{R}$,
+$-2 < t < 2$. 
+\end{prop}
+}
+検証してみよう. 
+\begin{egprob}
+次の$\mr{SL}_{2}(\mb{R})$の元を上にリストした共役類のどれに属すかを調べよ(実際に共役であることを確かめること). 
+\[ \bmat{3&2\\ 4&3}, \bmat{1 & 0 \\ 1&1 }, \bmat{-1 & 0 \\ -1 & -1}, \bmat{1 & 2 \\ -1 & -1}, \bmat{-2 & 1\\ 1 & -1} \]
+
+\end{egprob}
+
+
+
+
+\subsection{演習問題}
+\begin{prob} \label{linalg:prob:not_conjugate}
+$A\in\mr{SL}_{2}(\mb{R})$が虚数の固有値$z,\ovl{z}$を持つとする. $\sumib{0 & 1 \\ -1 & \tr{A}}$と$\sumib{0 & -1 \\ 1 & \tr{A} }$は$\mr{SL}_{2}(\mb{R})$において共役ではないことを示せ. 
+\end{prob}
+
+
+
+
+

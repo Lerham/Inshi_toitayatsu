@@ -1,0 +1,411 @@
+
+\documentclass[dvipdfmx]{jsarticle}
+
+\usepackage[dvipdfmx]{hyperref}
+% *** usepackage (アルファベット順) ***
+\usepackage{
+    amsfonts,amssymb,amsthm,
+    braket,
+    enumitem,
+    physics,
+    tikz
+}
+\newenvironment{probblock}[2]{
+  \vspace{0.35\baselineskip} %上余白調節
+    %
+    % *** 問題番号・点数 ***
+    \hspace{-1.5zw} \probbox{#1} \hfill 
+      \raise 0.3\baselineskip \hbox{(#2)} \par
+    %
+  \vspace{-0.15\baselineskip} %下余白調節
+}{}
+
+\newcommand{\probbox}[1]{
+  \begin{tikzpicture}
+    \def\HALF{0.42}
+    \coordinate (A) at (-\HALF,-\HALF);
+    \coordinate (B) at (\HALF,-\HALF);
+    \coordinate (C) at (\HALF,\HALF);
+    \coordinate (D) at (-\HALF,\HALF);
+    \draw (A)--(B)--(C)--(D)--cycle;
+    \node at (0,0) {\huge #1};
+  \end{tikzpicture}
+}
+
+% [*** 使い方 ***]
+% \begin{probblock}{問題番号}{点数}
+%   問題文
+% \end{probblock}
+%
+% [*** 例 ***]
+% \begin{probblock}{1}{334点}
+%   $\tan 1^{\circ}$ は有理数か。
+% \end{probblock}
+%
+% [*** 蛇足 ***]
+% 個人的に見栄えがよさげな余白に調節しています。
+% もし気に入らない感じだったら変更してください。
+% (by ぷりん)
+
+
+% *** 余白調整 ***
+\usepackage[%
+top    = 30truemm,%
+bottom = 20truemm,%
+left   = 25truemm,%
+right  = 25truemm]{geometry}
+
+\newtheorem{theo}{定理}[section]
+\newcommand{\theocount}[2]{\setcounter{subsection}{#1}\setcounter{theo}{#2}}
+\newcommand{\propcount}[2]{\setcounter{subsection}{#1}\setcounter{prop}{#2}}
+\newtheorem{prop}[theo]{命題}
+\newtheorem{hint}{Hint}[section]
+\newtheorem{prob}{問題}[section]
+\newtheorem{tips}[theo]{Tips}
+\newtheorem{cor}{系}[theo]
+\newtheorem{defn}[theo]{定義}
+\newtheorem{eg}[theo]{例}
+\newtheorem{egprob}[theo]{例題}
+\newtheorem{egans}{解答}[theo]
+\newtheorem{rem}[theo]{注意}
+\newtheorem{rev}{復習}
+\newtheorem{assume}{仮定}[theo]
+\newtheorem{ans}{解答}[theo]
+\newtheorem{que}{疑問}
+\newtheorem*{recall}{Recall}
+\newtheorem*{theo*}{定理}
+\newtheorem*{prop*}{命題}
+\newtheorem*{claim*}{Claim}
+\newtheorem*{lem*}{補題}
+\newtheorem*{defn*}{定義}
+\newtheorem*{cor*}{系}
+\newtheorem{probans}{解答}[section] %%演習問題用
+\newtheorem*{prob*}{問題}
+ %newtheorem
+
+%Enumerate 環境
+\def\theenumi{\arabic{enumi}}
+\def\labelenumi{(\theenumi)}
+
+% (Re)New commands
+
+\definecolor{shadecolor}{gray}{0.80}
+
+
+\newcommand{\bbox}{\quad\rule{2.2mm}{3mm}}
+\newcommand{\aran}{\leftarrow}
+\newcommand{\step}[2]{\textbf{Step #1.} (#2)\quad} 
+\newcommand{\dothom}[1]{ \underset{#1}{\overset{\cdot}{\simeq}}  }
+\newcommand{\maru}{\textcircled}  %%%まるで囲む数字
+\newcommand{\prf}{\noindent{\large (\textbf{Proof.})\quad}} 
+\newcommand{\ten}{$\bullet\quad$} %黒丸
+\newcommand{\vin}{\rotatebox{90}{$\in$}}
+\newcommand{\thm}{\begin{itembox}[l]}
+\newcommand{\enthm}{\end{itembox}\\}
+\newcommand{\disp}{\displaystyle}
+\newcommand{\dou}{\Leftrightarrow}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\beqn}{\begin{eqnarray*}}
+\newcommand{\eeqn}{\end{eqnarray*}}
+\newcommand{\bcas}{\begin{cases}}
+\newcommand{\ecas}{\end{cases}}
+\newcommand{\spec}[1]{\mr{Spec}\parena{#1}}
+\newcommand{\nara}{\Rightarrow}
+%%%フォント
+\newcommand{\mb}{\mathbb} %%白抜き
+\newcommand{\mr}{\mathrm} %%%ローマン
+\newcommand{\maf}{\mathfrak} %%%フラクトゥール(素イデアルなど)
+\newcommand{\hana}{\mathscr} %%%花文字(圏のやつ)
+\newcommand{\mac}{\mathcal} %%%関手のやつ
+\newcommand{\besha}{\begin{shadebox}}
+\newcommand{\ensha}{\end{shadebox}}
+
+\newcommand{\chat}{\widehat{\mathbb{C}}} %リーマン球面
+%\newcommand{\khat}{\widehat{K}}
+\newcommand{\nea}{\nearrow}
+\newcommand{\bolm}[1]{{\mbox{\boldmath $#1$}}}
+\newcommand{\exer}{{\bf 演習}\arabic{chapter}.\arabic{section}.}
+\newcommand{\sea}{\searrow}
+\newcommand{\tf}{\textbf}
+
+\newcommand{\bracket}[1]{%
+\[
+ \left(
+ \begin{tabular}{p{0.9\hsize}}
+  #1
+ \end{tabular}
+ \right)
+\]}
+
+\renewcommand{\leq}{\leqq}
+\renewcommand{\geq}{\geqq}
+\renewcommand\thefootnote{*\arabic{footnote}}
+\newcommand{\kuro}[1]{\mr{\textbf{#1}}}  %%複体の文字とか
+
+%%%代数学
+\newcommand{\tens}{\mathbin{\otimes}} %%%テンソル
+\newcommand{\ilim}[1][]{\mathop{\varinjlim}\limits_{#1}}%%逆極限
+\newcommand{\plim}[1][]{\mathop{\varprojlim}\limits_{#1}}%順極限
+\newcommand{\im}[1]{\mr{Im}\,#1}
+\newcommand{\coker}[1]{\mr{Coker}\,#1}
+\newcommand{\rank}[1]{\mr{rank}\, #1}
+\newcommand{\tor}[2]{\mr{Tor}_{#1}^{#2}}  %%Tor{i番目}{環}
+\newcommand{\ext}[2]{\mr{Ext}^{#1}_{#2} }
+\renewcommand{\hom}[1]{\mr{Hom}\parena{#1}} %Hom関手
+\newcommand{\norgr}{\rotatebox{90}{$\triangle$}}  %%正規部分群
+\newcommand{\bep}{\begin{pmatrix}}
+\newcommand{\enp}{\end{pmatrix}} %行列
+\newcommand{\tr}[1]{\mr{Tr}\parena{#1}} %Trace
+\newcommand{\gal}[1]{\mr{Gal}\parena{#1}} %Galois群
+
+%%%幾何学
+\newcommand{\supp}[1]{\mr{Supp}(#1)}
+\newcommand{\opensub}{\overset{\mr{open}}{\subset}}
+
+
+%%%解析学
+\newcommand{\grad}{\mr{grad}} %%%grad
+\newcommand{\inpr}[2]{\lan #1, #2 \ran} %%%内積
+\newcommand{\del}{\partial} %%%偏微分, 境界
+\newcommand{\abs}[1]{ \left| #1 \right| }
+\newcommand{\norm}[1]{\left\| #1 \right\| }
+\renewcommand{\span}[1]{\mr{Span}(#1)}
+\newcommand{\fou}[1]{\mac{F}\parenc{#1}}
+\newcommand{\llfou}[1]{\mac{F}_{L^2}\parenc{#1}}
+\newcommand{\uof}[1]{\mac{F}^{-1}\parenc{#1}}
+\newcommand{\lluof}[1]{\mac{F}^{-1}_{L^2}\parenc{#1}}
+\newcommand{\conv}[1]{\mr{Conv}\, (#1)}
+\newcommand{\res}[2]{\underset{\mr{Res}}{#1}#2}
+\newcommand{\slim}{\mr{s-}\disp\lim}
+\newcommand{\wlim}{\mr{w-}\disp\lim}
+
+
+%%%その他数式用
+\newcommand{\witi}{\widetilde} %%%ワイドチルダ
+\newcommand{\wiha}{\widehat} %%%ワイドはっと(フーリエ係数)
+\newcommand{\symdiff}{\bigtriangleup}  %%%対称差
+\newcommand{\ovl}{\overline}
+\newcommand{\lan}{\langle}
+\newcommand{\ran}{\rangle}
+
+\newcommand*{\ve}{\overrightarrow} %%%%%ベクトル
+\newcommand{\parena}[1]{\left( #1 \right)}
+\newcommand{\parenb}[1]{\left\{ #1 \right\}}
+\newcommand{\parenc}[1]{\left[ #1 \right]}
+\newcommand{\bea}[2]{\begin{array}{#1} #2 \end{array}}
+
+
+\newcommand{\reg}[1]{\mr{Reg}\, #1}  %%非特異点集合
+\renewcommand{\div}[1]{\mr{div}(#1)}
+\newcommand{\sgn}[1]{\mr{sgn}#1}
+
+
+%%%左赤線環境
+\makeatletter
+
+\renewenvironment{leftbar}{%
+%  \def\FrameCommand{\vrule width 3pt \hspace{10pt}}%  デフォルトの線の太さは3pt
+  \def\FrameCommand{\vrule width 1pt \hspace{10pt}}% 
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}%
+ {\endMakeFramed}
+\newcommand{\lefba}[1]{\begin{leftbar} #1 \end{leftbar}}
+
+\makeatletter
+
+\def\mapstofill@{%
+   \arrowfill@{\mapstochar\relbar}\relbar\rightarrow}
+\newcommand*\xmapsto[2][]{%
+   \ext@arrow 0395\mapstofill@{#1}{#2}}
+\newcommand{\xequal}[2][]{\ext@arrow 0055{\equalfill@}{#1}{#2}}
+\def\equalfill@{\arrowfill@\Relbar\Relbar\Relbar}
+\makeatother
+
+
+% 問題文用の環境 'probblock' を作りました。
+% 定義は __def_probblock_env.tex に書いてあります。
+% (by ぷりん)
+\include{__def_probblock_env}
+
+% *** ページ番号を消去 ***
+\pagestyle{empty}
+
+% *** フォントサイズ・行送りの指定 ***
+\newcommand{\applyfontsetting}{
+  \fontsize{11pt}{17pt}\selectfont
+  \renewcommand{\baselinestretch}{1.05}
+}
+
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+\begin{document}
+\applyfontsetting
+
+\section{第1セット(数学I)}
+
+% *************
+% ***** 1 *****
+% *************
+\begin{probblock}{1}{H31東北大院試(共同)}
+3次実正方行列
+\[A = \bep  0 & -1 & 1 \\ -1 & 0 & -1 \\ 1 & -1 & 0 \enp\]
+について, 以下の問いに答えよ。
+\ben
+\item $A$の固有値をすべて求めよ。また, 各固有値に対応する固有空間の基底を一組求めよ。
+\item 極限$\disp\lim_{n\to \infty} \dfrac{1}{2^{n}}A^{n}\bep 5 \\ 0 \\ 1 \enp$ を求めよ。
+\een
+\end{probblock}
+
+\vfill
+
+% *************
+% ***** 2 *****
+% *************
+\begin{probblock}{2}{微分積分(吉田伸夫)問12.2.3}
+$f:[0,\infty)\to [0,\infty)$は狭義単調減少な連続関数とする。二つの広義積分
+\[I=\int_{0}^{\infty} f(x)\, dx,\qquad J=\int_{0}^{\infty} f(x)|\sin{x}|\, dx\]
+に対し, $I<\infty$であることと$J<\infty$であることは同値であることを証明せよ。
+\end{probblock}
+
+\vfill
+
+% *************
+% ***** 3 *****
+% *************
+\begin{probblock}{3}{\href{http://zen.shinshu-u.ac.jp/modules/0023000000/}{環論演習第11回}}
+$\mb{Z}[x]$の部分環$R$を$R = \mb{Z}[2x,2x^2, 2x^3,\cdots⋅]$とする。即ち, 多項式$f(x) = a_nx^n +\cdots + a_1x + a_0 \in \mb{Z}[x]$について，$f(x)\in R \overset{\mr{def}}{\iff}  \text{$a_1,\cdots ,a_n$は 2の倍数 ($a_0$は任意の整数)}$である。
+$R$の部分集合$\maf{a}$を
+\[\maf{a} = \{ a_nx^n + \cdots⋅ + a_1x \mid n \geq 1, a_1\cdots ,a_n\text{は2の倍数} \} \]
+とおく。このとき
+\ben
+\item $\maf{a}$ は $R$のイデアルであることを示せ。
+\item $R$はNoether環か?
+\een
+\end{probblock}
+\vfill
+
+% *************
+% ***** 4 *****
+% *************
+\begin{probblock}{4}{(2020幾何学I問題65 改)}
+$S^2 = \{ (x,y,z)\mid x^2+y^2+z^2=1 \}$上の関数$f:S^2\to \mb{R}$を$f(x,y,z)=xy$で定める。$f(x,y,z)$の臨界点をすべて求めよ。
+\end{probblock}
+
+\vfill
+
+% *************
+% ***** 5 *****
+% *************
+\begin{probblock}{5}{複素関数概論, 定理4.7}
+$f$を整関数とする。整数$p\geq 0$, 定数$M$および$\lim_{n\to \infty}r_n = \infty$をみたす正数の列$\{ r_n \}_{n=1}^{\infty}$が存在して, 
+\[\max_{|z| = r_n} |f(z)| \leq Mr_n^{p}\quad (n=1,2,\ldots)\]
+が成り立てば, $f$は高々$p$次の多項式であることを証明せよ。
+\end{probblock}
+\vfill
+
+
+\clearpage
+
+%全滅系問題
+%H21 なし
+%H22 4番(逆関数定理)
+%H23 1,4番
+%H24 4(写像度2) , 3(F_5イデアルx^4+2x^2)
+%H25 3(X^pが単位行列), 4(部分多様体)
+%H26 なし
+%H27 2(一様収束)  4(臨界点)
+%H28 3(単院試論)
+%H29 4(臨界点),5(最大値原理)
+
+\section{第2セット(ほぼ全滅系問題)}
+留学生入試の完答者1人以下で, 教育的な問題のセット。少し誘導を追加したので復習しよう。
+
+
+
+\begin{probblock}{1}{H25}
+$\mathbb{F}_{p}$を成分に持つ2×2正方行列$X$で, $X^p = I$を満たすものがいくつあるかについて調べたい。
+\ben
+\item $a\in \ovl{\mathbb{F}_{p}} = \bigcup_{k\geq 1} \mb{F}_{p^k}$が$a^{p} = 1$を満たすならば$a = 1$であることを示せ。
+\item $X$の固有値を$\lambda_1,\lambda_2$とする。$\lambda_i$は$\mb{F}_{p}$に属すとは限らないことに注意せよ。 $\lambda_i \in \ovl{\mathbb{F}_{p}} = \bigcup_{k\geq 1} \mathbb{F}_{p^k}$である。$X^p = I \iff \lambda_i =1 (i=1,2)$を示せ。
+\item 結局, 固有値が1のみであるような$X$の個数を求めればよい。$X$は何個あるか。
+\een
+\end{probblock}
+
+\begin{probblock}{2}{H27}
+$\{ f_n \}$を開区間$(0,1)$上の微分可能な関数の列で, 任意の$x\in (0,1)$と任意の正の整数$n$に対して$|f_n'(x)|\leq 1$が満たされているとする。$\{ f_n \}$が$f$に$(0,1)$で各点収束するとする。
+\ben 
+\item $|f(x) - f(y)| \leq |x-y|$を示せ。
+\item 任意の$\epsilon > 0$に対し, $f_n$は閉区間$[\epsilon,1-\epsilon]$上一様収束することを示せ。
+\item $f_n$は$[0,1]$上一様収束することを示せ。 
+\een
+\end{probblock}
+
+\begin{probblock}{3}{(1):中国剰余定理 (2)H24 (3)H27 (4)H26 }
+\ben 
+\item $A$が単位元を持つ可換環で, $I,J$が$I+J = A$を満たすイデアルとする。このとき, $IJ = I\cap J$であることを示し, 次は環同型であることを証明せよ。
+\[
+A/IJ \cong A/I \times A/J,\quad a\bmod{IJ} \leftrightarrow (a\bmod{I}, b\bmod{J})
+\]
+\item 剰余環$\mb{F}_{5}[x]/(x^4+2x^2)\mb{F}_{5}[x]$の可逆元の個数を求めよ。
+\item $\mathbb{R}[x]/(x^3-8)$の元$a$で$a^4 = 1$を満たすものの個数を求めよ。
+\item 環準同型$\phi:\mb{C}[x]/(x^2(x+1))\to \mb{C}$で$a\in \mb{C}$ならば$\phi(a)=a$であるようなものをすべて求めよ。
+\een
+\end{probblock}
+
+\begin{probblock}{4}{H29}
+$n$を正の整数, $M$を境界のないコンパクト$n$次元多様体とする。$f:M\to \mb{R}$を非退化な臨界点しかもたない$C^{\infty}$級関数とし, $f$の臨界点の集合を$A$とする。
+\ben 
+\item 臨界点$p\in A$が非退化であるとはどういうことを言うのか説明せよ。
+\item 座標近傍$(U_i;x_1,\cdots, x_n)$において, $g(p) = (\dfrac{\del f}{\del x_1}(p),\cdots, \dfrac{\del f}{\del x_n}(p))$ として$C^{\infty}$級関数$g:U_i\to \mb{R}^{n}$を定義する。$p\in A$ならば$(dg)_{p}:T_{p}M \to \mb{R}^{n}$は線形同型であることを示せ。
+\item $U_i\cap A = g^{-1}(\ve{0})$を示し, これが離散集合であることを示せ。そして$A$が有限集合であることを証明せよ。
+\een
+\end{probblock}
+\newpage 
+\begin{probblock}{5}{H29}
+$D = \{ |z| < 1 \}$. $f,g$はともに$D$上正則かつ$\ovl{D}$上で連続とし, 
+\[|f(z)| \leq |g(z)|\, (\mr{on} D),\quad |f(z)| = |g(z)|\, (\text{on} \del D),\quad f(z)\neq 0\, (\text{on} \ovl{D}-\{ 0 \})\]
+\ben 
+\item $D-\{ 0\}$上の正則函数$h(z) = \frac{f(z)}{z^mg(z)}$は$\ovl{D}$上連続で$D$上正則な関数に拡張できることを示せ。
+\item $h^{-1}$は$D$上正則であり,  絶対値の最大値が$1$であることを示せ。そして$|h|\equiv 1$が$\ovl{D}$上で成立することを示せ。
+\item $h$は絶対値1の定数であることを示せ。よって, $f(z) = \alpha z^m g(z)$ ($|\alpha| = 1$) と書ける。
+\een
+\end{probblock}
+
+\begin{probblock}{6}{おまけ(剰余環の練習)}
+次の同型を示せ。
+\ben
+\item $\mb{R}[x]/(x^3+1) \cong \mb{R}\times \mb{C}$
+\item $\mathbb{C}[x,y]/(x^2+y^2)\cong \mb{C}\times \mb{C}$
+\item $\mb{F}_{19}[x]/(x^2-2) \cong \mb{F}_{361}$
+\item $\mb{Z}[x]/(17,x^2-2) \cong \mb{F}_{17}\times \mb{F}_{17}$
+\item $\mb{R}[x]/(x^4 + 1) \cong \mb{C}\times \mb{C}$
+\item $\mb{Z}[\sqrt{-1}]/(p)\cong \bcas
+\mb{Z}/4\mb{Z}\quad (p=2) \\ 
+\mb{F}_{p}\times \mb{F}_{p} \quad (p\equiv 1\pmod{4})\\
+\mb{F}_{p^2} \quad (p\equiv 3\pmod{4})
+\ecas$; $p$は素数
+\een
+\end{probblock}
+
+\clearpage
+\section{第3回(代数題)}
+
+
+\clearpage
+\section{第4回(部誌用)}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

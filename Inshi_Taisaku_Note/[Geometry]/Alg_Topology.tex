@@ -1,0 +1,625 @@
+\chapter{代数的位相幾何学}
+%幾何入門, 幾何IIの内容を含める。
+
+\section{基礎事項}　%幾何学入門+ホモロジー論程度の内容にしたい
+\subsection{ホモトピー}
+\begin{defn}
+位相空間$X$から$Y$への2つの連続写像$f,f'$がホモトピック(homotopic)であるとは, すべての$x\in X$に対して$F(x,0) = f(x)$かつ$F(x,1) = f'(x)$を満たす連続写像$F:X\times[0,1] \to Y$が存在することである。このような連続写像$F$を$f$の$f'$へのホモトピー(homotopy)といい, $f$と$f'$がホモトピックであることを$f\simeq f'$と表し, このような$f,f',F$があるとき$X,Y$はホモトピー同値であるという。
+\end{defn}
+ホモトピーは同相より弱い"同値関係"である。図形の一種の不変量がホモロジー群であったが, そのホモロジー群はホモトピーで不変であるという性質を持つ。したがって, ホモロジー群が異なればホモトピーでないことを結論付けることができる。
+
+
+\subsubsection{応用例}
+面白い応用例を紹介する。
+\begin{eg}
+回転数とホモトピーを用いて代数学の基本定理を証明しよう。$p(z)\in \mb{C}[z]$は定数でないとし, $p(z)$は$\mb{C}$の根を持たないとして矛盾を導く。このとき, $F:S^{1}\times (0,1]$が次のように定義できる。
+\[F(z,t):= \dfrac{p((1-t)z/t)}{|p((1-t)z/t)|}\]
+さらに$p$の次数が$n\geq 1$なら, $F(z,0) = \disp\lim_{t\to +0} \dfrac{t^{n}p((1-t)z/t)}{|t^{n}p((1-t)z/t)|}$と定めることで$F$は$S^{1}\times [0,1]$に連続的に拡張される。$F(z,1) = p(0)/|p(0)|$だから$F$の$S^{1}\times \{ 1 \}$への制限は定値写像である。一方で$F(z,0) = z^{n}/|z^{n}| = z^{n}$なので, 定置写像と$n$乗写像$\pi_n:S^{1}\to S^{1}$の回転数は等しくなければならない(回転数のホモトピー不変性)。しかし$\pi_n$の回転数は$n$なので矛盾である。\qed
+\end{eg}
+
+\begin{eg}
+
+\end{eg}
+
+\subsubsection{ホモトピー同値の例}
+\begin{eg}
+$\mb{R}^{N}$は1点$pt$にホモトピー同値である。$pt$にホモトピー同値であるような位相空間のことを\tf{可縮}という。$pt$の(簡約)特異ホモロジー$\witi{H}_{q}(pt)$はすべての$q$に対して$0$であるから, $X$が可縮ならば$\witi{H}_{q}(pt) = 0$である(実は逆も成り立つ)。それゆえ, $\witi{H}_{q}(X)\neq 0$であるような$q$があるならば$X$が可縮ではないといえる。たとえば$S^n$は可縮ではない($\witi{H}_{n}(S^n) = \mb{Z}$であるため)。
+\end{eg}
+\begin{eg}
+$p\in \mb{R}^2$とするとき, $S^{1}$と$\mb{R}^{2} - p$はホモトピー同値である。
+\end{eg}
+
+
+
+\subsection{($\heartsuit$)写像度} %重要項目。
+\subsubsection{$d:D^2(1)\to \mb{R}^2$の場合}
+向きを用いた写像度の定義について解説する。$O$を$\mb{R}^2$の原点, $r>0$に対して$D^2(r)=\{  (x,y)\in \mb{R}^2\mid x^2+y^2\leq r\}$ とし, 体積形式$dx\wedge dy$から定まる向きが与えられているものとする
+\footnote{つまり, $dx\wedge dy (e_1,e_2)$を正にするframe $e_1,e_2\in \{ \frac{\del}{\del x}, \frac{\del}{\del y} \}$の順番の選択。}。
+$S^1(r) = \del D^2(r)$には境界としての向きを定める。また, $\alpha\in \Omega^{1}(\mb{R}^2-\{ O \})$を
+\[\alpha = \dfrac{1}{2\pi} \cdot \dfrac{1}{x^2+y^2}(x dy - y dx)\]
+で定める。外微分すると
+\[2\pi d\alpha = \dfrac{y^2-x^2}{(x^2+y^2)^2}dx\wedge dy - \dfrac{x^2-y^2}{(x^2+y^2)^2}dy\wedge dx = 0\]
+だから$\alpha$は閉形式である。しかし$\alpha$は完全形式ではない。なぜなら完全1形式は$S^1(r)$上で積分するとStokesの定理から0であるものの, 
+\[\int_{S^1(r)} 2\pi \alpha = \int_{0}^{2\pi} (\cos^2{\theta} + \sin^{2}{\theta})d\theta = 2\pi\]
+だからである。
+\begin{rem}
+少し話が逸れる。$\alpha$は原点で定義されず, 原点に拡張することも出来ない。だから次の議論は誤りである。Stokesの定理から
+\[\int_{S^1(r)}\alpha = \int_{D^2(r)} d\alpha = \int_{D^2(r)}d\alpha = \int_{D^2(r)}0 = 0\]
+また, Stokesの定理を用いるときは必ず向きの指定も必要である。\bbox
+\end{rem}
+$f:D^2(1)\to \mb{R}^2$を$C^{\infty}$級写像で, 原点Oを正則値にもつとする。制限$f|_{S^1(1)}$はOという値をとらないとする。つまり, $S^1(1)$を$f$で飛ばして得られるループは原点を通らない。このとき次が成り立つ。
+\begin{prop} 
+$f^{-1}(O)$は有限集合であり, 
+\[\int_{S^1(1)}f^{\ast}\alpha = \sum_{p\in f^{-1}(O)}\sgn{\det Jf_{p}}\]
+である。
+\end{prop}
+\prf $p\in f^{-1}(O)$の開近傍$U_{p}$と$O$の開近傍$V_{p}$を$f:U\to V$が微分同相であるように取る(逆関数定理)。$0<\delta < 1$を$S^{1}(\delta) \subset V_{p}$となるようにとる. このとき
+\[\int_{f^{-1}(S^1(\delta))} f^{\ast}\alpha = \sgn{\det{Jf_{p}}} \int_{S^1(\delta)} \alpha =  \sgn{\det{Jf_{p}}}\]
+ここで, 局所的に微分同相であるから$f^{-1}(O)$の各点は孤立点である。$f^{-1}(O) \subset D^2(1)$で$D^2(1)$はコンパクト集合だから, $f^{-1}(O)$は有限集合でなければならない\footnote{距離空間ではコンパクト性と点列コンパクト性は同値であるから, もし無限個あるなら, 集積点を持ち孤立していることに反する。}。よって有限回の取り直しによって$p,p'\in f^{-1}(O)$が異なる2点ならば$U_{p}\cap U_{p'} =\varnothing$であるとしてよい。また, すべての$p$に対して$S^1(\delta) \subset V_{p}$となるように$\delta$を取り直しても良い。
+
+曲線$C_p:=(f|_{U_p})^{-1}(S^1(\delta))$は$(f|_{U_p})^{-1}(D^2(\delta))$の境界としての向きをいれるとする。$\det Jf_{p} > 0$なら$f|_{U_p}$は向きを保ち, そうでないなら向きは保たない。なお, $O$が正則値なので$f^{-1}(O)$の点でJacobi行列は正則であり,Jacobianは0ではない。よって
+\[\int_{C_{p}} f^{\ast}\alpha = \sgn{\det Jf_{p}} \int_{S^1(\delta)}\alpha = \sgn{\det Jf_{p}}.\]
+$f^{\ast}\alpha$を$A := D^2(1) \setminus{\bigcup_{p\in f^{-1}(O)} (f|_{U_p})^{-1}(\mr{Int}D^1(\delta))}$上の1-formと考えることができる($O\notin f(A)$だから)。さらに$A$には$D^2(1)$から定まる自然な向きを入れる。$d(f^{\ast}\alpha) = f^{\ast}(d\alpha) = 0$だからStokesの定理により
+\[\int_{A}d(f^{\ast}\alpha)=0\]
+れば$\del A = \del D^2 - \sum_{p\in f^{-1}(O)} C_p$であるから(向きに注意すること!), Stokesの定理により
+\beqn
+\int_{A}d(f^{\ast}\alpha) 
+&=& \int_{\del A} f^{\ast}\alpha \\
+&=& \int_{\del D^2(1)}f^{\ast}\alpha - \sum_{p\in f^{-1}(O)} \int_{C_p}f^{\ast}\alpha\\
+&=& \int_{S^1(1)} f^{\ast}\alpha - \sum_{p\in f^{-1}(O)} \sgn{\det Jf_{p}}
+\eeqn
+よって
+\[\int_{S^1(1)}f^{\ast}\alpha - \sum_{p\in f^{-1}(O)} \sgn{\det Jf_{p}} = 0\]
+が得られた。\qed 
+\subsection{例題}
+\begin{egprob}
+地球を$S^2$とみなす。ある固定された時刻において, 気温と気圧がともに等しい対心点(antipodal point)の対が存在することを示せ。ただし, 気温$T$と気圧$P$は連続写像$S^{2}\to \mb{R}$とみなす。
+\end{egprob}
+
+
+\subsection{レトラクト}
+$X$の部分空間$A$を考え$i:A\to X$を包含とする。連続写像$r:X\to A$であって$r|_{A}=1_{A}$であるとき, $r$をレトラクション, $A$を$X$のレトラクトという。さらに, $i\circ r$と$1_{X}$をつなぐホモトピーで$A$上では恒等写像であるものが存在するとき, $r$を変位レトラクション, $A$を変位レトラクトという。
+\begin{eg} (\tf{レトラクションだが変位レトラクションでない例})\\
+$X=S^{1}$, $A$を端点を含む上半円周とする。$r:X\to A$を$r(x,y) = (x,|y|)$と定めると$r$は$A$上恒等写像なのでレトラクションである。しかし$r$は変位レトラクションではない。実際, $i\circ r$の回転数は明らかに0なので$S^1$上の恒等写像(回転数1)とホモトピックになってはならない。
+\end{eg}
+
+レトラクションを考えるのはホモロジー代数的にも意義がある。レトラクションがあるとき, 完全列が分裂するのである。この事実は重要である。
+\besha
+\begin{prop} (\tf{分裂補題(Splitting Lemma)}) \label{prop:splitting_lemma}
+$R$加群の完全列
+\[0\to A\xrightarrow{f} B\xrightarrow{g} C\to 0\]
+を考える。このとき, 次は同値である。
+\ben
+\item ある$R$準同型$r:B\to A$が存在して, $r\circ f = 1_{A}$
+\item ある$R$準同型$s:C\to B$が存在して, $g\circ s = 1_{C}$
+\item この完全列は分裂(split)する。すなわち, $B\cong A\oplus C$.
+\een
+また, この$r$,$s$をそれぞれ\tf{レトラクション}, \tf{セクション}という。
+\end{prop}
+\ensha
+証明は単純だが面倒である。\href{}{幾何学IIレポート問1}を参照せよ。なお,初めて証明するときは「直和になっているのならこうであるべき」という意識を持ちながら写像を作るのがよい。
+
+レトラクションがあることを示すのはただ構成するだけであるが, \tf{レトラクションがないことを示すにはコホモロジーなど何かの不変量を使って考えるとよい。}
+
+\subsection{($\spadesuit$)普遍係数定理}
+まず簡単な双対加群の計算をまとめておく. 
+
+\begin{prop}
+\ben 
+\item $\mr{Hom}(\mb{Z},R)\cong R$
+\item $\mr{Hom}(\cyc{m}, R) \cong \ker{(R\xrightarrow{\times m} R)}$
+\item $\mr{Hom}(\cyc{m},\mb{Z}) = 0$
+\item $\mr{Hom}(A\oplus B, R) \cong \mr{Hom}(A,R)\oplus \mr{Hom}(B,R)$ 
+\item 有限生成加群$G$の階数を$\rank{G}$とするとき, $\mr{Hom}(G,R) = R^{\rank{G}}$
+\een 
+\end{prop}
+加群$A$に対し, 自由加群$F_0$が存在して$F_0 \xrightarrow{\epsilon} A$が全射である. このときの核は, また自由加群である(多分). よって, ある自由加群$F_1$によって$F_1 \xrightarrow{d} F_0$の像が$\ker{\epsilon}$であるようにできる. これにより, 長さ1の\tf{自由分解}
+\[\dots \to 0\to 0\to F_1\xrightarrow{d} F_0 \xrightarrow{\epsilon} A \to 0\]
+が得られる. この自由分解から得られるHom複体
+\[0\to \mr{Hom}(A,R) \xrightarrow{\epsilon^{\lor}} \mr{Hom}(F_0,R) \xrightarrow{d^{\lor}} \mr{Hom}(F_1,R) \to 0 \to 0\to \dots\]
+が得られる. これは完全列とは限らないが, 左完全ではある. すなわち, $\epsilon^{\lor}$は単射で, $\ker{d^{\lor}} = \im{\epsilon^{\lor}}$でもあるが,  $d^{\lor}$は全射とは限らない. このコチェイン複体の1次コホモロジー, すなわち$\mr{Ext}(A,R) := \mr{Hom}(F_1,R)/\im{d^{\lor}}$は$d^{\lor}$がどれくらい全射でないかというズレを計る. 
+
+\begin{prop}
+\ben 
+\item $\mr{Ext}(A\oplus A', R) \cong \mr{Ext}(A,R) \oplus \mr{Ext}(A',R) $ 
+\item $\mr{Ext}(\mb{Z},R) = 0$ 
+\item $\mr{Ext}(\cyc{m},R) \cong R/mR$. とくに$\mr{Ext}(\cyc{m},\mb{Z}) = \cyc{m}$, $\mr{Ext}(\cyc{m},\cyc{l}) = \cyc{\mr{gcd}(m,l)}$
+\item 有限生成加群$G$のねじれ群を$T(G)$とするとき, $\mr{Ext}(G,\mb{Z}) = T(G)$. 
+\een 
+\end{prop}
+
+さて, チェイン複体$\mac{C} = \set{C_q,\del}$に対しコチェイン複体$\mr{Hom}(\mac{C},R) = \set{\mr{Hom}(C_q,R), \delta := \delta^{\lor}}$が作れる. このコチェイン複体の$q$次コホモロジーを
+\[H^q(\mac{C};R)\]
+と表し, \tf{チェイン複体$\mac{C}$の$R$係数のコホモロジー群}という. \par 
+これかに述べる\tf{普遍係数定理}は, $H^{q}(\mac{C};R)$と$H_q(\mac{C})$がどのように異なるかを述べるものである. そもそも$H_q(\mac{C})$は$R$上の加群ではない. そこで, $\mr{Hom}(H_q(\mac{C}), R)$という$R$加群が考えられよう. ところがこれは, 一般に$H^q(\mac{C};R)$とは異なる. その差が何であるかというのが, 実はイクステンションから計算できる. \par 
+ここで, 写像$\kappa$を定義しよう. 各$q$ごとにペアリング$\mr{Hom}(C_q,R)\times C_q\to R$が作れる. この写像を$(f,c) \mapsto \lan f,c\ran :=f(c)$と表すと, $\lan, \ran$は双線形写像であり, $\lan \delta(g), c\ran = g,\del(c)\ran$を満たす. これを$Z^q(\mac{C};R) \times Z_q(\mac{C})\to R$に制限すると, これは$B^q(\mac{C};R)\times Z_q(\mac{C})$の元と$Z^q(\mac{C};R)\times B_q(\mac{C})$の元を0にする. したがって$H^q(\mac{C};R) \times H_q(\mac{C}) \to R$が引き起こされる. こうして, 次の写像が引き起こされる. 
+\[\kappa: H^q(\mac{C};R) \to \mr{Hom}(H_q(\mac{C}), R),\quad \kappa([\phi]) = ([c] \mapsto \phi(c))\]
+
+\tbox{
+\begin{theo} (\cite{masuda}定理7.12)
+チェイン腹帯$\mac{C}=\set{C_q,\del}$において, 各$C_q$が自由加群ならば, 完全系列
+\[0\to \mr{Ext}(H_{q-1}(\mac{C}), R) \to H^q(\mac{C};R) \xrightarrow{\kappa} \mr{Hom}(H_q(\mac{C}),R) \to 0\]
+が存在する. しかも, この完全列は分裂する. したがって, 
+\[\bolm{H^q(\mac{C};R) \cong \mr{Hom}(H_q(\mac{C}),R) \oplus \mr{Ext}(H_{q-1}(\mac{C}), R)}\]
+\end{theo}
+}{title=普遍係数定理}
+
+
+
+
+
+\subsection{演習問題}
+
+\subsection{Level B}
+\begin{prob} (2020前期幾何演義)
+$X\in \mb{R}^{2}\setminus{\{ (0,0)\}}$とし, 群$\mb{Z}$の$X$への作用を次で定める:
+\[n\cdot (x,y) = (2^{n}x, 2^{-n}y)\]
+\ben
+\item 商写像$\pi:X\to X/\mb{Z}$は被覆空間であることを示せ。
+\item 商空間$X/\mb{Z}$はHausdorffでないことを示せ。
+\een
+\end{prob}
+
+\newpage 
+\section{被覆空間}
+\tbox{ 
+\begin{theo}
+
+$D$を単連結, $C$を連結, $f: D\to X$を連続, $C\to X$を被覆写像とするとき, 次を可換にする連続写像$\witi{f}: D\to C$が存在する.
+\[
+\xymatrix{ 
+ & C \ar[d]\\
+D \ar[r]^{f}\ar[ru]^{\witi{f}} & X 
+}
+\]
+また, カテゴリーを$C^{\infty}$や正則に変えたものも成立する. 
+
+\end{theo}
+}{title=Lifting}
+
+\begin{eg}
+\ben 
+\item $S^1$は単連結ではない. $T^2$も単連結ではない. 
+\item 可縮な空間や, $S^n$ ($n\geq 2$)は単連結である. 
+\een
+\end{eg}
+
+\begin{egprob} (H26基礎科目II)
+$f:S^2\to S^1$を$C^{\infty}$級写像とする. このとき, $S^2$上の少なくとも2点において, $f$の微分は零写像となることを示せ. 
+\end{egprob}
+
+\begin{egans}
+$S^2$は\tf{単連結}(連結で基本群が自明)であるため, 定理が使える. 
+被覆写像$\pi:\mb{R}\to S^1$を用いることで, これにより$\witi{f} : S^2\to \mb{R}$が得られる. $S^2$はコンパクトだから$\witi{f}$は最大値$M$と最小値$m$を持つ. $\witi{f}(p) = m, \witi{f}(q)  = M$とする. $m=M$なら$\witi{f} \equiv \text{const}$なので微分は明らかに0である. $m<M$なら, $p\neq q$であり, $p$のまわりの局所座標系$(U;x,y)$を選択し, $f(p)$のまわりの局所座標は$\pi$を通して取ることにより, 
+\[(Jf)_{p} = (J\witi{f})_{p} = [\dfrac{\del \witi{f}}{\del x} \quad \dfrac{\del \witi{f}}{\del y}] = [0\quad 0]\]
+となる(最後の等号は最小性より). $q$でも同様である. よってこの$p,q$が微分が0写像となる2点である. \qed  
+\end{egans}
+
+\begin{egprob}
+$\Lambda, \Lambda' \subset \mb{C}$は格子とする. $f:\mb{C}/\Lambda\to \mb{C}/\Lambda'$を正則写像とする. 
+\ben 
+\item $f$から正則写像$\witi{f}: \mb{C} \to \mb{C}$を引き起こせ. もちろん, 被覆射影写像$\pi:\mb{C}\to\mb{C}/\Lambda$と$f$で整合しているようなもののことである. 
+\item $\lambda\in \Lambda$を固定し, $\witi{f}'(z) - \witi{f}'(z+\lambda) = 0 $であることを示せ. これより$\witi{f}'(z)$が定数$m$になることを導け. 
+\item $\witi{f}(z) = mz + a$, $m\Lambda \subset \Lambda'$となることを示せ. これにより$f$の形は一次関数的であることが従う. 
+\een 
+
+\end{egprob}
+
+\begin{egans}
+\end{egans}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\section{($\heartsuit$)ホモロジー群の計算}
+\subsection{基礎事項}
+「整数係数ホモロジー群」を求めさせる問題が頻出である。ところでホモロジー群には単体複体ホモロジー, 胞体複体ホモロジー, 特異ホモロジーなどを学習したが, これらは単体複体に関してすべて一致する。さらに,一般の位相空間$X$で三角形分割$K$を持つものに対しては,その特異ホモロジー$H_{\mr{Sing}}(X)$と$K$の単体複体ホモロジー群は一致する。その他でもまあいろいろ一致すると思う。
+
+以下ではこれらをまとめて「整数係数ホモロジー群」といい, $H_{n}(X)$という式で表すものとする。
+
+任意の位相空間$X$に対して$\epsilon:X\to \mr{pt}$という写像がただひとつ存在するが, ここから特異チェイン複体に添加した
+\[\cdots\xrightarrow{\del} S_{2}(X) \xrightarrow{\del} S_{1}(X) \xrightarrow{\del} S_{0}(X) \xrightarrow{\epsilon_{\ast}} S_{0}(\mr{pt}) \to 0\]
+という列が存在する。この列においても二つの連続した写像の合成は$0$となっており, すなわちチェイン複体である。このチェイン複体のホモロジー群を$\witi{H}_{n}(X)$と書き, \tf{簡約ホモロジー群}という。簡約ホモロジー群は
+\[\witi{H}_{q}(X) = H_{q}(X)\quad (q\neq 1), \quad \witi{H}_{0}(X) \cong \mb{Z}^{\mr{rk}H_{0}(X) - 1}\]
+を満たす。
+\begin{tips}
+この程度のものと思うかもしれないが, ホモロジー群の計算において$0$次の部分というのはいつも単純に分かる上に完全列の中では邪魔が多い。しかしMayer-Vietorisや長完全列を持ち出すとき, このような$\witi{H}$を持ち出すことでより見通しが良くなる。積極的に使うべきものである。
+\end{tips}
+\begin{rem}
+$\witi{H}(X,A)$なんてものはない。
+\end{rem}
+\tbox{
+\begin{prop}
+\ben
+\item $X$の弧状連結成分数が$m$個のとき, $H_{0}(X)\cong \mb{Z}^{m}$.
+\item $H_{0}(\mr{pt}) = \mb{Z}$, $H_{q}(\mr{pt}) = 0$\quad ($q\neq 0$)
+\item (\tf{ホモトピー公理}) $X\simeq Y$のとき$H_{\ast}(X) \cong H_{\ast}(Y)$である。とくに$X$が可縮であるなら$H_{q}(X) = H_{q}(\mr{pt})$
+\item (\tf{切除定理}) $(X,A)$を位相空間対, $V$を開集合として, $\ovl{V} \subset \mr{Int}A$が成り立つとき, 
+\[H_{\ast}(X-V,A-V) \cong H_{\ast}(X,A)\]
+\item (\tf{簡約ホモロジーの長完全列})次の完全列がある。
+\[--\]
+なお, $\witi{H}$を$H$にしてもよい。
+\item (\tf{Mayer-Vietoris}完全列) こちらも$\witi{H}$は$H$にしてもよい。
+\item (\tf{球面のホモロジー群}) 
+\[H_{q}(S^{n}) = 0\quad (q\neq 0,n), H_{0}(S^{n}) = H_{n}(S^{n}) = \mb{Z}\]
+
+\een
+\end{prop}
+}{title=ホモロジー群まとめ}
+\prf 
+\ben
+\item
+\item
+\item
+\item
+\item
+\item 切除公理と簡約ホモロジー長完全列を使う。
+\een
+\qed
+
+
+完全列および$\mb{Z}$加群に関する基本をまとめておく。
+\begin{prop} (\tf{完全列と$\mb{Z}$加群に関する命題まとめ})\\
+\tf{以下では加群は整数係数とする。}
+\ben
+\item 自由加群の部分加群は自由加群である(\tf{})。
+\item $P$が射影加群で
+\[0\to A\to B\to P \to 0\]
+が完全列であるとき, この完全列は分裂する。とくに, $P$が自由加群, $\mb{Z}^{n}$のとき, 完全列は分裂する(自由加群は射影加群なので)。
+\item 
+\een
+\end{prop}
+\prf 
+(1):ここでは論じる教育的意義はないので省略。ホモロジー代数の教科書を見る。
+
+(2):射影加群の定義を思い出せば, セクション$P\to B$が簡単に作れる。そこで分裂補題(命題$\ref{prop:splitting_lemma}$)を使う。
+
+\qed
+
+\begin{prac} \label{prac:X_and_A_are_contractible}
+$(X,A)$を位相空間対とする。$X$と$A$がともに可縮なら, $H_{\ast}(X,A) = 0$であることを示せ。わからなければ次の例題にヒントを与えているのでそこを見よ。
+\end{prac}
+
+
+
+
+\begin{egprob} (\tf{切除公理の$\ovl{V}\subset \mr{Int}A$は外せない})\\
+$X = D^{n}$, $A=\del X = S^{n-1}$, $V=\{ p \}$ ($p\in A$)とする。
+\[H_{q}(D^{n}, S^{n-1}) = \bcas \mb{Z}\quad (q=n) \\ 0 \quad (q=0) \ecas\]
+であるが, 
+\[H_{q}(D^{n} - p, S^{n-1} - p) = 0\]
+である。なぜなら, 後者は$D^n - p$と$S^{n-1} - p \cong \mb{R}^{n-1}$がともに可縮で簡約ホモロジーの長完全列から従う(\ref{prac:X_and_A_are_contractible})。前者も簡約ホモロジー長完全列と$D^{n}$が可縮であることから$H_{q}(S^{n-1}) \cong H_{q+1}(D^{n},S^{n-1})$であり, 球面のホモロジー群から分かる。
+\end{egprob}
+
+
+
+\subsection{($\heartsuit$)いろんな例題}
+\subsubsection{Level A}
+\begin{egprob}
+$X=\mb{R}^{3} - (\text{$x$軸$\cup$ $z$軸})$のホモロジー群を求めよ。
+\end{egprob}
+\begin{egans}
+連結なので$H_{0}(X) = \mb{Z}$である。$X\simeq S^{2} - \{ 4\text{点} \}$である。穴の開いた1点でステレオ射影をすることで$X\simeq \mb{R}^{2} - \{\text{3点} \}$である。この空間を$Y$とおく。3点に十分小さい$\mb{R}^{2}$の球状近傍を与え, $U$をその和とするとき, $U\cup Y = \mb{R}^{2}$である。この開被覆でMayer-Vietorisを用いて, $H_{p}(\mb{R}^{2}) = 0$ ($p>0$) だから$H_{p}(Y\cap U) \cong H_{p}(Y)\oplus H_{p}(U)$を得る。$H_{p}(U) = 0$, $Y\cap U \simeq \bigsqcup_{i=1}^{4} S^{1}$なので
+\[H_{p}(X) \cong H_{p}(Y) \cong H_{p}(S^{1})^{\oplus 4}\]
+以上より
+\[H_{p}(X) = \bcas
+\mb{Z}\quad (p=0)\\
+\mb{Z}^{4}\quad (p=1)\\
+0\quad (p\neq 0,1)
+\ecas\]
+\end{egans}
+
+
+
+
+\subsubsection{Level B}
+\subsubsection{Level C}
+
+\clearpage
+\subsection{演習問題}
+\subsubsection{Level A}
+\begin{prob}
+一般の位相空間$X$では弧状連結と連結は同じ概念ではない。$X$が\tf{位相幾何学者の連続曲線}
+\[ \{ (x,\sin{\dfrac{1}{x}}) \mid x>0 \} \cup \{ (0,y) \mid -1\leq y\leq 1 \}\]
+であるとき, $H^{\mr{Sing}}_{0}(X)$を求めよ。もしこれが弧状連結であるなら, $H^{\mr{Sing}}_{0}(X) \cong \mb{Z}$であるはずだが・・・？
+\end{prob}
+\subsubsection{Level B}
+\subsubsection{Level C}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\section{胞体複体のホモロジー}
+\clearpage
+
+
+
+
+
+
+
+
+
+\section{de Rham Cohomology}
+\subsection{基礎事項}
+
+
+
+\tf{ただ完全列があるというだけでなく, 完全列の各射がどのような定義であったかを思い出す必要があることもある。}
+\begin{egprob} (19幾何学II, \href{https://www.math.kyoto-u.ac.jp/~iritani/teaching/enshu4.pdf}{演習No.4問題17})\\
+単位円$S^1$を2つの開区間
+\beqn
+U:=\{e^{i\theta} \mid -\frac{2\pi}{3} < \theta < \frac{2\pi}{3} \}
+V:=\{e^{i\theta} \mid \frac{\pi}{3} < \theta < \frac{5\pi}{3} \}
+\eeqn
+で覆う。
+\ben
+\item 開被覆$\{ U,V\}$に関するMayer-Vietoris完全列を書き下せ。
+\item Mayer-Vietoris完全列に現れる群$H^{\ast}(U) \oplus H^{\ast}(V)$, $H^{\ast}(U\cap V)$, および\textcolor{blue}{それらの間の準同型を求めよ}(この問題が大事)。
+\item Mayer-Vietoris完全列を使って$H^{0}(S^1) \cong H^1(S^1) \cong \mb{R}$を示せ。また, 連結準同型$d^{\ast}$を使って$H^{1}(S^1)$の基底を代表する微分形式を一つ与えよ。また写像$H^1(S^1)\to \mb{R}$, $[\omega] \mapsto \int_{S^1}\omega$が同型であることを示せ。
+\een
+\end{egprob}
+
+\begin{egans} (\href{https://www.math.kyoto-u.ac.jp/~iritani/teaching/kaito4.pdf}{解答No.4})\\
+(1)についてはリンク先を見よ。\\
+(2): $\ast \neq 0$で$H^{\ast}(U)\oplus H^{\ast}(V) = H^{\ast}(U\cap V) = 0$であることはリンク先の通り。だから$\ast\neq 0$では当然0写像である。$\ast = 0$のときで理解が問われる。まず, $H^{0}(M)$とは$M$上の局所定数関数と思うことが出来るのであった。$U,V$は連結で$U\cap V$は2個の連結成分をもつ。$H^{0}(U)\oplus H^{0}(V)$の元は$U$上の定数関数と$V$上の定数関数の組である。だからそれを$\mb{R}^2$の元のようにみなして$(a,b)$と書く。\tf{mayer-Vietoris完全列の作り方に戻ると}, $i_{U}^{\ast} - i_{V}^{\ast}$というchain mapで作っていたのであった(ただし, $i_U:\cap V\hookrightarrow U$, $i_V:U\cap V\hookrightarrow V$)\footnote{$i_U^{\ast}$は$U$上の微分形式の$U\cap V$への制限を考えることと同じである。}。だから
+\[(i_{V}^{\ast} - i_{U}^{\ast})(a,b) = (b-a,b-a)\]
+という計算をしなければならない。つまり, $U$上で$a$で$V$で$b$の定数関数の差を取って$U\cap V$に制限すればそれは"各連結成分において"$b-a$という値をとる定数関数であるということを表している。$H^{0}(U\cap V)$は, 標準的に$\mb{R}^2$との同型を取るのであれば, 「各連結成分における定数関数の値を拾う」という同型写像であることに注意。
+\end{egans}
+
+\begin{prac}
+$f(x)=\dfrac{1}{x}$を満たす$C^{\infty}$級関数$f:\mb{R}-\{ 0 \} \to \mb{R}$をすべて決定せよ。また, その答えをde Rham Cohomologyから理解せよ。
+\end{prac}
+
+
+
+
+
+
+\subsection{計算問題}
+最低限, 次の事柄は覚えておこう。
+\begin{prop} (de Rham Cohomologyまとめ)\\
+de Rham Cohomologyに関して, 次が成り立つ。
+\ben
+\item $H^{0}(M)=\mb{R}^{\text{$M$の連結成分数}}$
+\item $H^{q}(M_1\sqcup M_2) = H^{q}(M_1)\oplus H^{q}(M_2)$
+\item (\tf{Poincareの補題}) $H^{\ast}(M) \cong H^{\ast}(M\times \mb{R})$. 同型は$\pi:M\times\mb{R}\leftrightarrow M:s$, $\pi(x,t)=x$, $s(x) = (x,0)$で$\pi^{\ast}$と$s^{\ast}$によって与えられる。
+\item (\tf{Homotopy公理}) $M,N$がホモトピー同値ならば$H^{q}(M)\cong H^{q}(N)$.
+\item (\tf{Mayer-Vietois完全列})$M=U\cup V$を開被覆とするとき, 次の長完全列が存在する。
+\[
+\]
+\item $H^{q}(\mb{R}^{n}) = 0$ ($\forall q$)
+\item $H^{q}(S^{n}) = \mb{R}$ ($q=0,n$), それ以外は0.
+\item (\tf{Kunnethの公式}) $M,N$がFinite Good Coverを持つとき次が成り立つ。
+\[H^{n}(M\times N) \cong \bigoplus_{p+q=n}H^{p}(M) \tens_{\mb{R}} H^{q}(N)\]
+\een
+\end{prop}
+\prf これらは幾何学IIでやることだが, 証明の概要を述べる。
+(1):0次コホモロジーは局所定数関数全体であり, 連結成分に一つ実数を与えることに等しいため。
+
+(2): $M_1\sqcup M_2$上の微分形式を与えることは, $M_1$上の微分形式と$M_2$上の微分形式の組を与えることに他ならないから。
+
+(3): $\pi:M\times \mb{R} \to M$を射影, $s:M\to M\times \mb{R}$; $s(x) = (x,0)$を零切断とすると, $s^{\ast},\pi^{\ast}$がcochain homotopicでありコホモロジーの間の同型を与えることが示せる。
+
+(4):次が短完全列であることを示せばホモロジー代数的に長完全列が得られる。
+\[\]
+(5): (3)より分かる。
+
+(6): $S^n$を二つの$\mb{R}^n$で覆えるので(4)から分かる。
+
+(7): Good coverの個数で帰納法を回す。Mayer-Vietoris完全列を使ってcochain complexの同型を与えていく。可換性を示せば帰納法の仮定とFive Lemmaから終わる。\qed
+
+\begin{egprob} (\tf{穴あき平面})\\
+$p_1,\cdots, p_k$を$\mb{R}^2$の異なる点, $V= \mb{R}^2 - \{ p_1,\cdots, p_k \}$とする。$H^{\ast}(V)$を計算せよ。
+\end{egprob}
+\begin{egans}
+$p_i$中心の十分半径の小さい開円板(互いに交わらない)の直和を$U$とする。$U\simeq n\mr{pt}$, $U\cup V=\mb{R}^2$は可縮, $U \cap V \simeq S^1\cup \cdots \cup S^1$ ($n$個のコピーの直和)である。$V$は連結なので$H^{0}(V) = \mb{R}$.  MV完全列から$p\neq 0$で$H^{p}(V)\cong H^{p}(U\cap V) = H^{p}(S^1)^{\oplus n} $ なので
+\[H^{0}(V) = \mb{R}, H^{1}(V)\cong \mb{R}^n, H^{p}(V) = 0\quad (p\neq 0,1)\]
+
+\end{egans}
+
+\begin{tips}
+このような$U\cup V$で$\mb{R}^{n}$を作るタイプの被覆は覚えておくとよい(楽である)。多くの場合の多様体$M$に対して, $M$から何個かの点を抜いた空間のde Rham Cohomologyはこの方法で解決できることが多い。次の問題もそのような被覆で解決する。
+\end{tips}
+
+\begin{egprob} (\tf{de Rham Cohomologyの計算例1}) \\
+$H^{\ast}(S^3 - S^1)$を計算せよ。ただしここでは
+\[S^3 = \{ (x,y,z,w)\mid x^2+y^2+z^2+w^2 =1 \}\]
+\[S^1 = \{ (x,y,0,0) \mid x^2+y^2 = 1 \}\]
+として与える。
+\end{egprob}
+\begin{egans}
+$(1,0,0,0)$を北極としてステレオ射影を考えることにより$S^3-S^1$は$\mb{R}^3 - \{ \text{X軸} \}$に微分同相となる。$U$を$X$軸を覆う円柱$\{ Y^2+Z^2<1\}$とし, $V = \mb{R}^3 - \{ \text{X軸}\}$とする。$U\cup V = \mb{R}^3$と$U$は可縮, $U\cap V \simeq S^1\times \mb{R}$なのでPoincar\'{e}補題とMV完全列から
+\[H^{p}(V) = H^{p}(S^1)\quad (p\neq 0)\]
+が分かる。$V$は連結なので$H^{0}(V) = \mb{R}$. $S^1$のコホモロジーは分かっているから, 答えは
+\[H^{p}(S^3-S^1) = \bcas \mb{R} \quad (p=0,1) \\ 0 \quad (\text{o.w.}) \ecas\]
+\end{egans}
+
+
+
+
+
+\begin{egprob}
+$H^{\ast}(\mb{CP}^{n})$を計算せよ。
+\end{egprob}
+
+\begin{egprob} (20幾何学IIレポート)
+$0<m<n$を自然数とする。$H^{\ast}(S^{m}\times S^{n})$を計算せよ。
+\end{egprob}
+
+
+
+
+次は授業では扱われないが, 本に載っている定理であり, 検算に役立つと思われる。証明は参考文献を参照にせよ。
+
+\begin{theo} (De Rham Cohomologyの裏技?)\\
+\ben
+\item $M$は連結$n$次元多様体とする。このとき, $M$がコンパクトかつ向き付け可能であるなら$H^{n}(M)\cong \mb{R}$であり, そうでない場合は$H^{n}(M)=0$である。
+\item $M$を連結コンパクト$n$次元多様体とする。$M$から$k$個の点を抜いた多様体を$M_{-k}^{n}$とするとき,$H^{\ast}(M_{-k}^{n})$は次のようになる。ただし, $d_{p} = \dim_{\mb{R}}H^{p}(M)$で, 表の2列目の$q$は$1\leq q\leq n-2$である。
+\[
+\begin{tabular}{c||c|c|c|c}
+$H^{\ast}(M_{-k}^{n})$ & $H^{0}$ & $H^{q}$ & $H^{n-1}$ & $H^{n}$ \\ \hline
+    $n=1$ & $\mb{R}^{k}$ & $\ast$ & $\ast$&$0$\\
+    $n=2$ &$\mb{R}$&$\ast$&$\mb{R}^{k+d_1-d_2}$ &$0$\\
+    $n\geq 3$ &$\mb{R}$ &$\mb{R}^{d_q}$ &$\mb{R}^{k+d_{n-1}-d_n}$& $0$
+\end{tabular}
+\]
+さらに,  (1)から
+\[
+d_n = 
+\bcas
+1 \quad (M\text{が向き付け可能})\\
+0 \quad (\text{otherwise}) 
+\ecas
+\]
+である。
+\een
+\end{theo}
+\prf 
+\ben
+\item $M$が連結で有限Good Coverを持つ場合は\cite{bott-tu}系7.8.1. 主張通りの証明については\cite{CCAC}205p. なお, $M$が向き付け可能の場合は主張はPoincar\'{e} Dualityを使えば易しく, 向き付け可能でない場合は二重被覆$\witi{M}$を取って示している。
+\item $n=1$では$M_{-k}$の連結成分数が複数になる。これは1次元多様体の分類定理\footnote{気になる方は次を参照。(まだ見つけてない)}を用いて$M\cong S^1$であることを仮定すれば簡単である。$n\geq 2$では$M_{-k}$が連結非コンパクトになるので(1)から$H^{n}(M_{-k}) = 0$.
+\een
+\
+
+\subsection{コンパクト台コホモロジー}
+\begin{prop} (Compact台コホモロジーまとめ)\\
+$\dim{M}=n$とする。
+\ben
+\item (\tf{Poincar\'{e} Duality}) \textcolor{blue}{$M$が向き付け可能の場合,} $H^{\ast}(M)\cong (H^{n-\ast}_{c}(M))^{\ast}$で, 同型は
+\[\omega \quad \leftrightarrow \quad \int_{M}\omega\wedge \bullet\]
+で与えられる。
+\item 
+\een
+\end{prop}
+\prf
+(1): MV argument.
+
+(2):
+
+\begin{eg}
+\ben
+\item Poincar\'{e} Dualityは向き付け可能性が必要である\footnote{そもそも積分を定義するときに向きに適合した局所座標を取って積分を定義するため。}が, 向き付け可能性を外すと反例がある。たとえばコンパクトなメビウスの輪$M$は, センターラインに送ることで$M\simeq S^1$なので$H^{2}(M) = 0$であるが$H_{c}^{0}(M) = H^{0}(S^1)=\mb{R}$となり同型でない。
+\een
+\end{eg}
+
+\begin{egprob}
+$n>0$に対し, $H_{c}^{\ast}(\mb{R})$を計算せよ。
+\end{egprob}
+\begin{egans}
+$\ast=0,1$の場合のみ考える(次元の問題でその他の場合はすべて0である)。$H^{0}_{c}(\mb{R})$は微分して$0$であるような$\mb{R}$上のコンパクト台$C^{\infty}$級関数である。これは明らかに$0$のみなので$H_{c}^{0}(\mb{R}) = 0$である。$H_{c}^{1}(\mb{R}) = \Omega_{c}^{1}(\mb{R})/\im{d}$である。ここで, $I:H_{c}^{1}(\mb{R})\to \mb{R}$を積分作用素
+$I([\omega]) = \int_{\mb{R}}\omega$とすると, $\ker{I} = \im{d}$が分かる。実際, $f'(x)dx$を積分すると$f(\infty) - f(-\infty)$で, 
+$f$はコンパクト台だからこの値は0である。逆に積分して$0$であるなら,
+$g(x) = \int_{-\infty}^{x}f(x)\, dx$はコンパクト台0-formであり, $dg=f(x)dx$を満たす。明らかに$I$は全射だから準同型定理によって
+$H_{c}^{1}(\mb{R})\cong \mb{R}$である。よって
+\[H_{1}(\mb{R})=\mb{R}, H_{c}^{q}(\mb{R}) = 0\quad (q\neq 1)\]
+\end{egans}
+上のような計算で分かるコホモロジーの例としては$H_{c}^{\ast}([0,\infty))$がある。これは演習問題とする。
+
+
+\subsection{応用}
+
+
+\begin{egprob} (20幾何学IIレポート) 
+$f:S^2\times S^3\to S^5$にはレトラクションが存在しないことを示せ。すなわち, $r:S^5\to S^2\times S^3$であって$r\circ f = 1_{S^2\times S^3}$を満たすものは存在しないことを示せ。
+\end{egprob}
+\begin{egans}
+存在したとする。このとき$r,f$はcochain map
+\[r^{\ast}: H^{\ast}(S^2\times S^3) \to H^{\ast}(S^5), f^{\ast}:H^{\ast}(S^5)\to H^{\ast}(S^2\times S^3) \]
+を誘導するのであった。$r\circ f = 1$だから$f^{\ast}\circ r^{\ast}=1$であり、、 すべての$q$に対して$r^{\ast}:H^{q}(S^2\times S^3)\to H^{\ast}(S^5)$は単射準同型である。よって, 完全列
+\[0\to H^{q}(S^2\times S^3) \xrightarrow{r^{\ast}} H^{q}(S^5) \xrightarrow{\mr{nat.}} \coker{r^{\ast}} \to 0 \]
+を取ることができる。$f^{\ast}$はこの完全列のレトラクション(\ref{prop:splitting_lemma}参照)であるから, この完全列は分裂する。したがって
+\[H^{q}(S^5) \cong H^{q}(S^2\times S^3) \oplus \coker{r^{\ast}}\]
+となるが, $q=2,3$のとき左辺は$0$で右辺は$0$でないので矛盾である。よって$r$は存在しない。\qed
+\end{egans}
+
+\begin{prac}
+標準直線束$\mac{L}\to \mb{C}$は自明束ではないことを示せ. (\tf{Hint:} 次が知られている. 自明束$\iff$ いたるところ0でない切断が存在する. したがって, もしそのような切断$s$が存在すれば, それは連続関数$s: \mb{CP}^1\to \mb{C}^2\setminus{\{ 0 \}}$で, 射影$\pi:\mb{C}^2 \setminus{\set{0}} \to \mb{CP}^1$に対し$\pi\circ s = \mr{id}$を満たすものになる. ここでコホモロジー関手で写し, 上と同様に議論せよ. )
+\end{prac}
+
+
+\subsection{演習問題}
+\subsubsection{Level A}
+\begin{prob} (\tf{点対称移動の写像度})\\
+\ben
+\item $j:S^n\to \mb{R}^{n+1}$を包含写像とする。次の$\omega$は$H^{n}(S^n)\cong \mb{R}$の基底を与えることを示せ。
+\[\omega = j^{\ast}\parena{\sum_{i=1}^{n+1} (-1)^{i-1}x_i dx_1\cdots \wiha{dx_{i}}\cdots dx_{n+1}}\]
+\item 原点に関する点対称移動$r:S^n\to S^n$, $r(x)=-x$の写像度を計算せよ。
+\een
+\end{prob}
+
+\begin{prob} (\tf{半直線のコンパクト台コホモロジー})\\
+$H_{c}^{\ast}([0,\infty))$を計算せよ。
+\end{prob}
+
+\subsubsection{B}
+
+
+\subsubsection{Level C}
+\begin{prob} (2020後期幾何IIレポート)\\
+$H^{\ast}(S^n\times [0,1] / (x,0)\sim (-x,1))$を計算せよ。
+\end{prob}
+
+\subsubsection{HINTS}
+{\small
+
+\begin{hint}
+$H^n(S^n)\cong \mb{R}$は$\int_{S^n}$で与えられていた。もし基底にならないなら, $\mb{R}$における0に対応するはずである。つまり, $\int_{S^n}\omega = 0$である。本当にそうだろうか？
+\end{hint}
+\begin{hint}
+$H_{c}^{\ast}(\mb{R})$を求めたときの方法を真似する。積分の考え方に少し工夫が要るであろう。この多様体は境界を持っているが, そのような境界があるときは妙なことが起こるのかもしれない(その理由はどこにあるのだろう？それを自由に考えてみるのも面白いと思う)。
+\end{hint}
+\begin{hint}
+$n,n+1$次のコホモロジーを決定するのが難しい。$\pi$を標準的射影として$U=\pi(S^n\times (0,1))$, $V=\pi(S^n\times [0,1]\setminus{\{ 1/2\}})$とおいてMV完全列を出す。$U,V,U\cap V$は何とホモトピー同値か。そのホモトピー同値を具体的に与えて,その写像をしっかり追うことで, $H^{n}(U)\oplus H^{n}(V)\to H^{n}(U\cap V)$の写像がどのようなものかを決定せよ。点対称移動$r(x) = -x$も登場する。
+\end{hint}
+
+}
+
+
+

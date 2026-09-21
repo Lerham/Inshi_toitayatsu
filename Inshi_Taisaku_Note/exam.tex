@@ -1,0 +1,367 @@
+\documentclass[twocolumn]{jbook}
+\usepackage{plextarray}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{bm,braket,ascmac,extarrows}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,makeidx}
+\usepackage{amsfonts,graphics,fancyhdr,ulem,stmaryrd,pxrubrica,multicol,enumitem,framed,tcolorbox}
+\setcounter{secnumdepth}{3} %subsubsectionに番号をつける
+
+%%enumitem・・・A, a, I, i, 1 が \Alph*, \alph*, \Roman*, \roman*, \arabic* を表す列挙型の構文を使用できる．
+
+
+\usepackage[all]{xy}
+\usepackage[%
+top    = 15truemm,%
+bottom = 15truemm,%
+left   = 6truemm,%
+right  = 6truemm]{geometry}
+\usepackage{amsthm, bm}
+\usepackage{tikz}
+
+\usetikzlibrary{shadows}
+\usetikzlibrary{patterns}
+
+\columnseprule=.4pt
+
+\pagestyle{fancy}
+\lhead{\rightmark}
+% Theorem 環境
+\theoremstyle{definition}
+
+
+\newtheorem{theo}{\textcolor{blue}{定理}}[section]
+\newcommand{\theocount}[2]{\setcounter{subsection}{#1}\setcounter{theo}{#2}}
+\newcommand{\propcount}[2]{\setcounter{subsection}{#1}\setcounter{prop}{#2}}
+\newtheorem{prop}[theo]{命題}
+\newtheorem{hint}{Hint}[section]
+\newtheorem{prob}{問題}[section]
+\newtheorem{tips}[theo]{Tips}
+\newtheorem{cor}{系}[theo]
+\newtheorem{lem}{補題}[theo]
+\newtheorem{defn}[theo]{\textcolor{blue}{定義}}
+\newtheorem{eg}[theo]{例}
+\newtheorem{egprob}[theo]{例題}
+\newtheorem{prac}[theo]{練習}
+\newtheorem{egans}{解答}[theo]
+\newtheorem{point}{Point}[theo]
+\newtheorem{rem}[theo]{注意}
+\newtheorem{rev}{復習}
+
+\newtheorem{warning}[theo]{\textcolor{red}{警告}}
+\newtheorem{assume}{仮定}[theo]
+\newtheorem{ans}{解答}[theo]
+\newtheorem{que}{疑問}
+\newtheorem{recall}{Recall}[theo]
+\newtheorem*{theo*}{定理}
+\newtheorem*{prop*}{命題}
+\newtheorem*{claim}{Claim}
+\newtheorem*{lem*}{補題}
+\newtheorem*{defn*}{定義}
+\newtheorem*{cor*}{系}
+\newtheorem{probans}{}[section] %%演習問題用
+\newtheorem*{prob*}{問題}
+\newtheorem{miss}{\textcolor{red}{誤答}}[theo]
+
+ %newtheorem
+
+%Enumerate 環境
+\def\theenumi{\arabic{enumi}}
+\def\labelenumi{(\theenumi)}
+
+% (Re)New commands
+
+\definecolor{shadecolor}{gray}{0.80}
+
+
+\newcommand{\bbox}{\quad\rule{2.2mm}{3mm}}
+\newcommand{\aran}{\leftarrow}
+\newcommand{\step}[2]{\textbf{Step #1.} (#2)\quad}
+\newcommand{\dothom}[1]{ \underset{#1}{\overset{\cdot}{\simeq}}  }
+\newcommand{\maru}{\textcircled}  %%%まるで囲む数字
+\newcommand{\prf}{\noindent{\large (\textbf{Proof.})\quad}}
+\newcommand{\ten}{$\bullet\quad$} %黒丸
+\newcommand{\vin}{\rotatebox{90}{$\in$}}
+\newcommand{\thm}{\begin{itembox}[l]}
+\newcommand{\enthm}{\end{itembox}\\}
+\newcommand{\disp}{\displaystyle}
+\newcommand{\dou}{\Leftrightarrow}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\beqn}{\begin{eqnarray*}}
+\newcommand{\eeqn}{\end{eqnarray*}}
+\newcommand{\bcas}{\begin{cases}}
+\newcommand{\ecas}{\end{cases}}
+\newcommand{\spec}[1]{\mr{Spec}\parena{#1}}
+\newcommand{\nara}{\Rightarrow}
+%%%フォント
+\newcommand{\mb}{\mathbb} %%白抜き
+\newcommand{\mr}{\mathrm} %%%ローマン
+\newcommand{\maf}{\mathfrak} %%%フラクトゥール(素イデアルなど)
+\newcommand{\hana}{\mathscr} %%%花文字(圏のやつ)
+\newcommand{\mac}{\mathcal} %%%関手のやつ
+\newcommand{\besha}{\begin{shadebox}}
+\newcommand{\ensha}{\end{shadebox}}
+\newcommand{\ken}[1]{\text{\textbf{#1}}}
+
+\newcommand{\chat}{\widehat{\mathbb{C}}} %リーマン球面
+%\newcommand{\khat}{\widehat{K}}
+\newcommand{\nea}{\nearrow}
+\newcommand{\bolm}[1]{{\mbox{\boldmath $#1$}}}
+\newcommand{\exer}{{\bf 演習}\arabic{chapter}.\arabic{section}.}
+\newcommand{\sea}{\searrow}
+\newcommand{\tf}{\textbf}
+
+\newcommand{\bracket}[1]{%
+\[
+ \left(
+ \begin{tabular}{p{0.9\hsize}}
+  #1
+ \end{tabular}
+ \right)
+\]}
+
+\renewcommand{\leq}{\leqq}
+\renewcommand{\geq}{\geqq}
+\renewcommand\thefootnote{*\arabic{footnote}}
+\newcommand{\kuro}[1]{\mr{\textbf{#1}}}  %%複体の文字とか
+
+%%%代数学
+\newcommand{\tens}{\mathbin{\otimes}} %%%テンソル
+\newcommand{\ilim}[1][]{\mathop{\varinjlim}\limits_{#1}}%%逆極限
+\newcommand{\plim}[1][]{\mathop{\varprojlim}\limits_{#1}}%順極限
+\newcommand{\im}[1]{\mr{Im}\,#1}
+\newcommand{\coker}[1]{\mr{Coker}\,#1}
+\newcommand{\rank}[1]{\mr{rank}\, #1}
+\newcommand{\tor}[2]{\mr{Tor}_{#1}^{#2}}  %%Tor{i番目}{環}
+\newcommand{\ext}[2]{\mr{Ext}^{#1}_{#2} }
+\renewcommand{\hom}[1]{\mr{Hom}\parena{#1}} %Hom関手
+\newcommand{\norgr}{\rotatebox{90}{$\triangle$}}  %%正規部分群
+\newcommand{\bep}{\begin{pmatrix}}
+\newcommand{\enp}{\end{pmatrix}} %行列
+\newcommand{\tr}[1]{\mr{Tr}\parena{#1}} %Trace
+%\newcommand{\gal}[1]{\mr{Gal}\parena{#1}} %Galois群
+
+%%%幾何学
+\newcommand{\supp}[1]{\mr{Supp}(#1)}
+\newcommand{\opensub}{\overset{\mr{open}}{\subset}}
+\newcommand{\spaces}[3]
+{
+& #1 & #2 & #3 \\
+}
+
+\newcommand{\mvthree}[9]
+{
+    &#1&#4&#7 \\
+    &#2&#5&#8\\
+    &#3&#6&#9
+}
+
+%%%解析学
+\newcommand{\grad}{\mr{grad}} %%%grad
+\newcommand{\inpr}[2]{\lan #1, #2 \ran} %%%内積
+\newcommand{\del}{\partial} %%%偏微分, 境界
+\newcommand{\abs}[1]{ \left| #1 \right| }
+\newcommand{\norm}[1]{\left\| #1 \right\| }
+\newcommand{\fou}[1]{\mac{F}\parenc{#1}}
+\newcommand{\llfou}[1]{\mac{F}_{L^2}\parenc{#1}}
+\newcommand{\uof}[1]{\mac{F}^{-1}\parenc{#1}}
+\newcommand{\lluof}[1]{\mac{F}^{-1}_{L^2}\parenc{#1}}
+\newcommand{\conv}[1]{\mr{Conv}\, (#1)}
+\newcommand{\res}[2]{\underset{#1}{\mr{Res}}#2}
+\newcommand{\slim}{\mr{s-}\disp\lim}
+\newcommand{\wlim}{\mr{w-}\disp\lim}
+
+
+%%%その他数式用
+\newcommand{\witi}{\widetilde} %%%ワイドチルダ
+\newcommand{\wiha}{\widehat} %%%ワイドはっと(フーリエ係数)
+\newcommand{\symdiff}{\bigtriangleup}  %%%対称差
+\newcommand{\ovl}{\overline}
+\newcommand{\lan}{\langle}
+\newcommand{\ran}{\rangle}
+
+\newcommand*{\ve}{\overrightarrow} %%%%%ベクトル
+\newcommand{\parena}[1]{\left( #1 \right)}
+\newcommand{\parenb}[1]{\left\{ #1 \right\}}
+\newcommand{\parenc}[1]{\left[ #1 \right]}
+\newcommand{\bea}[2]{\begin{array}{#1} #2 \end{array}}
+\newcommand{\reg}[1]{\mr{Reg}\, #1}  %%非特異点集合
+\renewcommand{\div}[1]{\mr{div}(#1)}
+\newcommand{\sgn}[1]{\mr{sgn}#1}
+\newcommand{\checkbox}{$\Box\Box\Box$}
+\newcommand{\redwave}[1]{\textcolor{red}{\uwave{#1}}}
+
+%2021
+\newcommand{\aka}[1]{\textcolor{red}{#1}}
+\DeclareMathOperator{\gal}{Gal}
+\newcommand{\ao}[1]{\textcolor{blue}{#1}}
+\newcommand{\tbox}[2]{\begin{tcolorbox}[#2] #1 \end{tcolorbox}}
+
+\newenvironment{sumipmatrix}{\left ( \begin{smallmatrix}} {\end{smallmatrix}\right )}
+\newenvironment{sumibmatrix}{\left [ \begin{smallmatrix}} {\end{smallmatrix}\right ]}
+\newenvironment{sumivmatrix}{\left \{ \begin{smallmatrix}} {\end{smallmatrix}\right \}}
+\newcommand{\eqn}[1]{\begin{eqnarray*}#1\end{eqnarray*}}
+\newcommand{\sumib}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
+\newcommand{\beal}[1]{\begin{align} #1 \end{align}}
+\newcommand{\bealn}[1]{\begin{align*} #1 \end{align*}}
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+
+\newcommand{\enu}[2]{\begin{enumerate}[#2]#1\end{enumerate}}
+
+\newcommand{\cyc}[1]{\mb{Z}/#1\mb{Z}}
+\newcommand{\SL}{\mr{SL}_{2}(\mb{Z})}
+
+\DeclareMathOperator{\diag}{diag} %対角対角
+
+%%%左赤線環境
+\makeatletter
+
+\renewenvironment{leftbar}{%
+%  \def\FrameCommand{\vrule width 3pt \hspace{10pt}}%  デフォルトの線の太さは3pt
+  \def\FrameCommand{\vrule width 1pt \hspace{10pt}}%
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}%
+ {\endMakeFramed}
+\newcommand{\lefba}[1]{\begin{leftbar} #1 \end{leftbar}}
+
+\makeatletter
+
+\def\mapstofill@{%
+   \arrowfill@{\mapstochar\relbar}\relbar\rightarrow}
+\newcommand*\xmapsto[2][]{%
+   \ext@arrow 0395\mapstofill@{#1}{#2}}
+\newcommand{\xequal}[2][]{\ext@arrow 0055{\equalfill@}{#1}{#2}}
+\def\equalfill@{\arrowfill@\Relbar\Relbar\Relbar}
+\makeatother
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+\begin{titlepage}
+\title{院試対策Note}
+\author{京都大学数学作問サークル有志}
+\maketitle
+\onecolumn
+\thispagestyle{empty}
+\end{titlepage}
+\subsection*{編集について}
+本書は, 執筆者が学部4回生(B4)であった2021年頃に作成していた原稿をもとに, AIを用いて構成・表現・文体などを大幅に編集したものです。とくに文体にはAIによる修正が多く含まれているため, 元の原稿や執筆者の意図よりも断定的なニュアンスを帯びている可能性があります。また, AIによる編集は数学的内容の正確性を保証するものではありません。必要に応じて原典も確認してください。
+
+\subsection{院試対策ゼミについて}
+院試問題に真剣に取り組み, さまざまな問題を解いたり議論したりします。これまでの講義で扱った問題や教科書から有用な内容を引用しながら, 院試対策ノートを兼ねた議事録を作成します。
+活動時間は毎週土曜日13時から18時までです。メンバーは次の通りです。
+\ben
+\item Lim(主催者, 4回生)
+\item ふじおか(4回生)
+\item Seeker(4回生)
+\item 似顔絵師(4回生)
+\item Shakayami(M1)
+\een
+メンバーは作問サークル内で募集しました。将来は, このノートをサークル内で引き継いでもらえればと考えています。
+
+\subsection{このノートについて}
+院試対策を進める中で見つかった復習事項をまとめる目的で作成しました。本文は主にLiが執筆し, ゼミのメンバーからも問題を募集しました。
+
+基本的には, 京都大学理学部の数理科学系で履修できる講義に対応する分野を扱っています。各sectionでは, はじめにsubsection「基礎事項」を置き, subsubsectionごとに基本事項を整理しています。発展度に応じて$\spadesuit$印を付しました。講義内容に直接対応する項目には印を付けず, 講義で扱われる場合と扱われない場合がある項目には$\spadesuit$を一つ, 学部生にはやや発展的と思われる項目には$\spadesuit\spadesuit$を付しています。
+各sectionには演習問題のページを一つ用意しています。可能な限り解答も掲載しますが, 参考資料へのリンクのみを示す場合もあります。演習問題はLevel A, Level B, Level Cに分類しました。難易度の分類は執筆者の判断によるものであり, Level Aは基本的な問題, Level Cは相応の習熟を要する問題を表します。
+
+演習問題のほかにも, 多くの例と例題を掲載しました。また, 簡単な思考練習のための\tf{練習問題}も配置しています。練習問題には解答を付していないため, 実際に手を動かして取り組んでみてください。
+
+重要な定理は明記していますが, 証明を省略している場合もあります。
+
+
+\tableofcontents
+
+\clearpage %院試の問題を置いた場所を記すやつ。labelとrefを使う。「平成○年数学Iの4番」とかなら\label{prob:H○○I4} 基礎(Basic)問題ならH○○B4とか。英語(English)問題(やるか知らんが)ならH○○E2とか
+
+\ben[label=\arabic*.]
+\item H1-I-3 (40次拡大体) (\ref{prob:H1_I_3})
+\item H19-I-2 (一様収束しない関数項級数) (\ref{prob:H19I2}) 8/7,○
+\item H19-I-3 ($\mb{Z}[\sqrt{-3}]$の4を含むイデアル) 8/7,○ (\ref{prob:H19I3})
+\item H19-II-5 (順序交換の十分条件) (\ref{prob:H19I2}) 8/7,×
+\item H22-I-2 (原始関数の一次近似) 3/??,○
+
+\een
+
+
+%%いろんな本を参照していきましょう。なんでも載せよう
+\begin{thebibliography}{数字}
+%%代数学
+	\bibitem[小林]{linalg1} 小林正典・寺尾宏明「線形代数 講義と演習」
+	\bibitem[AM]{atiyah} Atiyah-Macdonald 「可換代数入門」
+	\bibitem[桃]{momoyukie} 雪江明彦「整数論2 代数的整数論の基礎」
+	\bibitem[青]{aoyukie} 雪江明彦「代数学2 体とガロア理論」
+	\bibitem[緑]{midoriyukie} 雪江明彦「整数論1 初等整数論から$p$進数へ」
+	\bibitem[黄]{kiyukie} 雪江明彦「代数学3 代数学の広がり」
+	\bibitem[DuF]{dummitfoote} Dummit, Foote, "{\it Abstract Algebra}"
+	\bibitem[Har]{har} Robin Hartshorne, 代数幾何学I
+	\bibitem[lang-algebra]{SLA} Serge Lang, Algebra
+%%幾何学
+	\bibitem[BoT]{bott-tu} Raoul Bott, Loring W.Tu, "{\it Differential Forms in Algebrac Topology }"
+	\bibitem[CCAC]{CCAC} Werner Greub, "{\it Connections, Curvature, and Cohomology Volume I, De Rham Cohomology of Manifolds and Vector Bundles}",  %205p,PropIX
+	\bibitem[松本]{matsumoto}
+	\bibitem[内田]{utida}
+%%解析学
+	\bibitem[理工]{rikou} 吹田・新保「理工系の微分積分学」
+	\bibitem[吉田]{nobical} 吉田伸生「微分積分」
+	\bibitem[MR]{mag} Murray R.Spiegel著 石原宗一 訳, マグロウヒル大学演習 複素解析
+\end{thebibliography}
+
+
+
+%
+\part{Memo}
+\input{[IroIro]/R4exam}
+\input{[IroIro]/Li}
+
+\part{代数分野}
+\input{[Algebra]/Linear_Algebra} %線形代数(1~2回生)
+\input{[Algebra]/Group_Theory} %群論(2回生)
+\input{[Algebra]/Ring_Theory} %環論(2~3回生)
+\input{[Algebra]/Field_Theory} %体論(ガロア理論含む, 2~3回生)
+\input{[Algebra]/専門代数題}
+
+\part{幾何分野}
+\input{[Geometry]/General_Topology} %位相空間論(2回生)
+\input{[Geometry]/Manifold} %多様体論(3回生)
+\input{[Geometry]/Alg_Topology} %代数的位相幾何学(3回生, 幾何IIなど)
+
+\part{解析分野}
+\input{[Analysis]/Calculus} %微積分(1回生)
+\input{[Analysis]/Complex_Analysis} %複素解析(2回生)
+\input{[Analysis]/Differential_Equation} %微分方程式(2~4回生)
+\input{[Analysis]/Lebesgue} %Lebesgue積分論(測度論を含む)
+%\input{[Analysis]/Vector_Analysis} %ベクトル解析(2回生): source file unavailable
+\input{[Analysis]/Functional_Analysis} %関数解析学(3~4回生)
+%\input{[Analysis]/Fourier} %Fourier解析学(3~4回生): source file unavailable
+
+\part{その他(基礎論)}
+\input{[Foundation_of_Mathematics]/Foundation_of_Math} %集合論(1~2回生)
+
+%\part{専門分野}
+%\input{[Expert]/Algebraic_Geometry}
+%
+
+%\part{演習解答}%%
+{\small
+%%\input{[IroIro]/Answer} %演習問題解答
+}
+
+
+
+\end{document}

@@ -1,0 +1,738 @@
+\clearpage
+\section{Liのおぼえがき}
+
+
+\subsection{何がやりたいのか}
+代数, 幾何, 解析の融合地帯に興味があり, 保型形式に行ったが,実際に自分が好きな分野はスキーム論,整数論, 代数トポロジーであったため, 「数論トポロジー」に興味がわく。どうも問題意識は数論幾何にあるようで, 数論を幾何で調べるとはどういうことなのかに興味がある。まずは数論幾何の基本的なところを進みたい。面接までに桃雪江, Liu, Haを読み込みたい。できれば楕円曲線も。\par
+
+\subsection{面接対策}
+\subsubsection{桃雪江}
+\begin{egprob} (定義言って系)
+\ben
+\item 分岐指数・相対次数
+\item アデール・イデール
+\item ($\spadesuit$) イデアル類群
+\item ($\heartsuit$)類数
+\een
+\end{egprob}
+
+\begin{egprob} (主張を言って系)
+次の主張は？
+\ben
+\item Dedekindの判別定理
+\item Dirichletの単数定理
+\een
+\end{egprob}
+\begin{egans}
+
+\end{egans}
+
+\begin{egprob}
+\ben 
+\item $\mb{Z}[\sqrt{-1}]$の素数の分岐を調べて下さい。
+\item この環の類数はなんですか？
+\een
+\end{egprob}
+\begin{egans}
+\ben
+\item
+\item PIDだから1です。
+\een
+\end{egans}
+
+\subsubsection{Liu}
+\begin{egprob} (定義言って系)
+次の言葉の定義を言ってください。
+\ben 
+\item 素イデアル
+\item 環の層
+\item 局所環付空間
+\item アファインスキーム/スキーム
+\item ($\spadesuit$)固有射
+\item 準コンパクト射
+\item 分離射・分離スキーム
+\item 次数付代数$B$に対し, $\mr{Proj}B$
+\een
+\end{egprob}
+\begin{egans}
+(注意: 何回もここの記述があっているかを見直すこと！)
+\ben
+\item
+\item
+\item
+\item
+\item
+\item 分離射$X\to Y$とは, 対角射$\Delta_{X/Y}:X\to X\times_{Y} X$が閉埋め込みであることをいう\footnote{Hausdorff性に対応していたことを思い出す。}。分離スキーム$X$とは, $X\to \spec{\mb{Z}}$が分離射であることをいう。
+\item 集合としては$B_{+} = \bigoplus_{d\geq 1} B_{d}$を含まない斉次素イデアル全体の集合で, その集合に$\{ V_{+}(I) \}$を閉集合系とする位相(Zariski位相)を定義したもの。ただし, $V_{+}(I)$は斉次イデアル$I$を含む$\mr{Proj}B$の元。
+\een
+\end{egans}
+
+\begin{egprob} (主張言って系)
+\ben
+\item 
+\een
+\end{egprob}
+
+\begin{egprob} (例を言って系) 
+\ben
+\item 分離的でないスキーム
+\een
+\end{egprob}
+
+\begin{egans}
+
+\end{egans}
+
+
+\onecolumn
+\subsubsection{(環論)アティマク・松村}
+{\small
+\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+    (環)  &Noe.& Art. &red. & 整域 & 正規 & UFD &D.D. &DVR & PID  & E.D. & 体 \\ \hline 
+    $\mb{Q}$ &○&○&○&○&○&○&○&○&○&○&○\\ \hline
+    $\mb{Q}[x]/(x^2)$ &○&○&×&×&×&×&×&×&×&×&×\\ \hline
+     $\mb{Z}$&○&×&○&○&○&○&○&×&○&○& × \\ \hline 
+     $\mb{Z}[\frac{1+\sqrt{-19}}{2}]$&○&×&○&○&○&○&○&×&\aka{○}&\aka{×}&× \\ \hline
+     $\mb{Z}[x]$&○&×&○&○&○&○&×&×&×&×&× \\ \hline 
+     $\mb{Q}[x_1,\cdots]$ &×&×&○&○&\aka{○}&○&×&×&×&×&× \\ \hline 
+      $\mb{Q}[x,y]/(xy)$&\aka{○}&×&×&×&×&×&×&×&×&×&× \\ \hline
+      $\mb{Z}[\sqrt{6}]$ &○&×&○&○&\aka{○}&×&○&×&×&×&×\\ \hline
+      $\mb{Z}[\sqrt{5}]$ &○&×&○&○&\aka{×}&×&×&×&×&×&×\\ \hline
+      $\mb{Z}[\sqrt{5}][x_1,\cdots]$ &×&×&○&○&×&×&×&×&×&×&×\\ \hline
+      $\mb{Q}[x]/(x^2+x)$ &○&○&○&×&×&×&×&×&×&×&×\\ \hline 
+      $\mb{Z}/4\mb{Z}[x_1,\cdots]$ &×&×&×&×&×&×&×&×&×&×&×\\ \hline
+      
+\end{tabular}
+}
+\begin{rem}
+次の事実がある.
+\ben
+\item (\tf{基本}) PIDはUFD,  UFDは正規環, UFDの多項式環はUFD. 体の多項式環はPID(通常の次数に関してE.D.でもある)
+\item (\tf{自明}) PIDはNoe. 体はだいたいの性質を持ってる. 整域の多項式環は整域.
+\item (\tf{Hilbertの基底定理}) Noe.の多項式環はNoe.
+\item (\tf{秋月の定理}) Art. $\iff$ 次元0かつNoe. とくにArt.はNoe.
+Noe.
+\item Art.整域は体(アティマク9章).
+\item 任意の素イデアルが有限生成ならばNoe. (アティマク7章演習)
+\item $A=\mb{Z}[\sqrt{d}]$,$d$:square-freeとする。$A$は$\mb{Z}$上整. $d\equiv 2,3\pmod{4}$のとき, $\mac{O}_{A}$は自分自身. $d\equiv 1$ならば$\mac{O}_{A} = \mb{Z}[\frac{1+\sqrt{d}}{2}]$
+\item $\mb{Q}(\sqrt{-19})$の判別式は$-19$よりMinkowski定数は$\sqrt{19}\parena{\frac{4}{\pi}}\frac{2!}{2^{2}}$で切り捨てで2である。ノルム2のイデアルは素イデアルであり, $\mb{F}_{19}[x]/(x^2-x-5)\cong \mb{F}_{25}$なので相対次数が2. よって2の上にある素イデアルのノルムは4以上になる。よって類数が1なのでPIDである。
+\een
+\end{rem}
+
+\twocolumn
+
+\ben
+\item 
+\een
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\subsection{苦手な定理たち}
+\subsubsection{解析用}
+\begin{theo} (\tf{陰関数定理})
+
+\end{theo}
+
+
+
+\begin{theo} (\tf{逆関数定理})
+
+\end{theo}
+
+\begin{theo} (\tf{Grownwallの不等式})
+
+\end{theo}
+
+\begin{theo} ()
+
+\end{theo}
+
+\subsubsection{代数用}
+\begin{theo} (\tf{Galoisの推進定理})
+
+\end{theo}
+
+\begin{prop} (\tf{次元1のNoether整域に関する性質})
+
+\end{prop}
+
+\begin{prop} (\tf{惰性群, 分解群の基本性質})
+
+\end{prop}
+
+
+
+
+\subsubsection{幾何用}
+
+
+
+\begin{theo} (\tf{Sardの定理}, \ref{theo:sard})
+
+\end{theo}
+
+\begin{theo} (\tf{})
+
+\end{theo}
+
+
+\newpage 
+
+\section{面接対策}
+\subsection{線型代数}
+\begin{prob}
+ケーリーハミルトンの定理を示せ. 
+\end{prob}
+
+
+\begin{prob}
+$a$は実数とする.  $\bmat{1&2&3\\
+0&a&2\\
+0&0&a^2}$をJordan標準形に直せ. 
+\end{prob}
+
+\begin{prob}
+$\bmat{a&2\\ 2&1}$を直交対角化せよ. 
+\end{prob}
+
+\begin{prob}
+二つの対称行列$A,B$に対し,次を示せ. 
+\[AB = BA \iff A,Bは同時対角化可能\]
+\end{prob}
+
+
+
+\subsection{微分積分}
+
+\begin{prob}
+$\mb{R}$においてコーシー列は収束することを示せ. 
+\end{prob}
+
+\begin{prob}
+連続関数の一様収束極限は連続であることを示せ. 
+\end{prob}
+\begin{ans}
+簡単のため$\mb{R}$上で考える. 関数列$\set{f_n(x)}$が極限関数$f(x) := \lim_{n\to \infty} f_n(x): \mb{R}\to \mb{R}$に一様収束するとする. 示すべきことは, 任意の$\epsilon > 0$と任意の$x_0 \in \mb{R}$に対し, ある$\delta>0$が存在して$|x-x_0|<\delta \implies |f(x) - f(x_0)| < C\epsilon$となるようにできること, である. さて, まず三角不等式から
+\[|f(x) - f(x_0)| \leq |f(x) - f_n(x)| + |f_n(x) - f_n(x_0)| + |f_n(x_0) - f(x_0)|\]
+に注意しよう. $f_n$は$f$に一様収束するから, 十分大きい番号$N_1$からの$n$では$\sup_{x\in \mb{R}}|f(x) - f_n(x)| < \epsilon$を満たす. よって, そのような$n$を一つ固定すれば, 上の第1項と第3項は$\epsilon$未満である. 最後に, $f_n$は連続なので, 十分ちいさい$\delta>0$が存在して$|x-x_0| < \delta$ならば $|f_n(x) - f_n(x_0)| < \epsilon$を満たす. よって, この$x$の範囲で$|f(x) - f(x_0)| < 3\epsilon$となるので連続である. \qed 
+
+\end{ans}
+
+\begin{prob}
+一様連続だがリプシッツ連続ではない例は? 
+\end{prob}
+
+
+\subsection{位相空間論}
+
+\begin{prob}
+$T_1$だが$T_2$(Hausdorff)でない空間は? 
+\end{prob}
+\begin{recall}
+$X$が$T_1$空間であるとは, 任意の異なる2点$x,y$に対して, $x$は$y$を含まない開近傍を持ち, $y$は$x$を含まない開近傍を持つことをいう. 
+\end{recall}
+\begin{ans}
+$\mathrm{mSpec}\mb{Z}$. というか補有限位相. 
+\end{ans}
+\begin{miss}
+Zariski位相を入れた$\spec{\mb{Z}}$は$T_1$ではない. $(0)$に対応する点を$\xi$と書く. いわゆる$\xi$は生成点で, 任意の空でない開集合は$\xi$を含む. よって, $\xi$でない点が, $\xi$を含まない開近傍を取ることはできない. 
+\end{miss}
+
+
+\subsection{函数論}
+
+\begin{prob}
+コーシーリーマンの関係式とは何か. 
+\end{prob}
+
+
+
+
+\subsection{可換環論}
+
+\begin{prob}
+Noether正規化補題・Zariskiの補題・Hilbertの弱零点定理とは何か. 
+\end{prob}
+
+
+\begin{prob}
+強零点定理の主張を述べよ. 
+\end{prob}
+
+\begin{prob}
+
+\end{prob}
+
+\subsection{スキーム論}
+
+
+
+
+
+
+\subsection{代数的整数論}
+
+
+
+
+\subsection{その他}
+
+\begin{prob}
+Fatouの補題で$f_n\geq 0$の仮定は必要か?
+\end{prob}
+
+
+
+\clearpage 
+\section{質問募集偏}
+マシュマロで質問募集したらいろいろきたのでここに残す. 
+
+\section{7/4}
+
+
+
+\begin{prob}
+Fatouの補題で$f_n\geq 0$の仮定は必要か?
+\end{prob}
+\begin{ans}
+$X=\mb{R}$にLebesgue測度を入れて, $f_n = -\chi_{[n,n+1]}$を考えると反例. 
+\end{ans}
+
+
+\begin{prob}
+$T_1$だが$T_2$(Hausdorff)でない空間は? 
+\end{prob}
+\begin{recall}
+$X$が$T_1$空間であるとは, 任意の異なる2点$x,y$に対して, $x$は$y$を含まない開近傍を持ち, $y$は$x$を含まない開近傍を持つことをいう. 
+\end{recall}
+\begin{ans}
+$\mathrm{mSpec}\mb{Z}$. というか補有限位相. 
+\end{ans}
+\begin{miss}
+Zariski位相を入れた$\spec{\mb{Z}}$は$T_1$ではない. $(0)$に対応する点を$\xi$と書く. いわゆる$\xi$は生成点で, 任意の空でない開集合は$\xi$を含む. よって, $\xi$でない点が, $\xi$を含まない開近傍を取ることはできない. ただし, 一般にスペクトラムは$T_0$. 
+\end{miss}
+
+\begin{prob}
+無限次元Banach空間の単位球面はコンパクトか? 
+\end{prob}
+\begin{ans}
+No. まずBanach空間に対して有限次元性とunit ballのコンパクト性が同値. $I=[0,1]$とする. 単位球面を$S$とし, 仮にこれがコンパクトであるとする. 連続写像$\phi:S\times I\to B$, $\phi(x,r) = rx$を考える. $S\times I$はコンパクト. よって像$B$もコンパクトだがこれは無限次元に反する.
+\end{ans}
+
+
+\begin{prob} (阪大)
+Borzano Weierstrannの証明の概略は? 
+\end{prob}
+\begin{ans}
+主張は, $I=[0,1]$の点列が収束部分列を含むというもの. 点列$\set{x_n}$を考え, $I$を左と右に分割する. このときどちらかに$x_n$が無限個含まれる. これを繰り返すとある値に収束する(Cauchy列であることを言えば良い). 
+\end{ans}
+
+次は分からなかった. 何事も自明な構造から考えていくべきなのかもしれないけど絶対使いどころないじゃんってなる. あるの?
+\begin{prob}
+内積を入れることができないベクトル空間は存在するか? 
+\end{prob}
+\begin{ans}
+存在しない. $\mb{C}$ベクトル空間の基底をなんでもいいから取る(選択公理使用). それを$\set{v_{\lambda}}_{\lambda\in I}$とする. 内積を次で定める: $(v_{\lambda}, v_{\mu}) = \delta_{\lambda\mu}$, そしてこれのsesqui-linearな拡張. これは非退化性, 同次性, sesqui-linearを満たす. 
+\end{ans}
+
+\begin{prob}
+$\mb{P}^{n}$の閉集合を全て答えて下さい. 
+\end{prob}
+
+\begin{ans} どう考えてもZariski位相のことなんだけど早期尽くのに時間かかった. 答えは, 空集合か, 全体か, 斉次多項式の連立方程式の零点集合として書けるもの. $\mb{P}^n$の点$[X_0:\dots: X_n]$に関して斉次多項式$F(X_0,\dots,X_n)$が消失するかどうかというのは意味がある話であって, 零点集合がつくれる. $k[X_0,\dots ,X_n]$の斉次多項式よりなる部分集合$S$に対して, $S$に属す斉次多項式の連立方程式の解集合を$Z(S)$とか書く. そして, 実際は$S$で生成される斉次イデアルを$I$とすれば$Z(I) = Z(S)$とできたはずで, しかも多項式環のNoether性から$I$は有限生成なので実際は斉次多項式$F_i$により$Z(F_1) \cap \cdots \cap Z(F_r)$の形に書ける. だから連立方程式の解集合になる. 統一的に書けば$Z(S)$の形に書けるものが閉集合. 空集合は$Z(1)$で, 全体は$Z(0)$. 
+\end{ans}
+
+\begin{prob}
+ガロア群が$\cyc{8}$になる例は? 
+\end{prob}
+
+\begin{ans} これ悩んだ. まず最初頭によぎるのが$\mb{Q}(\zeta_{16})$だが, これは$(\cyc{16})^{\ast}\cong \cyc{2}\times \cyc{4}$とかだったはず. \par 
+$\mb{F}_{256}/\mb{F}_{2}$のガロア群は$\cyc{8}$である. 実際これが8次拡大でガロア拡大なのはいいはず(分離性は$x^{256}-x$の微分が$-1$だから. 正規性は, 有限体が$x^{256}=x$の解全体ということからわかる). \par 
+$\mb{F}_{256}^{\times}$は巡回群だから, もしくは有限次分離拡大だから$\mb{F}_{256} = \mb{F}_{2}(\alpha)$と書ける. ($\alpha\in \mb{F}_{256}^{\times}$). 
+ガロア群$G$の中にフロベニウス$\phi:x\mapsto x^2$がある. $\phi$が$G$で位数8であることを見ればよい. $\phi^{k}(\alpha) = \alpha^{2^k}$で, $\alpha$が$\mb{F}_{256}^{\times}$の生成元なので$k=8$ではじめて$\alpha$になる. $G$の元は$\alpha$の行き先で決まるため, $\phi^{k}=\mr{id}$にはじめてなるのが$k=8$. よってこれが$G$を生成する. 
+\end{ans}
+\begin{ans}
+$\mb{Q}(\zeta_{32}+\zeta_{32}^{-1}) / \mb{Q}$もそうらしい(未検証). 
+\end{ans}
+
+
+\begin{prob}
+一様連続だがリプシッツ連続ではない例は?
+\end{prob}
+\begin{ans}
+$[0,1]$上の$\sqrt{x}$. 一様連続性はコンパクト集合上だから. リプシッツでないのは微分係数が$0$付近でいくらでもおおきくなるから. 
+\end{ans}
+
+\begin{prob}
+\enu{ 
+\item $[0,1]$上の二乗可積分だが可積分でないものはあるか? 
+\item $[0,1]$上の可積分だが二乗可積分でないものはあるか?
+}{}
+\end{prob}
+\begin{ans}
+(2):$1/\sqrt{x}$. 原始関数は$2\sqrt{x}$なので. \\
+(1): $f(x)$を可積分とする($L^1([0,1])$と思えばいい?). コーシーシュワルツで
+\[\parena{\int_{0}^{1} dx}\parena{\int_{0}^{1} |f(x)|^2\, dx} \leq \parena{\int_{0}^{1} |f(x)|dx }^2\]
+なので, もし$|f(x)|^2$が可積分でないなら, Lebesgueの意味では無限大に発散するということになるからおかしい, って感じ? 実解析はなんか収束性の議論とかやばそうだからよくわからん.
+\end{ans}
+
+\begin{prob} (東大) 2つの対称行列$A,B$に対して$AB=BA$と$A,B$が同時対角化可能は同値を示せ. 
+\end{prob}
+
+\begin{ans}
+同時対角化可能のときは$A,B$を同時対角化してやったものが可換だから$AB=BA$もそうでしょとなる. \par
+残りは省略. $A$のなんかの固有空間$W$を見て$BW\subset W$にすると固有ベクトルを並べた行列$P$で$P^{-1}BP$がブロック型になることを用いて構成できる. (これはつい最近覚えました)
+\end{ans}
+
+\begin{prob}
+部分群の共通部分は部分群ですか. それはどうしてですか. 
+\end{prob}
+
+\begin{ans}
+部分群であることは, 積と逆元で閉じることに同値. よって,  $g_1,g_2\in H,K$なら$g_1g_2\in H,K$で, $g\in H,K$なら$g^{-1} \in H,K$なので, $h_1g_2, g^{-1}\in H\cap K$. 
+\end{ans}
+
+次のようなのを待ってた. 
+\begin{prob}
+中山の補題で有限生成の過程を外すと成り立たなくなる反例は? 
+\end{prob}
+\begin{ans}
+$A=\mb{Z}_{(p)}$とする($p$は素数). $A$加群$\mb{Q}$を考える. これがもし有限生成なら, $\mb{Q} = \sum_{i=1}^N A\dfrac{a_{i}}{b_i}$と書ける. $b_i$の$p$の冪のオーダーを$n_i$とする. すべての$n_i$より大きい$N$を取り, $\dfrac{1}{p^N}\in \mb{Q}$を考えると, これは$\sum_{i} A\dfrac{a_{i}}{b_i}$には属さない. さて, $A$の極大イデアルは$pA$のみで, これがJacobson根基であるが, $\mb{Q}\neq 0$であるにも関わらず$\mb{Q} = (pA)\mb{Q}$が成り立つので中山の補題の反例になる.  
+\end{ans}
+
+\begin{miss}ツイートではこんなことをいった: 
+$b_i$の分母を割りきらない素因数$q$が取れて$\frac{1}{q}$は生成できない. \par 
+これは嘘. 自分がよくやる間違いで$A$のことを分母に$p$冪しかこないと思ってるやつ. $A$の元の分母は, $p$の倍数以外ならなんでもよいというやつなので, そもそも$\frac{1}{q}\in A$の可能性すらある. 
+\end{miss}
+ただ同じ局所化でも$\mb{Z}_{f}$の形のものとは分けが違う. こいつはスキームの層の開集合上の断面であって, むちゃくちゃ多くの点を持つ. それに対して$A=\mb{Z}_{(p)}$は層の茎なので, 1点と生成点しか見ていない. \par 
+もうちょっと良い例作れたら作ってみます.
+
+\begin{prob}
+$\mb{Z}[\sqrt{-1}]^{\ast}$を求めて下さい. 
+\end{prob}
+\begin{ans}
+$\set{\pm 1,\pm i}$. ノルム$N(a+bi) = a^2 + b^2$を使う. $a+bi$が単元であることと$N(a+bi) = 1$が同値. 
+\end{ans}
+
+\begin{prob}
+$p$進体に全順序は入るか?(順序体の構造のことをいっていると思われる)
+\end{prob}
+\begin{ans}
+考え中. Henselの補題で$\sqrt{-d}$を含んだり含まなかったりするけど, 一発で行けないもんかな. 
+\end{ans}
+
+
+\begin{prob}
+一般にベクトル空間$V$は, 有限個の真部分空間の和集合にはなりえないことを示してください. また, ガロア理論の基本定理を認めて, ガロア拡大が単拡大であることを示して下さい. 
+\end{prob}
+
+\begin{ans}
+考え中. おそらく有限次の話で, 「有限次分離的ならば単拡大」っていうのは知ってるのですが, この文脈はなんだろう. 
+\end{ans}
+
+\section{7/5}
+
+\begin{prob}
+有限整域は体であることを示せ. 
+\end{prob}
+\begin{ans}
+有限可換環のイデアル減少列は明らかに停留するので次の問題に帰着. 
+\end{ans}
+
+\begin{prob}
+アルティン整域は体であることを示せ.
+\end{prob}
+
+\begin{ans}
+$a$をノンゼロの元とするとき$(a^n)$はイデアル減少列なので, $(a^n) =(a^{n+1})$となる. ここから$a^n = a^{n+1}u$という関係式を得るが, 整域より$1=au$. よって体.
+\end{ans}
+
+\begin{prob}
+コンパクト空間の共通部分はコンパクトとならない例をあげよ. 仮定にどのくらいの条件を追加すれば成り立つであろうか? 
+\end{prob}
+そういう例があることは知識としてあるけど反例なんか覚えてないので寝ながら20分考えて作った. 
+\begin{ans}
+$X:=\mb{R}\cup\set{\pm \infty}$に, 
+\[\varnothing, X, \mb{R}の任意の部分集合, \mb{R}\cup\set{\infty}, \mb{R}\cup\set{-\infty}\]
+によって位相が定まる.このとき$U,V$はコンパクトだが$\mb{R} = U\cap V$はコンパクトではない.  
+\end{ans}
+
+\begin{prob}
+$z$を複素数としたとき, $\log{z}$の定義は? 
+\end{prob}
+
+\begin{ans}
+$z=0$では定義できない. 負の実数ではない$z=x+iy$に対し
+\[\log{\sqrt{x^2+y^2}} + i\arctan{\dfrac{y}{x}}\]
+と定める. 微分は, $\dfrac{d}{dz} = \dfrac{1}{2}\parena{\dfrac{d}{dx} - i\dfrac{d}{dy}}$から頑張って計算. 
+\end{ans}
+
+\begin{prob}
+距離空間は位相空間か? では, どのように位相を定めるのか?
+\end{prob}
+
+\begin{ans}
+各点に$\epsilon$-Open Ballを基本近傍系とする位相を定める. あるいは, $\epsilon$-Ballを開基として定まる位相. 
+\end{ans}
+
+\begin{prob}
+$\mr{Tor}_{1}(\mb{Z},\mb{Z}_{p})=0$を示せ. 
+\end{prob}
+
+\begin{ans}
+なんもわからん.
+\end{ans}
+
+\begin{prob}
+加群が忠実平坦であることと, 忠実かつ平坦であることの違いは?
+\end{prob}
+
+\begin{ans}
+忠実平坦とは, その加群のテンソル関手について, テンソル後とテンソル前で単射性が同値になるもの. \par 
+忠実$A$加群とは,$a\in A$が$aM=0$なら$a=0$なることをいう. \par 
+平坦加群とは, その加群のテンソル関手が単射性を保存することをいう. 
+
+\end{ans}
+
+\begin{prob}
+ペー関数と$\sigma$関数の関係を教えて下さい.
+\end{prob}
+\begin{ans}
+$\sigma$関数ってなに? 
+\end{ans}
+
+\begin{prob}
+$\mb{R}$で$p$進距離を考えるとき, 収束しないコーシー列の例はありますか?
+\end{prob}
+まず$\mb{R}$に$p$進距離って入るのかって悩んだけど, 10進展開みたいなノリで実数を級数で表すことかと気付いた. 
+\begin{miss}
+$a_n = 1+p+\cdots + p^n$かと思ったが, これは収束している. $\dfrac{1}{1-p} - a_n$の距離が0に収束することが簡単に示せる. 
+\end{miss}
+\tf{自分$p$進に弱すぎる！}緑雪江復習しようかな. 
+\begin{ans}
+噂によると$\mb{Q}_{5}$で$a_n=2^{5^n}$が収束しないらしい.\\
+(Cauchy列であること) $m>n>N$のとき
+\[2^{5^{m}}  - 2^{5^n} = 2^{5^n}(16^{\frac{5^m - 5^n}{4}} - 1) \]
+で, 括弧の部分でLTEの補題を考えると$5$で$N$回以上割れることがわかるのでCauchy列. \\
+(収束しないこと) 未検証
+\end{ans}
+
+\begin{prob}
+全単射な正則複素関数$f:\mb{C}\to \mb{C}$の逆写像は正則か? 
+\end{prob}
+
+\begin{ans}
+$g=f^{-1}$とする. $w_0\in \mb{C}$と$w_0 =f(z_0)$なる$z_0$を取る. このとき, 
+\[\dfrac{g(w) - g(w_0)}{w-w_0} = \dfrac{g(w) - g(w_0)}{f(g(w)) - f(g(w_0))} \to \dfrac{1}{f'(g(w_0))} \]
+なので, $f'$が0にならなければOK. そして多分, 0になることがない. これは単射性が効いてて, もし$z=c$で$f'(c) = 0$なら$f(z) - f(c)$は$c$で位数2の零点を持つ. このとき$c$の近傍と$f(c)$の近傍で$f$を見ると二重巻きになっているので単射性が壊れる. 
+\end{ans}
+
+\begin{prob} (東大数理面接過去問)\\
+$\mb{Z}\times \mb{Z}$の指数9の部分群をすべて求めて下さい. 
+\end{prob}
+
+\begin{ans} $M=\mb{Z}\times \mb{Z}$とする. 標準基底を$(e_1,e_2)$で書く. 指数9の部分群は必ず$9e_i$を含むので, $M$の指数9の部分群は$\cyc{9}\times \cyc{9}$の指数9の部分群に対応する. そのようなものは位数9である.\par 
+$V := \cyc{9}\times \cyc{9}$の位数9の部分群を$N$とする. もし$N$が$(a,b)\notin 3V$なる元を含めば, $(a,b)$は$V$で位数9だから$N$が$(a,b)$で生成される. このような$(a,b)$のうち, 定数倍で移り合うものを一つと考えると, $(a,b) = (1,0), (1,1), (1,2),\dots, (1,8), (0,1), (3,1), (6,1)$ですべてだと思う. よって,  このような$(a,b)$と$9e_1,9e_2$で生成される$M$の部分群がある. \par 
+もしこのような$(a,b)$が$N$に含まれない場合, $N$のすべての元は$3V$の元だが, $3V$はそもそも位数9なので$N=3V$になる. この場合は$3\mb{Z}\times 3\mb{Z}$を得る. 
+\end{ans}
+
+\begin{prob}
+第一可算だけど第二可算じゃない位相空間の例は? 可分だけど第二可算じゃない位相空間の例は? 
+\end{prob}
+
+\begin{ans}
+知りません. そんなの絶対聞かれんでしょ. 
+\end{ans}
+次は確かに出そう...モジュラー曲線論では常識なので. 演習問題としてやったのでわりとやり方の感覚は覚えてます. 
+\begin{prob}
+$\SL$の生成元を教えて下さい.
+\end{prob}
+\begin{ans}
+$T = \sumib{1&1\\0 &1}$と$S = \sumib{0&-1\\ 1&0}$. まず$S$が位数4で$S^{2} = -I$とか, $T^n = \sumib{1&n\\ 0&1}$に注意する. $\gamma = \sumib{a&b\\ c&d}\in \SL$を考える. すべての$\gamma$が$S,T$で生成することを示したい. これを$N = |c|+|d|$に関する帰納法で示す. \par 
+$N=1$ならば$c=0$か$d=0$になる. もし$c=0$なら$a=d= \pm 1$で, $T^n S$か$T^n$を考えればOK. \par 
+$1\leq N\leq k$で$\gamma$が生成できると仮定. $N = k+1$のときを考える. もし$|d| \leq |c|$なら, $\gamma S$を考えると$\sumib{b & -a\\ d&-c}$によって$|d|\geq |c|$の場合に帰着. 最初から$|c|\leq |d|$にする. $S \gamma = \sumib{-c & -d \\a&b}$で, $-d$を$-c\neq 0$で割るときに 絶対値$|c|/2$以下の余り$r$を出すようにできる. すなわち, $-d = (-c)m + r$と書く. このとき$S\gamma T^{-m}$を考える. PSLで見たとき, 
+\[\dfrac{-c(z-m) - dz}{a(z-m) + b} = \dfrac{-cz + r}{\ast z + \ast} \]
+となることに注意. よって, $S\gamma T^{-m}$は$\pm \sumib{-c & r \\ \ast & \ast}$の形をしている. これに$S$を左からかけると$\pm \sumib{\ast & \ast \\ -c & r}$の形になるので, 帰納法で$S,T$により書ける. \qed 
+\end{ans}
+
+\begin{prob}
+すべての楕円関数は, $\wp$と$\wp'$の有理関数で書ける. これの証明のアウトラインを教えて下さい. (実際にどう書けますか? )
+\end{prob}
+\begin{ans}
+たとえば$\mb{P}^1$から考えると, $\mb{P}^1$上の有理型関数$f$に対して, その零点$\alpha$が$n$位だったら$(z-\alpha)^{n}$を分子に, 極$\beta$が$n$位だったら$(z-\beta)^{n}$を分母に持って行き,$f$の$\infty$の極の位数が$n$ならそこに$z^n$をつける. こうして出来た有理関数$g$と$f$では, すべての点で, 消失・極のデータが同じなので$\dfrac{f}{g}$はすべての点で正則になり, Liouvilleの定理から$f/g = c$となって$f$が有理関数で書けることになる. \par 
+これと大体同じことをすればよい. 簡単のために格子は$\mb{Z}[i]$としよう. $\wp$は$0$で2重極, $(1+i)/2$で2重零点, $\wp'$は$0$で3重極, $1/2, i/2, (1+i)/2$で1位の零点を持つ. それ以外では零点も極も持たない. よって,$f$を楕円関数とするとき, この4点以外の点$c$で位数$n$のときは$(\wp(z) - \wp(c))^{n}$を作る.  $c=0,1/2,i/2,(1+i)/2$では適当に行うものとすれば, $\wp$と$\wp'$で作れる有理関数$g$が楕円関数$f$と同じ位数データを持つことが言えて, トーラスはコンパクトだからLiouvilleの定理で$f/g$は定数になる. それによって$f$が有理関数にかける.
+\end{ans}
+
+\section{7/6}
+
+\begin{prob}
+有限体のガロア拡大のガロア群として現れる有限アーベル群をすべて求めてください. 難しかったら有限巡回群でもよいです. 
+\end{prob}
+全然構成がわからなくて頭ひねったら次のようなのが思いついた.
+\begin{ans}
+有限巡回群で考える. 素数$p$に対して$\mb{Q}(\zeta_{p})$のガロア群は$\cyc{p-1}$になる. 自然数$n$に対し, $p-1$が$n$で割り切れるよな素数$p$が存在するので, それを一つとり, $\cyc{p-1}$の指数$n$の巡回部分群$H$を取り, $H$に対応する中間体$M$を取れば$M$のガロア群は$(\cyc{p-1})/ H \cong \cyc{n}$. 
+\end{ans}
+この日は次の問題を解決させようといろいろ調べた. 
+\begin{prob} (ハーバード大学)
+$\mr{SL}_{2}(\mb{R})$の共役類をすべて求めなさい.
+\end{prob}
+
+\begin{ans}
+長くなるので得られた結果のみ. $A\in \mr{SL}_{2}\mb{R}$とする. 
+\ben 
+\item $A$が相異なる実固有値$r,s$ ($rs=1$)を持つ場合, $\sumib{r&0\\ 0 & s}$に共役. 
+\item 固有値が$r=s$で重複する場合, 行列式から$r^2 = 1$なので$r=\pm 1$. もし対角化できる, つまり最小多項式が$T-r$なら$rI$に共役. 対角化できないなら, $\sumib{r & 1\\ 0 & r}$か$\sumib{r & -1\\ 0 & r}$に共役で, この二つは互いに共役ではないことが計算で分かる. 
+\item $A$の固有値が虚数の場合, それは$z$と$\ovl{z}$で$|z|=1$になる. $\tr{A} = 2\mr{Re}z $なので$|\tr{A}|\leq 2$である. $z\notin \mb{R}$なので, $\mb{R}$成分の固有ベクトルは存在しない. ノンゼロな$v_1 \in \mb{R}^2$と$v_2 := Av_1$を取り, $P=\sumib{v_1 & v_2}$とし, $A^2 = \tr{A}A - \det{A} I$を用いて$P^{-1}AP$を計算すると$\sumib{0 & -1 \\ 1 & \tr{A}}$になる. $P$に$\dfrac{1}{\sqrt{|\det{P}|}}$倍を施して$\det{P}=\pm 1$とできる. $P$がこのときSLに属せば$A$はこいつに共役. $\det{P} = -1$なら$Q=\sumib{1 & 0 \\ 0 & -1}$として$(PQ)^{-1} A (PQ)$を考えることで$\sumib{0 & 1 \\ - 1 & \tr{A}}$に共役になる. そしてこの共役類が異なることはdetですぐ分かる. 
+
+\een
+
+\end{ans}
+
+\begin{prob}
+$p$を素数, $\mr{GL}_{2}(\mb{F}_{p})$の共役類を求めよ. 
+\end{prob}
+
+\begin{ans}
+院試の専門問題にはあるのでそのときにまとめたい. おそらく$p=2$のときだけ場合分けがいる. 一般には, 固有多項式である程度共役類が決まるというのが言える. $\mb{F}_{p}$に固有ベクトルを持たない場合は実はさっきの問題の(3)と似た方法でできると思う. 
+\end{ans}
+
+
+\tf{次はナイスだった！}やっぱりスキーム論なので答えられないと. 
+\begin{prob}
+冪零元根基とジャコブソン根基が一致すれば$\spec{A}$で極大イデアル全体は稠密であることを示せ.
+\end{prob}
+\begin{ans}
+$Z = \mathrm{mSpec}A$とする. $A$がノンゼロなら$Z$は空でない. $Z$が稠密でないとせよ. するとある$\maf{p}\in \spec{A}$が存在し, その基本開近傍$D(f)$は$Z$と交わらない. このときすべての$Z$の元$\maf{m}$について$f\in \maf{m}$だから$f$はジャコブソン根基に含まれ, 仮定より冪零元になる. よって$f\in \maf{p}$だが$\maf{p}\in D(f)$に反する.
+\end{ans}
+\begin{prob}
+$D\subset \mb{C}$をコンパクト集合, $D$上定義された正則函数$f,g$がある. $fg = 0$が$D$上で恒等的に成田宇とき, $f=0$が$D$上恒等的に成り立つか, $g=0$が$D$上恒等的に成り立つことを示せ. 
+\end{prob}
+\begin{ans}
+まずこの問題は怪しい. コンパクトではなく連結性ではと思った. それに, 主張が真であるためには少なくとも連結性は絶対に必要(指示関数を使えば簡単な反例がある). あと, 閉集合上の正則関数っていうのもびみょいので, $D$を含む解集合$E$上で正則, とかそんな感じのが良いと思う. あと結局コンパクト性は使わなかった.\par 
+$g$がノンゼロ関数とすれば$g$の零点は孤立している(一致の定理). $f$は離散的ないくつかの点を除き0である. $D$から離散集合を抜いても連結なので, 一致の定理から$f$は$D$上0.
+\end{ans}
+
+\begin{prob}
+$A\in \mr{Mat}M_{n}(\mb{R})$について$\sum_{n=0}^{\infty} \dfrac{A^n}{n!}$は収束することを示して下さい. 
+\end{prob}
+
+\begin{ans}
+$B_1,B_2\in \mr{M}_{n}(\mb{R})$のすべての成分の絶対値が$M_i>0$以下であるとき, $B_1B_2$のすべての成分の絶対値は$nM_1M_2$以下である. ここから, $A$のすべての成分の絶対値が$M$以下なら, $A^k$のそれは$n^{k-1}M^{k}$以下になる. $\sum_{k=0}^{\infty} \dfrac{n^{k-1}(M)^{k}}{k!}$は収束するのでこの無限和の各成分も絶対収束する.  
+\end{ans}
+
+\begin{prob}
+{\small
+\[\int_{\mb{R}^3} \exp{(-x^2-y^2-z^2-xy-yz-zx)}\exp{i(ax + by + cz)}\, dxdydz,\]
+}
+$(a,b,c\in \mb{R})$
+\end{prob}
+\begin{ans}
+知らん. たぶん聞かれんやろ. 
+\end{ans}
+
+
+\clearpage 
+\section{7/7}
+\begin{prob}
+可換環の二つの単項イデアルの共通部分はまた単項イデアルですか? 
+\end{prob}
+\begin{ans}
+$k[t^2,t^3]$で$(t^2) \cap (t^3) = (t^5,t^6)$. 
+\end{ans}
+
+\begin{miss} (試行錯誤) まずDedekind環ではイデアル類群かんがえるとダメで, なんならUFDでもだめっぽい. もっと雑魚い環で, たとえば$\mb{Z}[\sqrt{5}]$はどうか? 
+\[\mb{F}_{11}[T]/(T^2-5) \cong \mb{F}_{11}\times \mb{F}_{11}\]
+\[\mb{Z}[\sqrt{5}]/I \cong \mb{Z}[T]/(11,T^2-5)\]
+$I=(4 + \sqrt{5})$, $J=(4-\sqrt{5})$とする. $I\cap J = (\alpha)$と書けたとせよ.  $11\in I\cap J$である. 
+\[\mb{Z}[\sqrt{5}]/(11) \cong \mb{F}_{11}[T]/(T^2-5) \cong \mb{F}_{11}\times \mb{F}_{11}\]
+であり, 11を含むイデアルは左辺のイデアルに対応するが, 右辺のイデアルが$0, \mb{F}_{11}\times \mb{F}_{11}, 0\times \mb{F}_{11}, \mb{F}_{11}\times 0$しかない. $I$
+
+
+
+\[\alpha = (4+\sqrt{5})(a+b\sqrt{5}) = 4a + 5b + \sqrt{5}(a + 4b)\]
+\[\alpha = (4-\sqrt{5})(c+d\sqrt{5}) = 4c - 5d + \sqrt{5}(-c + 4d)\]
+
+\end{miss}
+
+
+\begin{prob}
+奇素数$p$, 位数$2p$の群を分類
+\end{prob}
+\begin{ans}
+非アーベル群のみ考える. 位数$p$の元$x$が存在. $x$の冪でない元$y$を取る. シローの定理から位数$p$の群は1個だけなので$y$は位数$p$ではない. 巡回群でもないので, $y$は位数2になる. $yxy$は位数$p$なので$x$の冪でかつ単位元ではない. よって関係式$yxy = x^m$を得る. この$m$は$1\leq m\leq p-1$にある. もし$m=1$なら$xy=yx$で$G$がアーベル群になるから不適. よって, 非アーベルの場合は$\lan x,y \mid x^p = y^2 = 1,  yxy = x^m \ran$ の形の群だと思う...
+\end{ans}
+\begin{rem}
+これの$m=p-1$のときが2面体群$D_{p}$らしい. 
+\end{rem}
+\clearpage 
+\section{7/9(自主作成)}
+\begin{prob}
+群の半直積の定義は? 
+\end{prob}
+\begin{prob}
+有限アーベル群上の既約表現について何かわかることは?
+\end{prob}
+\begin{prob}
+$10$次の円分多項式$\Phi_{10}(x)$の式を書いて下さい. また, $\Phi_n(x)$は一般に有理数係数であることを示してください. 
+\end{prob}
+
+\begin{prob}
+$[0,1]$上の連続関数は一様連続ですか? $(0,1)$上では?
+\end{prob}
+
+\begin{prob}
+$[0,1]$と$[0,1)$は濃度は同じですね.  この二つに$\mb{R}$の部分位相を定めたとき, それらは同相ですか? 
+\end{prob}
+
+
+\begin{prob}
+$[0,\infty)$上の微分可能かつ可積分な関数は有界ですか? ...わかりました.  ではどれくらいの条件をつければ有界にできそうですか? 
+\end{prob}
+
+
+\begin{prob}
+普遍係数定理の主張を教えて下さい. 
+\end{prob}
+
+\begin{prob}
+$\mb{Z}[\sqrt{5}]$は整閉整域ですか? ...わかりました. では, 整閉包を決定してください. 
+\end{prob}
+
+\begin{prob}
+上昇定理の主張を教えて下さい. また, 下降定理とは何が異なりますか? 
+\end{prob}
+
+\begin{prob}
+$\phi:A\to B$を環準同型とします. $B$の極大イデアルの引き戻しは極大イデアルとは限らないことを示して下さい. また, どのような場合なら引き戻しもまた極大イデアルになりますか? 
+\end{prob}
+
+\begin{prob}
+Hilbertの強零点定理の主張は? 
+\end{prob}
+
+\begin{prob}
+$\mb{Z}[\dfrac{1+\sqrt{-19}}{2}]$がPIDであることを示して下さい. 
+\end{prob}
+
+\begin{prob}
+$\spec{A}$は(準)コンパクトであることを示して下さい.
+\end{prob}
+
+\begin{prob}
+分離射の定義を述べて下さい. アファインスキーム間の射は分離射ですか? また, 分離的でないスキームの例をあげてください. 
+\end{prob}
+
+
+
+

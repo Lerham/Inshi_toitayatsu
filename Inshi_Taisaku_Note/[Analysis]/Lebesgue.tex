@@ -1,0 +1,308 @@
+\chapter{Lebesgue積分論}
+\section{測度論}
+\subsection{基礎概念}
+\subsubsection{}
+\subsubsection{$\spadesuit$}
+
+
+\subsection{例題}
+
+
+\subsection{演習問題}
+\subsubsection{Level A}
+\begin{prob} (H28東北大選択)
+$\mu$を$\mb{R}$上のLebesgue測度とし, $a>2$を実数とする。以下の問いに答えよ。
+\ben
+\item $\{ A_n \}$を$\mb{R}$上の可測集合列とし$\sum_{n=1}^{\infty}\mu(A_n) < \infty$を満たすとする。$\mu(\limsup_{n\to \infty} A_n) = 0$を示せ。
+\item 正の整数$n$に対して$B_n$を
+\beqn
+B_n := \{ x\in (0,1) \mid n\text{と互いに素であるような}\\
+\text{正の整数$k$が存在して} \abs{x-\dfrac{k}{n}} < \dfrac{1}{n^a} \}
+\eeqn
+と定める。$\mu(B_3)$, $\mu(B_4)$を求めよ。
+\item $\mu(\limsup_{n\to \infty} B_n) = 0$を示せ。
+\een
+\end{prob}
+\subsubsection{Level B}
+
+\subsubsection{Level C}
+\begin{prob} (\tf{Minkowskiの定理})
+$S\subset \mb{R}^{n}$を部分集合とする。$S$が対称であるとは, $x\in S$なら$-x\in S$となることをいう。$S$が凸であるとは, $t\in [0,1]$なら$tx + (1-t)y\in S$となることをいう。以降$S$は対称でかつ凸であるとし,測度はLebesgue測度$\mu$を考える。 以下の問いに答えよ。
+\ben
+\item $x,y\in S$で$|t| + |s| \leq 1$なら$tx + sy \in S$であることを示せ。
+\item $S$が可測で$\mu(S) > 1$であるなら, 異なる2点$x,y\in S$が存在して$x-y \in \mb{Z}^{n}$であることを示せ。
+\item $S$が有界閉集合で$\mu(S)\geq 1$であるとする。異なる2点$x,y\i S$が存在して$x-y/in \mb{Z}^{n}$であることを示せ。
+\item $S$が可測かつ対称な凸集合で$\mu(S) > 2^{n}$であるか, $S$が対称で凸な有界閉集合で$\mu(S) \geq 2^{n}$であるならば, $S$は$\mb{Z}^{n}\setminus{\{ 0 \}}$の点を含むことを証明せよ。これはMinkowskiの定理として知られている。
+\een
+\end{prob}
+
+
+
+
+
+\section{($\heartsuit$)Lebesgue積分}
+\subsection{収束定理}
+Lebesgue積分論において特に重要な定理をメモする。
+\besha
+\begin{theo} (Lebesgue収束定理)
+測度空間$(X,\hana{F},\mu)$, 可測関数列$\{ f_n\}$と可測関数$f$を考える。次の条件を考える。
+\ben
+\item $\mu$に関して殆どすべての$x\in X$で, $\disp\lim_{n\to \infty} f_n(x)= f(x)$\\
+\item ある可積分関数$\phi$が存在し, $\disp\sup_{n\in \mb{N}} |f_n(x)| \leq \phi(x)$ .
+\een
+この(1), (2)が満たされるとき, $f,f_n$は可積分であり, 
+\[\disp\lim_{n\to \infty} \disp\int_{X} f_n(x) \mu(dx)が存在して, \disp\lim_{n\to \infty} \disp\int_{X} f_n d\mu = \disp\int_{X} f d\mu\]
+が成り立つ。
+\end{theo}
+\ensha
+さっそく下の問題で使ってみよう。
+\begin{prac} (2020解析Iレポート9A)\\
+$(\mb{R},\mac{L},\\mu)$は1次元Lebesgue測度空間とし, $f(x)$は$\int_{[0,1]}|f(x)|d\mu<\infty$を満たすとする。このとき, 
+\[\disp\lim_{n\to \infty} \int_{[0,1]} (1-e^{-1/n})f(x)d\mu = 0\]
+を示せ。
+\end{prac}
+まれにLebesgue収束定理が使えずFatouの補題がつかえるようなことがある。
+\begin{theo} (\tf{Fatouの補題})
+測度空間$(X, \hana{F}, \mu)$と非負値可測関数列$\{ f_n\}$を考える。このとき
+\[\disp\int_{X} \disp\liminf_{n\to \infty} f_n(x) \mu(dx) \leq \disp\liminf_{n\to \infty} \disp\int_{X} f_n(x) \mu(dx)\]
+が成り立つ。
+\end{theo}
+不等号がどちら向きであるかが忘れそうだったら, $f_n(x) = \mb{I}_{(n,n+1)}(x)$のときを考えるとよい。
+
+\begin{theo} (単調収束定理)
+測度空間$(X, \hana{F}, \mu)$, 非負値可測関数列$\{ f_n\}$を与える。$\{ f_n\}$が増加列である, すなわち $0\leq f_1 \leq f_2\leq \cdots$ であるとするとき, 
+\[\disp\lim_{n\to \infty} \disp\int_{X} f_n(x) \mu(dx) = \disp\int_{X} \disp\lim_{n\to \infty} f_n(x) \mu(dx)\]
+が成り立つ。
+\end{theo}
+
+
+
+
+\begin{egprob} (2020解析I中間レポート)\\
+$1<p<\infty$, $(X,\mac{M},\mu)$を有限測度空間, $f,f_n:X\to \ovl{\mb{R}}$を$(\mac{M},\mac{B}(\ovl{\mb{R}}))$-可測かつ, 
+\[\disp\lim_{n\to \infty}f_n(x) = f(x)\quad (\mu-\mr{a.e.}), \quad \disp\lim_{n\to \infty} \norm{f_n}_{L^p} = \norm{f}_{L^p} < \infty\]
+とする。ただし, $1\leq q<\infty$に対し, $\norm{f}_{L^q}= \parena{\disp\int_{X} |f(x)|^{q}\, \mu(dx)}^{1/p}$. 
+\ben
+\item $\disp\lim_{n\to \infty} \norm{f-f_n}_{L^p} = 0$を示せ。
+\item $\disp\lim_{n\to \infty} \norm{f-f_n}_{L^1} = 0$  を示せ。
+\een
+\end{egprob}
+\begin{egans}
+(1) $a,b>0$で次の不等式に注意せよ:
+\[2^{p}(a^{p} + b^{p}) \geq (a+b)^p\]
+よって, 三角不等式に注意すると, 
+\[g_n = 2^{p}(|f|^{p} + |f_n|^{p}) - |f-f_n|^p\]
+が非負可測である。条件より$\disp\lim_{n\to \infty} g_n(x) = 2^{p+1}|f(x)|^{p}$ ($\mu-$a.e.) である。非負だからFatouの補題によって
+\[\disp\int_{X} \liminf_{n\to \infty} g_n\, d\mu \leq \liminf_{n\to \infty} \disp\int_{X} g_n\, d\mu\]
+右辺は
+\[\liminf_{n\to \infty} \parenc{ 2^{p}\norm{f}_{p}^{p} + 2^{p}\norm{f_n}^{p} - \norm{f-f_n}^{p}_{p}}\]
+左辺は$\mu-$a.e.で$\disp\liminf_{n\to \infty} g_n(x) = \disp\lim_{n\to \infty}g_n(x) = 2^{p+1}|f(x)|$であることにより$2^{p+1}\norm{f}^{p}_{p}$である。よって,$\liminf (-a_n) = - \limsup a_n$に注意して整理すれば
+\[\disp\limsup_{n\to \infty} \norm{f-f_n}_{L^p}^{p} \leq 0\]
+を得るので題意は示された\footnote{$\liminf$を$\lim$にして上から抑えるとミスらしい。多分極限の存在性が自明でないから?}。
+
+(2) $a,b\geq 0, p^{-1} + q^{-1} = 1$ ($1<p,q<\infty$)のとき
+    \[ab\leq \dfrac{a^{p}}{p} + \dfrac{b^{q}}{q}\]
+    に注意する(\tf{Youngの不等式})。  
+    これを用いて任意の正の数$\epsilon$に対して
+    \[|f-f_n|\epsilon \leq \dfrac{|f-f_n|^{p}}{p} + \dfrac{\epsilon^{q}}{q}\]
+    を得る。$\mu(X)<\infty$に注意して
+    \beqn
+    \norm{f-f_n}_{p}^{p} \epsilon 
+    &\leq& \dfrac{1}{p} \norm{f-f_n}_{p}^{p} + \disp\int_{X}\dfrac{\epsilon^{q}}{q}\, d\mu\\
+    &= & \dfrac{1}{p}\norm{f-f_n}_{p}^{p} + \dfrac{\mu(X)}{q}\epsilon 
+    \eeqn
+    よって
+    \beqn
+    \norm{f-f_n}_{p}^{p} \leq \dfrac{1}{p\epsilon} \norm{f-f_n}_{p}^{p} + \dfrac{\mu(X)}{q}\epsilon^{q-1}
+    \eeqn
+    が成り立つので, $n\to \infty$として
+    \[
+    \disp\lim_{n\to \infty} \norm{f-f_n}_{1} \leq \dfrac{\mu(X)}{q}\epsilon^{q-1}
+    \]
+    を得る。$1<q<\infty$だから$\epsilon\downarrow 0$とすると$\disp\lim_{n\to \infty}\norm{f-f_n}_{1} = 0$を得る。\qed
+\end{egans}
+
+\begin{prob} (H19-II-5) \href{https://www.cs.mcgill.ca/~dberma3/notes/HW5_564.pdf}{解答(外部)})\\
+$\{f_n\} ,\{g_n\}, \{h_n \}$は$L^1(\mb{R})$の点列で, それぞれ$f,g,h$にほとんどいたるところ収束するとする。
+\[\disp\lim_{n\to \infty} \disp\int_{\mb{R}} f_n \, dx = \disp\int_{\mb{R}} f\, dx,\quad \disp\lim_{n\to \infty} \disp\int_{\mb{R}} h_n \, dx = \disp\int_{\mb{R}} h\, dx,\]
+が成り立つとき, 
+\[\disp\lim_{n\to \infty} \disp\int_{\mb{R}} g_n\, dx = \disp\int_{\mb{R}} g\, dx\]
+であることを示せ。
+\end{prob}
+
+
+\subsection{Fubiniの定理}
+Lebesgue積分における重積分の順序交換可能であるための十分条件を与えるものがFubiniの定理である。
+\begin{theo} ({\bf 一般のFubiniの定理})\\
+2つの$\sigma$-有限な測度空間$(X,\hana{F}_X, \mu_X), (Y,\hana{F}_Y, \mu_Y)$と, その直積測度空間$(Z,\hana{F}_Z, \mu_Z)$を考える。$f(z) = f(x,y)$が$Z$上の$\hana{F}_{Z}$可測関数であり, $\disp\int_{Z}|f(z)|\mu_Z(dz)$, $\disp\int_{Y} \left( \disp\int_{X}|f(x,y)|\mu_X(dx) \right)\mu_Y(dy)$, $\disp\int_{X} \left( \disp\int_{Y}|f(x,y)|\mu_Y(dy) \right) \mu_X(dx)$ のうちどれか1つが有限の値を取ると仮定したとき, 次が成り立つ。
+\ben
+\item[(1)] 残りの2つも有限の値となる。
+\item[(2)] $\mu_X$-a.e. $x\in X$ に対して$f(x,・)$は$\mu_Y$-可積分であり, $\mu_Y$-a.e. $y\in Y$に対して$f(・,y)$は$\mu_X$で可積分である。
+\item[(3)] 
+\beqn
+\disp\int_{Z} f(z) \mu_Z(dz) &=& \disp\int_{Y}\left( \disp\int_{X}f(x,y)\mu_X(dx) \right)\mu_Y(dy)\\
+&=& \disp\int_{X}\left(\disp\int_{Y} f(x,y)\mu_Y(dy)\right) \mu_X(dx)
+\eeqn
+\een
+\end{theo}
+\begin{theo} ({\bf 非負値関数のFubiniの定理})\\
+$f(z)=f(x,y)$が$Z$上の非負値$\hana{F}_Z$-可測関数であるとき, 
+\ben
+\item 任意の$x\in X$に対して $f(x,・)$は$\hana{F}_Y$可測であり, 任意の$y\in Y$に対して$f(・,y)$は$\hana{F}_X$可測である。
+\item \beqn
+\disp\int_{Z} f(z) \mu_Z(dz) &=& \disp\int_{Y}\left( \disp\int_{X}f(x,y)\mu_X(dx) \right)\mu_Y(dy)\\
+&=& \disp\int_{X}\left(\disp\int_{Y} f(x,y)\mu_Y(dy)\right) \mu_X(dx)
+\eeqn
+\een
+\end{theo}
+
+上のFubiniの定理を用いるときの条件の確認のために「$f$の可測性」を見なければならない。これは, 普通に確認すると大変である。しかし, Lebesgue測度とその直積測度の性質から, 応用上はほとんどの場合可測にはなる。\\
+　直積測度の記号を導入する。
+
+\begin{defn}
+2つの$\sigma$-有限測度空間$(X,\hana{F}_{X}, \mu_{X})$と$(Y,\hana{F}_{Y}, \mu_Y)$を考える。$(X,\hana{F}_X), (Y,\hana{F}_Y)$が作る直積可測空間$(Z,\hana{F}_Z)$を
+\[Z=X\times Y,　\hana{F}_Z = \sigma(\{E\times F\mid E\in \hana{F}_X,　F\in \hana{F}_{Y} \})\]
+で定め,$(X,\hana{F}_Z)$上の測度$\mu_Z$を, $E\times F$に対して
+\[\mu_Z(E\times F) = \mu_X(E)\mu_Y(F)\]
+が成り立つものとして定める。\footnote{hopfの拡張定理を用いると, この
+$\mu_Z$は一意に定まることがわかる。}この$\mu_Z$を{\bf $\mu_X, \mu_Y$からなる直積測度}とよび, $(Z,\hana{F}_Z, \mu_Z)$を{\bf $(X,\hana{F}_X, \mu_X), (Y,\hana{F}_Y,\mu_Y)$からなる直積測度空間}といい, しばしば次で表す。
+\[(Z,\hana{F}_Z,\mu_Z) = (X\times Y, \hana{F}_X\tens \hana{F}_Y, \mu_X\tens \mu_Y)\]
+\end{defn}
+
+\begin{prop}　
+\beqn
+\maf{B}(\mb{R}^{d_1+d_2}) &=& \maf{B}(\mb{R}^{d_1})\tens \maf{B}(\mb{R}^{d_2})\\
+m_{d_1+d_2}|_{\maf{B}(\mb{R}^{d_1+d_2})} &=& m_{d_1}|_{\maf{B}(\mb{R}^{d_1})}\tens m_{d_2}|_{\maf{B}(\mb{R}^{d_2})} 
+\eeqn
+となる。しかし, 実は
+\[\maf{M}_{d_1+d_2} \neq \maf{M}_{d_1}\tens\maf{M}_{d_2}\]
+である。
+\end{prop}
+$f(z)=f(x,y)$が$X\times Y=\mb{R}\times \mb{R}$上の連続関数であれば, $\mb{R}$の開集合の引き戻しが$\maf{B}(\mb{R})$に属するので$f$は$\maf{B}(\mb{R}^2)$-可測関数である。また, $a_1,b_1,a_2,b_2\in \mb{R}\cup\{\pm \infty\}$に対して, ($a_i\leq b_i$) 
+\[\mb{I}_{(a_1,b_1)\times (a_2,b_2)}, \mb{I}_{[a_1,b_1]\times [a_2,b_2]},　\cdots\] 
+などは$\maf{B}(\mb{R}^2)$-可測関数である。{\bf $\maf{B}(\mb{R})$が(開区間に限らない)任意の区間を含むからである。}ゆえに, $f(z)\mb{I}_{(a_1,b_1)\times (a_2,b_2)}$なども可測関数である。可測関数の積も可測であるからである。
+
+\subsection{積分記号下の微分}
+積分で表された関数の微分を考えるときは次の定理を用いる。
+\begin{theo} (積分記号下の微分)
+
+\end{theo}
+
+
+
+\subsection{例題Part1}
+$d$次元Lebesgue測度空間を$(\mb{R}^d, \maf{M}_{d}, m_d)$で表すことにする。
+
+\begin{prob}　\footnote{(1),(2),(3):\href{www-an.acs.i.kyoto-u.ac.jp/kigami/analysis1ex10.pdf}{www-an.acs.i.kyoto-u.ac.jp/kigami/analysis1ex10.pdf}: , 解答:\href{ www-an.acs.i.kyoto-u.ac.jp/kigami/analysis1ex10a.pdf}{www-an.acs.i.kyoto-u.ac.jp/kigami/analysis1ex10a.pdf} (analysis1ex○の数字を変えると他のものも出てきます)　 (4), (5):解析I, 演習No.11}\\
+次の積分の$n\to \infty$の極限を求めよ。
+\beqn
+\begin{array}{cccc}
+(1)& \disp\int_{0}^{\infty} \dfrac{1}{1+x^n}\, dx&(2)& \disp\int_{0}^{\infty} \dfrac{\sin{e^x}}{1+nx^2}\, dx\\
+(3)& \disp\int_{0}^{1} \dfrac{n\cos{x}}{1+n^2x^{3/2}}\, dx&(4)& \disp\int_{0}^{\infty} e^{-x}(\sin{x})^n\, dx\\
+(5)& \disp\int_{0}^{1} (\sin{(nx)})^{n}\, dx&(6)&
+\end{array}
+\eeqn
+\end{prob}
+
+\dotfill
+\begin{egans}　
+(1): $(0,\infty)$上の関数$\phi(x) = \min{\{ 1, \frac{1}{x^2}\}}$としたとき, $n\geq 2$に関して$\dfrac{1}{1+x^n} \leq f(x)$が成り立つ。$\phi(x)$は$(0,\infty)$ 上可積分であり,  Lebesgue収束定理より
+\[\disp\lim_{n\to\infty} \disp\int_{0}^{\infty} \dfrac{dx}{1+x^n} = \disp\int_{0}^{\infty} \disp\lim_{n\to \infty}\dfrac{1}{1+x^n} dx =\disp\int_{0}^{\infty} \mb{I}_{(0,1)} (x) dx = 1\]
+(2):$\phi(x) = \dfrac{1}{1+x^2}$とおく。$\left| \dfrac{\sin{e^x}}{1+nx^2}\right| \leq \phi(x)$であり, $\phi(x)$は$(0,\infty)$上可積分なので, Lebesgue収束定理より
+\[\disp\lim_{n\to \infty} \disp\int_{0}^{\infty} \dfrac{\sin{e^x}}{1+nx^2}\,dx = \disp\int_{0}^{\infty} \disp\lim_{n\to \infty} \dfrac{\sin{e^{x}}}{1+nx^2} dx = \disp\int_{0}^{\infty} 0\, dx = 0\]
+(3): $y=nx$と変換すると
+\beqn
+\disp\int_{0}^{1} \dfrac{n\cos{x}}{1+n^2x^{3/2}} dx &=& \disp\int_{0}^{n} \dfrac{ \cos{(y/n)} }{1+n^{1/2}y^{3/2} } dy \\
+&=& \disp\int_{0}^{\infty} \left\{ \dfrac{ \cos{(y/n)} }{1+n^{1/2}y^{3/2} } \mb{I}_{(0,n)} \right\} dy
+\eeqn
+である。$\phi(y) = \dfrac{1}{1+y^{3/2}}$とおくと, $\phi$は$(0,\infty)$上可積分であって, Lebesgue収束定理により
+\beqn
+\disp\lim_{n\to \infty} \disp\int_{0}^{1} \dfrac{n\cos{x}}{1+n^2x^{3/2}} dx &=& \disp\lim_{n\to \infty} \disp\int_{0}^{\infty}\left\{ \dfrac{\cos{(y/n)}}{1+n^{1/2}y^{3/2}} \mb{I}_{(0,n)}\right\} dy \\
+&=& \disp\int_{0}^{\infty} \disp\lim_{n\to \infty} \left\{ \dfrac{\cos{(y/n)}}{1+n^{1/2}y^{3/2}} \mb{I}_{(0,n)}\right\} dy \\
+&=& \disp\int_{0}^{\infty}  0 \, dy = 0
+\eeqn
+(4):任意の$n\in\mb{N}$で$e^{-x}|\sin{x}|^n \leq e^{-x}$であり, $e^{-x}$は$[0,\infty)$上可積分である。また, $x\notin \dfrac{\pi}{2}\mb{N}$ならば$e^{-x}(\sin{x})^{n} \to 0 $であり, $\dfrac{\pi}{2}\mb{Z}$はLebesgue測度に関して零集合だから, Lebesgue収束定理より$\disp\lim_{n\to \infty} \disp\int_{0}^{x} e^{-x}(\sin{x})^n dx $が存在して
+\[\disp\lim_{n\to \infty} \disp\int_{0}^{\infty} e^{-x}(\sin{x})^n dx = \disp\int_{0}^{\infty} 0\, dx = 0\]
+(5): Riemann積分の変数変換公式と$\sin$の周期性より, 
+\beqn\disp\int_{0}^{1} |\sin{(nx)}|^{n} dx = \dfrac{1}{n} \disp\int_{0}^{n}|\sin{y}|^{n} dy &\leq& \dfrac{1}{n} \disp\int_{0}^{n\pi} |\sin{y}|^{n} dy \\
+&=& \disp\int_{0}^{\pi} (\sin{y})^{n} dy
+\eeqn
+となる。ここで, $x\in [0,\pi]$に対して$0\leq (\sin{x})^{n} \leq 1$であって, 定数関数$1$は$[0,\pi]$上可積分である。また, $\disp\lim_{n\to \infty} (\sin {x})^{n} = \mb{I}_{\{ \pi/2 \}}(x)$であり, $m_1$-a.e.で$0$である。よって, Lebesgueの収束定理より
+\[\disp\lim_{n\to \infty} \disp\int_{0}^{\pi} (\sin{y})^{n} dy = \disp\int_{0}^{\pi} 0 dy = 0\]
+となる。これにより, $\disp\int_{0}^{1} (\sin{(nx)})^n dx = 0$である。
+\end{egans}
+
+\begin{egprob} (2019解析I, 演習No.11)\\
+$[1,\infty)$上の関数$\dfrac{\sin{x}}{x}$は, $[1,\infty)$上広義Riemann可積分だが, $[1,\infty)$上Lebesgue可積分ではないことを示せ。
+\end{egprob}
+\begin{egans}
+
+
+
+\end{egans}
+\dotfill
+\begin{egprob} (2019解析学I 演習No.13)
+次の積分の値を求めよ。
+\ben
+\item $\disp\int_{0}^{\infty} \left( \disp\int_{0}^{1} t^{-1}e^{-\frac{x}{t}} \right) dx$
+\item $\disp\int_{0}^{2\pi} \left( \disp\int_{0}^{1} x\cos{(2\pi x)}\sin{(x\theta)} \,dx \right) d\theta$\\
+\item $\disp\int_{0}^{r} \disp\int_{0}^{r} \dfrac{\sin{x}}{x}\, dx$
+\een
+\end{egprob}
+\begin{egans}
+(1):こういう問題は$(\mb{R}, \maf{B}(\mb{R}), m_1|_{\maf{B}(\mb{R})})$, $(\mb{R}^2, \maf{B}(\mb{R}^2), m_2|_{\maf{B}(\mb{R}^2)})$で考える。
+\beqn
+f(x,t) = t^{-1}e^{-x/t}\mb{I}_{[0,\infty)\times (0,1]}(x,t)
+\eeqn
+とすると, $f$は非負値可測である(次の節を参照)。よって, Fubiniの定理より
+\beqn
+\disp\int_{0}^{\infty} \left( \disp\int_{0}^{1} t^{-1}e^{-\frac{x}{t}} \right) dx&=& \disp\int_{\mb{R}}\left( \disp\int_{\mb{R}}f(x,t) dt \right)dx\\
+&\xequal{{\footnotesize \mbox{Fubini} }}& \disp\int_{\mb{R}} \left(  \disp\int_{\mb{R}} f(x,t) dx\right)dt\\
+&=&  \disp\int_{0}^{1} \left(\disp\int_{0}^{\infty} t^{-1}e^{-x/t}\right) dt\\
+&=& \disp\int_{0}^{1} \left( \left[ -e^{-x/t} \right]_{x=0}^{x=\infty} \right) dt\\
+&=& \disp\int_{0}^{1} dt =1
+\eeqn 
+(2):同様に, 
+\[f(x,\theta) = x\cos{(2\pi x)}\sin{(x\theta)} \mb{I}_{[0,1]\times [0,2\pi]}\]
+とすると, $f$は$\maf{B}(\mb{R}^2)$-可測である。また, 
+\beqn
+\disp\int_{[0,2\pi]} \left( \disp\int_{[0,1]}||f(x,\theta) dx \right)d\theta &\leq& \disp\int_{[0,2\pi]} \left(\disp\int_{[0,1]} |x| dx\right)d\theta\\
+&=& \disp\int_{[0,2\pi]} \dfrac{1}{2} d\theta = \pi
+\eeqn
+となり, 有限である。Fubiniの定理より
+\beqn
+&&\disp\int_{[0,2\pi]} \left(\disp\int_{[0,1]} x\cos{(2\pi x)}\sin{(x\theta)} dx\right)d\theta\\
+&=& \disp\int_{[0,1]} \left(\disp\int_{[0,2\pi]} x\cos{(2\pi x)} \sin{(x\theta)} \,d\theta\right)\, dx\\
+&=&  \disp\int_{0}^{1} \left[ \cos{(2\pi x)}(-\cos{(x\theta)}) \right]_{\theta=0}^{\theta=2\pi} dx\\
+&=&  \disp\int_{0}^{1} \cos{(2\pi x)}\left(1-\cos{(2\pi x)}  \right) dx\\
+&=&  \dfrac{1}{2\pi}\disp\int_{0}^{2\pi} \cos{t}(1-\cos{t})\, dt\\
+&=& \dfrac{1}{2\pi} \left[ \sin{t} - \dfrac{t}{2} - \dfrac{\sin{2t}}{4} \right]_{0}^{2\pi}\\
+&=& \dfrac{1}{2\pi} (-\pi) = -\dfrac{1}{2}  
+\eeqn
+
+\end{egans}
+
+\subsection{演習問題Part2}
+\subsubsection{Level A}
+
+
+
+\subsubsection{Level B}
+\begin{prob} (2019解析I, 演習No.6)\\
+$\alpha\geq 0$とし, 測度空間$(X,\hana{F}, \mu)$上の非負値可測関数$f$で, $0<\disp\int_{X} f(x)^{\alpha} \mu(dx)$を満たすものを考える。このとき, 次を示せ。
+\beqn
+\disp\lim_{n\to \infty}\!\disp\int_{X} n\log{\left( 1+\left(\dfrac{f(x)}{n}\right)^{\alpha} \right)} d\mu = \bcas 
+\infty 　　　　(0<\alpha<1)\\
+\disp\int_{X} f(x) d\mu　(\alpha=1)\\
+0　　　　　(\alpha>1)
+\ecas
+\eeqn
+\end{prob}
+\begin{egans}
+
+
+
+\end{egans}
+
+\subsubsection{Level C}
+

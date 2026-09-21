@@ -1,0 +1,56 @@
+
+\section*{体論}
+\section{Part1} \label{section:ans_field_1}
+\begin{ans}
+$K=\mb{Q}(\sqrt[6]{2}\omega, \sqrt[6]{2}\ovl{\omega})$とおく。$\sqrt[6]{2}\in K$である。$\mb{Q}$代数の同型$\phi:\mb{Q}(\sqrt[6]{2})\to K$が存在したとする。$\phi$は有理数を固定し, $\phi^{-1}(\sqrt[6]{2})$は$\sqrt[6]{2}$の共役である。よって$\phi(\sqrt[6]{2}) = \pm \sqrt[6]{2}$となるしかない。しかしこれでは$\phi$の像は$\mb{R}$に含まれ, $\sqrt[6]{2}\omega$に移る元が取れない。これは同型であることに反する。\qed
+\end{ans}
+\begin{ans}
+\href{https://drive.google.com/file/d/1qjXkWRRvhhL8-TEUwqHF2hy2ZAeKA0Sh/view?usp=sharing}{(2020前期整数論レポートby Li)}の問題2を見よ。ちなみに, 2020前期整数論はyke先生の担当であり, レポートは必須のものをひとつ(類数計算)と本の演習問題を授業に関係していたらなんでもいいから解くというものである。なお, レポートの問題1の整基底の決定は, あってはいるが\tf{悪い解き方}なので真似してはいけない。本当は判別式を使って考える。
+\end{ans}
+
+
+\begin{ans}
+(1):ある$N$で$a_{N} > \alpha$とすると,十分小さい$\epsilon>0$が存在して$a_{N} \geq \alpha + \epsilon$ ($n>N$)である。よって$n>N$なら定数$C$が存在して$\frac{1}{n} \sum_{k=1}^{n}a_k > \dfrac{C + (n - N)(\alpha+\epsilon)}{n} \to \alpha + \epsilon $で条件に反する。
+
+(2): (1)により$\{ a_n \}$は有界単調増大列だから$\disp\lim_{n\to \infty} a_n = c$が存在し, $c<\alpha$とすると$a_n \leq c- \epsilon$となる$\epsilon>0$が取れることから矛盾が導かれる。
+
+(3):この和は$\frac{1}{n}\parena{na_{n+1} - a_{n} - a_{n-1} - \cdots - a_{1}}$と書ける。よって$a_{n+1} - \frac{a_1+\cdots + a_n}{n}$の極限を求めればよく, 仮定と(2)からただちに0とわかる。
+\end{ans}
+\begin{ans}
+$x>0$なら$f_n(x) \geq 1+ x\sum_{k=1}^{n} \frac{1}{k}$より発散。$x=-n$ ($n\in \mb{N}$)なら$0$に収束。それ以外の場合, $0<1+\dfrac{x}{n}$となる$n$のうち最小な$m$を取ると, $n\geq m$から$f_n(x)$の符号は一定である(場合分けから0ではない)。$f_n(x)>0$なら$f_{n}(x) > f_{n+1}(x) > 0$なので収束。$f_{n}(x) < 0$でも$f_{n}(x) < f_{n+1}(x) < 0$なので収束。よって$x\leq 0$で収束し,$x>0$で発散。 
+
+\end{ans}
+
+\begin{probans} %H28tohoku_kyodo
+(\href{https://drive.google.com/file/d/1anaTAHLXhDH8Ng_6pvw6pPFb4MDD5v7i/view?usp=sharing}{Liの解答例})
+\end{probans}
+
+\begin{probans} %int f int 1/f
+不等式左辺は次に等しい。
+\[\iint_{[a,b]\times [a,b]} \dfrac{f(x)}{f(y)} \, dxdy = \dfrac{1}{2} \iint_{[a,b]\times[a,b]} \parena{\dfrac{f(x)}{f(y)} + \dfrac{f(y)}{f(x)}}\, dxdy \]
+$f$は正値だから$\frac{f(x)}{f(y)} + \frac{f(y)}{f(x)} \geq 2$である。よって
+\[\dfrac{1}{2} \iint_{[a,b]\times[a,b]} \parena{\dfrac{f(x)}{f(y)} + \dfrac{f(y)}{f(x)}}\, dxdy\geq \dfrac{1}{2}\cdot 2(b-a)^2 = (b-a)^2\]
+等号成立は(連続性を考慮すれば)常に$f(x) = f(y)$であるときに成り立つので$f$が定数のとき。
+\end{probans}
+
+\setcounter{chapter}{11}
+\section{Lebesgue積分論}
+
+\subsection{Part1}
+\begin{probans}
+(1): $t+s = u$とすると$-1\leq u\leq 1$である。$x,-x\in S$だから$ux = \frac{1+u}{2}{x} + \frac{1-u}{2}(-x)\in S$である。同様に$uy\in S$である。よって$\frac{s}{u} + \frac{t}{u} = 1$だから
+\[sx + ty = \frac{s}{u}(ux) + \frac{t}{u}(uy) \in S\]
+(2): $I=[0,1)^{n}$とする。$\gamma\in \mb{Z}^{n}$に対して, $S^{(\gamma)} = ((I+\gamma) \cap S) - \gamma$とする。つまり, $S$を格子立方体$I+\gamma$で切り取った部分を$I$の中に平行移動したものを$S^{(\gamma)}$と置く。明らかに$\bigcup_{\gamma\in \mb{Z}^{n}} S^{(\gamma)} \subset I$だから$\mu(\bigcup_{\gamma\in \mb{Z}^{n}}S^{(\gamma)}) \leq \mu(I) = 1$が成り立つ。もし$S^{\gamma_1} \cap S^{\gamma_2}\neq \varnothing$ ($\gamma_1\neq \gamma_2$)が常に成り立つとすると,上の左辺はLebesgue測度の平行移動不変性から$\mu(S)$に等しいが, $\mu(S) > 1$だから矛盾である。よってある異なる$\gamma_1,\gamma_2\in \mb{Z}^{n}$によって$S^{(\gamma_1)} \cap S^{(\gamma_2)} \neq \varnothing$であって, $x+\gamma_1 = y+\gamma_2$となる$x,y\in S$が存在するから$x-y = \gamma_2 - \gamma_1\in \mb{Z}^{n}$.\qed
+
+(3): $n$を自然数とする。$S$の$t>1$倍拡大$tS$は$\mu(S) > 1$を満たすので(2)から$x(t) - y(t) \in S_n\setminus\{ 0 \}$が存在して$x(t)-y(t) \in \mb{Z}^{n}$. $t_0 > t_1 > \cdots  > 1$という収束列を取れば,  $x(t_n),y(t_n)$はすべて有界閉集合$t_0S$に含まれ, $\{ x(t_n) \}$, $\{ y(t_n)\}$から収束部分列が取れる。$\{ t_n \}$をその部分列に取り換えて$\{ x(t_n)\}$, $\{ y(t_n)\}$自身が収束列としてよい。$x(t_n) = x_n$, $y(t_n) = y_n$と書く。$x_\to x$, $y_n\to y$とするとき離散性から十分大きい$N$からは$x_{N} - y_{N} = x-y$であることが分かる。この$x,y$が所望の点である。\qed
+
+(4): 最初のケースでは$\mu(\frac{1}{2} S) > 1$である。(2)から$\frac{1}{2}S$には異なる点$x,y$で$x-y\in \mb{Z}^{n}$なるものがある。(1)から$\frac{1}{2} x - \frac{1}{2}y\in \frac{1}{2}S$なので$x-y\in S$である。\qed
+
+\end{probans}
+
+
+
+
+
+
+

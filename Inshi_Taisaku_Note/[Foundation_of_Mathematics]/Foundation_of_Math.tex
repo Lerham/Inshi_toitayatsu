@@ -1,0 +1,40 @@
+\chapter{集合論}
+%%位相空間論は幾何にいれました(本来, そうだから)。よって集合論とか論理学くらいしか入らないが院試でそんなにあるか不明。
+\section{基礎事項}
+\subsection{濃度}
+
+\begin{egprob}
+$A$を次の性質を満たす関数$f:\mb{R}\to \mb{R}$全体のなす集合とする。
+\ben[label=(\roman*)]
+\item $f(1) = 1$
+\item $f(x+y) = f(x) + f(y)$
+\een
+\ben
+\item $f\in A$のとき, $f(x) = x$ ($x\in \mb{Q}$)であることを示せ。
+\item $r\in \mb{R}\setminus{\mb{Q}}$を固定する。$f(r) = 0$であるような$f\in A$が存在することを示せ。
+\item $A$の部分集合$\{ f\in A\mid \text{$f$は$\mb{R}$のある点で不連続} \}$の濃度を求めよ。
+\een
+\end{egprob}
+\begin{egans}
+(1): $f(0) = 0$, $f(n) = n = -f(-n)$ ($n\in \mb{N}$) は容易。$x=m/n$のとき$m=f(m) = f(nx) = nf(x)$だから$x\in \mb{Q}$のときもよい。\qed
+
+(2): $\{ 1,r\}$は$\mb{Q}$上一次独立である。$\mb{R}$は自然に$\mb{Q}$ベクトル空間の構造を持つ。よって$\{ 1,r\}$はある基底$\{ e_i\}_{i\in I}$に拡張される。これを用いて$x=\sum_{i\in I} a_{i}(x)e_i$となる$a_i(x)\in \mb{Q}$が一意に取れる。ただしほとんどすべての$i\in I$に対して$a_i(x) = 0$である。$e_t = 1$, $e_s = r$であるとする。
+このとき, $f:\mb{R}\to\mb{R}$を
+\[f(x) = a_{t}(x)e_t = a_{t}(x)\]
+と定めるとよい。$\{ e_i \}_{i\in I}$が基底だから, $a_{t}(x+y) = a_{t}(x) + a_{t}(y)$となる。$a_{t}(1) = 1$だから$f(1) = 1$であり, $a_{t}(r) = 0$なので$f(r) = 0$である。この$f$でよい。
+
+(3): $f\in A, i\in I$に対して, $f(e_i) = f_i$とする。条件から$f_t = 1$である。こうして$f\in A$から実数の族$(f_i)_{i\in I\setminus{\{ t \}}}\in \mb{R}^{I-\setminus{\{ t \}}}$が得られる。逆に, $I' = I -\setminus{\{ t \}}$とし, 任意の$(k_i)\in \mb{R}^{I'}$に対し, $f(e_i) = k_i$となる$f\in A$を
+\[f(x) = \sum_{i\in I'} a_{i}(x)k_{i}\]
+で定めることができる(和は本質的に有限であるからwell-defined)。こうして$A$と$\mb{R}^{I'}$の間に全単射がある。$\mb{Q}$ベクトル空間として$\oplus_{i\in I}\mb{Q} \cong \mb{R}$であり, 左辺の濃度は$|\mb{Q}|^{|I|}=2^{|I|}$だから$\mb{Q}$が可算で$\mb{R}$が連続濃度であることから$|I'| = |\mb{N}|$である。よって$I'$も可算で$|\mb{R}^{I'}| = |\mb{R}|=\aleph$であるから$|A| = |\mb{R}|$. $f\in A$は$f|_{\mb{Q}} = \mr{id}_{\mb{Q}}$を満たしていたから, $f$がすべての点で連続であるとするなら$f=\mr{id}_{\mb{R}}$でなければならない。よって$A-\{ \mr{id}_{\mb{R}}\}$の濃度を求めればよいが, これも$|\mb{R}|$に等しい。よって濃度は$\aleph$.
+
+\end{egans}
+\subsubsection{HINTS}
+\begin{hint}
+
+\end{hint}
+
+
+
+
+
+
