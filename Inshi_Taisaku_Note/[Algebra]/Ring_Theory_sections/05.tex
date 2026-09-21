@@ -1,0 +1,612 @@
+\section{加群論}
+\subsection{加群の種類}
+\tbox{
+\begin{defn}$A$は環, $M$を$A$加群とする.
+\ben
+\item 自由加群
+\item 有限生成加群
+\item 平坦加群
+\item 射影加群
+\item Noether加群
+\item ($\spadesuit$ ) 入射加群
+\item ($\spadesuit$) Artin加群
+\een
+\end{defn}
+}{title=加群の種類}
+自由加群が最もベクトル空間に近く, かなり性質がよい. 平坦加群や射影加群も, 単因子論などで用いられる.
+
+\tbox{
+\begin{eqnarray*}
+\text{自由}\subset \text{平坦} \subset \text{射影}
+\end{eqnarray*}
+}{title=加群のクラス}
+
+射影加群や平坦加群については, ホモロジー代数の節で少し取り扱う.
+
+\begin{prop} $M$は$A$加群とする.
+\ben
+\item
+\item
+\item $A$がNoether環で$M$が有限生成であるとき, $M$はNoether加群である.
+\een
+\end{prop}
+
+
+
+
+
+
+\begin{egprob}
+何の問題か忘れた
+\end{egprob}
+
+\begin{egans}
+(1): $x=b/a + \mb{Z}$とおく。ただし$a,b\in \mb{Z}$で$a\neq 0$である。$ax = a+\mb{Z} = \mb{Z}$なので$ax = 0$である。\qed\\
+(2): $x=s/t + \mb{Z}$とおく。ただし$s,t\in \mb{Z}$, $t\neq 0$である。$y=s/(ta ) + \mb{Z}$とおけば$ay = x$\qed \\
+(3): 自由加群ではない。背理法で示す。もし$\mb{Q}/\mb{Z}$に$\mb{Z}$基底$\{ e_i\}_{i\in I}$が存在したとすれば, それらは非自明な線型関係式を持たないが, (1)から$a_i\in\mb{Z}\setminus{\{ 0 \}}$であって $a_i e_i = 0$となるものが存在する。この式自体は$a_i\neq 0$によって非自明な線型関係式であるから矛盾である。\qed
+
+(4):有限生成ではない。背理法で示す。$\mb{Q}/\mb{Z}$が$x_1,\cdots,x_n\in \mb{Q}/\mb{Z}$で$\mb{Z}$上生成されたと仮定する。このとき, 任意の素数$p$に対して, ある$a_{i,p}\in \mb{Z}$ ($i=1,\cdots, n$)が存在して
+\[\dfrac{1}{p} + \mb{Z} = \sum_{i=1}^{n} a_{i,p}x_i\]
+と書ける。ここで, (1)からある$b_i\in\mb{Z}\setminus{\{ 0 \}}$が存在して$b_ix_i \in \mb{Z}$となるものが存在するので, $b=b_1\cdots b_n$として
+\[\dfrac{b}{p} + \mb{Z} = \sum_{i=1}^{n}a_{i,p}bx_i = 0\]
+である。すなわち, 任意の素数$p$に対して$\dfrac{b}{p} \in \mb{Z}$である。しかし$b$の素因数でない$p$を取ることでこのようなことは起こりえない。よって矛盾である。\qed
+\end{egans}
+
+$A$加群の準同型$\phi:M\to N$に対し, $\ker{\phi}, \im{\phi}, \coker{\phi}$というものが定義される.
+
+
+\begin{egprob} (\cite{aoyukie}, 演習2.5)
+$A= \mr{diag}(1,3,6,0)$とし, $T_A:\mb{Z}^4\to \mb{Z}^4$を$A$により定義される加群の準同型とする. このとき, $\ker{T_A}$, $\im{T_A}$, $\coker{T_A}$を求めよ.
+\end{egprob}
+\begin{egans}
+\[\im{T_A} = \mb{Z}\oplus (3\mb{Z})\oplus 6\mb{Z} \oplus 0\]
+\[\ker{T_A} = 0\oplus 0\oplus 0\oplus \mb{Z} \]
+\[\coker{T_A} = 0\oplus \mb{Z}/3\mb{Z} \oplus \mb{Z}/6\mb{Z} \oplus \mb{Z}\]
+\end{egans}
+
+
+
+有限生成加群といえば, \tf{中山の補題}は大切である.
+
+\tbox{
+\begin{prop}
+$M$を有限生成$A$加群, $I$を$A$のJacobson根基に含まれるイデアルとする. $IM = M$であるとする. このとき, $M=0$である.
+\end{prop}
+}{title=中山の補題}
+
+\begin{prac} (仮想面接問題！これは聞かれそう)
+有限生成を外した場合, 中山の補題の反例は?
+\end{prac}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{単因子論とスミス標準形}
+次の二つはとても重要である.
+\begin{theo}
+$R$がPID, $M$が有限生成$R$加群なら, 自然数$r$と$e_1,\cdots, e_t\in R$で次を満たすものが存在する。
+\ben
+\item $M\cong R^{r} \oplus R/(e_1) \oplus R/(e_2) \oplus \cdots \oplus R/(e_t)$
+\item $e_i | e_{i+1}$ ($i=1,2,\cdots, t-1$)
+\een
+また上の条件が満たされるなら, $r$は一意であり, イデアル$(e_1),\cdots, (e_t)$も一意である。
+\end{theo}
+
+\begin{cor}
+有限生成$R$加群$M$($R$はPID)に対し, $M$が平坦であることとTorsion Freeであることは同値である.
+\end{cor}
+\prf Torison Freeなら$M \cong R^r$なので, 自由加群だから平坦になる. 逆に$M$が平坦であると仮定しよう. $a\neq 0 \in R$に対して$\phi_a: R\to R$を$\phi_{a}(r) = ar$と定めると, \tf{$R$が整域だから}これは単射である. よって, 平坦性により$\tens_{R}M$は左完全だから, 単射性が保存される. つまり, 次も単射である.
+\[\phi_{a} \tens \mr{id}_{M} : R\tens_{R} M \to R\tens_{R} M\]
+$\Phi: R\tens_{R} M \cong M$の同型写像と合成すると, この写像は
+\[m_{a}: M\to M,\quad m(x) = ax\]
+という$a$倍写像になる. $\phi_{a}\tens \mr{id}_{M}$と$m_a$は$\Phi$で移り合うので(図式参照), $m_a$も単射である. これが任意の$a\in R$で成り立つということは, $M$のねじれ元が$0$のみであるということに他ならない. \qed
+
+\begin{eg}
+$\mb{Z}$加群$\mb{K} = \mb{Q}, \mb{R}, \mb{C}$などはTorison Freeなので平坦である. よって関手$\cdot  \tens_{\mb{Z}} \mb{K}$右完全であるばかりでなく, 完全列を保つ. とくに, \tf{テンソルと剰余の交換が可能である。}(これは一般には成り立たないはず.) より一般には, $F$が平坦$R$加群, 部分加群$N\subset M$とするとき,
+\[(M\tens_{R} F)/(N\tens_{R} F) \cong (M/N)\tens_{R} F \]
+である(適当な完全列を取って示してみよ).
+\end{eg}
+
+\begin{prac}
+\ben
+\item 自然数$n$に対して$(\mb{Z}/n\mb{Z})\tens_{\mb{Z}} \mb{K}  = 0$を示せ. (\tf{Hint}: 剰余とテンソルの交換を用いよ.)
+\item $M$をrank $n$の有限生成$\mb{Z}$加群とする:
+\[M\cong \mb{Z}^{n} \oplus T\]
+$n=\dim_{\mb{K}} (M\tens_{\mb{Z}} \mb{K})$を示せ.
+\een
+\end{prac}
+
+\begin{rem}
+とくに$R=\mb{Z}$の場合は有限生成Abel群の構造定理と呼ばれる定理になる.
+\end{rem}
+
+\tbox{
+\begin{theo}
+$R$をPIDとする(たとえば$R=\mb{Z}$). 任意の$A\in \mr{M}_{n}(R)$に対して, ある$P,Q\in GL_{n}(R)$が存在して,
+\[PAQ = \bep
+e_1 & & &  \\
+& \ddots & &&\\
+&&e_r &  &\\
+&&&0&\\
+&&&&\ddots
+\enp\]
+\end{theo}
+とできる. ここで$e_1,\cdots, e_r\neq 0$かつ$e_1 | e_2 | \cdots | e_t$であり, このような$e_i$は同伴を除いて一意に定まる. これら$e_i$を行列$A$の単因子といい, 右辺の行列はスミス標準形, あるいは単因子標準形と呼ばれる.
+}{title=スミス標準形の存在性}
+
+\begin{rem}
+$P,Q$は基本行列の積として取れる. つまり, 行列の基本変形でスミス標準形に持って行くこともできる. しかし線型代数のときのような「第$k$列を$d$ ($d\neq 0,\pm 1$)で割る」操作に対応する基本行列を用いることはできない. $GL_{n}(\mb{Z})$の元は行列式が$\pm 1$でなければならないからだ. このように, 線型代数の場合とは使用できる基本変形が大きく異なることに注意しなければならない. 使用できる操作をまとめると
+\ben
+\item 第$i$行に第$j$行の\tf{整数倍}を足す操作
+\item 第$i$行を$\pm 1$倍する操作
+\item 行同士を交換する操作
+\een
+および上の二つで「行」を「列」に変えた操作である.
+\end{rem}
+
+
+基本行列の積で表せるとは言え, 基本変形だけでは少し難しいこともある. 以下は整数行列の変形法をまとめたものである(\cite{aoyukie} 139p参照).
+\tbox{
+\ben
+\item $A$が零なら何もしない. $A$が零でないなら, 0でない成分の中で\tf{絶対値が最小のもの}を行や列を交換して$(1,1)$成分に移す.
+\item もし第1行や第1列で$(1,1)$成分で割り切れないものがあれば,
+\[ P =
+\bep
+x & y & \\
+-q & p & \\
+& & I_{m-2}
+\enp
+\]
+のような行列を使う. ただし$px+qy=1$である\footnote{$p,q$が与えられており, $x,y$は$px+qy=1$の一つの解として求める.}. 0でない成分のうち, 絶対値がより小さいものを作る. (1)を繰り返し, 第1行と第1列の$(1,1)$成分以外が0になるまで続ける. $\pm 1$をかけ, $(1,1)$成分が正になるようにする.
+\item ほかに$(1,1)$成分で割り切れないものがあれば, その成分を含む列を第1列に加え, (1),(2)を行う. これを繰り返せば, (2)の状態でさらにすべての成分が$(1,1)$成分で割り切れるように変形できる.
+\item (1)-(3)のステップを第1行と第1列を除いた行列に繰り返す.
+
+\een
+}{title=整数行列の変形方法}
+
+\begin{eg} (\cite{aoyukie} 例2.12.7)
+$R=\mb{Z}$, $A=\bep 24 & 32 \\ 10 & 14 \enp$とするとき, $\coker{T}_{A}$を巡回加群の直和に表す. $A$の成分は偶数で,第1列は$2[12,5]$で, $12$と$5$は互いに素. $(-2)\cdot 12 + 5\cdot 5 = 1$となるから, $(p,q,x,y) = (12,5,-2,5)$により
+\[P = \bep -2 & 5 \\ -5 & 12 \enp \in SL_{2}(\mb{Z})\]
+を考えると,
+\[2P \bep 12 & 16 \\ 5 & 7 \enp = 2 \bep 1 & 3 \\ 0 & 4 \enp\to \bep 2 & 0 \\ 0 & 8 \enp\]
+となる. ただし最後は, 第1列の3倍を第2列から引いた. 一般に$GL_{n}(\mb{Z})$の元が左や右からかかっても, ker,im,cokerは同型を除いて不変なので\footnote{左からかかっても不変であるというのは, $T_P$が$im{T_A}$を$\im{T_{PA}}$に移すことから考えるとよい. 詳しくは\cite{aoyukie}命題2.5.7},
+\[\coker{T_A} \cong \coker{T_{PA}} = \mb{Z}/2\mb{Z} \oplus \mb{Z}/8\mb{Z}\]
+\end{eg}
+
+\begin{egprob}
+$A$が次の整数行列であるとき, $\coker{T_A}$を求めよ.
+\begin{center}
+(1):$\bep 6&12 \\ 4 & 6 \enp $\quad (2):$\bep 3 & 7 \\ 10 & 22\\ 9&21 \enp$\\
+(3): $\bep 14 & 11 \\ 6 & 5\\ 2 & 4 \enp$\quad (4): $\bep 5 & 2&5\\6&3&10\\ 10&4&16\\ 11&5&15 \enp$
+\end{center}
+\end{egprob}
+\begin{egans}
+(1): 以下のように変形できる.
+\begin{eqnarray*}
+\bep 6 & 12 \\ 4 & 6 \enp \to \bep 4 & 6 \\ -2 & 0 \enp \to \bep 0 & 6 \\ 2 & 0 \enp
+\end{eqnarray*}
+よって, \bolm{\coker{T_A} \cong \mb{Z}/2\mb{Z} \oplus \mb{Z}/6\mb{Z}}\\
+(2):
+\begin{eqnarray*}
+\bep 3&7\\10&22\\9&21 \enp \to \bep 3&7\\1&1\\0&0 \enp \to \bep 0&4\\1&1\\0&0 \enp \to \bep 1&1\\0&4\\0&0 \enp \to \bep 1 & 0 \\ 0&4\\0&0 \enp
+\end{eqnarray*}
+より, \bolm{\coker{T_A}\cong 0 \oplus \mb{Z}/4\mb{Z} \oplus \mb{Z}}である. \\
+(3):
+\begin{eqnarray*}
+\bep 14&11\\6&5\\2&4 \enp \to \bep 0&-17\\0&-7\\2&4 \enp \to \bep 0&3\\0&7\\2&4 \enp \to \bep 2&4\\0&3\\0&1 \enp \to \bep 2&0\\0&0\\0&1 \enp
+\end{eqnarray*}
+より, $\coker{T_A} \cong \mb{Z}/2\mb{Z} \oplus \mb{Z}\oplus 0$である.
+
+(4): 成分の中で一番小さいのが2なので, それを(1,1)成分に持ってくる.
+
+\begin{eqnarray*}
+\bep 2&5&5\\3&6&10\\4&10&16\\5&11&15 \enp \to \bep 2&5&5\\1&1&5\\ 0&0&6\\1&1&5 \enp \to \bep 0&3&-5\\ 1&1&5\\ 0&0&6\\ 0&0&0 \enp\\
+\to \bep1&1&5\\0&3&-5\\ 0&0&6\\ 0&0&0 \enp \to \bep 1&0&0\\0&3&-5\\0&0&6\\0&0&0 \enp
+\end{eqnarray*}
+2,3列, 2,3行の小行列を見ると
+\begin{eqnarray*}
+\bep 3&-5\\0&6 \enp \to \bep 3&1\\0&6 \enp
+\end{eqnarray*}
+ここからは右上の1を利用します. 「1」がある列または行に, その「1」以外の非零成分がなければ, その行または列を使って簡約できます.
+\[\bep 3&1\\0&6 \enp \to \bep 3&1\\-18&0 \enp \to \bep 0 & 1\\ -18&0 \enp\]
+よっ, 元の行列に戻れば\bolm{\coker{T_A} \cong  \mathbb{Z}/18\mathbb{Z} \oplus \mathbb{Z} }となる.
+\end{egans}
+
+
+\begin{egprob}
+アーベル群$G=\mb{Z}/2\mb{Z}\times \mb{Z}/4\mb{Z}\times \mb{Z}/6\mb{Z}$の元$a=(1,3,2)$で生成される部分群を$H$とする。剰余群$G/H$を巡回群の直積で表せ。
+\end{egprob}
+
+\begin{egprob}
+
+\end{egprob}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\subsection{テンソル}
+
+\begin{prop} $M$を$A$加群とするとき,
+テンソル関手$\bullet \tens_{A} M$は右完全である.
+\end{prop}
+\prf
+$0\to M_1\to M_2\to M_3 \to 0$を完全とする. $f:M_1\tens_{A} M \to M_2\tens_{A} M$, $g:M_2\tens_{A} M \to M_{3}\tens_{A} M$とする. 一番難しいのは$\ker{g} = \im{f}$の部分である. これは$\witi{g}: (M_2\tens_{A} M)/\im{f} \to M_3\tens_{A} M$が同型であることを示せばよい. そのために, \bolm{\witi{g}の逆写像を作る.} まず, 直積からの射$h:M_3\times M \to (M_2\tens_{A} M)/\im{f}$を次で定める.
+\lefba{
+$(x,z)\in M_3\times M$に対し, 全射$M_2\to M_3$による$x$のリフトを任意に一つとり, それを$y$とする. これを用いて
+\[h(x,z) = y\tens z \bmod{\im{f}} \]
+と定める.
+}
+これのwell-definedを示そう. まず$y_1,y_2$がともに$x$のリフトであるとせよ. このとき$y_1\tens z - y_2\tens z = (y_1-y_2)\tens z$である. $y_1-y_2$は$0\in M_3$のリフトである. つまり$M_2\to M_3$の核に属すので, $p:M_1\to M_2$として, $p(t) = y_1-y_2$と表せる. よって
+\[p(t)\tens z = (p\tens \mr{id}_{M})(t\tens z) = f(t\tens z)\in \im{f}\]
+なので, well-definedである. また, 明らかに$z$に関しては$A$線形であるし, $x$に関しても$A$線形であることは容易に示せる. したがって$h$は$\witi{h}:M_3\tens_{A} M \to (M_2\tens_{A} M)/\im{f}$を引き起こし, これが$\witi{g}$の逆写像であることが容易に分かる($g$でリフトを選択して定義しているので).\qed
+
+\begin{egprob}(仮想面接問題)
+テンソル関手が左完全にならない例をあげてください.
+\end{egprob}
+\begin{egans}
+2倍写像$\mb{Z}\to \mb{Z}$は単射だが$\mb{Z}/2\mb{Z}$にテンソルしたものは零写像なので単射でない. すなわち, $\cyc{2}$は$\mb{Z}$加群として\tf{平坦}ではない.
+\end{egans}
+左完全は一般に保存されないが, 保存されるものを\tf{平坦加群}という.
+
+
+\subsubsection*{補足-ねじれなしと平坦-}
+{\small
+単因子論を用いてPID上の有限生成加群について
+\[ねじれなし\iff 平坦\]
+を証明した. これは有限生成を外しても成り立つことである. ここではその証明をまとめておく.
+\begin{theo} $A$を環とする.
+\ben
+\item $A$加群$M$が平坦であるための必要十分条件は, 任意のイデアル$I\subset A$に対して$I\tens_{A} M \to IM$が同型であることである.
+\item $A$がPIDのとき, $A$加群$M$が平坦であることと$M$がねじれなしであることは同値である.
+\een
+\end{theo}
+\prf
+(1): 必要性は明らか. $I\tens_{A}M\to IM$が同型であると仮定する. $N'\to N$を任意の単射とする($N'\subset N$とみなす). この$N$に関して場合分けを行う. 自由加群からの全射準同型$p:F\to N$が存在する.  次の図式を考える.
+\[
+\xymatrix{
+\ker{p}\tens_{A}M \ar@{=}[d] \ar[r]& p^{-1}(N')\tens_{A}M \ar[d] \ar[r] & N'\tens_{A} M\ar[d] \ar[r] & 0\\
+\ker{p}\tens_{A} M \ar[r]&F\tens_{A}M  \ar[r]& N\tens_{A}M \ar[r]& 0
+}
+\]
+示したいことは$N'\tens_{A} N' \to N\tens_{A}M$の単射性であるが, このためには$p^{-1}(N')\tens_{A} N' \to F\tens_{A}N$が単射であることがいえればよい(diagram chasing またはFive Lemma). \tf{したがって主張は$N$が自由加群の場合に帰着する. } まず$N$を有限ランク$n$の自由加群とし, $n$に関する帰納法で有限ランクの場合を証明する. $n=1$ならば, $N\cong A$で$N'$は$A$のイデアルに同一視されるので仮定より明らか(即ち, この仮定は帰納法の最初のステップのためにある). $n>1$とし, ランク$n-1$以下の自由加群$N$で主張が正しいとせよ. $N_1,N_2\neq N$は $N = N_1\oplus N_2$なる直和因子とする. この分解を$N'$に落とす:
+\[N_1' = N_1\cap N',\quad N_2':= (N'+N_1)/N_1 \]
+そして次の図式を考える(横に完全である).
+\[
+\xymatrix{
+N_1'\tens_{A}M \ar[r]\ar[d]^{\beta} &N'\tens_{A}M\ar[d]\ar[r]& N_2'\tens_{A}M\ar[d]^{\gamma} \\
+N_1\tens_{A}M \ar[r]^{\alpha} & N\tens_{A}M \ar[r] & N_2\tens_{A}M
+}
+\]
+ここで$\beta,\gamma$は帰納法の仮定より単射であり, $\alpha$は入射$N_1\to N$からテンソル積によって得られる写像なので単射である. ここからdiagram chasingにより$N'\tens_{A}M \to N\tens_{A}M$も単射であることが分かる.
+\begin{prac}
+このdiagram chasingをせよ.
+\end{prac}
+よって有限ランクの場合は証明できた. あとは$N$が自由で任意ランクのときを示せばよい. $N_0$を$M$の有限ランクの直和因子となる自由加群とする. 有限ランクの場合により, $(N'\cap N_0)\tens_{A}M \to N_0 \tens_{A}M$は単射である.
+入射$j:N_0\to M$についてはテンソル後も単射であるから, $N_0\tens_{A}M \to N\tens_{A}M$も単射で, したがって合成\bolm{(N'\cap N_0)\tens_{A}M \to N\tens_{A}M}も単射であり, この写像は$N'\cap N_0 \to N$から引き起こされるものに一致する. 実はこれで$N'\tens_{A}M \to N\tens_{A}M$の単射性が得られるのである.
+
+ [証明] $x\in N'\tens_{A}M$がこの写像で送って$0$であるとする. 上手く$N_0$を選べば, \ao{$(N'\cap N_0)\tens_{A}M \to N'\tens_{A}M$の像に$x$が入るようにできる(そのリフトの一つを$y$とおく). }この写像に$N'\tens_{A} M \to N\tens_{A}M$を合成して, \bolm{(N'\cap N_0 )\tens_{A}M \to N'\tens_{A}M \to  N\tens_{A}M}を得るが, これは単射であった(図式の可換性に注意せよ). そして, $y\mapsto x\mapsto 0$と移るので, もともと$y=0$であり$x=0$となる. これで示せた.
+ \[
+\xymatrix@C=80pt{
+(N'\cap N_0)\tens_{A}M \ar[r]^{有限ランクの場合より単射}\ar[d] & \aka{\bolm{N_0\tens_{A}M}}\ar[d]^{入射から来るので単射} \\
+N'\tens_{A}M \ar[r]^{Question.単射か?}& N\tens_{A}M
+}
+\]
+(2): $I=aA$を$a\neq 0$とする. $t_a:A\to A$, $u_a: M\to M$を$a$倍写像とする. $t_a:A\to I$にすると(整域だから)同型である. $f:I\tens_{A}M \to IM$を$f(r\tens m) = rm$として, 次は可換.
+\[
+\xymatrix@C=80pt{
+\ar[d]^{u_a} M\cong A\tens_{A}M \ar[r]^{t_a\tens\mr{Id}_M: ここが同型}  & I\tens_{A}M\ar[ld]_{f} \\
+IM
+}
+\]
+これより$f$が同型であることと$u_a$が同型であることは同値. $u_a$はもともと全射なのでこれは$u_a$が単射であることに同値で, それは$a\neq 0$倍して消える$M$の元が存在しないということであるから, $M$がねじれなしということに同値である.
+\qed
+
+
+
+
+
+}
+
+
+
+
+
+\newpage
+
+\subsection{($\spadesuit\spadesuit$)ホモロジー代数}
+ホモロジー代数を使う人のために簡単な復習を行う. 以下, $R$は可換環, $A$は$R$代数とし, 加群は$A$上で考える.
+\begin{defn}
+\ben
+\item 関手$\mr{Hom}_{A}(P,\bullet):A-\ken{Mod} \to A-\ken{Mod}$が\tf{右完全}であるような $A$加群$P$を射影的$A$加群という.
+\item 関手$\mr{Hom}_{A}(\bullet, I)$が左完全であるような$A$加群$I$を単射的$A$加群(or 入射加群)という.
+\een
+\end{defn}
+
+
+\begin{prop} (射影加群について)
+\ben
+\item 自由加群は射影加群である.
+\item 自由加群のある直和因子になる加群は射影加群である. 逆に, 任意の射影加群$P$にはある$N$が存在して$P\oplus N $が自由加群となる.
+\een
+\end{prop}
+\prf (1): $F$を自由加群, $\pi:M\to N$を全射, $\phi:F\to N$を与える. $F=\oplus_{i} Ax_i$とし, $\phi(x_i) = \pi(m_i)$とする. このとき$\psi:F\to M$を$\psi(\sum a_ix_i) = \sum a_im_i$で定めると$\pi\psi = \phi$.
+
+(2): $P$が, ある$Q$が存在して$P\oplus Q = A^{\oplus I}$となるとする. $\pi:M\to N$を全射, $\phi:P\to N$を射とする. $\psi:P\to M$を与えたい. これは次のようにする: $\phi:P\to N$と零写像$Q\to N$を束ねることで$\phi_1: P\oplus Q = A^{(I)}\to N$を得る. $A^{(I)}$は自由加群だから射影的. よって, $\psi_1: P\oplus Q = A \to M$に持ち上がる. $s:P\to P\oplus Q$と$\psi_1$を合成して$\psi:P\to N$を得るが, これで$\pi\circ \psi = \phi$となる. \par
+逆に$P$を射影加群とせよ. 自由加群$F$が存在して$F\to P$は全射. $N = \ker{(F\to P)}$とすると$0\to N \to F \to P\to 0$は完全で, $P$が射影的なので分裂する(\tf{分裂補題}). よって$F\cong N\oplus P$.\qed
+
+\qed
+
+\begin{recall}
+自由$\implies$射影$\implies$平坦.
+\end{recall}
+そこで, 聞かれ方がいろいろあるだろう.
+\tbox{
+\begin{egprob}
+\ben
+\item 射影加群だが自由加群でない例.
+\item 平坦加群だが射影加群でない例.
+\item 平坦でない加群.
+\een
+\end{egprob}
+}{}
+\begin{egans}
+(1): \ao{$A=\mb{Z}/6\mb{Z}$とする.} $A$加群$P=\mb{Z}/2\mb{Z}$を考える. もし$P$が自由加群であるなら, $P\cong A^{\oplus I}$の形だが, これは\tf{位数の都合的に不可能である.} (2が6のべき乗にならないから) 一方で, $A$自由加群$A$は中国剰余定理から$\mb{Z}/2\mb{Z}\oplus \mb{Z}/3\mb{Z}$に同型なので, $P$は\tf{自由加群の直和因子}である. よって射影$A$加群である. \\
+(2): \ao{$\mb{Q}$は$\mb{Z}$加群として射影的ではない.} 実際, 平坦なのはねじれがないから. 射影的であるとせよ. 全射$\pi:\mb{Z}^{(I)}\to \mb{Q}$を取る. このとき, $N = \ker{\pi}$とすると$0\to N \to \mb{Z}^{(I)} \to \mb{Q} \to 0$は\ao{$\mb{Q}$が射影的であるという仮定により分裂する}ので$\mb{Z}^{(I)}\cong N\oplus \mb{Q}$となる. これにより$\mb{Q}\to N\oplus \mb{Q} \to \mb{Z}^{(I)}$という単射$f$を得るが, $f(1) = (n_i)_{i\in I}$だとすると$f(1/k) = (n_i/k)_{i\in I}$がすべての$k\in \mb{Z}$で成り立ち, $n_i = 0$でなければならず, $f\equiv 0$なので単射でなくなる. よって射影的ではない. \\
+(3):$\mb{Z}$加群$\cyc{2}$. ねじれがあるので平坦でない(単因子論).
+\begin{comment}
+\ao{$\mb{Z}$加群$\mb{Z}/2\mb{Z}$を考える.} この加群は, $x\bmod{6}$, $y\bmod{2}$に対して$xy\bmod{2}$を与えるという作用で構造を入れる. 目標は, $\pi:M\to N$という全射と, $\phi:\mb{Z}/2\mb{Z}\to N$という射を与え, これが$\psi:\mb{Z}/2\mb{Z}\to M$に持ち上がらないようなものを見つけることである. たとえば$M=\mb{Z}/4\mb{Z}\to \mb{Z}/2\mb{Z} = N$という自然な全射と, $\phi:\mb{Z}/2\mb{Z}\to \mb{Z}/2\mb{Z}$を恒等写像とする. もしこれが$\mb{Z}$加群の射$\psi:\mb{Z}/2\mb{Z}\to \mb{Z}/4\mb{Z}$に持ち上がると, $2\psi(1) = \psi(2) = \psi(0)=0$なので$\psi(1) = 0,2$でなければならず, $\pi\psi(1) = 0 \neq  1 = \phi(1)$だからおかしい. \\
+(4):  \qed
+\end{comment}
+\end{egans}
+
+
+次は覚えておいてもいいくらいの問題かもしれない.
+\tbox{
+\begin{egprob} (\cite{kiyukie}問題6.3.1(1))
+$A$が可換な整域で, $M$がねじれを持つ$A$加群なら, $M$は射影的加群ではないことを証明せよ.
+\end{egprob}
+}{}
+\begin{egans}
+ある零でない$a\in A$により$\phi: M\xrightarrow{\times a}M$は単射ではない. $x\in \ker{\phi}\setminus{\set{0}}$とする. 自由加群からの全射$A^{(I)}\to M$が存在する. この全射と$\mr{id}_{M}$について,  仮に$\psi:M\to A^{(I)}$に持ち上がったとしよう. $ax = 0_M$であるから$\psi(ax) = 0 = a\psi(x)$となる. $\psi(x) = (a_i)_{i\in I}$と書くと, $(aa_i)_{i\in I} = 0$だから$aa_i = 0$がすべての$i$で成り立つ. $A$は整域だから$a_i = 0$である. よって$\psi(x) = 0$を得るので$\pi\psi(x) = \pi (0) = 0_M = \mr{id}_M(x)= x$となり$x\neq 0$に矛盾する. よって$M$は射影的である. \qed
+
+\end{egans}
+
+
+\tbox{
+\begin{prop} (\cite{kiyukie}黄雪江, 定理6.3.11)
+$A$は$R$代数, $M$を右$A$加群, $N$を左$A$加群とする. $(P_n,d_{P,n},\epsilon_P)$, $(Q_n,d_{Q,n},\epsilon_Q)$をそれぞれ$M,N$の射影的分解
+\[\to P_n\tens_{A} N \xrightarrow{d_{P,n}\tens 1} P_{n-1}\tens_A N \to \dots \to P_0\tens_{A}N \xrightarrow{\epsilon_P} 0\]
+\[\to M\tens_{A} Q_n \xrightarrow{1\tens d_{Q,n}} M\tens_A Q_{n-1} \to \dots \to M\tens_{A} Q_0\xrightarrow{\epsilon_Q} 0\]
+を考える. このとき,
+\ben
+\item $R$加群$\mr{H}_n(P_{\ast}\tens_{A} N)$, $\mr{H}_n (M\tens_A Q_{\ast})$は射影的分解$(P_n,d_{P,n},\epsilon_P)$, $(Q_n,d_{Q,n},\epsilon_Q)$の取り方によらず定まる.
+\item 右$A$加群$M$と左$A$加群$N$に対し
+\[\bolm{\mr{H}_0(P_{\ast}\tens_{A} N) \cong \mr{H}_0(M\tens_{A} Q_{\ast}) \cong M\tens_{A} N}\]
+\item $k$加群として\bolm{\mr{H}_n(P_{\ast}\tens_A N) \cong \mr{H}_{n}(M\tens_A Q_{\ast})}.
+\een
+\end{prop}
+}{title=トーションの定義}
+\begin{defn}
+上の命題の(3)で等しい$k$加群のことを$\mr{Tor}^{A}_{n}(M,N)$と定義し, \tf{トーション}という. (1)より, トーションは$M,N$の片方の射影的分解を任意に一つ選び, もう片方のテンソルにより得られる複体のホモロジーとして得られる.
+\end{defn}
+双対的にイクステンション$\mr{Ext}^{n}_{A}(M,N)$が定義されるが, これは第一成分と第二成分で扱い方が微妙に異なる. 第一成分$M$では反変的であり, $M$の射影分解を用いるが, 第二成分$N$で共変的であり, \tf{入射分解}を用いる. 定義を覚えておくときのポイントは, 分解でHomを取ったときにそれが\tf{コチェイン複体}であるようにすることである
+.
+
+\tbox{
+\begin{prop} (\cite{kiyukie} 定理6.3.21)
+$(P_n, d_{P,n}, \epsilon_P)$を$M$の射影的分解, $(I_n,d_{I,n},i_I)$を$N$の入射的分解とする., このとき
+{\small
+\bealn{
+0\to \mr{Hom}_{A}(P_0,N) \to \mr{Hom}_{A}(P_1,N) \to \mr{Hom}_{A}(P_2,N)\to \dots \\
+0\to \mr{Hom}_{A}(M,I_0) \to \mr{Hom}_{A}(M,I_1) \to \mr{Hom}_{A}(M,I_2)\to \dots
+}
+}
+はコチェイン複体である. この状況で
+\ben
+\item $R$加群$\mr{H}^n(\mr{Hom}_{A}(P_{\ast},N))$, $\mr{H}^n(\mr{Hom}_{A}(M,I_{\ast}))$は分解の取り方によらず定まる.
+\item \bolm{H^0(\mr{Hom}_{A}(P_{\ast},N)) \cong \mr{H}^0(\mr{Hom}_{A}(M,I_{\ast})) \cong \mr{Hom}_{A}(M,N)}
+\item $R$加群として\bolm{\mr{H}^n(\mr{Hom}_{A}(P_{\ast},N))\cong \mr{H}^n(\mr{Hom}_{A}(M,I_{\ast}))}. この等しい$R$加群のことを\bolm{\mr{Ext}^{n}_{A}(M,N)}と表し, \tf{イクステンション}という.
+\een
+\end{prop}
+}{title=イクステンションの定義}
+上により, $\mr{Ext}^{n}_{A}(M,N)$を計算するだけなら, $M$の射影分解を一つ選択するか, $N$の入射分解をひとつ選択して, Homを取ってコホモロジーを計算するだけでよい. Torはテンソル複体の完全度をはかり, ExtはHom複体の完全度を測る. したがって, この群が0になるというのは嬉しいことである.  これに関連して次は覚えておくべきだろう.
+\tbox{
+\begin{egprob}
+\ben
+\item $M$が右$A$加群, $N$が左$A$加群とするとき, \ao{$M,N$のどちらかが射影的}なら, すべての$n>0$で$\mr{Tor}_{n}^{A}(M,N) = 0$
+\item $M,N$を加群とするとき, $M$が射影的か, $N$が入射的であるなら, すべての$n>0$に対し$\mr{Ext}^{n}_{A}(M,N) = 0$である.
+\een
+\end{egprob}
+}{}
+\begin{egans}
+(1): $M$が射影的なら, $M$の射影分解として
+\[\dots\to 0\to 0\to P_0 = M \xrightarrow{\epsilon_P} \to 0\]
+が取れ, これにテンソルをすれば1次以上が0のチェイン複体ができるので, それのホモロジーは0. \\
+(2):同様である. $M$側では射影分解を使って定義し, $N$側では入射分解を用いていたことに注意.
+\end{egans}
+
+
+\begin{egprob}
+$A$を環, $x$を零因子でも単元でもない元とする. このとき$M=A/xA$は射影加群ではないことを示せ.
+\end{egprob}
+\begin{egans}
+自然な全射$\pi:A\to A/xA$を与え, $\phi:A/xA\to A/xA$を恒等写像とする. これが$\psi:A/xA\to A$に持ち上がったとする. $\psi(1\bmod{xA})\in A$は,
+\[x\psi(1+xA) = \psi(xA) = 0\]
+を満たすので$x$が零因子ではないことより$\psi(1+xA) = 0$である. よって$\pi(1 + xA) = \pi\psi(1+xA) = xA$だから$1+xA = xA$となる. よって$xA=A$だが$x$が単元でないからこれはおかしい.
+\end{egans}
+
+\tbox{
+\begin{egprob}  $n$は0以上の整数とする. 次を求めよ.
+\ben
+\item $\mr{Tor}_{n}^{\mb{Z}}(\mb{Z},N)$, $\mr{Tor}_{n}^{\mb{Z}}(M,\mb{Z})$
+\item $\mr{Tor}_{n}^{\mb{Z}}(\cyc{a},\cyc{a})  $
+\item 互いに素な$a,b>0$に対し, $\mr{Tor}_{n}^{\mb{Z}}(\cyc{a},\cyc{b})$
+\een
+\end{egprob}
+}{title=トーション計算問題}
+
+\tbox{
+\begin{egprob} $n$は0以上の整数とする. 次を求めよ. \ao{必要ならば, $\mb{Q}/\mb{Z}$が入射加群であることを用いて良い. }
+\ben
+\item $\mr{Ext}^{n}_{\mb{Z}}(\cyc{2},\cyc{2})$
+\een
+\end{egprob}
+}{title=イクステンション計算問題}
+\begin{egans}
+(1):次は入射的分解(番号が上がる分解である).
+\[0\to \dfrac{1}{2}\mb{Z}/\mb{Z} \to \mb{Q}/\mb{Z} \xrightarrow{\times 2} \mb{Q}/\mb{Z}\to 0\to 0\to 0\to \dots\]
+Hom複体は
+\[0\to \mr{Hom}(\cyc{2},\mb{Q}/\mb{Z}) \xrightarrow{2倍} \mr{Hom}(\mb{Z}/2\mb{Z},\mb{Q}/\mb{Z})\to 0 \to 0\to \dots\]
+この2倍写像は$(a\mapsto f(a)) \mapsto (a \mapsto 2f(a))$である. 0,1次の部分のみでらうから, $n>1$なら$\mr{Ext}^{n}_{\mb{Z}}(\cyc{2},\cyc{2}) = 0$である. $\mr{Hom}(\cyc{2},\mb{Q}/\mb{Z})$は$1$の行き先で決定され, それは$0+\mb{Z}, \dfrac{1}{2}\mb{Z}$しかなく, $\mr{Hom}(\cyc{2},\mb{Q}/\mb{Z})\cong \cyc{2}$である(これは$\mr{Ext}^{0}_{\mb{Z}}$でもある). この同型において2倍写像は0写像になり, 像は0である. よって$\mr{Ext}^{1}_{\mb{Z}}(\cyc{2},\cyc{2}) = (\cyc{2})/0$.
+\end{egans}
+
+
+
+
+\subsection{演習問題}
+\subsubsection{Level A}
+\begin{prob}
+アーベル群と$\mb{Z}$加群は同一視できることを示せ. すなわち, アーベル群から自然に$\mb{Z}$加群を与える方法が存在し, 逆に$\mb{Z}$加群からアーベル群を与える方法があり, それらが互いの逆対応であることを示せ.
+\end{prob}
+
+\begin{prob} $A$を\tf{局所環},
+$M$を$A$加群, $x_1,\dots, x_n\in M$はとする. $x_i + \maf{m}M$が$k=A/\maf{m}$ベクトル空間$M/\maf{m}M$を$k$上生成するとき, $x_1,\dots, x_n$は$M$を$A$上生成することを示せ.
+\end{prob}
+
+\subsubsection{Level B}
+\begin{prob} (\cite{liu}, Prop1.2.6)
+$A$を環, $\mb{E}: 0\to M'\to M \to M'' \to 0$を$A$加群の完全列とする.
+\ben
+\item (\tf{復習})$M''$が射影的のとき, この完全列は分裂する. なぜか?
+\item $M''$が\tf{平坦$A$加群であるとする.} このとき, 任意の$A$加群$N$について, $\mb{E}\tens_{A}N$はまた完全列であることを示したい. まず, $N$を自由加群の商$L/K$の形で表す. このとき, 次が可換である.
+\[
+\xymatrix{
+ &M'\tens_{A}K\ar[r]\ar[d]& M\tens_{A}K\ar[r]\ar[d] &M''\tens_{A}K\ar[d]^{\alpha} \\
+ 0\ar[r]&M'\tens_{A}L\ar[r]\ar[d]^{\beta}&M\tens_{A}L\ar[r]\ar[d]& M''\tens_{A}L\\
+  & M'\tens_{A}N \ar[r] & M\tens_{A}N
+}
+\]
+これを用いて$M'\tens_{A}N \to M\tens_{A}N$の単射性を導け.
+\een
+\end{prob}
+
+\begin{prob} (2020東工大午後2)
+$K$は標数$p>0$の代数閉体とする. $r\geq 1$, $K$係数の$p^r$次多項式
+\[f(X) = c_0X + c_1X^p + \dots + c_rX^{p^r} = \sum_{j=0}^{r} c_jX^{p^j}, c_0,c_r\neq 0\]
+を固定する. $f$は写像$f:K\to K$; $x\mapsto f(x)$を定める. これを$k$回合成したものを$f^k$と表す. $A=\mb{F}_{p}[T]$の$K$への作用を, $a=\sum_{k=0}^{n} a_kT^k\in A$および$x\in K$に対し
+\[ax = \sum_{k=0}^{n} a_kf^k(x)\]
+により定める. これにより$K$は$A$加群となる. $a\in A$に対し$V_a = \set{x\in K\mid ax = 0}$とおく.
+\ben
+\item $a\neq 0$ならば$V_a$は有限生成$A$加群であることを示せ.
+\item $a=T$のとき, $V_a$の$A$加群として構造を
+\[A^{\oplus m}\oplus A/a_1A \oplus \dots \oplus A/a_lA\]
+($m,l$は0以上の整数, $a_1,\dots, a_l\in A$)の形で求めよ.
+\item $K$は$A$加群として有限生成ではないことを示せ.
+\een
+\end{prob}
+
+
+\subsubsection{Level C}
+
+\begin{prob}
+$M$を\tf{局所環$A$上の有限生成平坦加群}とする. このとき$M$は\tf{自由加群}であることを示せ.
+\end{prob}
+
+\begin{prob}
+\chatgpthint{問題文が未記入です。}
+\end{prob}
+
+
+
+
+\subsubsection{Hint・Answer}
+\begin{probans}
+アーベル群$A$が与えられたとき, $a\in A$に対し$a+a+\dots + a$という$a$を$n$回足したものを$n\cdot a$と定めることで$\mb{Z}$加群の構造を入れることができる. 逆に, $\mb{Z}$加群は$\mb{Z}$の作用を忘れるとアーベル群である.
+\end{probans}
+
+\begin{probans}
+$N=Ax_1+\dots + Ax_n$とする. $N\to M \to M/\maf{m}M$は全射なので$N+\maf{m}M = M$. ここから$M/N = 0$が, とある命題を用いて従う.
+\end{probans}
+
+\begin{probans}
+平坦性より$\alpha$が単射である. $L\to N=L/K$が全射なので$\beta$も全射である. これだけを用いれば, diagram chasingで示せる.
+\end{probans}
+
+%===========================Level B==============================
+
+\begin{probans}
+(1): 「$K$が$A$加群になる」部分に$f(0)=0$が効いていることに注意. これにより, $b\in A$と$0\in K$に対し$b\cdot 0 = 0$が従う.
+$x\in V_a$, $b\in A$なら, $K$が$A$加群なので$a(bx) = b(ax) = b\cdot 0 = 0$となる. 和で閉じていることは明らか. よって$V_a\subset K$は$A$加群となる. いま, $a_k\neq 0$である. $x\in V_a$であるための必要十分条件は$K$係数多項式$\sum_{k=0}^{n} a_kf^k(X)$の根になることであり, これは零多項式ではない. よってこれの根は有限個なので, 有限生成$A$加群である(その有限個の根で生成できる).\\
+(2): $V_T$は$f(X)$の根の全体である. $b = \sum_{j=0}^{n} b_j T^j\in A$で$x\in V_T$を作用させると$bx = b_0x$であり,  特にイデアル$TA$の元に関する$V_T$への作用は0写像である. よって$V_T$は$A/TA \cong \mb{F}_{p}$ベクトル空間の構造と等価に与える. $V_T$は$p^r$個の元を持つので, $\mb{F}_{p}$上$r$個の元$x_1,\dots, x_r\in V_T$で生成される. つまり, $V_T$に自然に$\mb{F}_{p}$の作用を入れるとき$V_T = \mb{F}_p x_1 \oplus \dots \oplus \mb{F}_{p}x_r\cong \mb{F}_{p}^r$であり, この同型が$A$加群の同型$V_T \cong (A/TA)^{\oplus r}$を引き起こす. \\
+(3): $K$が有限生成$A$加群であると仮定する. $A$はPIDだから単因子論により
+\[K\cong A^{\oplus m} \oplus A/a_1A \oplus \dots \oplus A/a_l A\]
+なる有限個の$a_i\in A$が存在する. $a_i$ ($i=1,\dots, l$)の次数の最大値を$N$とする. $A$には$N+1$次以上の既約多項式が存在するので, それをひとつ選び$F$とおく.
+
+$F$の次数が$d$のとき, $A/FA \cong \mb{F}_{p^{d}}$である. (2)と同様に, $V_{F}$は$A/F A$加群の構造が定義され, $V_{F}$は$A/FA$のいくつかの直和に同型である. とくに, $K$のある元$x\neq 0$が$Fx = 0$を満たす. 単因子論による同型でこの$x$が同型で対応する元を$(a_1,a_2,\dots, a_m, r_1 + a_1A,r_2 + a_2A,\dots, r_l + a_lA)$と表すと, $Fa_i = 0\in A$, $Fr_j\in a_jA$が成り立つ.  $F$はノンゼロなので$a_i = 0$である. また, $b_j \in A$によって$Fr_j = a_j b_j$と表すとき, $F$の取り方から$F$と$a_j$は$A$で互いに素なので$b_j$は$F$で割り切れる. よって$r_j \in a_j A$であるから$x\neq 0$が対応する元は$0$になり, 同型であることに矛盾する. よって有限生成ではない. \qed
+\end{probans}
+
+\begin{probans}
+$M/\maf{m}M$の$k=A/\maf{m}$上の基底を作る$x_1,\dots, x_n$を取れば, それが$M$を$A$上生成することは見た. それが一次独立であればよい. \par
+必ずしも基底とは限らない一次独立系$\set{x_1+\maf{m},\dots, x_n+\maf{m}}\subset M/\maf{m}M$に対し, $\set{x_1,\dots,x_n}$が$A$上で一次独立であることを証明する. $\sum_{i} a_i x_i = 0$だとせよ. このとき$f:A^n \to A$を
+\[f(b_1,b_2,\dots, b_n) = \sum a_i b_i\]
+で定める. $0\to \ker{f}\hookrightarrow A^n \to \im{f} \to 0$に$\tens_{A}M$を施し$\ker{f}\tens_{A}M \to M^n \xrightarrow{f_M} M$という完全列を得る(ここで平坦を用いた). したがって$(x_1,\dots, x_n)$は$\ker{f} \tens_{A}M$の像に属す. 像と$\ker{f}\tens_{A}M$を同一視すれば, $(x_1,\dots, x_n)$は$\sum b_j \tens y_j$の形に表せる($b_j=(b_{j1},\dots, b_{jn})\in \ker{f}, y_j \in M$). $x_1,\dots, x_n$が$M/\maf{m}M$を生成するから,  すべての$b_{ij}$が$\maf{m}$に属すことはない. $b_{11}\in \maf{m}$としてよく, $A$は局所環なので$b_{11}\in A^{\times}$である. $\sum a_i x_i = 0$より$\sum_{i}a_ib_{i1} = 0$なので, $c_i = b_{i1}b_{11}^{-1}$として
+\[a_1 + a_2c_2 + \dots + a_nc_n = 0\]
+を得る. とくに$n=1$なら$a_1=0$なのでよい. $n\geq 2$なら, $\sum a_{i}x_i = 0$, $\sum_{i} a_ic_ix_1 = 0$ により
+\[\sum_{i\geq 2} a_i(x_i - c_ix_1 ) = 0\]
+である. $\set{x_i+\maf{m}M}$が$k$上一次独立ならば, 明らかに $\set{x_i - c_ix_1 + \maf{m}M}$もそうである. したがって帰納法を用いれば, 上から$a_i = 0$ ($i\geq 2$) が言え, $a_1=0$も従うので, $\set{x_1,\dots, x_n}$は一次独立になる. これにより, 基底$\set{x_1+\maf{m}M,\dots, x_n + \maf{m}M}$から引き戻して得た$M$の生成系$\set{x_1,\dots, x_n}$は基底でもあり, $A$は自由加群になる.
+\lefba{ (\tf{振り返り}) $M/\maf{m}M$で自由なら$A$で自由であることを帰納法で示すのが難しい. $\sum a_ix_i = 0$として, 一次変換$f$を作って, 平坦性により$ker{f}\tens_{A}M\to M^n \to M$を得た. $(x_1,\dots, x_n)\in \ker{f}\tens_{A}M$だと思えるので, $\sum b_j\tens y_j$の形に書けば$b_j\in A^n$のある成分が$\maf{m}$に入らないので単元. それを$b_{11}$にした. $a_1 + c_2a_2 + \dots + c_n a_n = 0$という関係式を用いることで, $\sum a_ix_i$の$a_1x_1$を消すことができ, $n-1$個の生成系に対する関係式に帰着し, 帰納法が回る.
+
+}
+
+\end{probans}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\section{($\spadesuit$) 次元}
+%\subsection{整従属}
+%\subsection{上昇定理・下降定理}
+%\subsection{いろいろな例}
+%\subsection{演習問題Part}
+
+
+\newpage

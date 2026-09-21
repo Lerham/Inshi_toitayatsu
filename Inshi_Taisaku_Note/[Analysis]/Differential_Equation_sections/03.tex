@@ -1,0 +1,40 @@
+\section{Grownwallの不等式}
+
+\besha
+\begin{theo} (\tf{Grownwallの不等式})
+$I=[a,b]$を有界閉区間, $f,g$を$I$上の連続関数で, $g$は非負値であるとする。ある定数$C$に対し,
+\[f(t) \leq C+ \int_{a}^{t} f(s)g(s) \, ds\]
+がすべての$t\in I$で成り立つと仮定するとき, 次の不等式が成り立つ。
+\[ f(t) \leq C\exp{\parena{\int_{a}^{t} g(s)\, ds}} \]
+\end{theo}
+\ensha
+\begin{point}
+Liは, これを手で書き殴って丸暗記した。次のような特徴の定理であることを掴もう。
+\ben
+\item 有界閉区間上。とりあえず連続。
+\item 非負値じゃないほうを, 非負値のほうで抑える！
+\item \tf{存在性を語る定理ではなく, 一意性を示すときに少し使える定理。}
+\een
+\end{point}
+
+
+
+
+
+
+\begin{egprob} (2019解析学入門演習)\\
+$[0,\infty)$上の連続関数$f(x)$により以下の積分表示による微分方程式を考える。
+\[y(x) = e^{-2x} + \disp\int_{0}^{x} e^{-2(x-s)} f(s)y(s)\, ds, \quad x\in [0,\infty)\]
+$\int_{0}^{\infty} |f(x)|\, dx < \infty$を仮定するとき, この方程式の解$y(x)$は$\disp\lim_{x\to \infty}y(x) = 0$を満たすことを示せ。
+\end{egprob}
+
+\subsection{例題}
+
+
+
+
+
+
+
+
+\clearpage

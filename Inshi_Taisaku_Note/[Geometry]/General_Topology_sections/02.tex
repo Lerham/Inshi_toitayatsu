@@ -1,0 +1,51 @@
+\section{分離公理}
+\begin{egprob} (仮想面接問題, ただしこんなの出なさそう)\\
+$T_1$空間だが$T_2$空間でないものの例をあげよ.
+\end{egprob}
+\begin{egans}
+ただこの問題にはそれなりに有名な例がある. \tf{補有限位相}というものがある. これは, 全体, 空集合, そして補集合が有限集合であるようなものを開集合と定める位相である. これが$T_1
+$だがHausdorffではないことは容易に分かる.
+\end{egans}
+\begin{prac}
+補有限位相について, $T_1$だが$T_2$でないことを確かめよ.
+\end{prac}
+
+\begin{egprob} (2021基礎数学試験-3) $\mb{R}$上に次の同値関係$\sim$を考え, 商位相空間を$\mb{R}/\sim$とする.
+\[x\sim y \iff x=y=0 または xy > 0\]
+このとき$\mb{R}/\sim$はHausdorff空間か? 理由をつけて答えよ.
+\end{egprob}
+\begin{point}
+\tf{商空間は滅多にHausdorffにならないので, Noの可能性が高い. } 商位相の定義を思いだす.
+\end{point}
+
+\begin{egans}
+$X=\mb{R}/\sim$, $\pi:\mb{R}\to X$を射影とすると$X=\set{\pi(0), \pi(1), \pi(-1)}$である. 実際, $x>0$なら$x\sim 1$で, $x<0$なら$x\sim -1$であるからだ. また, $\pi(0) \neq \pi(1)$も$0,1$が同値関係の定義を満たさないことから分かる.  さて, $\pi(0)$を含む開集合$U\subset X$を任意に取ると, 商位相の定義から$\pi^{-1}(U)$は$0$の開近傍である. これは正の数も負の数も含んでいるので, $\pi(\pi^{-1}(U)) = X$である. $\pi(\pi^{-1}(U))\subset U$なので, $U=X$である. よって, $\pi(0)$を含む開集合は必ず全空間$X$となる. もしHausdorffであるなら, $\pi(0)$と$\pi(1)$は交わらない開近傍によって分離できるが, $\pi(0)$のほうの開近傍が$\pi(1) (\neq \pi(0))$を含むのでこれは不可能である. よってHausdorff空間ではない.
+\end{egans}
+\begin{rem}上では,
+$\pi(0) \neq \pi(1),\pi(-1)$を示しておく必要がある.
+\end{rem}
+
+
+
+
+
+\begin{egprob}
+Let $X$ be a topological space, $Y$ be a Hausdorff topological space, and $f,g$ be two contenuous maps from $X$ to $Y$.
+\ben
+\item Show that a subset $\{ x\in X \mid f(x) = g(x) \}$ of $X$ is closed.
+\item Suppose that there exists a subset $A$ of $X$ such that $\ovl{A} = X$ and $f|_{A} = g|_{A}$, where $\ovl{A}$ is the closure of $A$ and $f|_{A}, g|_{A}$ are the restrictions of $f,g$ to $A$, respectively. Show that $f=g$.
+\een
+\end{egprob}
+\begin{screen}
+普通に示しても良いのだが, 次のような方針でやるのがベスト。$\Delta\subset Y\times Y$を対角集合とすると, $Y$はHausdorffだから・・・
+\end{screen}
+\begin{egans}
+(1):$F(x) = (f(x),g(x))$とする。これは連続写像$X\to Y\times Y$を定める。問題の集合は$F^{-1}(\Delta)$と書ける。$Y$はHausdorffなので$\Delta$は閉集合。$F$は連続なので$F^{-1}(\Delta)$も閉集合。
+
+(2): 条件より$F^{-1}(\Delta) \supset A$.  閉包を取り$F^{-1}(\Delta) \supset \ovl{A} = X$で終わり。
+\end{egans}
+
+
+
+
+\clearpage

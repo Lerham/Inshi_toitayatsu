@@ -1,0 +1,89 @@
+\section{初等的な微分方程式}
+\subsection{線形微分方程式}
+\begin{egprob} (2020解析学入門演習)
+次の線形微分方程式の一般階$y(t)$を求めよ。
+\ben
+\item $y'' - 2y' - 3y = 0$
+\item $y'' - 4y' + 4y = 0$
+\een
+\end{egprob}
+\begin{egans}
+(1): 特性方程式は$t^2 - 2t - 3 = 0$で$t=-1,3$. よって$y=Ae^{-t} + Be^{3t}$.
+
+(2): 特性方程式は重根$t=2$を持つ。そこで$y=e^{2t}u$とおくと$y'= 2y + e^{2t}u'$, $y'' = 4y  + 4e^{2t}u' + e^{2t}u''$だから
+\[y''-4y' + 4y = e^{2t}u'' = 0\]
+よって$u'' = 0$なので$u= Ax+B$と書ける。したがって$y=e^{2t}(Ax + B)$.
+\end{egans}
+\subsection{1階線形}
+
+\begin{egprob} (2013基礎数学試験No.2)
+関数$f,g$は$\mb{R}$上連続で, $|f|, |g|$は$\mb{R}$上可積分とする。このとき, 任意の実数$a$に対して
+\[y'(x) + f(x)y(x) = g(x)\]
+の解$y(x)$のうち, $\lim_{x\to \infty} y(x) = a$を満たすものがただひとつ存在することを示せ。
+\end{egprob}
+
+
+
+
+\subsection{変数分離型}
+
+
+\subsection{同次型}
+\begin{egprob} (2019解析学入門演習)
+\[y' = \dfrac{\cos{x}}{y}, x\in \mb{R}\]
+について, 初期値が$x=\frac{\pi}{6}, y=1$となる解を求めよ。
+\end{egprob}
+\subsection{積分因子}
+
+
+\subsection{オイラー型}
+\begin{egprob} (H27基礎科目II-6)
+$a$は実数で$0<a<1/4$とする. このとき, 区間$(0,\infty)$における常微分方程式
+\[\dfrac{d^2 y}{dx^2} + \dfrac{a}{x^2} y = 0\]
+の任意の解$y(x)$は$\lim_{x\to +0} y(x) = 0$を満たすことを示せ.
+\end{egprob}
+
+\begin{egans}
+$x=e^t$と変換すると
+\[\dfrac{dy}{dx} = e^{-t}\dfrac{dy}{dt}\]
+\bealn{
+\dfrac{d^2 y}{dx^2} &= \dfrac{d}{dx}\parena{e^{-t}\dfrac{dy}{dt}}= e^{-t} \dfrac{d}{dt} \parena{e^{-t} \dfrac{dy}{dt}} \\
+&= -e^{-2t}\dfrac{dy}{dt}  + e^{-2t} \dfrac{d^2 y}{dt^2}
+}
+だから, 方程式を書き換えると
+\[e^{-2t} \dfrac{d^2y}{dt^2} - e^{-2t} \dfrac{dy}{dt} + e^{-2t} ay = 0\]
+なので$y''- y' + ay = 0$となる. 特性方程式の根は
+\[\alpha = \dfrac{1 + \sqrt{1-4a}}{2},\quad \beta = \dfrac{1-\sqrt{1-4a}}{2}\]
+である. よってこれの解は
+\[ Ae^{\alpha t} + Be^{\beta t} \]
+の形のものですべてである. $x\to +0$のとき$y\to -\infty$であり, 上の解が0に収束することは明らか.\qed
+
+\end{egans}
+
+
+
+\subsection{応用}
+
+\subsection{演習問題}
+
+\subsection{Level B}
+\begin{prob} (H31基礎科目3)  \label{prob:H31kiso3}
+$(x_0,y_0)\in \mb{R}^2\setminus{\set{(0,0)}}$に対して$\mb{R}$上の連立常微分方程式
+\[
+\bcas
+\dfrac{dx}{dt} = -x^2y - y^3 \\
+\dfrac{dy}{dt} = x^3 + xy^2
+\ecas
+,\quad \bcas
+x(0) = x_0 \\
+y(0) = y_0
+\ecas
+\]
+の解$(x(t),y(t))$は周期を持つことを示し, 最小の周期を求めよ.
+\end{prob}
+
+\newpage
+\subsection{Hint・Answer}
+\begin{probans}
+$xx' + yy' = 0$に注意.  答えは$\dfrac{2\pi}{x_0^2 + y_0^2}$.
+\end{probans}

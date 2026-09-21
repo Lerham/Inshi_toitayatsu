@@ -1,0 +1,147 @@
+\section{冪級数}
+\subsection{冪級数の収束とTaylorの定理}
+基本的な性質をまとめる.
+\begin{prop} (冪級数の基本的性質)\\
+$\sum a_nx^{n}$の収束半径を$\rho$とする.
+\ben
+\item $\sum a_nx^{n}$は$|x|<\rho$において\tf{広義一様絶対収束}する\footnote{とくに, 収束半径内の領域において\tf{項別微分や項別積分が可能である!}}.とくに, この領域内で連続である.
+\item (\tf{ダランベールの収束判定法}) $\rho=\displaystyle\lim_{n\to \infty} \dfrac{a_n}{a_{n+1}}$
+\item (\tf{アダマールの公式}) $\rho=\dfrac{1}{\disp\limsup_{n\to \infty} \sqrt[n]{|a_n|}}$
+\item
+\een
+\end{prop}
+\begin{rem}
+一般に$|x| = \rho$における振る舞いは独特である.たとえば$a_n =1/n$のとき, $|x| = 1$においては収束も発散もする.また, $x$を複素数としても上と同様の結果が成り立ち, 冪級数は正則関数を定める.
+\end{rem}
+
+\begin{egprob} (\cite{rikou},演習5-18)\\
+次の整級数の収束半径を求めよ.ただし$H_n=1+\dfrac{1}{2}+\cdots+ \dfrac{1}{n}$, $a\neq 0$.
+\[(1): \sum_{n=1}^{\infty} H_nx^{n},  \, (2): \sum_{n=0}^{\infty} a^{n}x^{2^{n}},\, (3): \sum_{n=2}^{\infty} \dfrac{x^{n}}{(\log{n})^{\log{n}}}\]
+\end{egprob}
+\begin{egans}
+(1):$H_n/H_{n+1} = (H_{n+1} - \frac{1}{n+1})/H_{n+1}= 1 - \dfrac{1}{H_{n+1}(n+1)}\to 1$なので$\rho=1$.
+
+(2): $\sqrt[2^{n}]{|a|^{n}} = |a|^{n/2^{n}} \to 1$なので$\rho=1^{-1}=1$.
+
+(3): $\sqrt[n]{\dfrac{1}{(\log{n})^{\log{n}}}} = (\log{n})^{-\frac{\log{n}}{n}} = e^{\log{log{n}}\cdot (-\frac{\log{n}}{n})}\to e^{0} = 1$なので$\rho=1^{-1}=1$.
+\end{egans}
+
+次は交代和の級数に関する定理で, たまに役に立つ.
+\besha
+\begin{theo} (\tf{Leibnizの定理})　\label{theo:leibniz_theorem}\\
+$a_n$が単調減少で$a_n\to 0$を満たすとき, 級数$\sum_{k=1}^{\infty} (-1)^{k-1}a_k$は収束する.
+\end{theo}
+\ensha
+\begin{eg}
+以下の絶対収束はしない級数の収束性がLeibnizの定理から従う.
+\ben
+\item (Mercator級数) $\sum_{k=1}^{\infty}\dfrac{(-1)^{k-1}}{k} = \log{2}$
+\item (Leibniz級数) $\sum_{k=1}^{\infty} \dfrac{(-1)^{k-1}}{2k-1} = \dfrac{\pi}{4}$
+\een
+\end{eg}
+
+
+次にTaylorの定理をのべる. Taylor展開の剰余項を$f^{(n)}$を用いて表現するというものである.
+
+\begin{prop} (Taylorの定理, \cite{rikou}45p)\\
+$f:[a,b]$で\tf{$n$回微分可能}のとき,
+\[R_n = f(b) - \parena{f(a) + \dfrac{f'(a)}{1!}(b-a) + \cdots + \dfrac{f^{(n-1)}}{(n-1)!}(b-a)^{n-1}}\]
+とおくと, ある$a<c<b$を満たす$c$に対して$R_n = \dfrac{f^{(n)}(c)}{n!}(b-a)^{n}$である.
+\end{prop}
+$b$を$x$とおき, $x$を$a$に近づけると$R_n$と$c$は$x$の関数として動く.しかし,  上の命題を見て\textcolor{red}{$R_n$のオーダーが$o((x-a)^{n})$であると思ってはいけない.}思ってはいけないというよりは, 惜しいのだ.問題点は$f^{(n)}(c)$の振る舞いがおだやかでないことである.$f$は$n$回微分可能としか述べておらず, $C^{n}$級とは話が違うので$f^{(n)}$が連続とは限らない.一方で $f$が$C^{n}$であれば穏やかに議論できることが分かる.つまり, 次が証明される.
+\begin{prop}
+$f(x)$が$a$を含む区間で$C^{n}$級であるとき,
+\[f(x) - f(a) - \dfrac{f'(a)}{1!}(x-a) - \cdots - \dfrac{f^{(n)}(a)}{n!}(x-a)^{n} = o((x-a)^{n})\]
+\end{prop}
+\prf
+示すべき式の左辺は$R_n - \dfrac{f^{(n)}(a)}{n!}(x-a)^{n}$である.$x\neq a$のときにこれを$\epsilon(x-a)^{n}$とする($\epsilon$は$x$に依存する連続関数).$R_{n}$は$n$回微分すると$f^{(n)}(x)$なので
+\[f^{(n)}(x) - f^{(n)}(a) = \epsilon n! + \epsilon_1 (x-a)\]
+となる連続関数$\epsilon_1$が存在する($x$に依存).\textcolor{red}{左辺は連続なので$x\to a$のとき$0$に収束する.}よって$\epsilon \to 0$でなければならない.よってsmall orderが$(x-a)^{n}$であることが示された.\qed
+\newpage
+\subsection{Taylor展開}
+
+\begin{egprob}
+$-1<x\leq 1$の範囲でマクローリン展開
+\[\arctan{x} = x-\dfrac{x^3}{3} + \dfrac{x^5}{5} - \cdots \]
+を示せ.
+\end{egprob}
+\begin{egans}
+$0\leq x<1$で示せば良い($-1<x<0$については$0\leq x<1$の場合と奇関数であることから従う).
+\[\dfrac{1}{1+t^2} = 1-t^2 + t^4 - \cdots + (-1)^{n} t^{2n} - (-1)^{n} \dfrac{t^{2n+2}}{1+t^2}\]
+を$0<t<x$で積分することで
+\[\arctan{t} = t-\dfrac{t^3}{3} + \cdots + (-1)^{n}\dfrac{t^{2n+1}}{2n+1} + (-1)^{n} \disp\int_{0}^{t} \dfrac{t^{2n+2}}{1+t^2}\, dt\]
+だから最後の積分が$n\to \infty$で$0$に収束することを言えば良い.これは
+\[0\leq \disp\int_{0}^{x} \dfrac{t^{2n+2}}{1+t^2} \, dt \leq \disp\int_{0}^{x} t^{2n+2}\, dt = \dfrac{x^{2n+3}}{2n+2} \to 0 \]
+より分かる.
+\end{egans}
+解析関数でない$C^{\infty}$級関数の例が存在する. なお, この関数は多様体論でBump Functionを構成するときにも使われ, そこで$C^{\infty}$級であることを示すときに用いられる.
+\begin{egprob}
+次の関数のマクローリン展開は$0$であることを示せ.
+\[
+f(x) = \bcas e^{-\frac{1}{x^2}}\quad (x\neq 0)\\ 0 \quad (x=0) \ecas
+\]
+\end{egprob}
+
+\newpage
+\subsection{($\spadesuit$)Abelの連続性定理}
+\tbox{
+\begin{theo} %微積1青本178p
+開区間$(-1,1)$上の収束ベキ級数$\sum_{n=0}^{\infty} a_nx^n$が与えられているとき, $\sum_{n=0}^{\infty} a_n$が収束するならば, 級数$U(x) = \sum_{n=0}^{\infty} a_nx^n$は$[c,1]$ ($0\leq c < 1$) 上で一様収束する. したがって, $U(x)$は$[c,1]$で連続である. とくに$\lim_{x\to 1-0} = \sum_{n=0}^{\infty} a_n$.
+\end{theo}
+}{title=Abelの連続性定理}
+
+\begin{egprob}
+$\lambda > -1$のとき次を示せ.
+\[2^{\lambda} = \sum_{n=0}^{\infty} \dfrac{\lambda(\lambda-1)\dots (\lambda - n + 1)}{n!}\]
+\end{egprob}
+
+\begin{egprob}
+$\sum_{k=1}^{\infty} \dfrac{}{}$
+\end{egprob}
+
+\begin{egans}
+\[\dfrac{1}{1+x^3} = 1 - x^3 + x^6 - \dots -(-1)^n\dfrac{x^{3n+3}}{1+x^3}\]
+を$[0,1]$で積分して
+\[\int_{0}^{1}\dfrac{dx}{1+x^3} = \sum_{k=0}^{n} \dfrac{(-1)^k}{3k+1} - (-1)^n \int_{0}^{1} \dfrac{x^{3n+3}}{1+x^3}dx\]
+$\int_{0}^{1}\frac{x^{3n+3}}{1+x^3}dx \to 0$は収束定理より分かる. よって左辺の積分が答えで, これは$\frac{1}{1+x} - \frac{x-2}{x^2-x+1}$から計算できる.
+
+\end{egans}
+
+
+
+
+\newpage
+\subsection{演習問題}
+\subsubsection{Level A}
+\begin{prob} (極限計算)\\
+次の極限値を求めよ.
+\ben
+\item $\disp\lim_{n\to \infty} n^{1/n}$
+\item $\disp\lim_{n\to \infty} \dfrac{x-\log{(1+x)}}{x^2}$
+\item $\disp\lim_{n\to \infty} n!^{1/n}$
+\een
+\end{prob}
+\begin{hint}
+\chatgpthint{対数を取るか、Stirlingの公式を使ってください。}
+\end{hint}
+\begin{prob}
+次の冪級数の収束半径を求めよ.
+\ben
+\item $\disp\sum_{n=0}^{\infty} nx^{n}$
+\item $\disp\sum_{n=1}^{\infty} \disp\sum_{k=1}^{n} \dfrac{1}{k} x^{n}$
+\een
+\end{prob}
+\begin{hint}
+\chatgpthint{係数の$n$乗根、または既知の母関数と比較してください。}
+\end{hint}
+
+\subsubsection{Level B}
+
+\begin{prob} (H22-I-2, 解答\ref{ans:H22I2}) \label{prob:H22I2}
+$f$を, 点0を含む開区間で$C^{1}$級の関数とするとき, 極限
+\[\disp\lim_{h\to +0} \parenb{\disp\int_{0}^{h} f(x)\, dx - hf(0)}\]
+を求めよ.
+\end{prob}
+\begin{hint}
+\chatgpthint{$f(x)=f(0)+f'(0)x+o(x)$を積分してください。}
+\end{hint}

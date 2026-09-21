@@ -1,0 +1,345 @@
+\section{($\spadesuit$)局所化と整従属}
+\subsection{局所化}
+面接で聞かれてもよいように, 局所化の構成についておさえておこう. $S\subset A$を積閉集合で0は含まないとし, $S^{-1}A$を次の集合とする: $S\times A$の元$(s,a)$, $(s',a')$に対し, 次の関係を定める. すなわち, $(s,a)\sim (s',a') \iff \exists t\in S, t(sa' - s'a) = 0$. これは実は同値関係をなし, $(s,a)$の同値類を$\dfrac{a}{s}$と書く. 定義から, $sa' = as'$なら$\dfrac{a}{s} = \dfrac{a'}{s'}$である. \par
+この構成も大事であるが, 次の\tf{普遍性}も理論的には需要であり, 写像を作るときに便利である.
+\tbox{
+$\phi:A\to B$を環準同型で, $\phi(S) \subset B^{\times}$なるものとする. このとき, $\phi$は次のような準同型$\ovl{\phi}:S^{-1}A\to B$を引き起こす.
+\[\xymatrix{
+A\ar[r]^{\phi}\ar[d] & B \\
+S^{-1}A \ar[ur]_{\ovl{\phi}} &
+}
+\]
+ただし, $A\to S^{-1}A$は$a\mapsto \dfrac{a}{1}$を満たす自然な準同型.
+}{}
+
+
+
+\begin{prop}
+\ben
+\item $A$を環で, $f$が零因子でないとき, $A_{f} \cong A[x]/(xf - 1)$.
+\item 局所化は完全関手である. したがって, 局所化と, 剰余・直和・テンソルなどは交換できる.
+\item (\tf{重要})$S$を積閉集合とする. $X=\spec{A}$の部分集合$S^{-1}X:=\set{\maf{p}\in \spec{A}\mid \maf{p}\cap S = \varnothing}$と$\spec{S^{-1}A}$の間に自然な全単射がある.
+\een
+\end{prop}
+\prf
+(1): $F:A[x] \to A_f$を$x\mapsto 1/f$なる$A$代数の射とする. これは$F(xf - 1) = 0$を満たすので$\witi{F}:A[x]/(xf-1) \to A_{f}$が誘導される. 逆に$G:A\to A[x]/(xf-1)$を自然な$A$代数の射とするとき, $G(f^n) = f^n + (xf-1)$は$x^n + (xf-1)$の逆元である. よって普遍性から$\witi{G}:A_{f} \to A[x]/(xf-1)$が引き起こされる. $\witi{G}\circ \witi{F}$と$\witi{F}\circ \witi{G}$が恒等写像であることは容易に分かる.
+\qed
+
+\begin{rem}
+$A_{f} = 0 \iff f$が冪零元である. このようなとき, $A[x]/(xf-1)$も0である. 実際, $xf - 1$が$A[x]$の単元であることを示せばよい. 実際, $f^n = 0$なら, $\sum_{j=0}^{n-1} (xf)^{j}$が$xf-1$の逆元. \cite{atimac}のEx1.2も参照せよ.
+\end{rem}
+
+
+\begin{egprob}
+環$A$に対し$D(f) = \set{\maf{p}\in \spec{A} \mid f\notin \maf{p}}$とおく.
+\ben
+\item $D(f) \subset D(g)$ならば$f^n = gr$となる$n\in \mb{N}$, $r\in A$が存在することを示せ.
+\item $D(f) \subset D(g)$とし, (1)のように$n,r$を取る. 環準同型$A_{g} \to A_{f}$で$\dfrac{1}{g} \mapsto \dfrac{r}{f^n}$となるものが存在することを示せ.  これは$r,n$に依らないことを示せ.
+\item $D(f) = D(g)$ならば, $A_f\cong A_{g}$であることを示せ.
+\een
+\end{egprob}
+\begin{egans}
+(1): $V(fA) \supset V(gA)$により$g$を含む素イデアルは$f$も含むので, $g\in \bigcap_{\maf{p}\ni g} \maf{p} = \sqrt{gA}$が従う. ここから直ちに得られる.\\
+(2): $f^{n_1} = gr_1$, $f^{n_2} = gr_{2}$とせよ. 示したいことは$A_{f}$上で$r_1/f^{n_1} = r_2/f^{n_2}$となることである. これは, ある$f^k$が存在して$f^k(r_1f^{n_2} - r_2f^{n_1}) = 0$となることと同値だが, これは$r_2f^{n_1} = gr_1r_2 = r_1f^{n_2}$により明らかである. \\
+(3):
+\end{egans}
+次は初見では案外難しい.
+\begin{egprob}
+次を示せ.
+\[\sqrt{(0)} = \bigcap_{\maf{p}\in \spec{A}} \maf{p}\]
+\end{egprob}
+\begin{point}
+$\supset$が難しい. 実のところ, これは選択公理を認めてやらねばならない. ポイントは, $\spec{A} \neq \varnothing \iff A\neq 0$を利用することである(この命題はZornの補題を用いるのであった).
+\end{point}
+\begin{egans}
+$\subset$はやさしい(Check!). $\supset$を見る. $f$は右辺に含まれる元とし, 局所化$A_{f}$を考える. もし$f$が冪零元でなければ, $A_f\neq 0$である.
+よって$\spec{A_f}$は空でないので, ここから素イデアル$P$が取れる. その$P$は$A$の$f$を含まない素イデアルに対応し, 矛盾である. もし局所化の対応が苦手であるなら, 次のようにせよ: $f$が冪零でなく右辺に含まれる元とする. \aka{$f$の冪を含まない}イデアル全体の集合$\Sigma$は$(0)$を持つので空でなく, Zornの補題の適用条件を満たすことが確認できる. $\Sigma$の極大元が少なくとも一つ存在する. そのイデアルを$I$とせよ. この$I$が実は素イデアルである. [証明] $x,y\notin I$で$xy\in I$として矛盾を導く. 極大性より$f^n\in I+(x), f^m\in I+(y)$なので$f^{n+m}\in I$だがこれは$I\in \Sigma$に反する.\qed
+\end{egans}
+これと似ているが重要な定理として, 次のようなものも習うだろう.
+\begin{egprob}
+$A$を有限生成$k$代数とするとき, 次を示せ.
+\[\bigcap_{\maf{m}\in \mr{mSpec}A} \maf{m} = \sqrt{(0)}\]
+\end{egprob}
+\begin{egans}
+$\supset$は明らか. 左辺から元$f$を取り, これが冪零ではないとする. このとき$A_{f}\neq 0$で, $A_{f}\cong A[T]/(Tf-1)$は有限生成$k$代数. $A_{f}$の極大イデアル$\maf{m}$を取ると, $A_{f}/\maf{m}$は$k$の有限次拡大(Zariskiの補題). $\pi:A\to A_{f}$を自然な写像とすると, 単射$A/\pi^{-1}(\maf{m}) \to A_{f}/\maf{m}$が引き起こされる. 構造射$k\to A_{f}/\maf{m}$は有限次拡大の埋め込みなので整準同型であり, したがって$A/\pi^{-1}(\maf{m})\to A_{f}/\maf{m}$もそうである. すると$A/\pi^{-1}(\maf{m})$は体でなければならないので, $\pi^{-1}(\maf{m})$は極大イデアルとなる. これは$f$を含まないが, それは$f$の取り方に反する. \qed
+\end{egans}
+
+
+\begin{egprob} (H 数学II,1)
+単位元1を持つ可換環$A$のイデアル$I$について, $A$の元$a$がイデアル$I$の根基$\sqrt{I}$に含まれるための必要十分条件は, $A$上の一変数多項式環$A[T]$の中で$I$と$1-aT$が生成するイデアルが1を含むことであることを示せ.
+\end{egprob}
+\begin{point}
+問題文は簡単に理解できよう. しかし, このままやるのではなく, 少し簡単にする方法を考えて混乱しないようにすることが環論ではよく重要になる. あるいは, 簡単だが本質的な場合に示すことでヒントを得るのである.
+\end{point}
+
+\begin{egans} $I=(0)$の場合を考える(実は剰余環を考えればこれに帰着される).
+$a\in \sqrt{0}$のとき, $(1-aT) = A[T]$を示す. これは$1-aT$が単元であることに同値. $a^n = 0$なる$n$を取ると
+\[(1-aT)\sum_{j=0}^{n-1}a^jT^j = 1- a^nT^n = 1\]
+より単元. よって$(1-aT) = A[T]$. 逆に$(1-aT) = A[T]$であるとせよ. このとき$A[T]/(1-aT) \cong A_{a} = 0$なので$A_a$の中で$1/1 = 0/1$であり, これより$a^n = 0$という関係式が得られる. \par
+一般の$I$の場合を考えよう. $IA[T]+(1-aT) = A[T]\iff (1-aT)\dfrac{A[T]}{IA[T]} = \dfrac{A[T]}{IA[T]} \iff 1-aT \bmod{IA[T]}$が$\dfrac{A[T]}{IA[T]} $で単元$\iff 1 - (a\bmod{I})T が(A/I)[T]$で単元$\iff a\bmod{I}\in A/Iが冪零 \iff a\in \sqrt{I}$.
+\end{egans}
+
+
+\subsection{整拡大}
+\begin{prop}
+環の列
+$A\subset B\subset C$で$C$が$B$上整かつ$B$が$A$上整とするなら$C$は$A$上整.
+\end{prop}
+\prf
+$x\in C$を取る. $x$の$B$係数整等式の係数$b_0,\dots, b_{n-1}$を取り, 環$A[b_0,\dots, b_{n-1}]$を考える. $x$は$A[b_0,\dots, b_{n-1}]$上整であるから, $A[b_0,\dots, b_{n-1},x]$は$A[b_0,\dots,b_{n-1}]$加群として有限生成. $b_{i}$は$A$上整なので, $A[b_0,\dots, b_{n-1}]$は$A$加群として有限生成. よって$R:=A[b_0,\dots, b_{n-1},x]$は$A$加群として有限生成. $R\supset A[x]$であるから, 主張は次の命題の(i)$\iff$(iii)から示される. \qed
+\begin{prop} (\cite{atimac} 命題5.1. これは整拡大を理論的に簡単に取り扱うために重要な命題だと思う.) $A\subset B$を環の列とするとき, $x\in A$に対して次は同値.
+\ben
+\item $x$は$A$上整.
+\item $A[x]$は$A$加群として有限生成.
+\item $A$加群として有限生成である環$C\subset B$が存在して, $A[x]\subset C$.
+\item $A$加群としては有限生成であるが, $A[x]$加群としては忠実である加群$M$が存在する.
+\een
+\end{prop}
+\qed
+
+
+
+\tbox{
+\begin{theo}
+$A\subset B$を整域の整拡大とするとき, $A$が体であることと$B$が体であることは同値である.
+\end{theo}
+}{}
+
+\begin{prac} \label{prac:closedpoint_correspondence}
+整拡大$A\subset B$において, $\maf{n}\subset B$が極大であることと$\maf{n}\cap A\subset A$が極大であることは同値であることを示せ.
+\end{prac}
+
+\begin{cor}
+$A\subset B$を整拡大とする. $\maf{q_1},\maf{q}_2 \in\spec{B}$で$\maf{q}_1\subset \maf{q}_2$かつ$\maf{q}_1\cap A = \maf{q}_{2}\cap A$を満たすものとすると, $\maf{q}_1 = \maf{q}_{2}$となる.
+\end{cor}
+\begin{rem}
+すなわち, 整拡大に対応する射$f:\spec{B}\to \spec{A}$の$\maf{p}\in \spec{A}$におけるファイバー$f^{-1}(\maf{p})\cong \spec{A_{\maf{p}}/\maf{p}A_{\maf{p}}}$の異なる2点には\tf{包含関係がない.} 気持ち的には ファイバーの2点$x,y\in f^{-1}(\maf{p})$はバラバラな印象がある.
+\end{rem}
+\prf この命題を見て, \tf{ファイバーのことを思い出すとよい}ので, 局所化して考えるのが妥当である. $\maf{p} = \maf{q}_{1}\cap A = \maf{q}_{2}\cap A$とする. $B$の整閉集合$A-\maf{p}$による局所化$B_{\maf{p}}$は$A_{\maf{p}}$上整である. $\maf{q}_{1}B_{\maf{p}}$, $\maf{q}_{2}B_{\maf{p}}$は$B_{\maf{p}}$の素イデアルであり, 仮定より$\maf{q}_{1}B_{\maf{p}} \subset \maf{q}_{2}B_{\maf{p}}$を満たす. $\maf{p}A_{\maf{p}} = \maf{q}_{1}B_{\maf{p}}\cap A_{\maf{p}} = \maf{q}_{2}B_{\maf{p}}\cap A_{\maf{p}}$となる. \ao{ $\maf{p}A_{\maf{p}}\subset A_{\maf{p}}$は極大なので, 練習問題により$\maf{q}_{i}B_{\maf{p}}$も極大である.} よって$\maf{q}_{i}B_{\maf{p}}$はともに極大で, 包含があるのでそれらは等しい. 局所化との素イデアル対応定理によって$\maf{q}_{1} = \maf{q}_{2}$でなければならない. \qed
+
+{\small
+\begin{rem} 全く同じ証明だが, 代数幾何的な書き方にするとこうなる.\\
+$R_{P} \to A_{Q_2}$は単射整拡大. よって$\spec{A_{Q_2}}\to \spec{R_P}$で閉点同士が対応する(\ref{prac:closedpoint_correspondence}参照). $Q_2A_{Q_2}, Q_1A_{Q_2}$はこの写像で送ってともに$PR_P$という閉点になるので, $Q_iA_{Q_2}$は閉点. $A_{Q_2}$は局所環だから$Q_1A_{Q_2} = Q_2A_{Q_2}$である. これでは$Q_1=Q_2$となるので矛盾.\qed
+\end{rem}
+}
+
+実は上の命題が過去問で登場しているが, 少し違う流れで示す問題になっている(演習問題参照). \par
+試験で役立つ感じはしないが, 代数学Iで扱うことなので復習しておく.
+\lefba{
+\begin{theo} (\tf{上昇定理})
+$A\subset B$を\tf{整拡大}, $\maf{p}_1\subset \dots \subset \maf{p}_n$を$A$の素イデアル列とする. \bolm{1\leq m<n}に対して, $\maf{q}_{i}\cap A = \maf{p}_{i}$ ($1\leq i\leq m$)となるような素イデアル列$\maf{q}_{1}\subset \dots \subset \maf{q}_{m}$がもし有れば, この昇鎖は
+\[\maf{q}_{1}\subset \dots \subset \maf{q}_{m}\subset \maf{q}_{m+1} \subset \dots \subset \maf{q}_{n},\quad \maf{q}_{i}\cap A = \maf{p}_i,  (1\leq i\leq n)\]
+に延長できる.
+\end{theo}
+}
+\prf $n=2$, $m=1$の場合を示す. $A/\maf{p}_{1} \subset B/\maf{q}_{1}$であり, これは整拡大. よってLying over theoremより$B/\maf{q}_{1}$のある素イデアル$\maf{q}_2/\maf{q}_1$が$\maf{p}_{2}/\maf{p}_1$の上にあるのでこの$\maf{q}_{2}$を取れば良い. \qed
+次は覚えておくとよい.
+\begin{egprob} \label{egprob:dimA_dimB_integral_ext}
+\ben
+\item $\phi:A\to B$が整準同型であるとき, $\dim{B}\leq \dim{A}$であることを示せ.
+\item $\phi:A\to B$が単射整準同型であるとき, $\dim{A} = \dim{B}$を示せ.
+\een
+\end{egprob}
+\begin{egans}
+(1): $\maf{q}_0\subsetneq \maf{q}_1$とする. $A$に引き戻して$\maf{p}_0 \subset \maf{p}_1$を得る. このとき$\psi:A/\maf{p}_0\to B/\maf{q}_0$は整準同型. $x\in \maf{q}_1$とする. $y\in \maf{q}_1\setminus{\maf{q}_0}$とおく. $y\bmod{\maf{q}_0}$は$A/\maf{p}_0$上整. その整等式で最小次数のものを考え, その定数項を$a_0$とすれば,  最小性から$a_0 \not 0 \in A/\maf{p}_0$であり, $a_0 = -x (\dots)$の形で書け, $x\neq 0$と最小性から$a_0\neq 0$, つまり$a_0$の代表元が$\maf{p}_0$に属していない.  $a_0\in \maf{q}_1/\maf{q}_0 \cap A/\maf{p}_0 = \maf{p}_1/\maf{p}_0$で$a_0\neq 0$だから$\maf{p}_0\subsetneq \maf{p}_1$が分かる. よって$\dim{B} \leq \dim{A}$が従う. \qed
+
+(2): $\maf{p}_0\subsetneq \maf{p}_1$とする. $\maf{q}_0  =  \maf{p}_0^{c}$なる$\maf{q}_0$がある. 上昇定理のように, 剰余で$A/\maf{p}_0 \to B/\maf{q}_0$に落としてLying over Thmを考えれば$\maf{p}_1$の上にある$\maf{q}_1\supsetneq \maf{q}_0$が作れるから$\dim{A}\leq \dim{B}$が分かる.
+\end{egans}
+
+
+
+
+
+\lefba{
+\begin{theo} (\tf{下降定理}) \\
+$A\subset B$を\bolm{Aが整閉整域, Bが整域の整拡大}とするとき, 上昇定理で$\subset$を$\supset$に置き換えた主張が成り立つ.
+\end{theo}
+}
+これのある種の反例が過去問に存在する.
+\begin{egprob} (H27専門科目)
+$A=\mb{Z}[X,Y]/(Y^2-6X^2)$, $B=\mb{Z}[X,T]/(T^2-6)$とおく. $A$における$X,Y$の像を$x,y$とし, $B$における$X,T$の像を$x',t$とする. また,
+\[P_1=(x,y,5)A, P_2 = (x-y,5)A, Q_1 = (x',t+1)B)\]
+とする.
+\ben
+\item 単射環準同型$\phi:A\to B$で$\phi(x) = x'$, $\phi(y) = x't$であるものが存在することを示せ.\footnote{これはブローアップ写像と関連すると思われますが, 詳細は未確認です. }
+\item $P_1,P_2\in \spec{A}$で$P_2\subsetneq P_1$を示せ.
+\item $\phi$により$A\subset B$とみなす. $Q_1\in \spec{B}$で, $Q_1\cap A = P_1$を示せ.
+\item (\tf{下降定理の反例}) $Q_2\in \spec{B}$で$Q_2\subset Q_1$かつ$Q_2\cap A = P_2$であるものは存在しないことを示せ.
+\een
+\end{egprob}
+\begin{egans}
+(1): $X\mapsto X, Y\mapsto XT$なる環準同型を考えるとこれが $(Y^2-6X^2)$を$(T^2 - 6)$に移るので$\phi:A\to B$が引き起こされる. $A$の元は$a(x)y + b(x)$の形に書ける. $\phi$で移すと$a(x') + x'tb(x')$であり, これが0なら$a(x') = 0$, $b(x')=0$でなければならないので, $a(x) + yb(x) = 0$であり単射となる. \\
+(2):
+\bealn{
+&A/P_1 \cong \mb{Z}[X,Y]/(Y^2-6X^2, X,Y,5) = \mb{Z}[X,Y]/(5,X,Y) \cong \mb{F}_{5}\\
+&A/P_2 \cong \mb{Z}[X,Y]/(X-Y, 5) = \mb{Z}[X,Y]/(5,X-Y) = \mb{F}_{5}[X]
+}
+で両方整域なので$P_i\in \spec{A}$. $P_2\subset P_1$は明らかで, 剰余環が異なるので$P_1\neq P_2$. \\
+(3): $Q_1\cap A = \phi^{-1}(Q_1)$である.  $\phi(x) = x' \in Q_1$, $\phi(y) = x't = x'(t+1) - x' \in Q_1$, $\phi(5) = 5 = t^2 - 1 = (t-1)(t+1)\in Q_1$なので$\phi^{-1}(Q_1) \supset Q_1$. 逆に$a(x)+yg(x) \in \phi^{-1}(Q_1)$なら$a(x') + x'tb(x') \in Q_1$だから$a(x') \in Q_1$なので$a(x)$の定数項の整数は$Q_1$に属す. $5 = t^2-1 \in Q_1$でこれが$Q_1$の持つただひとつの素数であるから, $a(x)$の定数項は5の倍数である. よって$a(x) + yg(x)\in (x,y,5) = P_1$が分かる. \par
+(4): 仮にあるとしよう. このとき$5\in P_2 \subset Q_2$である. よって, $\mb{F}_{5}$代数の射
+\[\mb{F}_{5}[X]\cong A/P_2 \hookrightarrow B/Q_2\to B/Q_1\cong \mb{F}_{5}\]
+が引き起こされる. また, 次が可換である.
+\[
+\xymatrix{
+A/P_2 \ar[d]\ar[r] & B/Q_2 \ar[d] \\
+A/P_1\ar[r] &B/Q_1
+}
+\]
+$5, x'(1-t) \in Q_2$である. もし$x'\in Q_2$なら, $Q_2\supset (5,x')$.
+\[B/(5,x') \cong \mb{Z}[X,T]/(5,X,T^2-6) \cong \mb{F}_{5}[T]/(T-1)\times \mb{F}_{5}[T]/(T+1) \]
+だから$(5,x')$を含む素イデアルは$(5,x',t+1), (5,x',t-1)$で, $Q_2\neq Q_1$だから$Q_2 = (5,x',t-1)$となるが, これでは$Q_2\subset Q_1$が満たされないので矛盾. \par
+$x'\notin Q_2$とする. このとき$1-t\in Q_2$で$t-1 \in Q_2 \subset Q_1$だから$(t+1) - (t-1) = 2\in Q_2$で$Q_2$が$5\mb{Z}$の上にあることに反する. \qed
+\end{egans}
+
+\begin{rem}
+整拡大を外した場合, 反例がある. $\mb{Z}\subset \mb{Q}$など(左辺と右辺で次元が異なるため).
+\end{rem}
+
+\begin{egprob}
+
+\end{egprob}
+
+
+
+
+
+
+
+
+\subsection{整閉包}
+専門問題で整閉包を求める問題は頻出である.
+$A\subset B$を環の拡大とするとき, $B$の元で$A$上整なもの全体を$B$における$A$の整閉包という.
+\begin{eg}
+\ben
+\item $\mb{Q}$における$\mb{Z}$の整閉包は$\mb{Z}$である. ($\mb{Z}$が整閉整域であることによる.)
+\item $A$を整域とするとき, $K=\mathrm{Frac}A$における$A$の整閉包$C$が考えられる. $A$が整閉整域であるということの定義は, $C=A$であることである. ユークリッド整域, PID, UFDはどれも整閉整域である. たとえばUFD$R$に対して$R[x_1,x_2,\cdots, x_n]$の商体は$R(x_1,\cdots, x_n)$であって, この商体における$R[x_1,\cdots, x_n]$の整閉包は$R[x_1,\cdots, x_n]$自身である.
+\item (\tf{整閉整域でないもの}) この例は専門とする人なら抑えたい. $k[T]$の部分環 $A=k[T^2,T^3]$を考えると$A$は整閉整域ではない. \aka{実際, $A$の商体もまた$k(T)$であって, この中の元$T$は$A$上整である.} よって整閉包は$A$より真に大きい. なお, $A = k[X,Y]/(X^2-Y^3)$と表すこともできるが, このイデアルが定める曲線$Y^3=X^2$はカスプ特異点$(0,0)$を持つ. この特異点の存在が$A$の性質に影響していると考えられているそうである.
+\een
+\end{eg}
+商体における整閉包を考えるときに重要なテクニックについてまとめておく.
+\tbox{
+\begin{point}
+\ben
+\item UFD上の多項式環は整閉であることは事実として認められるだろう. このため, たとえば$\mb{C}[x^2,xy,y^2]$など, \tf{UFD上の多項式環}の商体における整閉包は必ず多項式環に含まれると言える. これにより, 整閉包を上からおさえることができる.
+\item \tf{自己同型}は有用である. 自己同型を用いることで, 商体が有理関数体の代数拡大であるときには トレースやノルムがまた整閉包に属すことを用いるとよい. 超越的
+\een
+\end{point}
+}{}
+
+\begin{eg}
+\ben
+\item $\mb{C}[x^2,y^2]$の商体における整閉包$R$を求める($R\cong \mb{C}[X,Y]$で整閉なので答えは分かってるが, 遠回りでこれを確かめる).  $R$の元は$\mb{C}(x^2,y^2)$に含まれかつ$\mb{C}[x^2,y^2]$上整なので, とくに$\mb{C}[x,y]$上整である. $\mb{C}[x,y]$は整閉だから,  その元は$\mb{C}[x,y]$に含まれる. よって$R\subset \mb{C}[x,y]\cap \mb{C}(x^2,y^2)$である. さて, $\mb{C}(x^2,y^2)$には$x\mapsto \pm x, y\mapsto \pm y$による自己同型があり, これらの自己同型により固定される$\mb{C}[x,y]$の元は$\mb{C}[x^2,y^2]$に属す元である. よって$R=\mb{C}[x^2,y^2]$である.
+\item $\mb{Z}$の$\mb{Q}(\sqrt{2})$における整閉包を求める. $\mb{Q}(\sqrt{2})$は自己同型$\sqrt{2}\mapsto -\sqrt{2}$を持つ. $p+q\sqrt{2}$が整閉なら, $2p, p^2-2q^2$は$\mb{Z}$上整な有理数だから整数である. よって$p\in \frac{1}{2}\mb{Z}$である. もし$p$が整数でなければ$p^2-2q^2$が整数にならないことが簡単に分かる. よって$P\in \mb{Z}$で$2q^2\in \mb{Z}$なので$q$も整数であると分かる.
+\item $\mb{C}[x, \sqrt{x^3 + 1}] \cong \mb{C}[X,Y]/(Y^2 - X^3 - 1)$の商体における整閉包を調べる. $y=\sqrt{x^3+1}$とおく. $y$は$\mb{C}[x]$上代数的であり, $\mb{C}(x)$上の共役元は$-y$である. 商体は$\mb{C}(x,y)$だが, $y$が$\mb{C}(x)$上代数的なので$\mb{C}(x,y) = \mb{C}(x)[y]$である. これは$\mb{C}(x)$上の二次拡大体であるから, この中の元は$yf(x) + g(x)$と表せる($f,g\in \mb{C}(x)$). さて, この元が$\mb{C}[x,y]$上整であるとしよう. $\mb{C}(x,y)$には$y\mapsto -y$による自己同型があるから$g(x)-yf(x)$も整である. よって$2g(x)$が$\mb{C}[x,y]$上整であるが, \ao{$\mb{C}[x]\subset \mb{C}[x,y]$は整拡大なので} $2g(x)$は$\mb{C}[x]$上整であり, 整閉性から$g(x) \in \mb{C}[x]$が従う. また, $yf(x)$が整だから$y^2f(x)^2 = (1+x^3)f(x)^2$も整である. $1+x^3$に平方因子が無いことから, $f(x)\in \mb{C}[x]$でなければならない. よって$\mb{C}[x,\sqrt{x^3+1}]$は整閉である.
+\een
+\end{eg}
+\begin{prac}
+上の(3)の議論を, 体$k$, 平方因子の持たない$n$変数多項式$F(x_1,\dots, x_n)\in k[x_1,\dots, x_n]$, について$k[x_1,x_2,\dots, x_n, \sqrt{F(x_1,\dots, x_n)}]$の場合に一般化し, これが整閉であることを示せ. $k$を\tf{UFD}にしても議論が回ることを確認せよ. \\
+(未検証) UFDでない整閉整域の場合などはどうなるだろうか?
+\end{prac}
+
+
+\begin{prac}
+$A\subset B$を整拡大とする. $B$の素イデアル$\maf{q}$を取るとき, $A/\maf{q}\cap A \subset B/\maf{q}$とみなせる. これは整拡大であることを示せ.
+\end{prac}
+
+\begin{egprob} (H22数学II,2) $R = \mb{C}[x,y,z]/(y^3-x^2z)$とおく.
+\ben
+\item $R$は整域であることを示せ.
+\item $R$の商体$Q$は$\mb{C}$上純超越拡大であることを示せ.
+\item $R$の$Q$における整閉包$\witi{R}$を求めよ.
+\een
+\end{egprob}
+\begin{egans}
+$y^3-x^2z$の形を見れば, $f(x,y,z)$を$y$を変数に見て割るのが都合がいい. $x,y,z$の$R$における像も同じ記号で表すと, すべての$R$の元が$y^2f_1(x,z) + yf_2(x,z) + f_3(x,z)$の形に書くことができる. \\
+(1): $\phi:R\to \mb{C}[t,s]$を$\phi(x) = t^3, \phi(z) = s^3$, $\phi(y) = t^2s$と定めるとwell-definedである. $R$の元を先のように書き, これが$\ker{\phi}$に含まれるとすると
+\[t^4s^2f_1(t^3,s^3) + t^2sf_2(t^3,s^3) + f_3(t^3,s^3)\]
+であり, $t,s$の次数を考えれば$f_1,f_2,f_3 = 0$が従うので$\phi$は単射で, $R$は整域の部分環に同型である. \\
+(2): (1)より$R\cong \mb{C}[t^3,s^3,t^2s]$であるから, 右辺について調べる. $Q\cong \mb{C}(t^3,s^3,t^2s) = \mb{C}(\frac{t}{s},t^3)$であり, $t^3$は$\mb{C}(\frac{t}{s})$上超越的かつ$\frac{t}{s}$は$\mb{C}(t^3)$上超越的なので, $\set{t^3,\frac{t}{s}}$は$\mb{C}$上代数的独立であり, 純超越基となる.
+\begin{recall}
+超越拡大$L/K$と$S\subset L$に対し, $S$(の任意の有限部分集合)が代数的独立であり, かつ $L/K(S)$が代数拡大であるとき$S$を超越基底といい, $L=K(S)$のとき純超越基底という.
+\end{recall}
+(3): $\witi{R}$は$\mb{C}[t^3,s^3,t^2s]$の$\mb{C}(\frac{t}{s},t^3)$における整閉包である. この商体は$\zeta = \zeta_3$として$t\mapsto \zeta t, s\mapsto \zeta s$という自己同型を持つから, $\witi{R}$はこの自己同型で不変な元のみからなる. たとえば$t^3,s^3,t^2s$のみならず, $ts^2$という元も不変であるが, $ts^2$は$X^3 - t^3s^6$の根だから$\witi{R}$に属す. よって$\mb{C}[t^3,t^2s,ts^2,s^3]\subset \witi{R}$が従う. $\witi{R}$の任意の元は$\mb{C}(t,s)$に含まれ, $\mb{C}[t,s]$上整であるから整閉性によって$\witi{R}\subset \mb{C}[t,s]$である必要がある. そして$\mb{C}[t,s]$の元のうち先の自己同型で不変なものは$\disp\oplus_{i+j\equiv 0\pmod{3}} \mb{C}x^iy^j = \mb{C}[t^3,t^2s,ts^2,s^3]$に属すので, $\witi{R}\subset \mb{C}[t^3,t^2s,ts^2,s^3]$が従う.
+\end{egans}
+
+
+
+
+
+
+
+\clearpage
+\subsection{演習問題}
+
+\subsubsection{Level B}
+\begin{prob} (H15数学II,1)
+\ben
+\item $\mb{Z}[\sqrt{5}]$は整閉でないことを示せ.
+\item $p,q$を平方院試を含まない1と異なる奇数で$p\neq q$とするとき, $R=\mb{Z}[\sqrt{p},\sqrt{q}]$は整閉でないことを示せ.
+\een
+\end{prob}
+
+
+\begin{prob} (H15数学II,2)
+\ben
+\item 可換環$R$は整域$A$の部分環とする. 商体の拡大$Q(R)\subset Q(A)$が代数的ならば, $A$の0でないイデアル$I$について$I\cap R \neq 0$が成り立つことを示せ.
+\item (1)において, $Q(A)/Q(R)$が代数拡大という条件をはずすと主張が必ずしも成り立たないことを, 例をあげて示せ.
+\item 可換環$A$は部分環$R$上の整拡大とする. $P$は$R$の素イデアルとし, $A$の相異なる素イデアル$Q_1,Q_2$が$R\cap Q_1 = R\cap Q_2 = P$を満たすとする. $Q_1,Q_2$には含む含まれるの関係はないことを示せ\footnote{この問題は\cite{atiyah}の5章にある. 「整拡大のときにファイバーの点に埋没はない」というスローガンで覚えている.}.
+\een
+\end{prob}
+
+\begin{prob} (H31専門1)
+$A=\mb{R}[X.Y]/(X^2+Y^2)$とおく.
+\ben
+\item $A$は整域であることを示せ.
+\item $A$の商体を$K$とおき, $A$の$K$における整閉包を$B$とおく. $A$加群としての$B$の生成系を一組与えよ.
+\een
+\end{prob}
+
+\subsubsection{Level C}
+\begin{prob} (R2専門科目) \label{prob:R2senmon3}
+整域$A$に対する次の性質を考える.
+\lefba{$(\ast)$ $A$の0でない素イデアルのうち極小なものは単項イデアルである.
+}
+$A$をNoether整域, $x\in A$を0でない$A$の素元とする. このとき, $A[1/x]$が性質を持てば, $A$も性質$(\ast)$を持つことを示せ.
+\end{prob}
+
+
+
+
+\subsubsection{Hint・Answer}
+{\small
+\begin{probans}
+(1): $\frac{1+\sqrt{5}}{2}$が入ってないから. \\
+(2):  $a=\frac{1+\sqrt{p}+\sqrt{q}+\sqrt{pq}}{2}$を考えよ.
+%\[a^2 = \frac{1+p+q+pq}{4} + \frac{q+1}{2}\sqrt{p} + \frac{p+1}{2}\sqrt{q} + \sqrt{pq} \in R \]
+\end{probans}
+
+\begin{probans}
+(1): $a\in I$をノンゼロとする. $a\in Q(A)$は$Q(R)$上代数的だから, ある$t_1,\dots, t_{n-1}\in Q(R)$が存在して
+\[a^n + t_{1}a^{n-1} + \dots + t_{n-1} = 0\]
+が成り立つ. $n$が最小であるものと仮定してよく, このとき($a\neq 0$および整域であることを用いて)$t_{n-1}\neq 0$である. $t_i = r_i/s_i$ ($r_i,s_i\in R, s_i\neq 0$)と表し, $s=s_1\dots s_{n-1}$とすると, $st_{n-1} \in R \cap I$が分かる. $s,t_{n-1}\neq 0$なので, 示せた. \\
+(2): $R=\mb{C}, A=\mb{C}[T]$とおく. $I=TA$とする. $Q(A) = \mb{C}(T)$, $Q(R) = \mb{C}$なので商体は超越拡大. そして$I\cap R=0$である. \\
+(3): $Q_1\subsetneq Q_2$であると仮定して矛盾を導けばよい. $R\to A$は整拡大であるから, $R/P\to A/Q_1$も整拡大である. $Q(A/Q_1)\supset Q(R/P)$が代数拡大であることを証明する. $x\in A/Q_1$は$R/P$上整だから $x/1$は$Q(R/P)$上代数的である. さらに$x\neq 0$であるとき, \ao{$x/1$の$R/P$係数代数関係式を用いることで, $1/x$の$R/P$係数代数関係式を得る.} よって$1/x$も$Q(R/P)$上代数的であるから, 任意の$s/t\in Q(A/Q_1)$が$(s/1)(1/t)$と書けることにより$Q(A/Q_1)\supset Q(R/P)$は代数拡大である. さて, (1)によれば$A/Q_1$のイデアル$Q_2/Q_1$の制限$R/P \cap Q_2/Q_1$は0ではないが, $Q_2\cap R = P$なので$R/P \cap Q_2/Q_1 = 0$であり, 矛盾である. よって包含はない. \qed
+\end{probans}
+
+\begin{probans}
+(1): $\mb{R}$代数の射$\phi:\mb{R}[X,Y]\to \mb{C}[T]$を$\phi(X) = T$, $\phi(Y) = iT$で定める. $\ker{\phi} \supset (X^2+Y^2)$は明らか. $\mb{R}[X,Y]$の元を$f(X) + Yg(X) + (X^2+Y^2)P(X,Y)$と表す. ($f,g\in \mb{R}[T]$).もしこれが$\ker{\phi}$に属せば$f(T) + iTg(T) = 0$だが$f,g$が実係数なので$f,g=0$となり$\ker{\phi}\subset (X^2+Y^2)$となる. よって$A$は整域の部分環に同型なので整域である.\qed \\
+(2): (1)より$A\cong \mb{R}[T,iT] = \mb{R}\oplus \bigoplus_{k\geq 1} \mb{C}T^k$である. $K$は$\mr{Frac}\mb{C}[T] = \mb{C}(T)$に含まれており, $iT/T = i$を含むので$K=\mb{C}(T)$である. $i\in K$は$i^2 + 1 = 0$という$A$係数の整等式を満たすので$i\in B$である. よって$\mb{C}[T]\subset B$である. $B$は$A$上整なので, とくに$\mb{C}[T]$上整である. $B\subset K$だから, $\mb{C}[T]$の整閉性より$B=\mb{C}[T]$である. 明らかに, $B=1A + iA$である.
+\end{probans}
+%=============================Level C=============================
+\begin{probans}
+$A[1/x] = A_x$である. $\maf{p}\in \spec{A}$を0でない極小な素イデアルとする. もし$x\in \maf{p}$なら, $(x)\subset \maf{p}$だが, $x$が素元だから$(x)\in \spec{A}$である. よって極小性により$\maf{p}=(x)$で, この場合はよい. 次に$x\notin \maf{p}$とする. このとき$\maf{p}A_{x} \in \spec{A_x}$は極小である. なぜなら, もし$Q \subset \maf{p}A_{x}$なる$Q\in \spec{A}_{x}$があれば, $Q$は$\maf{q}\in \spec{A}$で$x\notin \maf{q}$なるものの拡大$\maf{q}A_x$として得られるから$\maf{q}A_{x} \subset \maf{p}A_{x}$である. これを$A\to A_{x}$で引き戻すと$\maf{q}A_x\cap A = \maf{a} \subset \maf{p}A_{x} \cap A = \maf{p}$なので極小性から$\maf{p}=\maf{q}$であり, $\maf{q}A_x = \maf{p}A_{x}$にもなるから. よって条件より$\maf{p}A_x$は単項イデアルであり, $s/x^n A_{x}$と表せる. $1/x^n$は単元なので$(s/1) A_{x}$とも書ける. \par
+\aka{ここで, $s\notin (x)$であると仮定できることを示そう.} もし$s\in (x)$なら$s=xs_1$と表せるが, $s_1/1$と$s/1$は同伴元であるから生成するイデアルは変わらない. もしこれで$s_1\notin (x)$となればこの$s_1$に取りかえる. もし$s_1\in (x)$なら$s_1 = xs_2$とする. この操作は無限回続けられるということはない. 実際, もしこのようにして$s_n = xs_{n+1}$となる$s_n$たちが取れれば, $A$のイデアル増加列
+\[(s) \subset (s_1) \subset (s_2) \subset \dots\]
+が得られるが, Noether性によりこの列は停留する. したがって$(s_n) = (s_{n+1}) = (xs_{n})$となる$n$があるので, 単元$\epsilon\in A^{\times}$により$s_{n} = \epsilon xs_n$と表せる. $s_n(1-\epsilon x) = 0$で, もし$s_n \neq 0$なら整域であることから$\epsilon x = 1$で$x$が単元かつ素元となるので不適. よって$s_n = 0$であるが, このとき$s=0$であり
+, $\maf{p}A_{x} = 0$となる. これは$\maf{p}\neq 0$に反する. したがって$s$を$s_n \notin (x)$となるような$s_n$に取り替えればよい. \par こうして$s\notin (x)$とできる. このとき$\maf{p}=(s)$であることを示そう. \par
+まず$s\in \maf{p}$を示す. [証明] $s/1 = r/x^n$となる$r\in \maf{p}$, $n\in \mb{N}$があるので, $x^m(sx^n - r) = 0$なる$m$がある. 右辺は$\maf{p}$に含まれ, $x\notin \maf{p}$なので$sx^n - r\in \maf{p}\implies sx^n \in \maf{p} \implies s\in \maf{p}$. したがって$(s) \subset \maf{p}$が示せた. \par
+逆に$r\in \maf{p}$を任意に取る. $r/1\in \maf{p}A_{x} = (s/1)A_{x}$だから$r/1 = (st)/x^n$と表せる. このような$n$で最小のものを取る. $x^{m}(x^n r - st) = 0$である. 整域上であるから, $x\neq 0$より $x^n r = st$である. $n\geq 1$であるなら,  $st \in (x)$かつ$s\notin (x)$かつ$x$が素元であることより$t\in (x)$が従う. よって$t=xt_1$と書け, $x^{n-1}r = st_1$で, $x$の指数が0になるまでこれを続けることができ, 最後に$r = st'$となる$t' \in A$が存在することが示される. よって$r\in (s)$だから$\maf{p}\subset (s)$である. \qed
+\end{probans}
+
+}
+
+
+
+\newpage

@@ -1,0 +1,159 @@
+\section{有理関数体}
+\subsection{基本対称式で生成される体}
+Artinの定理の応用例としてあげたように, 次が成り立つ.
+\begin{prop} $k$を体とし, $n$変数有理関数体$L=k(x_1,\dots, x_n)$に変数の置換で$G=\maf{S}_n$を作用させる. このとき, $L^{G} = k(s_1,\dots, s_n)$. ただし, $s_i$は$i$次の$x_1,\dots, x_n$に関する基本対称式.
+\end{prop}
+
+
+\subsection{計算問題}
+京大では少ないが, 東大ではよく有理関数体の拡大を見るので, それについての問題を挙げていく.
+
+\lefba{
+\begin{egprob} (マシュマロより)
+$K=\mb{F}_{3}(T)$, $f(X) = X^3 - X\in K[X]$とする. $f(f(X))-T$の$K$上の最小分解体を$L$とするとき, $[L:K]$を求めよ. また, $L/K$の中間体で$K$上9次のものはいくつあるか.
+\end{egprob}
+}
+\begin{egans}
+$f(f(X)) - T = X^9-X^3 - (X^3-X) - T = X^9 - 2X^3 + X - T$である. $X^3 - X - T $の一つの根を$\alpha$とすると, $\alpha+1, \alpha-1$も根であるから
+\[X^3 - X - T = (X-\alpha)(X-\alpha-1)(X-\alpha+1)\]
+と因数分解される. よって$f(f(X)) - T$の根は$f(X) = \alpha, \alpha+1,\alpha-1$を満たす$X$である. 同様にして
+\bealn{
+X^3 - X - T - \alpha = (X-\beta)(X-\beta - 1)(X-\beta + 1)
+}
+と表す. $X^3 - X - 1$は$\mb{F}_{3}$上既約である. この根$r$を一つ取ると$r\in \mb{F}_{27}$である. $\mb{F}_{27}$の元$r$で$r^3 - r - 1 = 0$を満たすものについて   上の右辺で$X=\beta_0 + r$を代入すると$r(r-1)(r+1) = r^3 - r = 1$となるから, $f(\beta_0 + r) = \alpha + 1$であり, $f(f(\beta_0 + r)) - T=0$である. 同様に, $\mb{F}_{3}$上の既約多項式$X^3 - X + 1$でこれを考え, $\mb{F}_{27}$の元$s$で$s^3 - s + 1 = 0$を満たすものについて$f(f(\beta_0 + r)) - T = f(\alpha - 1) - T = 0$となる. \par
+$X^3-X-1$の根$r$を取ると$r\pm 1$もまた根であり, $2r$, $2r\pm 1$は$X^3 - X + 1$の根なので, $f(f(X)) - T$の根は
+\[\beta + k, \beta + r + k , \beta + 2r + k,\quad (k=-1,0,1)\]
+である. したがって最小分解体$L$は
+\[L = \mb{F}_{3}(T)(\beta, r) = \mb{F}_{27}(T)(\beta) = \mb{F}_{27}(T,\alpha)[X]/(X^3-X-T-\alpha)\]
+である. 一旦$[L:K] = 27$であることを認める. $f(f(X)) - T$が分離多項式であることは微分をすれば分かる. よって$L/\mb{F}_3(T)$は分離拡大だからガロア拡大. $G = \gal{(L/\mb{F}_{3}(T))}$とする. $\sigma\in G$は$\sigma(\beta)\in \set{\beta + mr + k \mid m,k\in \mb{F}_{3}}$と$\sigma(r) \in \set{r,r+1,r-1}$で決まる. 求めるべき個数は, $G$の位数3の部分群の個数であるから, 位数3の元の半分の個数を求めればよい. 実は, $G$に位数9以上の元は存在しない. 実際, $\sigma\in G$が
+\[\sigma(\beta) = \beta + m r + k,\quad \sigma(r) = r+a\]
+だとすれば,
+\[\sigma^3(r) = r+3a = r\]
+\bealn{
+\sigma^3(\beta) &= \sigma^2(\beta + mr + k) \\
+&= \sigma((\beta + mr + k) + m(r+a) + k )\\
+&= \sigma(\beta + 2mr + ma + 2k) \\
+&= (\beta + mr + k) + 2m(r+a) + ma + 2k \\
+&= \beta + 3mr + 3ma + 3k = \beta
+}
+であるから$\sigma$の位数は3以下である. したがって$G$の位数3の元は26個であるから, 9次中間体の個数は$13$個. \\
+\fbox{$[L:K] = 27$を示す}
+
+\end{egans}
+
+
+
+
+
+
+
+
+\lefba{
+\begin{egprob} (東大専門2021)
+$K=\mb{C}(X,Y,Z,W)$に$G=\maf{S}_4$を変数の置換で作用させる. $F=K^G$とおき, $L=K(\sqrt{X})$の$F$上のガロア閉包を$M$とする.
+\ben
+\item $[M:K]$を求めよ. $M=K(x)$をみたす$x\in M$を求めよ.
+\item $K$と$M$の中間体の個数を求めよ.
+\item $K$と$M$の中間体$E\neq K,M$のうちで$F$のガロア拡大であるものをすべて求めよ. 各々の$E$に対して$E=K(y)$をみたす$y\in E$を一つ求めよ.
+\een
+\end{egprob}
+}
+\begin{egans}
+{\small
+(1): $s_i$ ($i=1,2,3,4$)を$X,Y,Z,W$に関する$i$次基本対称式とすると$F=\mb{C}(s_1,s_2,s_3,s_4)$である.
+\[(T^2 - X)(T^2-Y)(T^2-Z)(T^2-W) \in F[T]\]
+である. 実際, $T^8 - s_1T^6 + s_2T^4 -s_3 T^2 + s_4 $になるから. そしてこれは$F$上で既約である.
+{\small
+\lefba{ 少し自信がないが, 次のようにやったら既約が言えると思う. 上の多項式がもし可約であるなら, それは4次と4次の積にならねばならないことがわかる. なぜなら, 上の多項式を$\gal{(K/K^G)}\cong \maf{S}_4$の元で作用すると解の置換が起きるが, $X\mapsto Y$なる$\maf{S}_{4}$の元を作用させると$\sqrt{X}$は$\pm \sqrt{Y}$に移らなければならない. $Z,W$でも同様である. 符号については掴めないが, これで$\sqrt{X}$の$F$上の共役元が4つ以上あることがわかる. よって既約でないなら$\sqrt{X}\in \set{\pm \sqrt{X}, \dots, \pm\sqrt{W}}$の$\gal{K/K^{G}}$による作用の軌道が4つの元しか持たないことになり,  $(T- \sqrt{X})\dots (T\pm \sqrt{W})$の形の多項式が$\sqrt{X}$の$F$上最小多項式であるべきである. これは, 定数項が$\pm \sqrt{s_4}$なのでありえない. よって既約.
+}
+}
+よって$M\supset K(\sqrt{X},\sqrt{Y},\sqrt{Z},\sqrt{W})$. 逆に右辺の体は$L$を含み, $\sqrt{X}$の$F$上の共役元をすべて含んでいるのでガロア拡大(標数0なので分離的). よって等号が成立. $[M:K] = 16$は明らかだろう. $M/F$がガロアで$F\subset K$なので$M/K$もガロア. $\gal{(M/K)}$は位数16の群であり, $\sigma\in \gal{M/K}$は$T^2-X,\dots, T^2-W\in K[T]$を変えないので, $\sigma$は4つの集合$\set{\sqrt{X},-\sqrt{X}},\dots, \set{\sqrt{W}, -\sqrt{W}}$に作用し, この作用の様子で$\sigma$は一意的に決まる. よって単射準同型$\gal{(M/K)} \to (\cyc{2})^4$を得る. 位数がともに16なので, 全射でもある. よって同型が引き起こされる. さて, $M$を$K$上の単拡大$K(x)$と見るには, すべての$\sigma\in \gal{(M/K)}$で$\sigma(x)\neq x$であるような$x\in M$を見つければよい(ガロア対応による). よって$x=\sqrt{X} + \sqrt{Y} + \sqrt{Z} + \sqrt{W}$とすれば16個の元すべてで$x$は固定されないことが確かめられる. \\
+(2): $\mb{F}_{2}^4$の部分空間の個数を求めればよい. より一般に$\mb{F}_{p}^n$の$k$次元部分空間の個数について論じる. $k=0$なら1個である. $k\geq 1$とする.  任意の$k$個の独立なベクトルの順序対$(v_1,\dots, v_k)$は$k$次元部分空間$V$を張る. 異なる順序対に対して同じ$V$が得られることもあるが, そのいずれも$V\cong \mb{F}_{p}^{k}$の基底である. $\mb{F}_{p}^{k}$の順序を考慮した基底の個数は
+\[N_k:=(p^k-1)(p^k-p)\dots (p^k-p^{k-1})\]
+である. よって, $(v_1,\dots, v_k)\mapsto V$は$N_k$対1の写像であり, $k$個の独立なベクトルの順序対の個数は
+$(p^n-1)(p^n-p)\dots (p^n-p^{k-1})$
+である. 以上をまとめ, $k$次元部分空間$V$の個数は$n(p,k) := \prod_{i=0}^{k-1} \dfrac{p^n - p^{i}}{p^k - p^i}, n(p,0) = 1$
+で得られる. これを$p=2$で考え,
+\bealn{
+&n(2,0) = n(2,4) = 1 \\
+&n(2,1) = n(2,3) = 15\\
+&n(2,2) = \dfrac{16-1}{4-1}\cdot \dfrac{16-2}{4-2} = 35
+}
+だから$1+1+15+15+35 =$ \bolm{67}個.\\
+(3): $\sigma\in \gal{M/F}$の$K$への制限を$\phi\in \gal{K/F}$とする. $\phi$は$X,Y,Z,W$の置換を起こすが, $\phi(\sqrt{X}) = \sqrt{\phi(X)}$ などと定めることで$\phi$は$F$同型$M\to M$に拡張される.
+このとき$\phi^{-1}\circ \sigma\in \gal{M/F}$は$X,Y,Z,W$を固定するので$\sigma\circ\phi^{-1}\in \gal{M/K}$であり, $\phi^{-1}\circ \sigma$は$\sqrt{X},\dots, \sqrt{W}$の符号のみを変化させる. $\alpha\in \gal{(M/K)}$であって, $\alpha(\sqrt{X}) = \epsilon_{X}\sqrt{X}$ ($\epsilon_X = \pm 1$)などとするとき, この$\epsilon_X,\dots, \epsilon_W\in \set{\pm 1}$によって$\alpha$は一意に決まるが,  この$\alpha$のことを$[\epsilon_X,\epsilon_Y,\epsilon_Z,\epsilon_W]$と表す. 先の考察で, $\sigma\in \gal{(M/F)}$が$\sigma = \phi\circ [\epsilon_X,\epsilon_Y,\epsilon_Z,\epsilon_W]$の形に表されることが分かった. \par
+$\gal{(M/K)}$は$[\pm1, \pm1 , \pm1, \pm1]$ (複合任意)の全体の集合であり, $(\cyc{2})^4$に同型であったからアーベル群である.  $E$に対応する部分群を$H(E)=\gal{(M/E)}$とする. $M/E$がガロア拡大であることと$H(E)$が$\gal{M/F}$の正規部分群であることは同値であるから, 任意の$\sigma\in \gal{(M/F)}$に対して$\sigma H(E) \sigma^{-1} = H(E)$であるかを見る. $\sigma = \phi\circ [\epsilon_X,\dots, \epsilon_W]$と表すとき, $[\epsilon_X,\dots, \epsilon_W]H(E)[\epsilon_X,\dots,\epsilon_W]^{-1} = H(E)$なので($(\cyc{2})^4$がアーベル群だから), $\sigma=\phi$に限定して調べてもよい. すなわち, $\sigma$は$\sqrt{X},\dots, \sqrt{W}$をそれぞれ$\sqrt{\sigma(X)},\dots, \sqrt{\sigma(W)}$に移すものに限定してよい. さて, $[\epsilon_X,\dots \epsilon_W]\in \gal{M/K}$に対して
+\[\sigma[\epsilon_X,\dots, \epsilon_W]\sigma^{-1} = [\epsilon_{\sigma^{-1}(X)},\dots, \epsilon_{\sigma^{-1}(W)}]\]
+であることは容易に確かめられる. $\sigma$はいかなる文字の置換も起こせるので, ここから $\gal{(M/K)}$が$\gal{(M/F)}$のどのような共役類から成るかが分かる. すなわち, $\gal{(M/K)}$は次の5つの共役類の直和である.
+\bealn{
+&\set{\mr{id}},\quad \set{[-1,-1,-1,-1]},\\
+C_1 &= \set{[a,b,c,d]\mid a,b,c,dのうち-1は一つ}\\
+C_2 &= \set{[a,b,c,d]\mid a,b,c,dのうち-1は二つ}\\
+C_3 &= \set{[a,b,c,d]\mid a,b,c,dのうち-1は三つ}
+}
+また, $|C_1| = |C_3| = 4, |C_2| = 6$である. $H(E)$は$\gal{(M/K)}$に含まれた$\gal{(M/F)}$の正規部分群だから, 上の5つの共役類のいくつかの合併でかつ群をなすものにならねばならない.  そのようなものは$\set{\mr{id}, [-1,-1,-1,-1]}$しかありえない(簡単に分かる). したがってこの部分群に対応する体が答え. その体$E$が$E':=K(\sqrt{XY},\sqrt{XZ},\sqrt{XW})$に一致することを示す. $E'$を固定する任意の$\sigma\in \gal{M/F}$を取れば, まずそれは$K$を固定するので, $\sigma$は変数の置換を起こさない. よって$\sigma=[\epsilon_X,\dots, \epsilon_W]$と表せるが, $\sigma$は$\sqrt{XY},\sqrt{XZ},\sqrt{XW}$も固定するので
+\[\epsilon_X\epsilon_Y = \epsilon_X \epsilon_Z = \epsilon_X \epsilon_W = 1\]
+を得る. 等式全体に$\epsilon_X$を掛けて$\epsilon_X = \epsilon_Y = \epsilon_Z = \epsilon_W$を得るので$\sigma\in H(E)$である. $H(E') \supset H(E)$は明らかなので, $H(E') = H(E)$が従い, $E = E'$である. 最後に, $y=\sqrt{XY} + \sqrt{XZ} + \sqrt{XW}\in E$に対して $E=K(y)$を示す. $H(E)\subset H(K(y))$は自明. 逆に$K(y)$を固定する$\sigma\in \gal(M/K)$を取る. $\sigma=[\epsilon_X,\dots, \epsilon_W]$とすると, $\sigma(y) = y$よりやはり$\epsilon_X\epsilon_Y = \epsilon_X\epsilon_Z = \epsilon_X\epsilon_W = 1$なので同様に$\sigma\in H(E)$となる.
+ゆえに$E=K(y)$である. \qed
+
+}
+\end{egans}
+
+
+
+
+\lefba{
+\begin{egprob} (H13数学II) \label{prob:H13-II-1}
+$K=\mb{C}(x_1,\dots, x_n)$の$\mb{C}$上の自己同型$\sigma$を
+\[\sigma(x_i) = x_{i+1}\quad (1\leq i\leq n-1),\quad \sigma(x_n) = x_1\]
+によって定義する.
+\ben
+\item $\sigma$による$K$の不変部分体$F=\set{\alpha\in K \mid \sigma(\alpha) = \alpha}$に対して, $K=F(\sqrt[n]{\alpha})$を満足する$\alpha\in F$をひとつ求めよ.
+\item $n\geq 3$であれば, (1)の条件を満たす$\alpha\in F$は$x_1\dots, x_n$の対称式には取れないことを示せ.
+\een
+\end{egprob}
+}
+\begin{egans}
+(1): $\lan \sigma \ran$ は$K/F$に忠実に作用する. アルティンの定理より$\gal{(K/F)}\cong \cyc{n}$である. $\alpha = (\sum_{j=1}^{n} \zeta_n^j x_j)^n$とおくとよいことを示す. $\sqrt[n]{\alpha} = \sum_{j=1}^{n} \zeta_n^j x_j$として$n$乗根を選ぶ. $\alpha\in F$は$\zeta_n^n = 1$なので分かる. $K_0 = F(\sqrt[n]{\alpha})$と$K$を比較しよう. $K_0$を固定する部分群が$\set{0}\subset \cyc{n}$であればよい. $\sigma^k(\sqrt[n]{\alpha}) = \zeta_n^{-k}\sqrt[n]{\alpha}$なので, 確かに固定部分群は$\set{0}$である. よって$K_0 = K$である. \qed \\
+(2): $x_1,\dots, x_n$の第$i$次基本対称式$s_i$を考える. $L/M$には $\maf{S}_n$が変数の置換で作用しており, $L^{\maf{S}_n} = M$である. アルティンの定理から$L/M$はガロア拡大で$\gal{(L/M)}\cong \maf{S}_n$である. $n\geq 3$により$\lan \sigma \ran \subsetneq \maf{S}_n$であるから$M\subsetneq F$である. $[K:F] = n$なので, $[F:M] = (n-1)!$となる. $M(\sqrt[n]{\alpha})/M$は, 任意の$\sigma\in \maf{S}_n$で$\sigma(M(\sqrt[n]{\alpha})) = M(\sqrt[n]{\alpha})$なのでガロア拡大である. $K=F(\sqrt[n]{\alpha})$なので$\sqrt[n]{\alpha}$の$F$上最小多項式は$n$次であり, $\sqrt[n]{\alpha}$の$M$上最小多項式は$n$次以上である. $T^n - \alpha \in M[T]$なので, ちょうど$n$次でありこれが最小である. よって$[M(\sqrt[n]{\alpha}):M] = n$が分かる. さて, \ao{$M(\sqrt[n]{\alpha})/M$は$n$次ガロア拡大だからこれは$\maf{S}_n$の指数$n$の正規部分群に対応する.} $n\geq 3$かつ$n\neq 4$において, $\maf{S}_n$の自明でない正規部分群は$A_n$に限るが, これは指数が$2$なので$n=2$となり矛盾である. $n=4$においては, $\maf{S}_{4}$の正規部分群は$A_4$と$K$(Kleinの四元群) であり, これらは指数$2,6$であるから指数$4$になり得ない. よって矛盾である.
+
+\end{egans}
+
+
+\subsection{演習問題}
+\subsubsection{Level B}
+
+
+\begin{prob} (H20数学II-2)
+$K=\mb{C}(t)$, $p,q\in \mb{C}$, $L=\mb{C}(t^3+pt+q)$とする. $K/L$は代数拡大であることを示し, さらに$K/L$のガロア閉包とその$L$上の拡大次数を求めよ.
+\end{prob}
+
+
+
+\begin{prob} (H5数学II-2)
+$n\geq 2$, $L=\mb{C}(X)$, $K=\mb{C}(X^n + X^{-n})$とする.
+\ben
+\item $L$は$K$上のガロア拡大になることを示し, そのガロア群を求めよ.
+\item $n=3$のとき$L/K$の中間体をすべて求めよ.
+\een
+\end{prob}
+
+
+
+\subsubsection{Hint・Answer}
+\begin{probans}
+ガロア閉包を$\witi{K}$とする. $[\mb{C}(t):\mb{C}(t^3+pt+q)] = 3$は$T^3 - pT - q$の$\mb{C}(t)$上既約性から従う(仮に可約であれば一次の根を持つ. その根は整閉性から$\mb{C}[t]$に属すはずだが次数を見るとそれはあり得ない).
+$p=0$のとき$\witi{K} = \mb{C}(t)$となるので$[\witi{K}:L] = 3$. $p\neq 0$なら6である.
+\end{probans}
+
+\begin{probans} $X$は
+$T^{2n} -(X^n + X^{-n})T^n + 1$の根なので代数拡大. これの根は$\zeta^k X$と$\zeta^k X^{-1}$で, 正規拡大である. 標数0なので分離的. よってガロア拡大. $M=\mb{C}(X^n)$とする. $L\supset M \supset K$という列を考えると$[L:M] = n$である. $X\to X^{-1}$という自己同型$\mb{C}(X)\to \mb{C}(X)$で$K$の元はすべて固定されるが$M$はそうではないので$[M:K] = 2$である. $G = \gal{(L/K)}$とすると, $L=K(X)$であるから, $\sigma\in G$は$\sigma(X)\in \set{\zeta^k X, \zeta^k X^{-1}}_{k=0,1,\dots, n}$で決まる. \tf{これはアーベル群ではない.} $\sigma:X\mapsto \zeta X$, $\tau: X\mapsto X^{-1}$とする.
+\[\tau \sigma \tau^{-1} = (X\mapsto \zeta^{-1}X) = \sigma^{-1}\]
+なので, $G\cong D_{n} = \lan \sigma,\tau\mid \sigma^n = \tau^2 = e, \tau\sigma\tau^{-1} = \sigma^{-1} \ran$である. \\
+(2): $D_3 = S_3$で部分群は6個. 2次拡大は$\mb{C}(X^n)$. 3次拡大は, $\mb{C}(X+X^{-1}), \mb{C}(X+\zeta_3 X^{-1}), \mb{C}(X+\zeta_3^{2}X^{-1})$.
+\end{probans}
+
+
+
+
+\clearpage

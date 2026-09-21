@@ -1,0 +1,358 @@
+\section{可換環の理論の復習}
+以降$A$は環とする。
+\begin{prop} (対応定理)\\
+$A$を可換環とする。$A$の$I$を含むイデアル$J$と, $A/I$のイデアルは1:1に対応する。
+\end{prop}
+\begin{prop}
+$A$の任意のイデアル$I\subsetneq A$に対して, $I$を含む極大イデアルが存在する。
+\end{prop}
+
+
+
+\begin{theo} (\tf{中国剰余定理}, CRT)
+
+\end{theo}
+\begin{theo} (\tf{極大イデアルの存在})
+
+\end{theo}
+
+\begin{theo} (\tf{Hilbertの基底定理})
+
+\end{theo}
+
+\begin{theo}
+
+\end{theo}
+
+
+
+代数系の人が次の(i)を聞かれたという噂がある.
+\begin{egprob} (\cite{atimac} Ex1.2) \\
+$f=a_0+a_1x+\dots +a_nx^n\in A[x]$として, 次を示せ.
+\ben
+\item $f$が$A[x]$の単元である$\iff$ $a_0\in A^{\times}$で$a_1,\dots, a_n \in \sqrt{0A}$.
+\item $f\in \sqrt{0A[x]} \iff a_0,a_1,\dots, a_n \in \sqrt{0A}$.
+\item $f$が零因子$\iff$ $\exists a\in A\setminus{\set{0}}$, $af = 0$
+\item $(a_0,a_1,\dots, a_n) = (1)$であるとき, $f$は原始的であるという. $f,g\in A[x]$のとき, $fg$が原始的$\iff$ $f$と$g$が原始的.
+\een
+\end{egprob}
+\begin{egans}
+(1). $g=b_0 + b_1x + \dots + b_mx^m$が逆元とせよ. $b_ma_n = 0$, $b_{m}a_{n-1} + b_{m-1}a_n = 0$より$a_{n}^2 b_{m-1} = 0$を得る. 次に$b_{m}a_{n-2} + b_{m-1}a_{n-1} + b_{m-2}a_{n} = 0$なら$a_{n}^3 b_{m-2} = 0$を得る.  これを繰り返し, $a_{n}^{m+1}b_{0} = 0$を得る. $b_0a_0 = 1$で$b_0$は単元なので$a_{n}\in \sqrt{0A}$が示せた. よって$a_{n}x^n \in \sqrt{0A[x]}$ なので, \aka{$f-a_{n}x^n$は単元と冪零元の和であり, これは単元である.} よって, $n-1$次以下の主張に帰着されるから,帰納的に示すことができる. なお, $0$次の場合の主張は明らかである. $(\Leftarrow)$は, まさしく$a_1x+\dots + a_nx^n$が冪零元で$a_0$が単元であることから単元になる. \\
+(2) $\Leftarrow$はやさしい. 逆を示す. $a_n\in \sqrt{0A}$がすぐ分かるので, $a_{n}x^n\in \sqrt{0A[x]}$である. よって$\sqrt{0A}$はイデアルだから$f-a_nx^n\in \sqrt{0A[x]}$. これを続ければ$a_{0},\dots, a_{n-1}\in \sqrt{0A}$であることも言える.
+\end{egans}
+
+
+7
+\subsection{($\spadesuit$)発展的内容をいくつか}
+\subsubsection{(Local Property}
+可換環論および加群論の多くの場面で, $A$のすべての$\maf{p}$での局所化$A_{\maf{p}}$がある性質$\hana{P}$を持つことと$A$が性質$\hana{P}$を持つことが同値である。このような性質$\hana{P}$を局所的性質という。局所化もそうだが, この局所的という意味は, $A$がアファインスキーム$\spec{A}$上の正則函数環と思えるのに対し, $A_{\maf{p}}$は$\maf{p}\in \spec{A}$での十分近くの正則函数環と思えることから来ている。
+\begin{prop} (\tf{環のLocal Propertyまとめ})
+以下はLocal Propertyである。
+\ben
+\item 整閉性. つまり, $A$が整閉$\iff$ $\forall \maf{p}\in \spec{A}$, $A_{\maf{p}}$が整閉
+\item
+\een
+\end{prop}
+\begin{eg}
+「体である」という性質はLocal Propertyかどうか調べよう。$\forall \maf{p}, A_{\maf{p}}$が体とする。$A\neq 0$なので$\maf{p}$が少なくとも一つ存在する。このとき$\maf{p}A_{\maf{p}}$は$\maf{p}\in \spec{A}$に対応するが, $A_{\maf{p}}$が体なので$\maf{p}^{e} = \maf{p}A_{\maf{p}} = (0)$. $\maf{p} = \maf{p}^{ec} = \maf{p}A_{\maf{p}}\cap A = (0)$なので$\maf{p}=(0)$である。よって$A$の素イデアルは$(0)$のみである。$x\in A\setminus{\{ 0 \}}$かつ$x$が可逆でないならば, $x$を含む極大イデアルが存在するはずなので矛盾。よって$x$は可逆であり, $A$は体である。逆に体$A$の素イデアルは$(0)$しかなく, $A$と$A$の局所化は同じなのですべての素イデアルに対して局所化は体である。したがってLocal Propertyである。
+\end{eg}
+\begin{prac}
+$A=\mb{C}[X,Y]/(X^2,XY,Y^2)$の素イデアルを決定し, この環を考えることで, 被約性はLocal Propertyではないことを示せ。ただし環$A$が被約であるとは, $\mr{nil}{A} = \bigcap_{\maf{p}\in \spec{A}}\maf{p}$が零であることをいう。
+\end{prac}
+%Aの素イデアルは(X),(Y),(X,Y)で被約だが(X)での局所環A_{(X)}は素イデアルが(X)のみなのでnil(A_{(X)})は(X)A_{(X)}であり, これは零ではない。たとえばX/(X-a)  (aは0でない複素数)はベキ零元。
+
+\begin{egprob} (\tf{有名問題！}) \\
+整域であることはLocal Propertyであるか?
+\end{egprob}
+\begin{egans}
+\tf{No!} たとえば$A=\mb{Q}\times \mb{Q}$を考える. $\maf{p} = \mb{Q}\times 0$と$\maf{q} = 0\times \mb{Q}$がこの環の素イデアルのすべてであるが, このとき$A_{\maf{p}} \cong \mb{Q}$なので素イデアル局所化は整域である. しかし$A$は整域ではない. \\
+\underbar{$A_{\maf{p}}\cong \mb{Q}$について}
+
+\end{egans}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{例題集}
+
+\begin{egprob}
+環$R_1,R_2$に対して$R=R_1\times R_2$を直積環とするとき, 集合として
+\[R^{\times} = R_1^{\times} \times R_2^{\times}\]
+を示せ.
+\end{egprob}
+\begin{egans}
+$R^{\times}$の元は, とりあえず$(r_1,r_2)$と書ける($r_i \in R_i$). これが可逆だから$(r_1,r_2)(s_1,s_2)=(1,1)$となる$s_i\in R_i$が存在する. 左辺は$(r_1s_1, r_2,s_2)$だから$s_i = r_i^{-1}$であり$r_i \in R_i^{\times}$である. 逆に$r_i\in R_i^{-1}$を与えれば, $(r_1,r_2)$は$R$で逆元$(r_!^{-1}, r_2^{-1})$を持つので$(r_1,r_2)\in R^{\times}$である. \qed
+\end{egans}
+\begin{eg}
+$n\in \mb{N}$を素因数分解して$n=\prod_{j=1}^{d} p_j^{e_j}$とするなら, 環の中国剰余定理により
+\[\mb{Z}/n\mb{Z}\cong \prod_{j=1}^{d} \mb{Z}/p_j^{e_j}\mb{Z} \]
+なので
+\[(\mb{Z}/n\mb{Z})^{\times} \cong \parena{\prod_{j=1}^{d}(\mb{Z}/p_j^{e_j} \mb{Z})}^{\times} = \prod_{j=1}^{d} (\mb{Z}/p_j^{e_j}\mb{Z})^{\times}\]
+$\mb{Z}/N\mb{Z}$の位数はトーシェント関数により$\phi(N)$だから, 上の位数を比較することで, $\phi$の乗法性
+\[\phi(n) =  \prod_{j=1}^{d} \phi(p_j^{e_j}) = \prod_{j=1}^{d} p_j^{e_j} \parena{1-\dfrac{1}{p_j}} = n\disp\prod_{j=1}^{d} \parena{1-\dfrac{1}{p_j}}\]
+が導かれる. たとえば$\phi(48) = 48(1- \frac{1}{2})(1-\frac{1}{3}) = 16$である.
+\end{eg}
+
+\begin{egprob} (\cite{dummit}, 258p, 25)\\
+$R$を可換環とする。任意の$a\in R$に対して$n_{a}$という$a$に依存する2以上の自然数が存在するとき, $R$の素イデアルはすべて極大イデアルであることを示せ。
+\end{egprob}
+\begin{egans}
+$\maf{p}\subset R$を素イデアルとする。$\maf{p}$が極大でないとすると, $\maf{p}$を真に含む極大イデアル$\maf{m}$が存在する。$a\in \maf{m}\setminus{\maf{p}}$とする。$a^{n_{a}} = a$だから$a(a^{n_{a} - 1} - 1)=0\in \maf{p}$である。$a\notin \maf{p}$と$\maf{p}$が素イデアルでないことから$a^{n_{a}-1}-1\in \maf{p}\subset \maf{m}$である。ところが$a^{n_{a}-1}\in \maf{m}$であるから$1\in \maf{m}$となり矛盾である。\qed
+\end{egans}
+
+\begin{egprob} \label{egprob:Q_is_not_finitelygenerated_over_Z}
+$\mb{Q}$は有限生成$\mb{Z}$代数ではないことを示せ.
+\end{egprob}
+\begin{egans}
+混同しやすいことだが, 有限生成$A$加群と言われたら$\sum Ax_n$と書ける加群のことをいう. 有限生成$A$代数は, $A$係数有限変数多項式環の準同型像のことである. つまり(準同型定理からすると) イデアル$I\subset A[T_1,\cdots, T_n]$によって$A[T_1,\cdots,T_n]/I$で表せる環のことをいう. 有限生成$A$代数には, 当然多項式環$A[T]$にも含まれるわけだから, 有限生成$A$加群であるとは限らない.  \par
+本題に入る. もし$\mb{Q} = \mb{Z}[p_1,\cdots, p_N]$ ($p_i\in \mb{Q}$) と書けるなら, 既約分数表示における$p_1,\cdots, p_N$の分母に表れない素数$q$をひとつ選べば, $\frac{1}{q} \notin \mb{Z}[p_1,\cdots, p_n]$が示せるのでおかしい. \qed
+\end{egans}
+
+\begin{egprob} (有名問題)
+位数有限の整域は体であることを示せ。
+\end{egprob}
+\begin{egans}
+$A$を位数有限の整域とする。有限性から$a\in A\setminus{\{ 0 \}}$に対して$a^{n} = a^{m}$を満たす自然数$n,m$ ($n>m$)が存在する。$a^{m}(a^{n-m} - 1) = 0$だから整域の性質から$a^{n-m} = 1$または$a^{m} = 0$である。$a\neq 0$と整域の性質から後者は生じないので$a^{n-m} = 1$である。よって$a^{n-m-1}$が$a$の逆元であるから$A$は体である。
+\end{egans}
+
+
+\begin{egprob}
+次の非同型を示せ。
+\ben
+\item $\mb{Z}\not \cong \mb{Z}[\sqrt{-1}]$
+\item $\mb{C}\not \cong \mb{R}$
+\item $\mb{C}[x,y]/(xy)\not\cong \mb{C}\times \mb{C}$
+\item $\mb{C}[x,y]/(xy)\not\cong \mb{C}[x]\times\mb{C}[x]$
+\een
+\end{egprob}
+
+
+\begin{egprob}
+$\mb{Z}_{(2)}[T]$において, 極大イデアルは必ず2を含むか?
+\end{egprob}
+\begin{egans}
+反例: $(2T-1)$. このイデアルで割ると$\mb{Q}$になるので確かに極大である.
+\end{egans}
+\begin{egans}
+Jacobson根基(すべての極大イデアルの共通部分)を使って答えることもできる. もし$2$がそれに入るなら, $1+2T$は$\mb{Z}_{(2)}[T]$の可逆元である(Why?). これはおかしい.
+\end{egans}
+
+
+
+
+
+\begin{egprob} (9/12, Quiz, \cite{aoyukie} Ex1.4.1)
+\ben
+\item $\mb{Z}[\sqrt{2}]/(3+\sqrt{2}) \cong \mb{F}_{7}$であることを示せ。
+\item $\mb{Z}[\sqrt{5}]/(1+2\sqrt{5})$ は何か? (簡単な環と同定せよ)。
+\een
+\end{egprob}
+\begin{egans}
+(1): 同型$\mb{Z}[x]/(x^2-2) \cong \mb{Z}[\sqrt{2}]$でイデアル$(3+\sqrt{2})$はイデアル$(3+x,x^2 - 2)/(x^2 - 2$に対応するので
+\beqn
+&& (\mb{Z}[x]/(x^2 - 2))/((3+x,x^2-2)/(x^2-2))\\
+&\cong& \mb{Z}[x]/(x+3, x^2-2) \\
+&\cong & \mb{Z}/7\mb{Z}
+\eeqn
+ただし, 最後の同型は$[x] \mapsto -3 \bmod{7}$による($x=-3$の代入$\mb{Z}[x] \to \mb{Z}$から誘導される準同型)。
+
+(2) $\mb{Z}[\sqrt{5}] \cong \mb{Z}[x]/(x^2 - 5)$と$4x^2 - 20 = -(1+2x)(1-2x)-19$より
+\beqn
+&&\mb{Z}[\sqrt{5}]/(1+2\sqrt{5}) \\
+&\cong& (\mb{Z}[x]/(x^2 - 5)) / (1+2x, x^2-5)/(x^2 - 5)\\
+&=& (\mb{Z}[x]/(x^2-5)) / ( (1+2x,\textcolor{blue}{4x^2 - 20}, x^2 - 5)/(x^2-5))\\
+&\cong& \mb{Z}[x] / (1+2x, -19, x^2 - 5)\\
+&=& \mb{Z}[x]/(1+2x, 19, x^2-5) \\
+&\cong& (\mb{Z}[x]/(19))/(1+2x, x^2-5)\\
+&\cong& \mb{F}_{19}[x] / (1+2x, x^2-5)\\
+&=& \mb{F}_{19}[x]/(10+x,x^2-5)\quad (\because 10(1+2x) = x+10)\\
+&\cong& (\mb{F}_{19}[x]/(x+10))/(10+x,x^2-5)/(10+x)\\
+&\cong& \mb{F}_{19}/(19, 9^2 - 5)\qquad (\because x=9の代入)\\
+&=& \mb{F}_{19}/(0) \\
+&=& \mb{F}_{19}
+\eeqn
+\end{egans}
+
+
+\tbox{
+\begin{egprob}
+\ben
+\item PIDではないUFDの例は?。
+\item Noetherでない環の例は?
+\item ArtinでないNoether環は?
+\item UFDでない整閉整域の例は?
+\een
+\end{egprob}
+}{title=環のクラスと反例}
+\begin{egans}
+(1):$\mb{Z}[x], \mb{R}[x,y]$など。まずUFDの多項式環はUFDであるから, この両者はUFDである。そして「PIDの0でない素イデアルは極大イデアル」であることによって, どちらもPIDではないことが分かる($(x) \subset \mb{Z}[x]$, $(x)\subset \mb{R}[x,y]$はともに極大でない素イデアルである)。なお, 単項でないイデアルの存在を示してもよい。たとえば, $(x,2)\subset \mb{Z}[x]$や$(x,y) \subset \mb{R}[x,y]$などがある。\\
+(2): $k[x_1,\cdots]$\\
+(3): $\mb{Z}$. \\
+(4): \bolm{\mb{Z}[\sqrt{-5}]}. 仮にこれがUFDだとすると\tf{既約元は素元になる.}よって既約元分解が一意である.  この環は整数環なので$\mb{Z}$の$\mb{Q}(\sqrt{-5})$における整閉包であり整閉整域である. ノルムを見ることで2,3は既約元であることが分かる. $1\pm \sqrt{-5}$も素元である. しかし
+\[2\cdot 3 = (1+\sqrt{-5})(1-\sqrt{-5})\]
+で分解が一意でなく, 矛盾.\qed
+
+\end{egans}
+
+
+
+
+
+\begin{egprob} (\cite{aoyukie})
+$\mb{C}[x,y,z]/(z^2 - xy)$が正規環であることを示せ。
+\end{egprob}
+\begin{egans}
+\chatgpthint{超曲面環にSerreの判定条件$(R_1)+(S_2)$を適用してください。}
+\end{egans}
+
+
+
+
+
+\begin{egprob}
+$\maf{p} = (2+\sqrt{-1})$を$A:=\mb{Z}[\sqrt{-1}]$のイデアルとする。$A_{\maf{p}}$は$\mb{Z}_{(5)}$上整ではないことを示せ。
+\end{egprob}
+\begin{egans}
+$\dfrac{1}{2-\sqrt{-1}} = \dfrac{2-\sqrt{-1}}{5}\in A_{\maf{p}}$である。これを$x$とおく。もし$x$が$\mb{Z}_{(5)}$係数の整等式を満たせば, 適当な5で割れない整数$m$によって$mx$が$\mb{Z}$係数の整等式を満たすようにできる。$\mb{Z}[\sqrt{-1}]$は$\mb{Q}(\sqrt{-1})$における$\mb{Z}$の整閉包だが, $mx\notin \mb{Z}[\sqrt{-1}]$なので矛盾である。\qed
+\end{egans}
+\begin{rem}
+$A$は$\mb{Z}$上整である。$S=\mb{Z}-5\mb{Z}$とするとき,$S^{-1}A$は$S^{-1}\mb{Z}$上整である(局所化は整従属を保存するため\footnote{\cite{atiyah}の5章参照})。これは上の問題とは異なる。つまり, $A\subset B$が整拡大でも$A_{\maf{p}^{c}} \subset B_{\maf{p}}$が整拡大とは限らない。なお, $S^{-1}A$は言葉でいえば「本質的には分母に5が来ない$\mb{Q}(\sqrt{-1})$の元の「集合」だから解答する際「分母に5が来てしまうようなものを見つければ勝てそう」と思える。
+\end{rem}
+
+
+\begin{egprob} (2019代数I期末1)
+整域$A$は環$R$の部分環とする。$S=A\setminus{\{ 0 \}}$とする。$R$が$A$加群として平坦であり,  $R$の$S$による局所化$S^{-1}R$が整域であるとするとき, $R$も整域であることを示せ。
+\end{egprob}
+\begin{egans}
+自然な準同型$\pi: R\to S^{-1}R$を考える。$R$が整域でないとする。ある$R$の元$x,y\neq 0$が存在して$xy=0$である。このとき$\pi(xy) = xy/1 = 0$であるから, $S^{-1}R$が整域であることより$x/1 = 0$または$y/1 = 0$である。$x/1=0$として考える。ある$s\in S$が存在して$sx = 0$である。したがって$s$を掛けるという写像$\phi:R\to R$は$\ker{\phi}$に$x$を含むので単射ではない。
+
+一方で, $s$を掛ける写像$\psi:A\to A$は, $s\neq 0$と$A$が整域であることから単射である。$R$は$A$加群として平坦であるから, テンソル関手$\tens_{A} R$は単射を保つ。したがって
+\[\psi \tens \mr{id}_{R}:  A\tens_{A} R \to A\tens_{A} R\]
+は単射である。ところが, $A\tens_{A} R \cong R$により$\psi$は$\phi$そのものと同一視できるため, $\phi$が単射でないことに反する。よって矛盾であり$R$は整域である。
+\end{egans}
+
+
+\newpage
+\begin{egprob} (数学II)
+$p$を素数とし, 位数$p^2$の(可換とは限らない)環$A$を考える。
+\ben
+\item $A$が可換環であることを示せ。
+\item $A$の同型類をすべて答えよ。
+\een
+\end{egprob}
+
+
+
+
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{演習問題}
+\subsubsection{Level A}
+
+
+\begin{prob}
+2変数多項式環$\mb{Z}[t,s]$の部分環$\mb{Z}[t^2,ts,s^2]$は$\mb{Z}[x,y,z]/(y^2-xz)$に同型であることを示せ。
+\end{prob}
+
+\begin{prob}
+$\mb{Z}[\sqrt{-5}]/(3) \cong \mb{F}_{3}\times \mb{F}_{3}$であることを示せ。
+\end{prob}
+
+\begin{prob} (H21留学生入試) [解答あり] \label{prob:H21F3}
+Let $\mb{C}[x]$ be the polynomial ring over the field $\mb{C}$ of complex numbers.  We define a subset $I$ of $\mb{C}[x]$ by
+\[I= \{ f(x)\in \mb{C}[x]\mid f(1) = f'(1) = 0 \},\]
+where $f'$ denotes the derivative of $f$.  Show that $I$ is an ideal of $\mb{C}[x]$ and compute the dimension of the quotient ring $\mb{C}[x]/I$ as a vector space over $\mb{C}$.
+\end{prob}
+
+\subsubsection{Level B}
+
+
+\begin{prob} (H19-I-3) \label{prob:H19I3}
+$\mb{Z}[\sqrt{-3}]$のイデアルで$4$を含むものをすべて求めよ。
+\end{prob}
+
+
+\begin{prob} (\cite{aoyukie}, Ex2.7.7)
+$\mb{C}[x,y,z]/(x^2+y^3+z^5)$が正規環であることを示せ。
+\end{prob}
+
+\begin{prob}
+$A=\mb{Z}[\sqrt{-5}]$のイデアル$I=(5+4\sqrt{-5}, 15-3\sqrt{-5})$の素イデアル分解を求めよ。
+\end{prob}
+
+\begin{prob}
+$A=\mb{Q}[x,y,z]/(x^2y^2-z^3)$とし, $p\in \mb{Q}[x,y,z]$の同値類を$\ovl{p}$とする。
+\ben
+\item $A$は整域であることを示せ。
+\item $I=(\ovl{x},\ovl{y})$, $J=\ovl{x},\ovl{z})$はそれぞれ素イデアルであるか, 説明せよ。
+\item 単項イデアル$(\ovl{x}\ovl{z})$を含む素イデアルで, 極大イデアルでないものを全て求めよ。
+\een
+\end{prob}
+
+\begin{prob} (\tf{}) \checkbox\\
+次の環の素イデアルの個数を求めよ。
+{\small
+\[\parena{\mb{Z}/2\mb{Z}\times \mb{Z}/4\mb{Z}\times \mb{Z}/12\mb{Z}}\tens_{\mb{Z}} \parena{\mb{Z}/14\mb{Z}\times \mb{Z}/42\mb{Z}\times \mb{Z}/84\mb{Z}\times\mb{Z}/420\mb{Z}} \]
+}
+\end{prob}
+
+\begin{prob}
+可換環の二つの単項イデアルの共通部分はまた単項イデアルですか?
+\end{prob}
+
+\subsubsection{Level C}
+
+\subsubsection{Level X}
+\begin{prob} (PIDだがEuclid整域でない例, $\mac{O}_{\mb{Q}(\sqrt{-19})}$)はPIDだがEuclid整域でないことを示せ。
+\end{prob}
+
+
+
+
+\subsubsection{Hint・Answer}
+{\small
+\begin{probans}
+$\phi:\mb{Z}[x,y,z] \to \mb{Z}[t,s]$を$x\mapsto t^2,y\mapsto ts, z\mapsto s^2$で核を計算せよ.
+\end{probans}
+\begin{probans}
+$\mb{Z}[\sqrt{-5}]\cong \mb{Z}[x]/(x^2+5)$で, $\mb{F}_{3}[x]/(x^2+5)$を考える.
+\end{probans}
+\begin{probans}
+$I=((x-1)^2)$を示す。ただし右辺は$(x-1)^2$で単項生成されるイデアル。$I\supset ((x-1)^2)$は自明。$f(x)\in I$なら, $f(1)=0$から$f(x) = (x-1)g(x)$と書ける。$f'(x) = g(x) + (x-1)g'(x)$なので$f'(1) = g(1) = 0$. よって$g(x)=(x-1)h(x)$と書ける。よって$f(x) = (x-1)^2 h(x) \in ((x-1)^2)$.  $x=1$中心のTaylor展開により$\mb{C}[x]/I$は$[a(x-1)+b]$ ($a,b\in \mb{C}$)全体の集合である([]で剰余類を表す)。$[a(x-1)+b] = a[x-1] + b[1]$である。$a[x-1]+b[1] = c[x-1] + d[1]$ならば$[(a-c)(x-1) + (b-d)] = [0]$であるから, $(a-c)(x-1) + (b-d) \in I$である。$F(x) = (a-c)(x-1)+(b-d)$とおく。$F(1) = F'(1) = 0$からただちに$a=c, b=d$が従う。よって$\{ [1], [x-1] \}$は$\mb{C}[x]/I$を$\mb{C}$上生成し, かつ一次独立である。よって$\dim_{\mb{C}}\mb{C}[x]/I = 2$.
+\end{probans}
+
+%%%B
+
+\begin{probans}
+$\mb{Z}[\sqrt{-3}] \cong (\mb{Z}/4\mb{Z})[x]/(x^2-1)$を示し, そのイデアルを求めよ。この環の位数は16で, イデアルの位数は$16$である。この環の元の単元を決定せよ(8個ある)。
+\end{probans}
+\begin{probans}
+\chatgpthint{Jacobian判定とSerreの正規性判定を使ってください。}
+\end{probans}
+\begin{probans}
+\chatgpthint{$I$を共役イデアルと積み、各素数上の指数を比較してください。}
+\end{probans}
+\begin{probans}
+素イデアル分解に現れる素イデアルは必ず$I$を含むから, $A/I$の素イデアルをすべて決定するとよい。$A\cong \mb{F}_{5}[x]/(x^2+5)$である。$A/I$は何と同型か?
+\end{probans}
+\begin{probans}
+(1): ごり押しはなるべくしたくない。\textbf{\bolm{\phi(f(x,y,z)) \to f(t^3,s^3,t^2s^2)}という準同型$\mb{Q}[x,y,z]\to \mb{Q}[s,t]$を考えよ。$\ker{\phi}$は何か?}ところで, この写像の思い付き方は次のような思考過程による。$x^2y^2-z^3=0$で表される「図形」をある意味でパラメータづけたい。一変数では難しそうだから2変数$s,t$を使って考えてみる。与えられた$x,y$に対して$x=s^3, y=t^3$としてみれば$z$は$s^2t^2$であるべきだろう。(2): $A/I,A/J$は何と同型か。(3):$A/(\ovl{x}\ovl{z})$は何と同型か。そして, $\mb{Q}[x,y,z]$のどのような素イデアルと対応するのか。剰余環のイデアル対応定理は, 極大性を保存することにも注意せよ。
+\end{probans}
+\begin{probans}
+$k[t^2,t^3]$で探せる.
+\end{probans}
+}
+
+
+\clearpage

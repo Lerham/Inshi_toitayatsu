@@ -1,0 +1,254 @@
+\section{様々な順序交換}
+経験上, 院試で見かけたことはあまりないが, 数学科の宿命ともいうべきテーマである. これは気になる人のための節である.\par
+順序交換は解析学では必須のテクニックである.とくに極限と積分, 極限と総和の交換は冪級数に絡めて使うこともできる.  複素解析においてはLaurent展開であったり, Fourier解析学ではFourier展開などでは重宝するものである.
+重要と思われる順番に述べていく.
+
+
+\subsection{lim v.s. Int}
+次はいつ成り立つのかを覚えなければならない.
+\[\lim_{n\to \infty} \int_{I} f_n(x)\, dx = \int_{I}\lim_{n\to \infty} f_n(x)\, dx\]
+覚えておくべき点は次のようなことである.
+\ben
+\item 積分範囲$I$に関する条件は?
+\item $\{ f_n \}$に関する条件は?
+\een
+
+\begin{theo}
+$I$が\tf{有界閉区間}で, $\set{f_n(x)}$は$\mb{R}$上の連続関数列で$f(x)$に一様収束しているものとする. このとき, 積分と極限の順序交換が可能である.
+\end{theo}
+
+もう少し広い範囲では次が成り立つ.
+\begin{theo} (\tf{Arzelaの定理}, \href{https://www2.math.kyushu-u.ac.jp/~hara/lectures/05/biseki4b-051214.pdf}{九州大pdf}) \\
+$I=(a,b)$で定義された連続関数の列$\set{f_n(x)}$が
+\ben
+\item $n$について一様有界, つまり$n,x$によらない定数$M$があってすべての$n\geq 0$と$x\in I$に対して$|f_n(x)|\leq M$
+\item $f(x) = \lim_{n\to \infty} f_n(x)$が存在して$I$で連続
+\een
+を満たしているとする. このとき積分と極限は交換できる.
+\end{theo}
+\prf 仮定より$f$も有界である.
+$f_n(x)$を$f_n(x) - f(x)$に置き換えて, $f(x)\equiv 0$としてよい. このとき示すべきことは$\int_{I}|f_n(x)|\, dx \to 0$である. 簡単のために$I=(0,1)$とする. \par
+$\epsilon > 0$を一つ与える. $I_{\epsilon} = [\epsilon,1-\epsilon]$とする. 十分大きい$n$から $\int_{I}|f_n(x)|\, dx < C\epsilon$となることを示したい($C$は定数). ここで
+\[\int_{I}f_n(x)\, dx = \int_{I-I_{\epsilon}}|f_n(x)|\, dx + \int_{I_{\epsilon}}|f_n(x)|\, dx\]
+であり, 右辺の最初の積分は一様有界性によって$2M\epsilon$以下. よって十分大きい$n$で$\int_{I_{\epsilon}}|f_n(x)|\, dx<C'\epsilon$とできればよい. \par
+自然数$N$を固定し, 積分区間$I_{\epsilon}$を$N$等分する. $N$等分点を$x_{\epsilon,k}$ ($k=1,\dots, N-1$)とおく. また, $x_{\epsilon,0} = \epsilon$, $x_{\epsilon,N} = 1-\epsilon$とおく. \textit{（以下, 証明未完）}
+\qed
+
+
+\begin{eg} (一様収束を外した場合に交換できない例)\\
+有界閉区間上で各点収束するものの一様収束せず, 極限と積分を交換できない例を構成します. Arzel\`aの定理を踏まえると, 一様有界性を外せばよいことが分かります. たとえば$[0,1]$上で, $(0,0), (1/n,n), (2/n,0)$を線分で結んだグラフを考えます. これを0で拡張して$[0,1]$上の関数とみなすと, 積分値は常に1である一方, \tf{0に各点収束します.}したがって極限と積分は交換できません.
+\end{eg}
+
+\begin{eg} (積分範囲を$\mb{R}$にした場合に交換できない例)
+$f(x)$は$[0,1]$上に台を持つ$\mb{R}$上の連続関数で$\int_{\mb{R}}f(x)\, dx =  \int_{0}^{1} f(x)\, dx=1$なるものとする. $f_n(x) = f(x+n)$とする. このとき$f_n(x)$は$0$に各点収束するが, 一様収束はしない. そして, 積分の順序交換は成り立たない. 実際, $\lim_{n\to \infty} \int_{\mb{R}} f_n(x) \, dx = 1$だから.
+\end{eg}
+
+\begin{eg}
+先の例では一様収束していませんでしたが, 一様収束しても交換できない例があります. たとえば, $f_n(x) = \mb{I}_{[0,n]}(x)\dfrac{1}{n^2}(n-x)$とします. そのグラフは, 面積$1/2$を保ったまま横に広がる直角三角形です. このままでは連続でないので, $f_n(x)$を滑らかに補間した$g_n(x)$を考えます. $g_n$は0に各点収束し, 高さが次第に小さくなるため一様収束もします. しかし, $\int_{\mb{R}}g_n(x)\, dx \geq \frac{1}{2}$なので極限と積分の交換は成り立ちません. この例でLebesgue積分の収束定理を適用できないのは, 優関数が存在しないためです.
+\end{eg}
+
+\begin{prac}
+上の例において, なぜ優関数が見つけられないか? つまり, $|f_n(x)|\leq g(x)$なる$\mb{R}$上の可積分関数$g$が存在しないことを示せ.
+\end{prac}
+
+
+\begin{egprob}
+
+\end{egprob}
+
+\subsubsection{Int v.s. Sum(項別積分)}
+\begin{eg} (交換できない例)
+
+\end{eg}
+\newpage
+
+
+
+
+
+
+
+
+
+\subsection{lim v.s. Dif}
+\tbox{
+\begin{theo}
+各$f_n(x)$は区間$I$上で$C^1$級とする. $\set{f_n'(x)}$が$I$上一様収束するとき, $\set{f_n(x)}$がある1点$x_0\in I$で収束するならば, $I$上すべての点で収束して, 極限関数$f(x)$も$I$上$C^1$級であって, 次の式が成り立つ.
+\[
+f'(x) = \dfrac{d}{dx} \parena{\lim_{n\to \infty} f_n(x)} = \lim_{n\to \infty} \parena{\dfrac{d}{dx} f_n(x)}
+\]
+\end{theo}
+}{}
+\prf
+\[f_n(x) = \int_{x_0}^{x} f_n'(t) dt + f_n(x_0)\]
+である. $f_n'(t)$は$\lim_{n\to \infty} f_n'(t)$に一様収束するから, 極限と積分の順序交換が可能であって,
+\[\lim_{n\to \infty}f_n(x) = \int_{x_0}^{x} \lim_{n\to \infty} f_n'(t)\, dt  + f(x_0)\]
+である. $\lim_{n\to \infty} f_n'(x)$は連続関数の一様収束極限なので連続であって, 右辺は$x$に関して微分可能であることがわかり, $x$で微分して
+\[\dfrac{d}{dx}\parena{\lim_{n\to \infty} f_n(x)} = \lim_{n\to \infty} f_n'(x)\]
+となる. \qed
+
+
+
+
+\subsubsection{Dif v.s. Sum(項別微分)}
+\begin{eg}(交換できない例)
+
+\end{eg}
+.
+複素関数論で扱われるWeierstrassの$\wp$関数の二重周期性を示すときに項別微分は用いられる.\par
+Weierstrassの$\wp$関数についてまず復習しよう.$L\subset \mb{C}$が格子, すなわち$\omega_1/\omega_2 \notin \mb{R}$なる複素数$\omega_i$を用いて
+\[ L = \{ n\omega_1 + m\omega_2 \mid n,m\in \mb{Z} \}\]
+と表される離散部分群であるとする.このとき, Lに関するWeierstrassの$\wp$関数とは
+\[\wp(z) = \dfrac{1}{z^2} + \sum_{\omega\in L, \omega\neq 0} \parenb{\dfrac{1}{(z-\omega)^2}  -  \dfrac{1}{\omega^2}}\]
+と定義されるのであった.次は$\wp$関数の基本性質である.
+\begin{prop}
+格子$L$を固定する.このとき, $\wp$関数は以下の性質を持つ.
+\ben
+\item $\wp(z)$は$L$を含まない任意のコンパクト集合で広義一様収束する.
+\item $\wp(z)$は偶関数である.
+\item (\tf{二重周期性)} $\wp(z+\omega_1) = \wp(z+\omega_2) = \wp(z)$
+\een
+\end{prop}
+\prf (1): $K$を$K\cap L = \varnothing$なるコンパクト集合とする.$K$は有界なので, 十分大きい自然数$N$を取り
+\[\omega\in L , |\omega| > N \implies \abs{\dfrac{z}{\omega} - 1} \geq \dfrac{1}{2}\]
+であるようにできる.つまり$|\omega|>N$ならば$|z-\omega| \geq \dfrac{1}{2}|\omega|$である.ところで,
+\beqn
+\dfrac{1}{(z-\omega)^2} - \dfrac{1}{\omega^2} = \dfrac{z}{\omega(z-\omega)^2} + \dfrac{z}{\omega^2(z-\omega)}
+\eeqn
+なので, 右辺を三角不等式で評価して$|z-\omega|\geq \dfrac{1}{2}\omega$を使えば
+\[\abs{\dfrac{1}{(z-\omega)^2} - \dfrac{1}{\omega^2}} \leq \dfrac{6|z|}{|\omega^3|}\]
+が確かめられるだろう.また,
+\[f(z):= \sum_{|\omega|\leq N} \parenb{\dfrac{1}{(z-\omega)^2} - \dfrac{1}{\omega^2}}\]
+は収束性に影響しない.$|f(z)|, |z|$はどちらも$K$上有界なので, 定数$M>0$で抑えられる.よって, 級数から$f(z)$を無視したとき,
+\[\abs{\sum_{|\omega| > N} \parenb{\dfrac{1}{(z-\omega)^2} - \dfrac{1}{\omega^2}}} \leq 6M \sum_{|\omega|\geq N} \dfrac{1}{|\omega|^3}\]
+が分かる.そこで次を示そう.
+\begin{claim}
+$\sigma > 2$に対し, $\disp\sum_{\omega \in L \setminus{\{ 0 \}}} \dfrac{1}{\omega^{\sigma}}$は絶対収束する.
+\end{claim}
+\prf
+$n\omega_1 + m\omega_2\in L$のうち, $n$と$m$のどちらかが$\pm r$ ($r\in \mb{N}$)であるようなもの全体を$L_r$とおき, 級数を$P_r$上の和の総和と見て計算する.すなわち,
+\[a_r = \sum_{\omega\in L_r} \dfrac{1}{\omega^{\sigma}} \]
+とおき, $\sum_{\omega\in L\setminus{\{ 0 \}}} \dfrac{1}{\omega^{\sigma}}$を$\sum_{r=1}^{\infty} a_r$として計算する.\tf{$L_1$の各点と原点$0$の間は多少離れているので, その最小距離を$a$とする.}このとき, $\omega\in L_r$は$|\omega| \geq ra$を満たす.よって
+\[|a_r| \leq \sum_{\omega\in L_r} \dfrac{1}{|\omega|^{\sigma}} \leq \dfrac{\sharp L_r}{(ar)^{\sigma}} = \dfrac{C}{r^{\sigma - 1}} \quad (C:\text{定数})\]
+よって絶対収束する級数$C\sum_{r=1}^{\infty} \dfrac{1}{r^{\sigma - 1}}$と比較すればよい.
+(\tf{Claim証明終})
+
+(2): 容易.
+
+(3): $\wp(z)$の形式的な微分は
+\[-2\cdot \dfrac{1}{z^3} -2\sum_{\omega\in L\setminus{\{ 0 \}}} \dfrac{1}{(z-\omega)^3}  = -2\sum_{\omega\in L} \dfrac{1}{(z-\omega)^3} \]
+である.これが広義一様絶対収束することは(1)と同様な評価$|\omega| > N \implies |z-\omega| \geq \frac{1}{2}|\omega|$を用いることでに示せるので省略する.よって, \tf{導関数和の広義一様収束と級数の各点収束が分かっているので項別微分可能である.}  よって$\wp'(z)$は最初に形式的に書いたものに一致する.これは明らかに$\wp'(z) = \wp'(z+\omega_i)$を満たすので, $\wp(z) - \wp(z+\omega_i) = c_i$となる定数$c_i$が存在する.$z=-\frac{\omega_i}{2}\notin L$とすると, (2)より$c_i = 0$が分かる.\qed
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Int v.s. Dif (積分記号下の微分)}
+\besha
+\begin{theo} (\tf{積分記号下の微分})
+$K=[a,b]\times [t_1,t_2]$とする.$f(x,t)$が2変数$x,t$の関数として連続ならば, $t\in [t_1,t_2]$の関数として
+\[F(t) = \int_{a}^{b} f(x,t)\, dx\]
+が定まる.ここだけの呼び名で, $t$をTimeと呼ぶことにする.この仮定のもとにおいて, 次が従う.
+\ben
+\item $F(t)$は$[t_1,t_2]$上連続
+\item $\disp\int_{t_1}^{t_2} F(t)\, dt = \int_{a}^{b}\int_{t_1}^{t_2}f(x,t)\, dt\, dx$
+\item Timeによる偏微分$f_{t}(x,t)$が$K$で連続ならば,
+\[\bolm{\dfrac{d}{dt}F(t) = \disp\int_{a}^{b} f_t(x,t)\, dx}\]
+\een
+\end{theo}
+\ensha
+\begin{egprob} (H18数学I, 有名問題)
+$t>0$に対して広義積分$\disp\int_{0}^{\infty} e^{-tx}\dfrac{\sin{x}}{x}\, dx$を計算せよ.
+\end{egprob}
+\begin{egans}
+\step{1}{Int v.s. Dif}\\
+$F_n(t) = \disp\int_{0}^{2n\pi} e^{-xt}\dfrac{\sin{x}}{x}\, dx$ とおく.$f(x,t):= e^{-xt}\dfrac{\sin{x}}{x}$は明らかに$(x,t)\in [0,2n\pi]\times I$で連続で($I\subset (0,\infty)$は任意の有界閉区間), Timeの偏微分$f_{t}$も連続である.よって$F_n$に対しては積分記号化の微分が適用できる.$e^{-xt}\sin{x}$の$x$に関する原始関数が
+\[-\dfrac{t}{t^2+1} e^{-xt}\sin{x} - \dfrac{1}{t^2+1}e^{-xt}\cos{x}\]
+であることは高校数学であり\footnote{$Ae^{-xt}\sin{x} + Be^{-xt}\cos{x}$の$x$微分が$e^{-xt}\sin{x}$となるように$A,B$を求めればよく, 簡単な線形代数(連立方程式)でわかる.}, $I$が任意に取れることに注意すると
+\[\dfrac{d}{dt}F_n(t) = -\int_{0}^{n\pi}e^{-xt}\sin{x}\, dx = \dfrac{e^{-2nt\pi} - 1 }{t^2+1} \quad (\forall t>0)\]
+となる.
+
+\step{2}{Dif v.s. lim} さて, 次のStepは微分と極限の順序交換の過程
+\[\dfrac{d}{dt}\lim_{n\to \infty}\int_{0}^{2n\pi} e^{-xt}\dfrac{\sin{x}}{x}\, dx = \lim_{n\to \infty} \dfrac{d}{dt} F_n(t) = \dfrac{-1}{t^2+1} \]
+の2つめの等号である(他は自明な計算である).これを行うには, 関数列$\{ F_n'(t) \}$がその極限関数$-\frac{1}{t^2+1}$に広義一様収束することを示せばよい.実際, 有界閉区間$I\subset (0,\infty)$に対して $\sup_{t\in I}|f(t)| = \norm{f}_{I}$とおくと, 次で分かる.
+\[\norm{\dfrac{-1}{t^2+1} - F_n'(t) }_{I} = \norm{\dfrac{e^{-2tn\pi}}{t^2+1}}_{I}\leq \norm{e^{-2nt\pi}} \to 0 (n\to \infty)\]
+(\ao{ここで$I=[a,b]\subset (0,\infty)$が$a>0$を満たすことを使った！}) \par
+よって交換可能である.もう一度言うと, 上で示したことは, $F(t):=\lim_{n\to \infty} F_n(t)$とおいたときに$F'(t) = \frac{-1}{t^2+1} (t>0)$であるということである.よって, $T>0, N\in \mb{N}$のとき
+\beqn
+F(T) &=& F(N) + \int_{N}^{T} F'(t)\, dt = F(R) -\int_{N}^{T} \dfrac{dt}{t^2+1} \\
+&=& F(N) -\mr{Arctan}(T) + \mr{Arctan}(N)
+\eeqn
+である.\\
+\step{3}{$\disp\lim_{N\to \infty}F(N) = 0$} \\
+これが示せれば, $F(T) = 0 - \mathrm{Arctan}(T) + \frac{\pi}{2} = \mr{Arctan}(1/T)$が導かれる！積分と極限の順序交換を考えてもいいのだが, 区間が無限なので素朴に評価する\footnote{$\sin{x}/x$が有界なのでLebesgue収束定理を使うのもよい.ただし$N\geq 1$としておくこと.$\sin{x}/x$は$[0,\infty)$において広義Riemann可積分だがLebesgue可積分ではない.}.より一般に, 次を示せばいいだろう.
+\begin{claim}
+$g(x)$は$[0,\infty)$上の連続関数で, $\lim_{x\to \infty}g(x)\to 0$を満たすものとする.このとき,
+\[\lim_{N\to \infty} \int_{0}^{\infty} e^{-Nx} g(x)\,dx  = 0\]
+である.
+\end{claim}
+(\tf{Claim証明}) $g(x)$が有界であれば, $|g(x)| \leq M$となる定数$M$を取り,
+\[\int_{0}^{\infty} e^{-Nx} M\, dx = \dfrac{M}{N}\]
+により証明はただちに終わる.そのため$g(x)$が有界であることを示せばよいが, これも以下の通り易しい.実際, 極限の過程からある$x>R$では$|g(x)| < 1$であるとしてよく, $[0,R]$上では有界閉区間の連続関数なので最大値を持つはずである.よって$g(x)$は有界である.
+(\tf{Claim証明終})
+
+以上より,
+\[\bolm{\disp\int_{0}^{\infty} e^{-tx}\dfrac{\sin{x}}{x}\, dx = \mr{Arctan}{\parena{\dfrac{1}{t}}} }\]
+\end{egans}
+
+
+
+\newpage
+
+\newpage
+\subsection{Dif v.s. Dif (Youngの定理)}
+\begin{eg} (交換できない例)
+
+\end{eg}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{例題}
+
+
+\subsection{演習問題}
+\subsubsection{Level A}
+\begin{prob} (RIMS, H24基礎)
+$\mb{R}$上の関数
+\[f(t) = \int_{0}^{1} \dfrac{e^{-t^2(1+x^2)}}{1+x^2}\, dx + \parena{\int_{0}^{t}e^{-x^2}\, dx}^2\]
+の具体形を求めよ. 積分を用いずにできるだけ簡単な形で表すこと.
+\end{prob}
+\newpage
+\subsubsection{Hint・Answer}
+{\small
+\begin{ans}
+最初の積分の被積分関数は$t$でなめらか. 積分記号下の微分より
+\[f'(t) = -2t\int_{0}^{1} e^{-t^2(1+x^2)}\, dx + 2e^{-t^2}\int_{0}^{t} e^{-x^2}\, dx = 0.\]
+よって$f(t) = f(0) = \frac{\pi}{4}$.
+\end{ans}
+}
+
+
+
+\clearpage

@@ -1,0 +1,321 @@
+\section{イデアル}
+環の\tf{イデアル}とは, 環$A$の加法に関する部分群であって, $x\in A$, $r\in I$ならば$rx\in I$を満たすようなものであった。とくに$A$でないイデアルのなかで極大なものを\tf{極大イデアル}といい, $x,y\notin \maf{p}\implies xy\notin\maf{p}$を満たすイデアル$\maf{p}$を素イデアルというのであった。また, 極大イデアルは素イデアルである。環準同型$\phi:A\to B$に対して$\ker{\phi}$は$A$のイデアルであり, $\im{\phi}$は$B$の部分環である。院試においては, 素イデアルを求める問題であったり, 環の同型を使って素イデアルであることを判定する問題が頻出である。
+
+
+
+
+\subsection{準同型定理}
+
+\begin{egprob}
+$(x^2-y^3)$は$\mb{C}[x,y]$の素イデアルであることを示せ。
+\end{egprob}
+\begin{screen}
+これは定義通りにやるようなものではない。$\mb{C}[x,y]/(x^2-y^3)$がある整域と同型であればよい。そのためには整域$A$として環準同型$\phi:\mb{C}[x,y]\to A$で$\ker{\phi}=(x^2-y^3)$となるものが欲しいが...
+\end{screen}
+\begin{egans}
+曲線$y^3=x^2$の媒介変数表示を与えるということを考え, $\phi:\mb{C}[x,y] \to \mb{C}[t]$; $\phi(f(x,y)) = f(t^3,t^2)$とおく. このとき$\phi$は整域への環準同型であって, $\im{\phi}$は整域の部分環だから整域である. よって$\ker{\phi}$は素イデアルである. そして, $\ker{\phi} = (x^2-y^3)$を示す. [証明] $\ker{\phi}\subset (x^2-y^3)$を示す. $f(x,y)\in \ker{\phi}$であるなら,
+\[f(x,y) = (x^2-y^3)Q(x)  +  xf_1(y) + f_2(y)\]
+と書けるので,$\phi$を通し
+\[t^3f_1(t^2)+f_2(t^2) = 0\]
+である. 左辺の第1項はすべて奇数次で, 第2項はすべて偶数次なので, $\mb{C}[t] = \oplus_{d\geq 0} \mb{C}t^d$により$f_1(t^2),f_2(t^2) = 0$でなければならない. ここから$\mb{C}[x,y]$の元として$f_1,f_2 = 0$が従うからこの包含関係が示せた. 逆の包含は当たり前である. \qed
+\end{egans}
+
+
+
+
+\subsection{($\heartsuit$)剰余環の計算}
+剰余環はなるべく簡単なものにして直すべきである。
+\begin{prop} (剰余環まとめ)
+\ben
+\item (\tf{中国剰余定理}) $I,J$が互いに素なイデアル($I+J=A$)のとき, $IJ=I\cap J$であり, 次の環同型が存在する。
+\[A/IJ \cong A/I \times A/J\]
+\item $\{ A/I \text{のイデアル}\}$と $\{ A\text{のイデアルで}I\text{を含むもの} \}$には全単射がある。
+\een
+\end{prop}
+\prf (1): 方針は$\pi:A\to A/I\times A/J$という自然な射から準同型定理を用いることである.\\
+\fbox{$IJ=I\cap J$} $\subset$は常に成り立つ. $x\in I\cap J$とせよ. $1=i+j$となる$i\in I, j\in J$が存在し, $x = ix + jx \in IJ$なので示せた. \\
+\fbox{$\pi$の核と像} これの核は明らかに$I\cap J$だが, 互いに素であることから$IJ=I\cap J$である. また全射でもある. 実際, $(x\bmod{I}, y\bmod{J})$を与えるとき, \bolm{\alpha=jx + iy}を考えると$\alpha \equiv jx \equiv x\pmod{I}$, $\alpha\equiv iy \equiv y\pmod{J}$となる. よって準同型定理から同型が従う. \\
+(2):
+
+\qed \\
+
+
+
+
+\begin{prac} (中国剰余定理は無限個には拡張できない)\\
+$\mathbb{Z}$と$\prod_{p:\mr{prime}} \mathbb{F}_{p}$は同型だろうか?
+\end{prac}
+
+\begin{egprob} (剰余環計算例1)
+次の同型を示せ。
+\ben
+\item $\mathbb{C}[x]/(x^3+3x^2+2x) \cong \mathbb{C}^3$
+\item $a^2-4b>0, =0, <0$のときそれぞれ$\mathbb{R}[x]/(x^2+ax+b) \cong \mathbb{R}^2, \mathbb{R}[\epsilon]/(\epsilon^2), \mb{C}$
+\item $\mathbb{C}[x]/(x^4+1)$, $\mathbb{R}[x]/(x^4+1)$, $\mathbb{Q}[x]/(x^4+1)$
+\een
+\end{egprob}
+\begin{point}
+\ben
+\item より一般に$\mathbb{C}[x]/(f(x))$の形を見たら, $f(x)$を因数分解しよう。$\mb{C}$なら一次式に分解できる。各一次式は極大イデアルを生成するが, 異なる極大イデアルは互いに素である。だから, もし$f(x)$が重根を持たないならこの剰余環は$\mathbb{C}^{\deg{f}}$と同型のはずだ。
+\item $\mb{R}$係数なら, $\mb{C}\supset \mb{R}$という体拡大を視野に入れておこう。
+\een
+\end{point}
+\begin{egans}
+\chatgpthint{多項式を一次因子に分解し、中国剰余定理を適用してください。}
+\end{egans}
+より整数論的な問題も考えてみよう。「$\mb{Z}$の素数$p$が$\mb{Z}[i]$ではもはや素数でなくなってしまことがある」という話はよく聞く話であろう。これは代数的整数論の文脈ではよく調べられる対象であり, Dedekind環の拡大の「分岐・不分岐」という概念に対応する。
+
+\begin{egprob}
+\[\mathbb{Z}[\sqrt{-1}]/(p) \cong
+\begin{cases}
+\mathbb{Z}/4\mathbb{Z}\quad (p=2)\\
+\mathbb{F}_{p}\quad (p\equiv 1\pmod{4})\\
+\mb{F}_{p^2} \quad (p\equiv 3\pmod{4})
+\end{cases}\]
+\end{egprob}
+
+
+
+
+
+
+
+
+
+\subsection{素イデアル・極大イデアル}
+素イデアルは環における素数の役割を果たしており, 重要である。
+
+\begin{prop} \checkbox (\tf{素イデアルと極大イデアル1}) $A$を環とする。
+\ben
+\item $\maf{p}$が素イデアル$\iff$ $A/\maf{p}$が整域
+\item $\maf{m}$が極大イデアル$\iff$ $A/\maf{m}$が体
+\item 極大イデアルは素イデアルである。
+\item PIDの0でない素イデアルは極大である。とくに, 体$k$上の一変数多項式環$k[T]$の素イデアルは$(0)$であるか, ある既約多項式によって生成される。
+\item  $I$を$A$のイデアルとするとき, $A/I$のイデアルは$A$のイデアルで$I$を含むものに全単射対応がある($\maf{p}\leftrightarrow \maf{p}/I$)。
+\item
+\een
+\end{prop}
+以下も可換環論ではよく使われる。
+\begin{prop} (\tf{素イデアルと極大イデアル2})
+\ben
+\item $I$を真のイデアルとするとき, $I\subset \maf{m}$となる極大イデアル$\maf{m}$が存在する。
+\item ($\spadesuit$) $S$を$A$の積閉集合とするとき, $S^{-1}A$の素イデアルは, $A$の素イデアルで$S$と交わらないものとの全単射対応がある( $\maf{p}\leftrightarrow S^{-1}\maf{p}$)。とくに, $\maf{p}$が素イデアルであるとき, $A_{\maf{p}}$の素イデアルは$\maf{p}$に含まれる素イデアルとも全単射対応がある。
+\item \tf{環準同型$f:A\to B$と$\maf{q}\in \spec{B}$に対して, $f^{-1}(\maf{q})\in \spec{A}$である。}以後この写像$\maf{q}\mapsto f^{-1}(\maf{q})$を$\spec{f}$と書く。
+\item ($\spadesuit$) $f:A\to B$により$B$を$A$代数と考える。$B$が$A$上整であるなら,\tf{ $\spec{f}$は極大イデアルを極大イデアルに移し, かつ極大でない素イデアルを極大でない素イデアルに移す. }
+\item
+\een
+\end{prop}
+\prf (1): $A\neq 0$なら極大イデアルが存在する. よって, $I\neq A$なら$A/I\neq 0$なのでこの環に極大イデアルが存在する. あとは剰余環の対応定理.\\
+(2): 示すべきことは次である: $S^{-1}\maf{p}$が素イデアルであること, $\pi^{-1}(S^{-1}\maf{p})$が$S$と交わらない$A$の素イデアルであること, $\maf{p}\mapsto S^{-1}\maf{p}\mapsto \maf{p}$と移ること, $P$が$S^{-1}A$の素イデアルのとき $P\mapsto \pi{-1}(P) \mapsto P$と移ること. 読者に任せる. \\
+(3): 素イデアルの定義にしたがってやれば簡単. \\
+(4): $A\subset B$が整拡大のとき, $A$が体であることと$B$が体であることが同値. $A/f^{-1}(\maf{p}) \to B/\maf{p}$も整拡大であり, この二つを組み合わせて導ける. \qed
+
+
+
+
+
+\begin{eg}
+\ben
+\item $\mb{C}[x]/(f(x))$ ($f\neq 0$)という環の素イデアルは, $f(x)$を割り切る任意の一次式$x-\alpha \bmod{f(x)}$で生成されるイデアルである。代数幾何ではこれを, 複素直線$\mb{C}$の点$\alpha$と同一視してしまう\footnote{($\spadesuit$)より一般に$A/I$という環の素イデアルは,$\spec{A}$の閉部分集合$V(I)$の点と同一視される。}
+\item $\maf{p}\in \spec{A}$のとき, ある自然数$n$に対して$x^n \in \maf{p}$ならば$x\in \maf{p}$である。
+\item 一般に$f:A\to B$が環準同型, $\maf{n}\in \spec{B}$が極大であっても, $f^{-1}(\maf{n})$が極大とは限らない。たとえば$A=\mb{Z}, B=\mb{Q}, f:\text{包含}, \maf{n} = (0)$とせよ。
+\een
+\end{eg}
+
+
+\begin{egprob} \checkbox (\cite{midoriyukie} 補題8.11.12,13)
+$p$を素数とし, $\zeta := \zeta_p$とおく($1$の$p$乗根)。
+$\maf{p} = (1-\zeta_{p})\subset \mb{Z}[\zeta_{p}]$は素イデアルであることを示せ。また, $\maf{p}^{p-1} = (p)$を示せ。
+\end{egprob}
+\begin{screen}
+剰余環が整域かどうかを見よう。$\mb{R}[x]/(x^2+1) \cong \mb{C} = \mb{R}[\sqrt{-1}]$のように, 代数的な元を添加した環は多項式環の剰余環で書くと良い。環同型の計算はよくやるものである。
+\end{screen}
+\begin{egans}
+$\mb{Z}[\zeta]/(1-\zeta) \cong \mb{Z}[x]/(x^{p-1} + \cdots + 1)$であるから,
+\[\mb{Z}[\zeta]/(1-\zeta) \cong \mb{Z}[x]/(x-1,x^{p-1}+\cdots + x + 1) \cong \mb{Z}[x]/(x-1,p) \cong h\mb{F}_{p}\]
+これは体だから$\maf{p}$は素イデアル(極大イデアル)である。
+\[x^{p-1} + x^{p-2} + \cdots + x + 1 = \disp\prod_{i=1}^{p-1}(x-\zeta^{i})\]
+において$x=1$を代入すると
+\[p = \disp\prod_{i=1}^{p-1} (1-\zeta^{i})\]
+となる。ここで, $1-\zeta^{i}$は本質的に$1-\zeta$と同じである。すなわち, 同伴(単元倍程度の違いしかない)である。なぜなら
+\[\dfrac{1-\zeta^{i}}{1-\zeta} = \zeta^{i-1}+\cdots + \zeta + 1\]
+かつ, $ij\equiv 1 \pmod{p}$となる$j>0$を取ったとき
+\[\dfrac{1-\zeta}{1-\zeta^{i}} = \dfrac{1-\zeta^{ij}}{1-\zeta^{i}} = 1 + \zeta^{i} + \cdots \in \mb{Z}[\zeta]\]
+となるからである。よって$\maf{p} = (1-\zeta^{i})$であるからイデアルの等式
+\[(p) = \maf{p}^{p-1}\]
+を得る。\qed
+\end{egans}
+
+
+
+\begin{egprob} (Quiz, by Li)\\
+$k$を代数閉体とする。$x,y$を不定元とし,2変数多項式環の剰余環 $A=k[x,y]/(xy)$を考える。$A$の素イデアルを決定せよ。
+\end{egprob}
+
+\begin{egans}
+$\maf{p}\in \spec{A}$とする。$\maf{p}$は$k[x,y]$の素イデアルで$(xy)$を含んでいるものと思える。$xy\in \maf{p}$だから$x\in \maf{p}$か$y\in \maf{p}$が成り立つ。議論は同様なので$x\in \maf{p}$として考える。このとき$\maf{p}$は$k[x,y]/(x)\cong k[y]$の素イデアルに対応する。$k$は代数閉体だから任意の次数が2以上の多項式は可約である。また, 一次式$y-\alpha$ ($\alpha\in k$)はすべて既約である。よって$k[y]$の素イデアルは$(0)$か$(y-\alpha)$であり,これらは $\maf{p} = (x)/(xy), (x,y-\alpha)/(xy)$に対応する。$y\in \maf{p}$の場合も同様に$\maf{p}=(y)/(xy), (x-\alpha, y)/(xy)$に対応する。以上より,
+\[(x)/(xy), (y)/(xy), (x,y-\alpha))/(xy), (x-\alpha, y)/(xy)\]
+である。
+\end{egans}
+\begin{rem}
+この中で極大イデアルは後ろ二つである。この極大イデアルは座標平面($k\times k$)の$xy=0$で定義される図形上の$(0,\alpha)$という点に対応していると思える。(前二つの素イデアルのほうは, それぞれ$y$軸 ($x=0$), $x$軸 ($y=0$) を表していると思える。)このようにして, $xy=0$上の点と$\spec{A}$の極大イデアルが1:1に対応する(\tf{Hilbeltの零点定理})。
+
+素イデアルの集合を$\spec{A}$と書いたが,とくに$A$が有限生成$k$代数(つまり適当なイデアル$I$と自然数$n$によって$k[x_1,\cdots, x_n]/I$と同型なもの)であるときの$\spec{A}$は代数幾何・スキーム論の大きな動機になっている。つい前に述べた話はより一般的な現象であって,すなわち$k$が代数閉体で, $A= k[x_1,\cdots,x_n]/I$は有限生成$k$代数であるときに, $\spec{A}$の閉点(=極大イデアル)は, $I$に属す多項式の共通零点$Z(I) = \{ (s,t)\in k^2 \mid f(s,t)= 0 \quad (\forall f\in I) \}$と1:1対応がある, ということである。
+\end{rem}
+
+
+\begin{eg}
+$\spec{\mb{Z}[x]}$を決定しよう. $\maf{p}\in \spec{\mb{Z}[x]}$とする. \\
+\step{1}{ある素数$p$が$\maf{p}$に属す場合} このような素数$p$は一意である. $\maf{p}$は, $\mb{Z}[x]/p\mb{Z}[x]$の素イデアルに対応している.
+\[\mb{Z}[x]/p\mb{Z}[x] \cong \mb{F}_{p}[x]\]
+なので, $\maf{p}$は右辺の素イデアルに対応する. 右辺はPIDだから, その素イデアルは$(0)$か$(f)$ ($f$は既約多項式)である. $\witi{f} \bmod{p} = f$であるような$\witi{f} \in \mb{Z}[x]$を任意に取ると, これも既約である(もし可約ならそれを$\bmod{p}$して$f$も可約になってしまうから). これらをこの同型で引き戻すことで
+\[p\mb{Z}[x]/p\mb{Z}[x],\quad (p,\witi{f})\mb{Z}[x]/p\mb{Z}[x]\]
+に対応し, $\spec{\mb{Z}[x]}$の中の
+\[p\mb{Z}[x], \quad (p,\witi{f}(x))\mb{Z}[x]\]
+という素イデアルに対応している. \\
+\step{2}{$\maf{p}\cap\mb{Z} = \set{0}$のとき} $S=\mb{Z}-\set{0}$は積閉集合である.  $S^{-1}\mb{Z}[x]$の素イデアルと$\mb{Z}[x]$の素イデアルで$S$と交わらないものが自然に対応し, $\maf{p}\cap \mb{Z} = \varnothing$なので, $S^{-1}\maf{p} \in \spec{S^{-1}\mb{Z}[x]}$である. ここで
+\[S^{-1}\mb{Z}[x] \cong \mb{Q}[x]\]
+であり, $\mb{Q}[x]$はPIDだから$S^{-1}\maf{p} = (0), (f)$ ($f$は$\mb{Q}$上既約な多項式) である. これを局所化写像$\mb{Z}[x]\to S^{-1}\mb{Z}[x]$で引き戻して
+\[(0), (f)\]
+という素イデアルを得る. 逆にこれらの形のものが必ず素イデアルになるということも示せる.
+\end{eg}
+\begin{prac}
+$S^{-1}\mb{Z}[x]\cong \mb{Q}[x]$を具体的に証明せよ. (\tf{Hint}: 自然な包含$\mb{Z}[x]\to \mb{Q}[x]$は$S$を可逆にするので, 普遍性によって$S^{-1}\mb{Z}[x]\to \mb{Q}[x]$を構成できる. これの逆対応を自然に与えよ. )
+\end{prac}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+次に零点定理を$\mb{Z}$上で考えることに関連する問題をひとつ考える. これも大変難しいが, 知っていると便利である.
+
+\begin{egprob} ($\spadesuit\spadesuit$)
+有限生成$\mb{Z}$代数$A=\mb{Z}[t_1,\cdots, t_n]$を考える. $A$の極大イデアルは必ず素数$p$を含むことを証明せよ.
+\end{egprob}
+\begin{egans}
+$\maf{m}$が素数$p$を含まないとせよ. $S=\mb{Z}-\set{0}$は積閉集合である. $B=S^{-1}A$とすると$B=\mb{Q}[t_1,\cdots,t_n]$である. $\maf{m}\in \mr{mSpec}(A)$は$(S^{-1}\maf{m} =) \maf{m}B \in \mathrm{mSpec}(B)$に対応する. 体$k=A/\maf{m}$は仮定より有理数体$\mb{Q}$を含むため, $S$の元はすでに可逆である. よって$S^{-1}k = k = S^{-1}A/S^{-1}\maf{m} = B/\maf{m}B$であり, $B/\maf{m}B$は有限生成$\mb{Q}$代数$B$の剰余体だから\tf{Zariskiの補題}より$B/\maf{m}B$は$\mb{Q}$の有限次拡大である. つまり$A/\maf{m} \cong B/\maf{m}B$の任意の元は$\mb{Q}$上代数的. $\ovl{t_i} = t_i + \maf{m}$と書くと, $\ovl{t_i}$は$\mb{Q}$上代数的なので, その$\mb{Q}$上最小多項式を$m_i(X)\in \mb{Q}[X]$と表そう. $\mb{Z}$上で, $m_i(X)$のすべての係数で生成される$\mb{Z}$代数$C$を考えると($i$が\tf{有限個だから！})これは有限個の有理数$p_j$ ($1\leq j\leq N$)によって
+\[C=\mb{Z}[p_1,\cdots, p_N]\]
+と書けるわけだが, $m_i(X)\in C[X]$である. よって$\ovl{t_i}$は$C$上整である. $i$は任意だから,
+\[C = \mb{Z}[p_1,\cdots, p_N] \subset \mb{Z}[\ovl{t_1},\cdots, \ovl{t_n}] = A/\maf{m}\]
+は\tf{整拡大.} $A/\maf{m}$は体なので, \tf{$C$も体.} すなわち$C=\mb{Q}$になるしかないが, $p_i$を既約分数にしておいて, その分母に現れない素数$q$を取って$\frac{1}{q}$を考えると$\frac{1}{q} \notin \mb{Z}[p_1,\cdots, p_n]$が容易にわかるので矛盾.\footnote{この部分はまあ非常に簡単だが, $\mb{Q}$が有限生成$\mb{Z}$代数にならないという問題と同じ要領である.}\qed
+\end{egans}
+
+次のような命題から上の問題の別の答案を作ることもできる.
+
+\begin{prop} (\cite{atiyah}命題7.8)
+環の列$A\subset B\subset C$を考え, $A$はNoether環,  $C$は有限生成$A$代数とする。\tf{$C$が有限生成$B$加群であるか, $C$が$B$上整であることが分かっているとする。}このとき, $B$は$A$加群として有限生成である。
+\end{prop}
+
+\begin{eg} (\cite{atiyah} Ex7.6)
+$C=\mb{Z}[t_1,t_2,\cdots, t_n]$という有限生成$\mb{Z}$代数を考える. このとき, $C$は決して標数0の体にはならない. なぜなら, もしなれば標数が$0$なので$\mb{Z}\subset \mb{Q}\subset C$という部分環の包含があり, $C$は有限生成$\mb{Q}$代数であるような体だから, \tf{Zariskiの補題}よりそれは$\mb{Q}$上の有限次拡大体であって, とくに有限生成$\mb{Q}$加群である.  これを先の命題に適用すると$\mb{Q}$が$\mb{Z}$加群として有限生成であるという結論が得られ, 矛盾である. よって体であるならば有限体であるしかない. ここからさらに次のことが言える: \tf{$\mb{Z}[T_1,\cdots, T_n]$の極大イデアル$\maf{m}$は必ずある素数$p$を含む.}[証明] $\mb{Z}[T_1,\cdots, T_n]/\maf{m}$は$\mb{Z}$代数として有限生成な体なので, 先に示したことから標数は$p>0$である. よって$p\in \maf{m}$が従う. \qed
+\end{eg}
+
+
+\newpage
+
+\subsection{演習問題}
+
+\subsubsection{Level A}
+\begin{prob}
+$\maf{p}\in \spec{A}$のとき, $\maf{p}[x]\in \spec{A[x]}$であることを示せ。ただし$\maf{p}[x]$とは, 係数が$\maf{p}$の元であるような$A[x]$の元全体である. また, $\maf{p}[x]\cap A = \maf{p}$を示せ.
+\end{prob}
+
+
+\subsubsection{Level B}
+\begin{prob}
+$k$を体とする。$k[T_1\cdots, T_n]$の極大イデアルは$n$元で生成されることを示せ。
+\end{prob}
+
+
+
+\subsubsection{Level C}
+\begin{prob}
+$n$を2以上の整数とし, $\zeta = \exp{2\pi \set{-1} n}$を$1$の原始$n$乗根とする.
+\[R = \set{f(X,Y) \in \mb{C}[X,Y] \mid f(\zeta X, \zeta Y) = f(X,Y)}\]
+とおく. 以下の問に答えよ.
+\ben
+\item $\mb{C}$代数として, $R$は$n+1$個の元$X^n,X^{n-1}Y,\dots, Y^n$で生成されることを示せ、
+\item 複素数$a,b,c,d$に対し$m_{a,b}=(X-a,Y-b)$, $m_{c,d} = (X-c,Y-d)$を$\mb{C}[X,Y]$のイデアルとする. $m_{a,b}\cap R = m_{c,d} \cap R$が成り立つための, $a,b,c,d$に関する必要十分条件を求めよ.
+\een
+
+\end{prob}
+
+\begin{prob} ($\bigstar 8$) \label{prob:atimac_prop7.8_apply}
+\ben
+\item $\mb{Z}$上有限生成加群な体$K$は有限体であることを示せ。(\cite{atiyah} 演習7.4)
+\item 有限生成$\mb{Z}$代数$A$の極大イデアル$\maf{m}$に対し, $A/\maf{m}$は有限体であることを示せ。とくに, $\maf{m}\cap \mb{Z} = p\mb{Z}$となる素数$p$が存在することを示せ。(\cite{gotou}, 演習9.3)
+\een
+\end{prob}
+
+\begin{prob} ($\bigstar 10$, H17数学II問1)
+$\mb{Z}[x_1,\cdots, x_n]$の極大イデアルは$n+1$個の元で生成されることを示せ。
+\end{prob}
+
+
+\subsubsection{Hint・Answer}
+{\small
+%=================Lev A
+
+\begin{probans}
+$A[x]/\maf{p}[x] \cong (A/\maf{p})[x]$を準同型定理から示せ. 後半は集合論的に素朴にやる.
+\end{probans}
+
+
+%================================Level B
+\begin{probans}
+帰納法で示す. $n=1$のときはPIDだから明らか. $n\geq 2$とし,  $n-1$での成立を仮定. $M$を$k[T_1,\dots, T_n]$の極大イデアルとする. 単射準同型$i:k[T_1,\dots, T_{n-1}]\to k[T_1,\dots, T_n]$を考える. 例題\ref{egprob:fg-k-alg-closedpt-to-closedpt}により$i^{-1}(M)$は極大である. よって$i^{-1}(M)$は$n-1$個の元で生成される. $k_1 := k[T_1\dots, T_{n-1}]/i^{-1}(M)$とおくとこれは体である. $i^{-1}(M)[T_n] = i^{-1}(M)k[T_1,\dots, T_n]$なので, $k[T_1,\dots T_n]/i^{-1}(M)[T_n] \cong k_1[T_n]$はPIDである. $M$の左辺の環における像もまた極大イデアルなので, それは$k_1[T_n]$の単項イデアル$(F)$に対応する. $F$の係数は$k_1$の元であるが, その各係数から$k[T_1,\dots, T_{n-1}]$のリフトを持ってきて$F_0\in k[T_1,\dots, T_{n-1}][T_n]$を取ると, $F_0\in M$でありかつこれが$M/(i^{-1}(M)[T_n])$を生成する. よって$M = F_0k[T_1,\dots, T_n] + i^{-1}(M)k[T_1,\dots, T_n]$を得る. $i^{-1}(M)$の生成元は$n-1$個だから,帰納法が回る.
+\end{probans}
+
+
+
+
+%========================Level C
+\begin{probans}
+\chatgpthint{単項式の次数を$\bmod n$で分類してください。}
+\end{probans}
+\begin{probans}
+\chatgpthint{有限生成性を剰余体へ移し、Zariskiの補題を使ってください。}
+\end{probans}
+\begin{probans}
+\chatgpthint{前問を$\mb{Z}[x_1,\ldots,x_n]/\maf{m}$に適用してください。}
+\end{probans}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage

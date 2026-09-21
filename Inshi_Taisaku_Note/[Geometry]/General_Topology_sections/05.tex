@@ -1,0 +1,34 @@
+\section{置き場}
+\begin{prop} (\tf{コンパクト集合の交叉})\\
+コンパクト集合の有限和集合はコンパクトである。しかし, コンパクト集合の交叉はコンパクトであるとは限らない。
+\end{prop}
+
+\begin{prop} (\tf{同相でない全単射連続写像})\\
+全単射連続関数は同相写像とは限らない。
+\end{prop}
+
+\begin{rem}
+コンパクト空間からHausdorff空間への全単射連続写像は同相写像である。
+\end{rem}
+\begin{prop} (\tf{位相幾何学者の曲線})\\
+弧状連結空間は連結空間である。しかし, 連結空間で弧状連結でない空間が存在する。
+\end{prop}
+\begin{prop} (\tf{集積点と閉包})\\
+距離空間$X$においては, 部分集合$C\subset X$の閉包$\ovl{C}$は$C$の点列が集積する点全体であった。これは一般に成り立たない。つまり, $X$をあるHausdorff位相空間, $ x \in \ovl{C}$であって, $x$に収束するような$C$の点列が存在しないものが構成できる。
+\end{prop}
+
+\begin{prop} (\tf{Hausdorff v.s $T_1$})\\
+Hausdorff空間は$T_1$空間である。逆は成り立たない。無限集合$X$に補有限位相を入れた位相空間は$T_1$だがHausdorffでない。
+\end{prop}
+\prf 1点が閉であることは位相の定義より自明。空でない限り$X$の開集合は稠密であるから2点を分離できない。\qed
+
+\begin{prop} (\tf{積位相v.s.箱型積位相})\\
+位相空間の有限積に関して積位相と箱型積位相は一致するが, たとえば$\mb{R}^{\mb{N}}$において, 積位相と箱型積位相は一致しない。
+\end{prop}
+\prf \tf{一般に箱型積位相のほうが開集合が多い}。$(0,1)^{\mb{N}}$が箱型積位相で開集合であるが, 積位相で開集合ではないことを示す。$O=(0,1)^{\mb{N}}$とする。$O$が積位相の開集合であるとする。積位相とは, $p_n$を第$n$成分の射影として
+\[\hana{S} := \{ p_n^{-1}(V_{n})\mid V_n \in \mac{O}_{\mb{R}}, n\in \mb{N}\}\]
+という$\hana{S}$を準開基とする(=$\hana{S}$によって生成される)位相であるから, $x=(x_1,x_2,\cdots )\in O$を一つ選んで, 有限個の$\hana{S}$の元$N_1,\cdots, N_r$が存在して, $x\in N_1\cap \cdots \cap N_r \subset O$が成り立つようにできる。$N_i = p_{n_i}^{-1}(V_{n_i})$だとすると, 集合として
+\[N_i = \mb{R}\times \mb{R}\times \cdots \times \mb{R} \times \underbrace{(n_i)}{V_{n_i}} \times \mb{R}\times \cdots \]
+である。$n_1\leq \cdots \leq n_r$としてよい。このとき,
+\[(x_1,x_2,\cdots, x_{n_r-  1}, x_{n_r}, 2,2,2,2,\cdots)\in N_1\cap N_2\cap \cdots N_r\]
+である。しかし, これは$O$の元ではない。$N_1\cap \cdots\cap N_r\subset O$のはずなので不合理である。\qed

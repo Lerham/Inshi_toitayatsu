@@ -1,0 +1,94 @@
+\section{連結性}
+
+\begin{prop} (\tf{連結性のまとめ})
+\ben
+\item 弧状連結ならば連結である。
+\item \tf{連結空間の閉包は連結である。}
+\een
+\end{prop}
+
+\begin{egprob} (位相幾何学者の曲線)
+
+\end{egprob}
+
+\begin{prac} (2013基礎数学試験No.2)
+$X = \parenb{(x, \frac{1}{x}\sin{\frac{1}{x}})\in \mb{R}^2 \mid x\in \mb{R}- \{ 0 \}}$の閉包は連結であることを示せ。
+\end{prac}
+
+
+
+
+\subsection{例題}
+\begin{egprob} (H2数学I-4)
+有理数上で無理数, 無理数上で有理数の値を取る連続関数は存在するか?
+\end{egprob}
+\begin{egans}
+存在しない。実際, $f(\mb{R})\subset \mb{Q}\cup f(\mb{Q})$で$f(\mb{R})$は可算であり,中間値の定理から$f(\mb{R})$は弧状連結なので$f(\mb{R})$は1点集合, つまり$f$が定数関数となってしまうから(そして定数関数は条件を満たさない)。
+\end{egans}
+
+\begin{egprob}
+連続曲線$\gamma:[0,+\infty)\to \mb{R}^2$の像が有界であるとする。集合$X = \bigcap_{T\geq 0} \ovl{\{\gamma(t)\mid t\geq T\}}$が連結であることを示せ。
+\end{egprob}
+\begin{egans}
+\chatgpthint{$\ovl{\gamma([T,\infty))}$がコンパクト連結集合の減少列になることを使ってください。}
+\end{egans}
+
+\begin{egprob} ($\spadesuit$ \cite{har})
+$A$を環とする。次は同値であることを示せ。
+\ben
+\item $\spec{A}$は連結である。
+\item $A$には非自明な冪等元$e\neq 0,1$ (つまり$e^2=e$を満たす元)が存在しない。
+\een
+\end{egprob}
+\begin{egans}
+$\spec{A}$が連結だとし, $e$を冪等元とする。$e^2 = e$なので$e(e-1)=0$であり,この式から 任意の素イデアル$\maf{p}$に対して$e\notin \maf{p}$と$e-1\notin \maf{p}$は同時には成り立たない。また, $e\in \maf{p}, e-1\in \maf{p}$も同時には成り立たない($1\in \maf{p}$になるから)。よって$V(e)\sqcup V(e-1) = \spec{A}$である。連結性からどちらかは空である。$V(e) = \varnothing$とすると$e$はいかなる素イデアルにも含まれないので単元であり, $e(e-1) = 0$から$e-1=0$となる。$V(e-1) = \varnothing$のときは$e=0$を得る。\par
+逆に$\spec{A}$が非連結とする。$A$を$A/\sqrt{(0)}$に移行して$\sqrt{(0)} = 0$であるとしてよい(Specは変わらない)。$\spec{A} = V(I_1)\sqcup V(I_2)$とする。$V(I_1)\cap V(I_2) = V(I_1+I_2) = \varnothing$なので$I_1+I_2 = A$. $V(I_1\cap I_2) = V(I_1) \cup V(I_2)$だから$I_1\cap I_2 \subset \sqrt{(0)} = 0$である。よって中国剰余定理から$A\cong A/I_1 \times A/I_2$なので右辺の非自明な冪等元$(1,0)$に対応する元$e$が非自明な冪等元になる。
+\end{egans}
+
+
+\subsection{演習問題}
+\subsubsection{Level A}
+\begin{prob}
+命題\ref{prop:compact_to_haus}を証明せよ。
+\end{prob}
+\begin{hint}
+\chatgpthint{点とコンパクト集合を有限個のHausdorff近傍で分離してください。}
+\end{hint}
+
+\subsubsection{Level B}
+
+
+
+\subsubsection{Level C}
+\begin{prob}
+$K$を体とする。次を満たす写像$\norm{}:K\to \mb{R}_{\geq 0}$を考える(非アルキメデス付値と呼ばれる)。
+\ben[label=(\roman*)]
+\item $|a|= 0 \iff a=0$
+\item $\abs{ab} = \abs{a}\abs{b}$
+\item $\abs{a+b} \leq \max{\{ \abs{a}, \abs{b}\}}$ (\tf{強三角不等式})
+\een
+$B_{\epsilon}^{-}(a) = \{ x\in K \mid \abs{x-a} < \epsilon \}$は$K$の基本近傍系をなすので$K$に位相がただひとつ定まる。このとき, 次を示せ。
+\ben
+\item $B_{\epsilon}(a) = \{ x\in K\mid \abs{x-a} < \epsilon \}$は開集合かつ閉集合である。
+\item $B_{\epsilon}(a)$の形の集合のことを球という。球$B,B'$が$B\cap B' \neq \varnothing$を満たせば, $B\subset B'$かつ$B'\subset B$であることを示せ。
+\item $K$は完全不連結であることを示せ。
+\een
+\end{prob}
+\begin{hint}
+\chatgpthint{強三角不等式から二つの球は交われば包含関係にあることを示してください。}
+\end{hint}
+\begin{rem}
+Dedekind環$A$とその商体$K$について, $A$の素イデアル$\maf{p}$は$\maf{p}$進付値を定め, その付値が距離を構成するのでその距離空間の完備化$\wiha{K}_{\maf{p}}$が得られる。 この$\maf{p}$進付値はまさしく非アルキメデス付値である。「$p$進函数解析」と呼ばれる分野では整数論との関わりの中で重要な概念(作用素など)をある意味で解析的な手法によって扱う。興味がある方は\cite{nfa}を参照するといいかもしれない。
+\end{rem}
+
+\begin{prob} ($\spadesuit$,\cite{liu})
+スキーム$X$に対して次は同値であることを示せ。
+\ben
+\item $X$は連結
+\item $\spec{\mac{O}_{X}(X)}$は連結
+\een
+また, 局所スキーム(局所環のスペクトラム)は連結であることを示せ。
+\end{prob}
+\begin{hint}
+\chatgpthint{非自明な冪等元とスペクトラムの分離の対応を使ってください。}
+\end{hint}

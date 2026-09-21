@@ -1,0 +1,131 @@
+\section{距離空間}
+
+\begin{defn} (位相)
+
+\end{defn}
+
+\begin{defn} (基本近傍系)
+
+\end{defn}
+一般に集合族で上の条件を満たすものが与えられたとき, それを基本近傍形とする位相がただひとつ定まることが分かる。
+次は必ず覚えよう.
+\begin{theo} (Heine-Borelの被覆定理) \label{theo:heineborel}\\
+$\mb{R}^{n}$の部分集合$K$について, 次は同値。
+\ben
+\item $K$は有界閉集合
+\item $K$はコンパクト集合
+\een
+\end{theo}
+
+次も定理なのだが, 基礎数学試験の過去問の形で述べる.
+\tbox{
+\begin{egprob} (基礎数学試験2015No.2, \tf{縮小写像の原理})\\
+$X$を距離$d$をもつ完備距離空間とし, 写像$f:X\to Y$は
+\[\forall x,y\in X, \quad d(f(x),f(y)) \leq \omega(d(x,y))\]
+を満たすとする. ただし$\omega:[0,\infty) \to \mb{R}_{\geq 0}$は$\omega(0) = 0$および$t>0$で$0<\omega(t) <t$を満たす右連続な単調増加関数とする. このとき,
+\ben
+\item $x_0\in X$, $x_n = f(x_{n-1})$によって$\set{x_n}_{n}$を定める. このとき, $\lim_{n\to \infty} d(x_n, x_{n+1}) = 0$を示せ.
+\item (\tf{これが難しい}) (1)の点列$\set{x_n}$はCauchy列であることを示せ.
+\item $f$はただひとつの不動点を持つことを示せ.
+\een
+\end{egprob}
+}{title=縮小写像の原理}
+
+
+
+
+
+
+
+\subsection{例題}
+\begin{egprob} (東北大H30共同)\\
+関数$f:\mb{R}\to \mb{R}$と関数$g:[0,\infty) \to \mb{R}$を考える。
+\ben
+\item
+\ben
+\item $f,g$が一様連続ならば$f\circ g$も一様連続であることを示せ。
+\item $g$が連続で$x\to \infty$のとき, $g(x)$が有限値の収束するとする。また, $f$は連続とする。$f\circ g$は一様連続であることを示せ。
+\een
+\item $f,g$を次で定める。
+{\small
+\[f(x) = \bcas
+\dfrac{1-e^{-x}}{x} \quad (x\neq 0)\\ 1\quad (x=0)
+\ecas,  g(x) = x\left(x+1 - \dfrac{1}{\sin{\dfrac{1}{1+x}}}\right)\]
+}
+\een
+このとき$f\circ g$が一様連続であることを示せ。
+\end{egprob}
+\begin{egans}
+(1): $f\circ g = h$とおく。
+(a): $\delta>0$に対して十分小さく$\gamma(\delta)> 0$を取れば
+\[\sup_{x,y\geq 0, |x-y|<\gamma(\delta)} |g(x) - g(y)| < \delta\]
+が成り立つようにできる。$\delta=\delta(\epsilon) > 0$を十分小さく取れば
+\[\sup_{x,y\in \mb{R}, |x-y|<\delta(\epsilon)} |f(x) - f(y)| < \epsilon\]
+が成り立つようにできる。ここから
+\[x,y\geq 0, |x-y| < \gamma(\delta(\epsilon)) \implies |h(x) - h(y)|\leq \epsilon\]
+が従うので$h$も一様連続である。
+
+(b): $\lim_{x\to \infty} g(x) = c$であるとする。$g$は十分遠方で$c$に近い。$A>0$を十分大きくとれば$|g(x)-c| < 1$ ($x\geq A$) が成り立つようにできるので, $x\geq A$の範囲で有界である。$0\leq x \leq A$の範囲では, $g$は最大値と最小値を持つので有界である。よって$g$の値域は有界である。そこで$g$の値域が$[-K,K]$の範囲に含まれるとする$(K>0)$。
+
+閉区間上の連続関数なので$f|_{[-K,K]}$は一様連続である。$f\circ g = f|_{[-K,K]}\circ g$だから, $g$が一様連続であることを示せば(a)から$f|_{[-K,K]}\circ g$が一様連続であることが従う。
+
+$g$が一様連続であることを示す、$\epsilon > 0$を任意にとる。$A'$を十分大きく取ることで
+
+$x\geq A'$において$|g(x) - c| < \epsilon /2$が成り立つ。
+\begin{center}
+とくに$x,y\geq A'$であるなら$|g(x) - g(y)| < \epsilon$である。
+\end{center}
+一方で$[0,A'+1]$において$g$は一様連続だから,十分小さい$\delta \in (0,1)$を取ることで
+\begin{center}
+$x,y\in [0,A'+1]$, $|x-y| < \delta$ならば$|g(x) - g(y)| < \epsilon$
+\end{center}
+が成り立つようにできる。この二つのことから
+\begin{center}
+    $|x-y| < \delta (< 1) $ならば$|g(x) - g(y)|<\epsilon$
+\end{center}
+が従うことはただちに分かる。
+
+(2):(b)を適用できることを見る。$x\to 0$のとき, $f(x)\to 1$であることは容易:
+\[\lim_{x\to 0} \dfrac{e^{0}-e^{-x}}{0 - (-x)} = \left(\dfrac{de^{x}}{dx}\right)|_{x=0}=1\]
+$x\geq 0$で$\sin{\frac{1}{1+x}} \neq 0$なので$g$の連続性は明らか。$\lim_{x\to \infty} g(x)$が有限値であることを見る。$T=\frac{1}{1+x}$とすると, $T\to +0$であって, $T-\sin{T} = \dfrac{T^{3}}{6} + O(T^{5})$に注意すると
+\beqn
+g(x) &=& \left(\dfrac{1}{T} - 1\right)\left(\dfrac{1}{T} - \dfrac{1}{\sin{T}}\right)\\
+&=& (1-T) \dfrac{\sin{T} - T}{T^2\sin{T}}\\
+&=& (T-1)\dfrac{T}{\sin{T}} \dfrac{T-\sin{T}}{T^{3}}\\
+&\to& (0-1) \cdot 1 \dfrac{1}{6}\\
+&=& -\dfrac{1}{6}
+\eeqn
+よって(b)が適用でき, $f\circ g$は一様連続である。\qed
+\end{egans}
+
+こういった解析的かつ抽象的な問題は, よく練習しておいたほうがよいと思う。
+\begin{egprob} (H30東北大共同, 改)
+$\mb{R}$の通常の位相を$\mac{O}$とし, 補有限位相を$\mac{O}_{\mac{Z}}$とする。
+\ben
+\item $(\mb{R},\mac{O}_{\mac{Z}})$は位相空間であることを示せ。
+\item $f(x) = x^2$で定まる写像$(\mb{R},\mac{O}_{\mac{Z}})\to (\mac{O}_{\mac{Z}})$は連続か?
+\item $f(x) = \sin{x}$; $(\mb{R},\mac{O}_{\mac{Z}})\to (\mac{O}_{\mac{Z}})$の場合はどうか?
+\item 連続写像$f:(\mb{R},\mac{O}_{\mac{Z}})\to (\mb{R},\mac{O})$は定数写像であることを示せ。
+\een
+\end{egprob}
+\begin{egans}
+(1):ストレート。
+(2):$U\in \mac{O}_{\mac{Z}}$とする。$f^{-1}(\varnothing) = \varnothing$なので$U\neq \varnothing$のときを考える。$a\in \mb{R} - f^{-1}(U)$なら$a^2\notin U$で$a^2 \in \mb{R}- U$である。このような$a$は有限個しか存在しないので$\mb{R}-f^{-1}(U)$も有限集合である。よって連続である。
+
+(3):$U = \mb{R} - \{ 0 \}\in \mac{O}_{\mac{Z}}$だが$f^{-1}(U) = \mb{R} - \pi\mb{Z} \notin \mac{O}_{\mac{Z}}$だから連続でない。
+
+(4):$f$が異なる値$a,b$を取るとする。$(\mb{R}, \mac{O})$はHausdorffなので$a\in U$, $b\in V$, $U\cap V = \varnothing$を満たす$U,V\in \mac{O}\setminus{\{ \varnothing\}}$が存在する。$f^{-1}(U), f^{-1}(V)$は$\mac{O}_{\mac{Z}}$に属す。$f^{-1}(U)$と$f^{-1}(V)$は$\mb{R}$の"ほとんどの点"を有しているから$c\in f^{-1}(U)\cap f^{-1}(V)$が存在する。しかし$f(c) \in U\cap V$となるので矛盾。よって定数となるしかない。
+\end{egans}
+
+\begin{egprob}
+
+\end{egprob}
+
+\subsection{演習問題}
+
+
+
+
+
+
+\newpage

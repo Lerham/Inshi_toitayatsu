@@ -1,0 +1,231 @@
+\section{($\heartsuit$)複素積分の計算問題}
+
+\subsection{Laurent展開}
+留数解析を行うとき, 微分を使ってもいいのだが, なかなか計算が難しい場合はLaurent展開で考えることも有効である.
+
+\begin{egprob} (RIMS, H24基礎)
+$\alpha$を正の定数とするとき, 次の等式を示せ.
+\[\int_{-\infty}^{\infty} \dfrac{e^{i\alpha x}e^x}{(1+e^x)^2}dx = \dfrac{2\alpha \pi}{e^{\alpha \pi} - e^{-\alpha\pi}}\]
+\end{egprob}
+
+\begin{screen}
+\begin{point}
+\tf{$e^x$を含む積分では, 高さ$2\pi$の横長の長方形経路が有効な場合があります.} これは$\exp$の周期性を利用する方法です. この経路では上辺と下辺の積分の関係が分かりやすく, 側辺の積分は十分遠方で0に収束することが期待できます.
+\end{point}
+\end{screen}
+
+\begin{egans}
+上のように経路を取る. つまり, $\pm R$, $\pm R + 2\pi i$を頂点とする長方形経路を反時計回りに積分する. 側面の積分は$R\to \infty$で0に収束する. 上辺の積分が下辺の積分の$-e^{-\alpha \pi}$倍になることも分かる. したがって, この経路に留数定理を適用すれば積分を計算できる. $e^{x} = -1 \iff z \in \pi i (2\mb{Z} + 1)$なので, 経路内の極は$i\pi$のみである. また, 2位の極であることも分かる. 微分による留数の計算は煩雑なので, $\dfrac{e^{i\alpha z}e^z}{(1+e^z)^2}$のLaurent展開を考える. $w = z-i\pi$とおく. $w\to 0$で,
+\bealn{
+\dfrac{e^{i\alpha z}e^z}{(1+e^z)^2} &= \dfrac{e^{i\alpha (w+i\pi)}}{e^z + e^{-z} + 2} \\
+&= e^{-\alpha\pi}\dfrac{e^{iw}}{2 - e^w - e^{-w}} \\
+&= e^{-\alpha \pi}\dfrac{e^w}{-w^2 + O(w^4)} \\
+&= -e^{-\alpha\pi}\dfrac{e^w}{w^2}(1+O(w^2))\\
+&= -e^{\alpha\pi}(\dfrac{1}{w^2} + \dfrac{1}{w} + O(1))(1+O(w^2)) \\
+&= -e^{-\alpha\pi} (\dfrac{1}{w^2} + \dfrac{1}{w} + O(1))
+}
+よって留数は$-e^{-\alpha\pi}$であると分かる. これらから等式を示すことができる. \qed
+\end{egans}
+\begin{prac}
+上の問の細部を埋めよ.
+\end{prac}
+
+\subsection{テクニック・公式まとめ}
+
+
+
+
+\tbox{
+\begin{theo}
+「留数の公式」と同じ状況で, $\disp\int_{\del D}f(z)\, dz $は次で計算される。
+\[2\pi i\disp\sum_{i:\, a_i\in A} \dfrac{1}{(m_i-1)!}\disp\lim_{z\to a_i}\dfrac{d^{m_i-1}}{dz^{m_i-1}}\left\{(z-a_i)^{m_i}f(z)\right\}\]
+\end{theo}
+}{title=留数定理}
+
+\begin{rem}
+{\Large \bf
+$2\pi i$は決して忘れてはならない。実関数の積分なのに虚数が残ったり不自然に$\pi$が残っていたりしたら見返すこと。
+}
+\end{rem}
+
+Laurent展開から留数を求めることも多い。$n$位の極を持っているときの留数の計算公式を以下に述べておく。
+\begin{prop}{({\bf 留数の公式})}\\
+$D$を領域とする。$f(z)$の(高々可算個の)異なる極の集合を$A=\{a_1,a_2, \cdots\}\neq \varnothing$とし, $D\setminus{A}$上で$f$は正則とする。\footnote{$A\neq\varnothing$としたので, 一致の定理より$A$は集積点を含まない。}$f(z)$が$z=a_i$において$m_i$の極を持つならば, 次が成立する。
+\[\underset{z=z_0}{\mr{Res}} f(z) = \dfrac{1}{(m_i-1)!}\disp\lim_{z\to z_0}\dfrac{d^{m_i-1}}{dz^{m_i-1}}\left\{(z-z_0)^{m_i}f(z)\right\}\]
+\end{prop}
+以下の問題の状況はしばしば起こる。
+\begin{egprob} (複素解析概論, 演習3.24, 87p)\\
+$P,Q$が多項式で, $f(z) = e^{iz}P(z)/Q(z)$のとき, 次数について$\mr{deg} Q \geq \mr{deg} P + 1$ならば, $\disp\lim_{R\to \infty} \disp\int_{C_R}f(z) \, dz = 0$を示せ。ただし, $C_r: z=Re^{i\theta}$\, ($0\leq \theta\leq \pi$)である。これを使って, $\disp\int_{0}^{\infty} \dfrac{x\sin{x}}{x^2+1}\,dx$ を求めよ。
+$$
+\left(
+\begin{tabular}{l}
+{\bf Hint:} $0\leq \theta \leq \dfrac{\pi}{2}$において, 不等式$\sin{\theta}\geq \dfrac{2}{\pi}\theta$が成り立つ\\
+ことに注意せよ。これは, {\bf Jordanの不等式}と呼ばれる。
+\end{tabular}
+\right)
+$$
+\end{egprob}
+
+
+
+
+
+\subsection{留数解析}
+留数解析系の複素積分は必ずできてほしい。
+一度はやっておくとよい問題である。
+\begin{egprob}
+$\Delta$内にすべての零点をもつ$n$次多項式$(n\geq 2)$
+\[P(z) = z^n + a_1z^{n-1} + \cdots + a_n \quad (a_i \in\mb{C})\]
+を考える。
+\ben
+\item $\int_{\del D} \dfrac{dz}{P(z)}$を求めよ。
+\item $\int_{\del D}\dfrac{z^ndz}{P(z)}$を求めよ。
+\een
+\end{egprob}
+\begin{screen}
+まさかすべての$\Delta$内の留数を足さなければならないのか？\tf{いや、そうではない！}$\infty$を含めたすべての留数和は$0$であるという事実を用いる！つまり, リーマン球面$\mb{CP}^1$の$w=x^{-1}$平面側の話にいれかえるのである。
+\end{screen}
+
+
+次のような応用もできる\footnote{Liが講究でやったやつをコピーした。}。
+\begin{egprob} (\tf{余接関数の部分分数分解})
+\begin{equation} \label{equation:1.1}
+\dfrac{1}{\tau} + \sum_{d=1}^{\infty} \parena{\dfrac{1}{\tau - d} + \dfrac{1}{\tau + d}} = \pi \cot{\pi\tau} = \pi i - 2\pi i \sum_{m=0}^{\infty} q^m
+\end{equation}
+\end{egprob}
+\prf
+\step{1}{1番目の等号}
+まず左辺が$\mb{C}\setminus{\mb{Z}}$で広義一様収束することを示す. $R>0$を固定し, 閉集合$|z| \leq R$で考える.$N\geq 2R$なる整数$N$をひとつ決める. 左辺を
+\[\parena{\dfrac{1}{\tau} + \sum_{n=1}^{N-1} \dfrac{2z}{z^2-n^2} }+ \sum_{n=N}^{\infty} \dfrac{2z}{z^2-n^2}\]
+と書くと, 第1項は有理関数であり, 収束性に関係しない.  第2項は, $n\geq N$ならば
+\[\abs{\dfrac{2z}{z^2-n^2}} \leq \dfrac{2|z|}{n}\cdot \dfrac{1}{1-\dfrac{|z|^2}{n^2}} \leq \dfrac{2R}{n^2}\cdot \dfrac{1}{1- \dfrac{1}{4}} = \dfrac{8R}{3n^2}\]
+だから, 第2項は$|z|\leq R$で一様収束する. よって左辺は$\{ |z| \leq R \}\setminus{\mb{Z}}$で正則である. $R$は任意だから$\mb{C}\setminus{\mb{Z}}$で広義一様収束する. \par
+$N\in \mb{N}$(十分大), $R=N+\dfrac{1}{2}$とし, $\pm R \pm Ri$を頂点とする正方形の反時計回りの経路を$C$とする. $C$の内側に点$z\notin \mb{Z}$を取り, $|z| < R$であるようにする. 有理型関数$f$を
+\[f(\zeta) = \dfrac{\pi \cot{\pi\zeta}}{\zeta-z}\]
+を積分する. 留数は$\mb{Z}$の点$k$と$z$のみで
+\[\res{\zeta = z}{f(\zeta)d\zeta} = \pi \cot{\pi z},\quad \res{\zeta=k}f(\zeta)d\zeta = \dfrac{1}{k-z} \]
+である(Check!). よって, 留数定理により
+\begin{eqnarray*}
+\int_{C}f(\zeta) \dfrac{d\zeta}{2\pi i} &=& \pi\cot{\pi z} + \sum_{k=-N}^{N} \dfrac{1}{k-z}\\
+&=& \pi\cot{\pi z} - \dfrac{1}{z} - \sum_{k=1}^{N} \parena{\dfrac{1}{z-k} + \dfrac{1}{z+k}}
+\end{eqnarray*}
+である.
+\begin{claim}
+$N\to \infty$のとき, $\disp\int_{C} f(\zeta) \dfrac{d\zeta}{2\pi i} \to 0$である.
+\end{claim}
+\prf  これは素朴にやると示せない. 補助的に$\dfrac{\pi\cot{\pi\zeta}}{\zeta}$を考える. これは偶関数であるため, 長方形の向かい合う辺の経路による積分は相殺されることに注意. よって
+\begin{eqnarray*}
+\int_{C}f(\zeta) \dfrac{d\zeta}{2\pi i} &=& \int_{C} \pi\cot{\pi \zeta}\parena{\dfrac{1}{\zeta - z} - \dfrac{1}{\zeta}}\, \dfrac{d\zeta}{2\pi i}\\
+&=& z \int_{C} \dfrac{\pi\cot{\pi \zeta}}{\zeta(\zeta - z)} \, \dfrac{d\zeta}{2\pi i}
+\end{eqnarray*}
+$C$上$ |\cot{\pi z}| < 2$に注意せよ(Check!). よって, 上のノルムを評価すると
+\[|z| \int_{C} \dfrac{\pi |\cot{\pi \zeta}| }{|\zeta|(|\zeta| - |z|)}\dfrac{|d\zeta|}{2\pi} \leq |z| \int_{C}\dfrac{|d\zeta|}{R(R-|z|)} = \dfrac{8R|z|}{R(R-|z|)}\]
+だから, この積分は$N\to 0$で$0$に収束する. よって示された.\qed \par
+複素積分が見えない問題にも, 複素積分は有効である. \tf{$[0,2\pi]$における積分は, $|z| = 1$での線積分と解釈できることがある. }
+\begin{egprob}
+\ben
+\item $n$は自然数とするとき, $\disp\int_{0}^{2\pi} \dfrac{\sin{nx}}{\sin{x}}\, dx$を求めよ. (RIMS, H25基礎)
+\een
+\end{egprob}
+\begin{egans}
+(1): $t=e^{x}$のとき,
+\[\dfrac{\sin{nx}}{\sin{x}} = \dfrac{t^n - t^{-n}}{t-t^{-1}} = \sum_{k=0}^{n-1} t^{k}t^{-(n-1-k)}\]
+である. $\int_{0}^{2\pi} e^{imx}\, dx = 2\pi \delta_{0,m}$なのでここから計算できる.
+
+
+\end{egans}
+
+
+
+\begin{egprob}
+$L_R (R>0)$は$-R+2i$を始点, $R+2i$を終点とする線分を表す. このとき次の値を求めよ.
+\[\lim_{R\to \infty} \int_{L_R} \dfrac{\cos{z}}{z^2 + 1}\, dz\]
+\end{egprob}
+
+
+
+\begin{egprob} (2021基礎数学試験-6)
+\[\int_{0}^{\infty} \dfrac{dx}{x^3-i}\]
+\end{egprob}
+\begin{egans}
+$C_1 = \set{Ri\to 0}$とする.
+\[\int_{C_1}\dfrac{dz}{z^3 - 1} = \int_{R}^{0} \dfrac{idt}{-it^3 - 1} = \int_{0}^{R} \dfrac{dt}{t^3 - i} \]
+$C_2 = [0,R]$とすれば, 4分円の経路を考え, 円弧上の積分を無視し...
+
+
+\end{egans}
+
+
+
+
+\subsection{分枝を取る系}
+\begin{egprob}
+\[\int_{0}^{\infty} \dfrac{1}{}\]
+\end{egprob}
+
+
+
+
+
+
+
+
+\subsection{演習問題}
+
+\subsubsection{Level A}
+\begin{prob} (H22数学I)
+次の積分を求めよ.
+\[\int_{-\infty}^{\infty} \dfrac{e^{ix} - 1}{x(x^2+1)}dx\]
+\end{prob}
+
+
+\subsubsection{Level B}
+
+\begin{egprob} ({\bf 複素積分集 その1})
+　
+\end{egprob}
+
+\begin{egprob} ({\bf 複素積分集 その2})\footnote{2019年前期「複素函数論」(吉川氏)のレポ-ト問題から引用.}\\
+$a$は正の実数とする。(5)では$m\in \mb{N}, -1 < \alpha < m-1$とする。以下の複素積分を計算せよ。
+\beqn
+\begin{array}{cccc}
+(1)&　\disp\int_{0}^{\infty}\dfrac{dx}{1+x^6} & (2)& \disp\int_{-\infty}^{\infty} \dfrac{\cos{x}}{(x^2+1)^2} \,dx\\
+(3)&　\disp\int_{0}^{\infty} \dfrac{\sin{x}}{x(x^2+a^2)}\,dx &(4)& \disp\int_{-\infty}^{\infty}\dfrac{\cos{(\pi x)}}{1+x^2+x^4} dx\\
+(5)&　 \disp\int_{0}^{\infty} \dfrac{x^{\alpha}}{1+x^{m}} &(6)&　 \disp\lim_{r\to \infty} \disp\int_{-r}^{r}\dfrac{x\sin{(2\pi x)}}{1+x+x^2} \\
+(7)& \disp\int_{-\infty}^{\infty} \dfrac{x\sin{x}}{(x^2+a^2)^2} \, dx&(8)&　 \disp\int_{0}^{\infty} \dfrac{(\sin{x})^3}{x^3(x^2+1)}\, dx \\
+(9)& \disp\int_{-\infty}^{\infty} \dfrac{e^{(1+i)x}}{(e^{x} + 1)^2}\, dx&(10)&　 \disp\int_{0}^{\infty} \dfrac{1-\cos{x}}{x^2(x^2+a^2)}\, dx
+\end{array}
+\eeqn
+\end{egprob}
+
+\begin{prob} (東北選択H28) \label{prob:tohoku_H28_7}
+\ben
+\item $n\in \mb{N}$, $c\in \mb{C}$のとき$\int_{|z| = 1} \parena{z+\dfrac{c}{z}}^{n} \dfrac{1}{z}\, dz$を計算せよ。経路は反時計回り。
+\item $m\in \mb{N}$, $a\in \mb{R}$のとき
+{\scriptsize
+\[\sum_{k=0}^{m}  \dfrac{(m!)^2(1+a)^{2k}(i-ai)^{2(m-k)}}{(2k)!(2m-2k)!}\int_{0}^{2\pi}\ (\cos{\theta})^{2k} (\sin{\theta})^{2m-2k}\, d\theta = 2\pi a^{m}\]
+}
+を示せ。
+\een
+\end{prob}
+
+
+\subsubsection{Level C}
+
+
+\subsubsection{Hints・Answer}
+{\small
+\begin{probans}
+典型解法である. 上半円. $(1-\frac{1}{e})\pi i$.
+\end{probans}
+
+\begin{probans} %東北H28_7
+(2): 一見すると扱いにくい問題です。偶数番目だけを取り出していることから, ある積分の実部または虚部を取ったものと考えられます。誘導に従って$I_n$を用います。ただし, 指数関数を三角関数に直すタイミングに注意してください。
+\end{probans}
+}
+
+\newpage
+
+
+
+\subsection{演習問題}

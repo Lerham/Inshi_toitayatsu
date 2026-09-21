@@ -1,0 +1,38 @@
+\section{基礎科目}
+\subsection{問1}
+与えられた積分$I$が収束しているものとして, $a>1$を導く.
+$D_{R} := \set{x\geq 0, y\geq 0, 1\leq x^2+y^2\leq R^2 }$として, $D_R$は極座標$(r,\theta)$で$A_R = \set{(r,\theta)\mid 1\leq r\leq R, 0\leq \theta \leq \pi/2}$に対応する.
+\bealn{
+I &= \lim_{R\to \infty}\int_{D_R} \dfrac{y}{(1+\sqrt{x^2+y^2} - x)(x^2+y^2)^{a}}dxdy \\
+&= \lim_{R\to \infty} \int_{A_R} \dfrac{r\sin{\theta}}{(1+r(1-\cos{\theta}))^2 r^{2a-1}}drd\theta \\
+&=\lim_{R\to \infty} \int_{1}^{R} \dfrac{1}{r^{2a-1}} \parenc{\aka{\dfrac{-1}{1+r(1-\cos{\theta})}}}_{\theta=0}^{\theta = \pi/2} d\theta dr \\
+&= \lim_{R\to \infty} \int_{1}^{R} \dfrac{1}{r^{2a-1}}\parena{1-\dfrac{1}{1+r}}dr\\
+&= \lim_{R\to \infty} \int_{1}^{R} \dfrac{dr}{r^{2a-2}(1+r)}\\
+&\geq \lim_{R\to \infty} \int_{1}^{R} \dfrac{1}{2r^{2a-1}}dr\quad (1+r\leq 2r) \\
+}
+最後の積分が有限であるためには, $2a-1 > 1$すなわち$a>1$が必要である. 逆に$a>1$であるとせよ. このとき上の式の最後から2番目の積分について
+\[\lim_{R\to \infty} \int_{1}^{R} \dfrac{dr}{r^{2a-2}(1+r)}\leq \lim_{R\to \infty} \int_{1}^{R} \dfrac{dr}{r^{2a-2}(r/2)}  \]
+の右辺は収束するから左辺も収束する. よって, $I$を計算した式の2行目における積分を「形式的に$\theta$から逐次積分をした結果」は有限であることが分かるから, その値は2行目の積分値でもある. それが有限であるから, $A_R$上で直交座標に戻せば, $D_R$上の積分の極限が収束することが分かる. $I$の値は領域の増加列の取り方によらず, $D_R$に関する積分の極限値が有限であることが分かれば$I$自体も収束すると言えるので, $a>1$が十分条件である.
+
+
+
+\subsection{問3}
+$G\cong \cyc{6}\times \cyc{12}$であり, この同型で$H = \cyc{6}\times \set{0}$である. 位数12の$K$が$G=K+H$を満たすとすれば, $(0,1) = (a,0) + (c,1)$となる$(a,0)\in H$, $(c,1)\in K$が存在する. $K\supset \set{(nc,n)\mid n=0,1,\dots,12}$だが, $K$の位数12なので等号が成立する. よって$K=\lan (c,1)\ran$ ($c\in \cyc{6}$)という6個が候補.  逆にこの$K$は, $(12c, 12) = (0,0)$, $(6c,6) = (0,6)\neq (0,0)$だから位数12の(巡回)部分群で, $K+H$は$(c,1) + (-c,0) = (0,1)$と$(0,0) + (1,0) = (1,0)\in K + H$を含むから$(a,0) + (0,b) = (a,b)$を含む. よって$G=K+H$である.
+
+
+\subsection{問5}
+
+$f(z) = \dfrac{z^3e^{iz}}{(z^2+1)^2}$とおく. $f(z)$は$\pm i$で$2$位の極を持つ. $i$における留数を計算する. $w=z-i$とおくと
+\bealn{
+& w^2f(w+i)= \dfrac{(w+i)^3}{(w+2i)^2}e^{i(w+i)}
+}
+であり, $w\to 0$で
+\bealn{
+&(w+i)^3 = -i  -3w + O(w^2) \\
+&e^{i(w+i)} = e^{-1} (1+iw + O(w^2)) \\
+&\dfrac{1}{(w+2i)^2} = \dfrac{1}{(2i)^2}\cdot \dfrac{1}{(1-wi/2)^2} \\
+&= \dfrac{1}{-4} (1 + wi/2 + O(w^2))^2 \\
+&= -\dfrac{1}{4} (1+iw + O(w^2))
+}
+だから, $w^2f(w+i)$の展開の1次の係数は
+\[-\dfrac{1}{4e}\parena{(-3)\cdot 1\cdot 1 + (-i)\cdot i\cdot 1 + (-i)\cdot 1\cdot i} = \dfrac{1}{4e}\]

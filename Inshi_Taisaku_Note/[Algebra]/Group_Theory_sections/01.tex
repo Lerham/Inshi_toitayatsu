@@ -1,0 +1,625 @@
+\section{基礎事項}
+\subsection{位数}
+
+\begin{prop} $G$を有限群とする.
+\ben
+\item $|G|$が素数$p$で割り切れるとき, 位数が$p$の元が存在する.
+\een
+\end{prop}
+
+\begin{prac}
+$\sigma = \bep 1&2&3&4&5&6&7&8&9\\ 2&1&4&5&3&7&8&9&6 \enp\in S_9$の位数を求めよ.
+\end{prac}
+
+\tbox{
+\begin{egprob}
+$G$は位数$n$の有限群で, 次の性質を満たす.
+\begin{center}
+$n$の任意の約数$d>0$に対し, $G$は位数$d$の部分群をただ一つ持つ.
+\end{center}
+$G$はどのような群か.
+\end{egprob}
+}{title=分からなかった問題(H10京大数学I)}
+    \begin{egans} \href{https://math.stackexchange.com/questions/1302635/a-finite-group-which-has-a-unique-subgroup-of-order-d-for-each-d-mid-n}{参考}
+位数$d$の元があるものとする. $x,y$を位数$d$の元とすると, 条件より$\lan x\ran = \lan y\ran$なので, $\lan x\ran$には位数$d$の元がすべて含まれる. $\lan x \ran \cong \mb{Z}/d\mb{Z}$なので$\lan x\ran$の中には位数$d$の元がちょうど$\phi(d)$個存在する. よって$G$には位数$d$の元が$\phi(d)$個存在するか, 1個も存在しない. よって
+\[|G|=n \leq \sum_{0<d|n} \phi(d) \]
+となる. \tf{ここで, 右辺は必ず$n$に等しいため}すべての$d$に対して位数$d$の元は$\phi(d)$個持たなければならない. よって示せた. \qed
+\end{egans}
+テクニカルだが, 次のような使い方も覚えておきたい.
+\begin{egprob}
+$G$を位数$30$の群とする. Sylow$p$部分群の個数を$n_p$とするとき, $n_3, n_5$のどちらかは1であることを示せ.
+\end{egprob}
+\begin{egans}
+Sylowの定理の主張を見て貰うと, $n_3 \in \set{1,10}$, $n_5\in \set{1,6}$である. よって$n_3=10, n_5=6$として矛盾を導けばよい. もしこうなっていたら, $G$には位数3の元が20個はあり, 位数5の元が24個あることになる. よっておかしい. \qed
+\end{egans}
+
+
+\begin{egprob} (H28基礎科目II,4)
+$A= \sumib{0&-1\\ 1&1}$, $B=\sumib{0&1\\1&0}$で生成される$\mr{GL}_{2}(\mb{C})$の部分群$G$について, 以下の問に答えよ.
+\ben
+\item $G$の位数を求めよ.
+\een
+\end{egprob}
+
+
+
+
+\subsection{有限Abel群}
+\begin{egprob} (H26基礎科目II, 4)
+$G = \cyc{4}\times \cyc{6}\times \cyc{9}$の指数3の部分群の個数を求めよ.
+\end{egprob}
+\begin{egans}
+指数3の部分群$H$は$3G = \cyc{4}\times 3\mb{Z}/6\mb{Z}\times 3\mb{Z}/9\mb{Z}$を含む. $G/3G = \cyc{3}\times \cyc{3}$だから, $H$は$G/3G$の位数3の部分群に対応する. これは位数3の元の個数の半分なので, $4$個である.
+\end{egans}
+
+\begin{egprob} (H25数学I, 3) \label{prob:H25-I-3}
+$p$は素数とする. アーベル群$A$は位数$p^4$であり, 位数$p$の部分群$N$で$A/N\cong \mb{Z}/p^3\mb{Z}$となるものを持つとする. このような$A$を同型を除いてすべて求めよ.
+\end{egprob}
+
+\begin{egans}
+仮定より$A$には位数$p^3$以上の元が存在する. もし位数$p^4$の元が存在すれば$A\cong \cyc{p^4}$である. 存在しないとする. 有限アーベル群の構造定理から$A\cong \cyc{p} \times \cyc{p^3}$となるしかないが, 実際この群は$N = \cyc{p}\times \set{0}$という部分群によって$A/N \cong \cyc{p^3}$となるのでよい. よって
+\[A\cong \cyc{p^4}, \quad \cyc{p}\times \cyc{p^3}. \]
+\end{egans}
+
+
+
+
+
+
+\newpage
+\subsection{部分群・正規部分群}
+\tbox{
+\begin{prop}
+\ben
+\item $\phi:G\to H$が群準同型なら$\ker{\phi}$は正規部分群である.
+\item $G$の中心$Z(G)$は正規部分群である.
+\item \tf{正規部分群は共役類の合併である. }
+\item 指数$2$の部分群は必ず正規である. とくに$A_n\norgr S_n$である. (より一般に, $G$の位数を割り切る最小の素数$p$に対し, 指数$p$の部分群は正規である\footnote{こちらも証明は知っておいた方が良い. しかし指数2のほうは答案にすぐ使ってもよいくらい「常識」であろう. }. )
+\item $G$を群, $H,K$は$G$の部分群, $N$は$G$の正規部分群とするとき, $HK$が部分群であることと$HK=KH$が成り立つことは同値. とくに, 正規部分群との積 $HN$は必ず$G$の部分群である.
+\item (\tf{重要}) $N_1,N_2$を$G$の正規部分群で$N_1\cap N_2 = \set{1_G}$かつ$G=N_1N_2$のとき, $G\cong N_1\times N_2$である.
+\een
+\end{prop}
+}{title=正規部分群のまとめ}
+\prf (1),(2):Very Easy. \\
+(3): $H\norgr G$とする. $ghg^{-1}\in H$なので$h\in H$の共役元はすべて$H$に属す. そこから明らかであろう. \qed \\
+(4): $H$が指数2ならすべての$g$に対して$gH\in \set{H,Hg} $である. もしある$g$で$gH \neq Hg$なら$gH = H$であり$g\in H$だが$gH = H = Hg$でおかしい. \qed \\
+(5): $hkh'k'$を$HK$の元と見たければ$HK=KH$を使うであろうことから前半が分かる. 後半も$HN=NH$は容易に分かるので前半の主張から言える. \qed \\
+(6): (5)より$N_1N_2$は部分群. $\phi:N_1\times N_2 \to G$を$\phi(n_1,n_2) = n_1n_2$で定めて,全単射準同型であることを示せばよい. 単射であることはどう示せるか考えて見よ. \qed
+\begin{prac}
+(6)の証明を埋めよ.
+\end{prac}
+
+
+
+
+
+
+
+
+\begin{eg}
+$G$が位数$pq$ ($p,q$は異なる素数)で, Sylow部分群$S_p,S_q$が正規であることが分かっているとする. このとき
+$G = S_pS_q$と$S_p\cap S_q=\set{1_G}$が満たされるので$G\cong S_p\times S_q \cong C_{pq}$ ($C_n = \mb{Z}/n\mb{Z}$)である. 実は, $p<q$で$p$が$q-1$を割らないなら, $G\cong C_{pq}$であることが言える(これもそれなりに有名である). (See ..)
+\end{eg}
+
+正規部分群に関連して, 正規化群というものがある.
+\begin{defn}
+群$G$とその部分群$H$に対し, $H$の\tf{正規化群}$N_{G}(H)$とは,
+\[N_{G}(H) = \set{\eta\in G \mid \eta H \eta^{-1} = H}\]
+により定義される群である. すなわち, 共役コセット集合$\set{gHg^{-1} \mid g\in G}$に$G$が共役で作用するときの$H$の固定部分群である.
+\end{defn}
+
+\begin{tips} H29専門科目3番の体論のように, 正規化群をわざわざ書いてくれることもある.  とはいえやっぱり正規化群くらいは覚えておいてもらいたい.
+\end{tips}
+
+\begin{egprob}
+$S^n$の指数2の部分群は$A_n$に限るか.
+\end{egprob}
+
+\begin{egans} 指数2の部分群$N$とする. $N$は正規である. $G/N\cong \mb{Z}/2\mb{Z}$なので全射準同型$S_n \to \mb{Z}/2\mb{Z}$がある. 逆に全射準同型$\phi : S_n \to \mb{Z}/2\mb{Z}$を与えると準同型定理より$\ker{\phi}$は指数2の正規部分群である. よって, $N$は$\ker{\phi}$として必ず書ける. さて, $S_n$は互換で生成され, 互換同士はサイクルの型が同じであるから共役である. もしある互換$\sigma$が$\phi(\sigma) = 0$を満たせば, 任意の互換$\sigma' = \alpha \sigma \alpha^{-1} $に対し
+\[\phi(\sigma') = \phi(\alpha) + \phi(\sigma) + \phi(\alpha^{-1}) = \phi(\sigma) = 0\quad \mr{in} \mb{Z}/2\mb{Z}\]
+と分かる. 逆に$\phi(\sigma) = 1$なら$\phi(\sigma') = 1$. よって$\phi$は自明な準同型か符号関数しか存在しない. そのうち全射であるものは符号関数で, その核は$A_n$である. \qed
+\end{egans}
+
+部分群からそれなりに大きい正規部分群を構成したいときに次が役立ったことがある.
+\begin{egprob}
+$G$を群, $H$を部分群とする. $H$に含まれる$G$の最大の正規部分群は$K=\bigcap_{g\in G}g^{-1}Hg$であるか?
+\end{egprob}
+\begin{egans}
+$K$が正規部分群であることと$N$が$H$に含まれる$G$の正規部分群なら$N\subset K$を示せばよい.\par
+まず$K$は部分群. $x\in K$とすると$y^{-1}xy$は$(gy)^{-1}H(gy)$に含まれ, $g$がすべて動くので$g^{-1}Hg^{-1}$に含まれる. よって$y^{-1}xy\in K$であり正規である. また, $N\subset K$は正規部分群の定義から明らかである.
+\end{egans}
+\begin{egans}
+$K$はcosetへの作用$G\to \mr{Aut}(G/H)$の核なので.
+\end{egans}
+
+
+\begin{egprob}
+部分群をちょうど$5$個持つような有限群$G$の構造を決定せよ. ただし, $G,\set{1}$も部分群として数える.
+\end{egprob}
+
+\begin{egans} (H3数学II-1)
+巡回群$C_n$から考えると, 部分群と$n$の約数は対応する. よって$n=p^4$という形である.
+シロー部分群を考えれば, $|G|$は4つ以上の素因数を持たない.
+$|G|$が素数$p<q<r$で割れるとき, $G$はアーベル群でなければならない. なぜなら, $S_p,S_q,S_r$がどれも一つだけであるから. $S_{p},S_q,S_r$はもはや自明な部分群を含んではならないので, $S_p,S_q,S_r$は巡回群である. よって$G\cong C_p\times C_q\times C_r$と書けるが, これは実際には条件を満たさない.\\
+$|G|$の素因数が$p<q$のみであるとする. $G$が巡回群でないアーベル群の場合, $C_{p^i}\times C_{p^jq^k}$という形か, これの$p,q$を入れ替えた形のものが考えられる. ただし$i,j,k\geq 1$である. このとき, $C_{p^jq^k}$に部分群が4個はあるので, この形では部分群が8個は見つかり, 不適. 以降非アーベル群から考える. Sylow$p,q$部分群の個数をそれぞれ$n_p$,$n_q$とする. $n_p + n_q \leq 3$が必要である. $p<q$なので$n_q = 1$である. 一方, $n_p >1$であれば$n_p \geq q-1\geq 2$であるから, $q\geq 5$のときは$n_q=1$となり, $G$がアーベル群になるから不適. よって$q=3$で, 非アーベル群なので$G=S_3$が考えられる. これは互換で生成される位数2の部分群を3つ, 位数3の部分群$A_3$を持つので, 不適である. \\
+$G$が$p$群かつ巡回群でないとする. $G=C_p\times C_p$のとき, 部分群が5個であるのは$p=2$のときである. $|G|\geq p^3$とする. 位数$p$の元が$c$個あるとすれば, 位数$p$の部分群がちょうど$c/(p-1)$個ある. $c=p^3-1$なら$c/(p-1) = p^2+p+1 > 3$なので不適. よって位数$p^2$の元$g$が存在する. $\lan g \ran $に属さない$h$を取ると, $\lan h \ran, \lan g \ran, \lan g^p \ran $は相異なる部分群である. これらの合併は$p^2 + p$個の元からなるが, $|G|\geq p^3 > p^2 + p$だから, この合併に属さない元$s$があり, $\lan s\ran$はまた相異なる部分群なので, 不適である. 以上より
+\[C_{p^4}, C_{2}\times C_{2}, \]
+\end{egans}
+
+
+
+\newpage
+\subsection{共役類}
+
+\tbox{
+\begin{prop}
+\ben
+\item $\maf{S}_{d}$の共役類と\tf{自然数$d$の分割}は対応する.
+\een
+\end{prop}
+}{title=共役類まとめ}
+\begin{eg}
+$\maf{S}_{3}$の共役類は$\set{1},\set{(12),(23),(13)},\set{(123),(132)}$である.  $\maf{S}_{4}$の共役類は$\set{1},\set{互換}$,$\set{\text{3-cycle}}$, $\set{\text{4-cycle}}$, $\set{\text{位数2偶置換}}$である. 個数はそれぞれ1,6,8,6,3である. また, $\maf{S}_{4}$のこの情報から「指数$3$の正規部分群が存在しない」ことが導ける. [証明]指数$3$なら位数$8$である. 正規部分群は共役類の合併であるから, 共役類をつなぎ合わせて$8$個の元を持つようにできるかを考えたいが, そのような方法は一つもない. よって存在しない. \footnote{実は$\maf{S}_{5}$の自明でない正規部分群は$A_5$のみであることが知られている. $\maf{S}_{d}$ ($d\neq 4$)でも同様. $d=4$の場合, Kleinの四元群というものがある. }.
+\end{eg}
+\begin{egprob}
+\end{egprob}
+
+
+
+\begin{prac}
+$S_5$の共役類とそれぞれの元の個数をすべて答えよ. (7個ある)
+\end{prac}
+
+\begin{theo}
+$G$を有限群とする。$G$の共役類の完全代表系で中心$Z(G)$の元でないものを$\{ x_1,\cdots, x_n\}$とするとき,
+\[|G| = |Z(G)| + \disp\sum_{i} |C(x_i)| = |Z(G)|  +  \disp\sum_{i} (G:C_{G}(x_i))\]
+である。ただし, $C_{G}(x_i)$は中心化群$\{ g\in G\mid gx_i = x_i g\}$である。
+\end{theo}
+$Z(G)$および$(G:C_{G}(x_i))$はLagrangeの定理より$|G|$の約数であるから, 類等式の数論的制約によってその構造が決定されることがある。
+\begin{eg}
+$p$を素数とするとき, 位数$p^2$の群$G$はAbel群, すなわち$|Z(G)| = p^2$であることを示す。類等式から$|Z(G)| = 1$ではありえない。$|Z(G)| = p$であるとして矛盾を導く。このとき$Z(G)$と$G/Z(G)$はともに位数$p$の巡回群である。生成元$a\in Z(G)$と$[b]\in G/Z(G)$をひとつ選ぶ(したがって$a\neq 1, b\notin Z(G)$)。$g\in G$を任意に取る。$[g] = [b]^{n}$となる自然数$n$が存在する。このとき$b^{n} g^{-1}\in Z(G)$だから$b^{n} g^{-1} = a^{m}$となる自然数$m$が存在する。よって$g=a^{-m} b^{n}$だから$G=\lan a,b \ran$である。すなわち, $G$の任意の元は$zb^{n}$と書ける。$z_1,z_2\in Z(G)$, $n_1,n_2\in \mb{N}$に対し, $z_{1}b^{n_1}$と$z_{2}b^{n_2}$が可換であることは容易に分かるので, $G$のすべての元は可換になり矛盾である。よって$G=Z(G)$である。
+\end{eg}
+
+特定の位数の正規部分群が無いことを示すには, 共役類の直和を考えることが一つの方法としてある.
+
+\begin{egprob}
+$D_6$は位数4の正規部分群を持たないことを示せ.
+\end{egprob}
+\begin{point}
+正規部分群は共役類の直和なので, 共役類をすべて調べてしまって, その直和が位数4の群を作り得ないことを示せばよい. 共役元の計算は, $\tau\sigma\tau = \sigma^{-1}$などの関係式を使って効率的に計算する. $D_6$は回転と鏡映を表す元で生成できることにも注意.
+\end{point}
+\begin{egans}
+$D_6$には回転(位数6の元)$\sigma$と, ある軸による鏡映$\tau$(位数2)が存在する. $D_6$の任意の元$g$が$g= \sigma^k \tau^i$ ($k=0,\dots, 5, i=0,1$)の形に一意に書ける. $\tau \sigma \tau^{-1} = \sigma^{-1}$や, それと同値な$\sigma\tau = \tau\sigma^{-1}$に注意すると
+\[\tau g\tau^{-1} = \tau\sigma^k \tau^{i-1} = \tau\sigma^k\tau^{-1}\tau^i = \sigma^{-k}\tau^{i}\]
+\[\sigma g\sigma^{-1} = \sigma^{k+1}\tau^{i}\sigma^{-1} = \bcas
+\sigma^{k} \quad (i=0) \\
+\sigma^{k+2}\tau\quad (i=1)
+\ecas\]
+が得られる. ここから, $g=\sigma^k\tau^i$の共役元をすべて計算することができる.
+\[\sigma^m g\sigma^{-m} = \bcas
+\sigma^k \quad (i=0) \\
+\sigma^{k+2m} \quad (i=1)
+\ecas \]
+\[\sigma^m \tau g \tau^{-1} \sigma^{-m} =
+\bcas
+\sigma^{-k} \quad (i=0)\\
+\sigma^m \sigma^{-k}\tau \sigma^{-m} = \sigma^{-k+2m}\tau\quad (i=1)
+\ecas
+\]
+となる. 上を見れば, 共役類を解析することができ, 以下が$D_6$の共役類である.
+\ben[label=$\bullet$]
+\item $R_0=\set{e}$ ($e$は単位元)
+\item $R_1=\set{\sigma, \sigma^5}$
+\item $R_2=\set{\sigma^2, \sigma^{4}}$
+\item $R_3=\set{\sigma^3}$
+\item $S_0=\set{\sigma\tau,\sigma^3\tau, \sigma^5\tau}$
+\item $S_1=\set{\tau,\sigma^2\tau, \sigma^4\tau}$
+\een
+正規部分群は, その定義から, 共役類の直和にならねばならない. 上の共役類の合併を考えて位数4の群が作れるか, というパズルを考えればよい. そしてそれは不可能であることがわかる. 仮に位数4の正規部分群$N$が作れたとしよう. まず$N$は単位元$e$を含む. $N$は$R_i,S_i$の合併でかつ位数4である. 位数4であることから考えられる組み合わせは, $N=\set{e}\sqcup S_0, \set{e}\sqcup S_1, \set{e}\sqcup R_3\sqcup R_1, \set{e}\sqcup R_3\sqcup R_2$などが考えられよう. しかし, これらはいずれも群をなさないので適さない. (たとえば最初の候補では, $\sigma^2\tau \cdot \tau = \sigma^2$が$\set{e}\sqcup S_0$に属していないのでおかしい. 最後の候補では, $\sigma^2\cdot \sigma^3 = \sigma^5$が合併に属さない.) ゆえに, これら共役類の直和によって位数4の群を作ることは不可能であり, 位数4の正規部分群は存在しない.
+
+\end{egans}
+
+
+
+\begin{egprob} (H28東工大, 午後1)
+有限群$G$の位数を$n$とし, $G$の共役類全体を$C(1),\dots, C(r)$とする.
+\ben
+\item $|C(i)| = n(i)$とすると$n(i)$は$n$の約数であることを示せ.
+\item $l(i) = n/n(i)$とおくとき$\sum_{i=1}^{r} 1/l(i) = 1$を示せ.
+\item $r=1,2,3$となる$G$の位数$n$をすべて求めよ.
+\een
+\end{egprob}
+\begin{egans}
+(1): $x\in C(i)$とする. $C(i)$には$G$が共役で作用する. $x$の固定部分群$G_x$は$C_G(x)$である. よって, $|C_G(x)||C(i)| = |G|$だから$n(i) = [G:C_G(x)]$. \\
+(2): 類等式から明らか. \\
+(3): (2)から考えると$n=1,2,3,4,6$に限られ, $n=4$はアーベル群で共役類が4つになるので不適. ほかは全部よい($n=6$のときは$S_3$である).
+\end{egans}
+
+
+
+
+
+\subsection{Abel群の構造定理}
+\begin{theo} (有限Abel群の構造定理)
+\end{theo}
+\begin{theo} (有限生成Abel群の構造定理)
+
+\end{theo}
+
+
+\begin{eg}
+$p$を素数とする。位数$p^2$の元はAbel群であった。よって, 位数$p^2$の群は$\mb{Z}/p^2\mb{Z}$か$\mb{Z}/p\mb{Z}\times \mb{Z}/p\mb{Z}$に同型である。
+\end{eg}
+
+\begin{egprob} (H15数学I)\\
+自然な準同型
+\[\phi:GL_{2}(\mathbb{Z}/4\mathbb{Z}) \to GL_{2}(\mathbb{Z}/2\mathbb{Z})\]
+の核は$(\mathbb{Z}/2\mathbb{Z})^4$と群として同型であることを示せ。
+\end{egprob}
+\begin{egans}
+$a,b,c,d\in \mb{Z}$として, これを$\mb{Z}/n\mb{Z}$の元と区別せずに用いる。
+$A=\bep a & b \\ c & d \enp \in \ker{\phi}$とする。このとき,
+\[a,d\equiv 1\pmod{2},\quad  c,b\equiv 0\pmod{2}\]
+逆にこのような$a,b,c,d$が与えられると$\det{A} = ad-bc$は奇数で代表されるので, $\mb{Z}/4\mb{Z}$の単元である。よって$A\in GL_2(\mb{Z}/4\mb{Z})$である\footnote{可換環$R$で, $X\in M_n(R)$に対し$X\in GL_n(R)\iff \det{X} \in R^{\times}$である。余因子行列は代数的に作れるので線形代数とほとんど同じである。}。よって$\ker{\phi}$の位数が$16$であることが分かる。\par
+あとは次を示せばよい。
+\ben
+\item $\ker{\phi}$のすべての元の位数が$2$以下であること。
+\item $\ker{\phi}$がAbel群であること。
+\item $(\mb{Z}/2\mb{Z})^4$以外の可能性がないこと。
+\een
+これらは簡単な整数問題になるので, そこは読者にお任せする。
+\end{egans}
+\begin{prac}
+上の3つを示し, 証明を完成させよ。
+\end{prac}
+
+
+
+
+
+\newpage
+\subsection{Sylowの定理}
+かなり強力な群論の定理のひとつである。
+\tbox{
+\begin{theo} (\tf{Sylowの定理}) \label{theo:sylow}
+$G$を有限群, $p$を素数, $|G| = p^{a} m$ ($a>0$, $m$は$p$で割れない自然数)とする。このとき, 次の(1)-(4)が成り立つ。
+\ben
+\item $G$の部分群$H$で$|H| = p^{a}$となるものが存在する(このような部分群をSylow$p$部分群という)。
+\item Sylow$p$部分群$H$をひとつ固定する。$K\subset G$が部分群で$|K|$が$p$冪なら, $g\in G$があり$K\subset gHg^{-1}$となる。特に, $K$を含む$G$のSylow$p$部分群が存在する。
+\item \tf{$G$のすべてのSylow$p$部分群は共役である.}
+\item Sylow-$p$部分群の数$n_p$は
+\[\bolm{n_p = |G|/|N_{G}(H)| \equiv 1 \pmod{p}}\]
+という条件を満たす.
+\een
+\end{theo}
+}{title=Sylowの定理}
+
+\begin{cor} (\tf{Cauchyの定理})\\
+$G$を有限群, $p$を$G$の位数を割り切る素数とするとき, 位数$p$の元$g\in G$が少なくとも一つ存在する.
+\end{cor}
+\prf Sylow-$p$部分群$P$を取り, $a\in P$は$G$の単位元と異なるとする. このとき, $a$の位数は$p^{n}$の形で書けるので, $a^{p^{n-1}}$は位数$p$の元である. \qed
+
+
+\begin{egprob}
+$D_6$には位数4の正規部分群は存在しないことを示せ.
+\end{egprob}
+\begin{egans}
+$D_6$のSylow-3部分群は正規である. [証明]もし正規でないなら$4$個あるはずである. このとき位数3の元が8個見つかるが, $D_6$には位数2の元が$6$個はあるので, おかしい. よってSylow-3部分群$P_3$が一つあり, 正規.\par 次にSylow-2部分群は正規ではない. 実際, もし正規だとしてそれを$P_2$とすると, $D_6 = P_3P_2$でかつ$P_2\cap P_3 = \set{e}$かつ$P_2,P_3$が正規なので, $f:P_2\times P_3 \to D_6$; $f(x,y) = xy$が群同型となるので,$D_6\cong P_2\times P_3$になるが, 右辺はAbel群なので矛盾. ゆえに位数4の部分群は正規ではありえない. \qed
+\end{egans}
+
+
+
+\begin{eg} (\tf{位数$pq$の群; $p<q, p\not| q-1$})
+
+\end{eg}
+
+\begin{egprob} (都立大\footnote{とはいえ, これは昔の問題である.  最近の院試でこの手の出題は見ないのであんまり恐れなくてもいいかもしれない. })
+位数$p^2q$の群の型を決定せよ. ($p<q$は素数, $p\not| q-1$)
+\end{egprob}
+
+\begin{egans}
+条件より$n_p = 1$. よって$S_p\subset G$は正規. $n_q$の可能性は$p<q$にも注意すると$n_q \in \set{1,p^2}$. $n_q = 1$ならば$S_q$も正規で$G\cong S_p\times S_q$で, $C_{p}^2 \times C_q$もしくは$C_{p^2}\times C_q$に同型である. 以下$n_q = p^2$で考える. $q|p^2-1 = (p-1)(p+1)$で$p-1<q$だから$q|p+1$であり, $p<q\leq p+1$なので$q=p+1$が従う. $p,q$は素数だから$p=2,q=3$となるが, これは$p\not| q-1$に反する. 以上ですべて決定できた. \qed
+\end{egans}
+
+\begin{eg}
+位数21の群で非可換なものがただひとつ存在することが知られている. それは次のアファイン変換群の形で実現できる.
+\[G=\set{\phi_{\alpha,\beta}\in \mr{Aut}(\mb{F}_{7})\mid  \phi_{\alpha,\beta}(x) = \alpha x + \beta,\quad \alpha,\beta\in \mb{F}_{7},\alpha^3=1}\]
+なお, このアファイン変換群の出どころはこの次の節の\tf{半直積}と呼ばれるものから構成できる. 興味がある人は見てみよう.
+\end{eg}
+
+ガロア理論と絡めた問題を考えよう.
+\begin{egprob}
+$\mb{Q}(\sqrt[11]{2}, \zeta_{11})/\mb{Q}$が110次Galois拡大であることを示せ. また, 中間体$M$で$\mb{Q}$上55次, 22次, 10次のものはいくつあるかそれぞれ求めよ.
+\end{egprob}
+\begin{egans}
+Galois拡大であることは省略($11$が素数であることは使う). $110 = 2\times 5\times 11$である. 55次のものは位数2だからSylow-2部分群に対応する. $G$をガロア群とする. \ao{Sylow部分群はどの二つも共役なので, 55次中間体$M$を一つ見つけると$\sigma(M)$ですべて得られる(ここがポイント).} $M=\mb{Q}(\sqrt[11]{2},\zeta_{11} + \zeta_{11}^{-1})$であり, $\sigma(M)$はある整数$j$によって$\mb{Q}(\sqrt[11]{2}\zeta_{11}^{j}, \zeta_{11}+\zeta_{11}^{-1})$の形になることが分かる. これらは異なる$j\in \cyc{11}$で異なる体になることが示せるので, 11個である. 22次の場合, $M=\mb{Q}(\sqrt[11]{2}, \zeta_{11} + \zeta_{11}^{4} + \zeta_{11}^{5} + \zeta_{11}^{9} + \zeta_{11}^{3})$は一つの例であり, 11個あることが示せる. 10次の場合, 実は$\mb{Q}(\zeta_{11})$しかない.
+\end{egans}
+\begin{prac}
+上の解答の細部を埋めよ.
+\end{prac}
+
+
+
+
+
+
+
+
+
+
+\newpage
+\subsection{($\spadesuit$)半直積}
+ガロア理論の院試で一回だけ半直積を見たことがあり「ふざけんな」となったのでまとめた. 半直積とは直積群の一般化である. 集合としては直積に等しいが, その群構造が少し変わっている. 二つの群から新たな群を作り出す方法であり, 有限群の分類にもしばしば現れる.
+\tbox{
+\begin{defn}
+群$N,H$と群準同型$\phi:H\to \mr{Aut}(N)$を与える. $\phi(h)$のことを$\phi_{h}$で表す. このとき, $\phi$に関する$N$と$H$の\tf{(外部)半直積}$N\rtimes_{\phi} H$とは, 次のようにして定まる群である.
+\ben[label=$\bullet$]
+\item 集合としては$N\rtimes_{\phi}H = N\times H$.
+\item \bolm{(n_1,h_1)(n_2,h_2) = (n_1\phi_{h_1}(n_2), h_1h_2)}
+\een
+\end{defn}
+}{title=半直積}
+
+\begin{prac}
+$N\rtimes_{\phi}H$が群をなすことを確認せよ. 単位元は$(1_N,1_H)$で, $(n,h)$の逆元が$(\phi_{h^{-1}}(n^{-1}), h^{-1})$であることも確認せよ.
+\end{prac}
+
+\begin{prac}
+この演算はいかにも非可換っぽく見えるから, うまくやると二つの有限群から非アーベル群が作れるということが予想される. \ao{素数$p,q$で$q-1$が$p$を割り切るとき, 位数$pq$の非アーベル群が存在するが, それは実は半直積で構成されるのである.} だが$p,q$に関する条件が満たされないときはアーベル群しか存在し得なかった. どうしてこのような場合に位数$pq$のアーベル群が半直積から構成できないのだろうか.
+\end{prac}
+%Answer: Hは位数p, Nは位数qとする. \phi: H\to Aut(N)\cong (\cyc{q})^{\times} という準同型は位数pから位数q-1の射になる. pは素数なのでこの射は単射か自明な準同型だが, 単射ならばq-1がpの約数にならねばならないはず. よって\phiが自明な準同型しかないので, \phi_{h_1}は常に恒等射N \to Nになる. すると, 半直積の演算は直積群の演算になるので, (HとNは素数位数でアーベル群だから)非アーベルにならない.
+
+
+\begin{eg} 個人的には次の例が最も良い半直積の例である. $\mb{R}^2$のアファイン変換$f_{a,b}(x) = ax+b$ ($a\in \mb{R}^{\times}, b\in \mb{R})$の集合$G$は合成に関して\tf{非可換な}群をなす. 実際, 実数$a_i\neq 0,b_i$ ($i=1,2$)に対して
+\bealn{
+f_{a_1,b_1}\circ f_{a_2,b_2}(x) &= a_1(a_2x+b_2) + b_1 \\
+&= a_1a_2x + (a_1b_2 + b_1) = f_{a_1a_2, a_1b_2 + b_1}(x)
+}
+であるから. そして, この結果を見るとまさしく半直積が現れている. 実際, この例では$G\cong \mb{R}\rtimes_{\phi} \mb{R}^{\times}$である. ただし, $\phi:\mb{R}^{\times}\to \mr{Aut}(\mb{R})$は$t\in \mb{R}^{\times}$に対し$\phi_{t}(r) = tr$なる$\phi_t$を与える写像である. $N=\mb{R}$のほうは加法群であることに注意. また, この$\mb{R}$は一般の体に置き換えてもよい(環まで許すと$t$倍が自己同型とは限らないので作れなくなる).
+\end{eg}
+
+\begin{eg}
+Sylowの定理の節で考察した群は$\mb{F}_{7}\rtimes_{\phi} \mb{F}_{7}^{\times}$である. ただし$\phi: \mb{F}_{7}^{\times} \to \mr{Aut}(\mb{F}_{7})$は上の例と同様の, $\mb{F}_{7}$の元の掛け算による自己同型である.
+\end{eg}
+
+外部半直積は独立した群から一つの群を得る操作だが, 一つの群に内包された状況における\tf{内部半直積}というものもある.
+\begin{defn}
+ふたつの群$N,H$に対して, $N$の$H$による\tf{内部半直積}とは, 次の性質を満たす群$G$のことで, $G=N\rtimes H$と表す.
+\enu{
+\item $N$は$G$の正規部分群で$G=NH$
+\item $N\cap H = \set{1}$
+}{}
+\end{defn}
+
+
+
+
+\tbox{
+\begin{prop} (参考:Wikipedia「半直積」)
+\ben
+\item 標準的な単射$N\hookrightarrow N\rtimes_{\phi} H$, $H\hookrightarrow N\rtimes_{\phi}H$が存在する.
+\een
+\end{prop}
+}{title=半直積のさまざまな性質}
+
+$G=NH, N\cap H = \set{1}$という状況は有限群論でよく現れるが, この条件は次のように特徴づけられる. ようは内部半直積とは, $N$と$H$の元による積で分解する操作が一意であるという状況に現れるのである.
+\tbox{
+\begin{prop} (参考: Wikipedia「半直積」)
+$G$の正規部分群$N$と部分群$H$に対し, 次は同値. \ben
+\item $G=NH$かつ$N\cap H = \set{1}$
+\item $G$のすべての元は積$nh$ ($n\in N, h/in H$)として一意的に書ける.
+\item $G$のすべての元は積$hn$ ($n\in N, h/in H$)として一意的に書ける.
+\een
+\end{prop}
+}{}
+
+
+
+次のような状況がしばしばあり, 有用である.
+\tbox{
+\begin{theo} (参考:Wikipedia「半直積」)
+群$G$と正規部分群$N$と部分群$H$を与える.
+$G$のすべての元が$g=nh$ ($n\in N, h\in H$)の形に書けるとする. $\phi:H\to \mr{Aut}(N)$を$\phi_h(n) = hnh^{-1}$で与える(これは群準同型である). このとき\bolm{G\cong N\rtimes_{\phi} H}である. ただし, 同型写像は$nh$を$(n,h)$に送る.
+\end{theo}
+}{title=半直積に同型であるための十分条件}
+
+ \begin{egprob} $p,q$は素数, $p|q-1$とする. 位数$pq$の非アーベル群$G$は同型除いてただひとつであることを証明せよ.
+ \end{egprob}
+\begin{egans}
+$G$から位数$p,q$の元が取れる. それで生成される巡回部分群を$H,N$とする. $p<q$なので, Sylow-$q$部分群である$N$は正規である. $\phi:H\to \mr{Aut}(N)$を$\phi_h(n) = hnh^{-1}$で定める. $\phi$は単射か自明な準同型であるが, 自明な準同型だと非アーベルに反するので単射.  とくに$H$の生成元が$\sigma$なら$\phi_\sigma$の位数が$p$であるから, $\phi_{\sigma}^{p} = \mr{id}_N$により$\sigma^{p} n \sigma^{-p} = n$を得る. これが任意の$n\in N$で成り立つことは, $N$の生成元$\tau$に対して$\sigma^{p} \tau \sigma^{-p} = \tau$であるということに同値である. $G$の元は$nh$ ($n\in N, h\in H$)の形で書ける($G=NH, N\cap H = \set{e}$より). よって
+\[G = \lan \sigma,\tau\mid \sigma^p = \tau^{q} = 1, \sigma^p\tau\sigma^{-p} = \tau \ran\]
+が得られる.
+\end{egans}
+
+
+
+ 半直積でお手軽に非アーベル群が作れるものだから, 院試の題材にはもってこいだろう.
+
+
+次はパズルチックだが良問である. 位数21非アーベル群の例も習得できる.
+\begin{egprob} (R2 東北大 専門 1)
+集合$\mb{Z}/7\mb{Z}\times \mb{Z}/3\mb{Z}$に次の積を定めた群を$G$とする.
+\[(a,b)(x,y) = (a+2^x b, x+y)\]
+\ben
+\item $H = \set{(a,0) \mid a\in \mb{Z}/7\mb{Z}}$, $K = \set{(0,x)\mid x\in \mb{Z}/3\mb{Z}}$はそれぞれ正規部分群か?
+\item $G$の中心を求めよ.
+\item $G$の共役類の個数を求めよ.
+\item 位数が3である$G$の元の個数を求めよ.
+\een
+\end{egprob}
+
+この群は$\cyc{7}\rtimes_{\phi}\cyc{3}$で, $\phi:\cyc{3}\to \mr{Aut}((\cyc{7})^{\times})$は$\phi_{x}(b) = 2^a b$に取っているということである.
+\begin{egans}
+(1): Sylowの定理より$n_7 = 1$なので$H$は正規. もし正規なら$n_3 = 1$だが, このとき$HK$は部分群で$G = H\times K$となるので非アーベルに反する. よって正規ではない. \\
+(2): 計算するのみ. $Z(G) = \set{1}$. \\
+(3): 類等式. $C$は2個以上の元を持つ共役類を走るとき
+\[21 = |Z(G)| + \sum_{|C| \geq 2} |C|\]
+である. $|C|$は21の真の約数なので3か7. $21-1 = 20$を3と7の足し算で分解する方法は$3+3+7+7$なので, 共役類は($\set{1}$と合わせると)5個. \\
+(4): 共役類を$\set{1}, C_{3,1}, C_{3,2}, C_{7,1},C_{7,2}$と名付ける, $|C_{3,i}| = 3$, $|C_{7,i}| = 7$である. \\
+$H$が正規部分群なので, 共役類のdisjoint unionになることから組み合わせを考えると$H=\set{1}\sqcup C_{3,1}\sqcup C_{3,2}$となる. $(a,x)^{-1} = (b,-x)$と書けるが\aka{(\tf{注意}: $b=-a$ではない！)},
+$(a,x)(0,1)(b,-x) = (\ast, 1)$より分かるように$(0,1), (0,2)$は共役ではないので同じ共役類に属さず, 位数3の元なので$(0,1), (0,2)\notin H$より, $(0,1)\in C_{7,1}, (0,2)\in C_{7,2}$としてよい. ひとつの共役類上で位数が不変量であるから$C_{3,i}$のすべての元は位数7, $C_{7,i}$のすべての元は位数3である. よって, 14個である.
+
+\end{egans}
+\begin{prac}
+上の問題について, (1)で$K$が正規でないことを計算で確かめよ. (2)を確かめよ. 正規部分群が共役類の合併であることを一般に証明せよ.
+\end{prac}
+
+
+
+
+
+
+
+\subsection{その他}
+問題で使った知識を置いておく.
+\begin{prop}
+$\mb{Z}/n\mb{Z}$に対し, $\mr{Aut}(\mb{Z}/n\mb{Z}) \cong (\mb{Z}/n\mb{Z})^{\times}$.
+\end{prop}
+\prf $\phi:\mb{Z}/n\mb{Z} \to \mb{Z}/n\mb{Z}$は$\phi(1)$の値で決まる. $\phi(1)$が$n$と互いに素な類にならないと全射にならない. 逆に$n$と互いに素の類になれば$\phi(1)$が$\mb{Z}/n\mb{Z}$で単元だから$\phi(1)^{-1}$倍の自己同形も考えることができて, それによって全単射になる. ,
+\qed
+
+
+
+\subsection{例題集}
+\begin{egprob} (2020前期代数演義)
+位数595の群は位数17の正規部分群を持つことを示せ。
+\end{egprob}
+\begin{egans}
+$595=5\times 7\times 17$より$n_{17}$としてありえるのは$1$か$35$である。$n_{17} \neq 35$を示せばよい。$n_{17} = 35$だとする。35個ある位数17の部分群は 単位元でのみ交わるので, $G$に位数17の元が$n_{17}\times (17-1) = 560$個以上あることが保証される。
+いま, $n_{17} = 35$のもとでは$n_{7} = 1$となることを示す。
+実際, $n_{7}$としてありうるのは1か85であり, もし85であれば位数$7$の元が$85\times (7-1)$個以上あることになり, 位数7,17の元だけで$595$個以上の元が保証されてしまうので矛盾である。
+よって$n_{7} = 1$となる。$S_{p}$をsylow-$p$-部分群とすると, $S_7 \cdot S_{17} < G$で, $S_7\cap S_{17}= \{ 1 \}$だから$|S_{7}\cdot S_{17}| = 119$となる。
+$S_{7}\cdot S_{17}$の中でSylowの定理を用いて, $17\not\equiv 1 \pmod{7}$, $7\not\equiv 1\pmod{17}$から
+$S_{7}, S_{17} \rotatebox{90}{$\triangle$} S_{7}\cdot S_{17}$である。
+$S_{7}\cap S_{17} = \{ 1 \}$だから$S_{7}\cdot S_{17} \cong S_{7}\times S_{17}$である。よって, $G$ には位数$7\times 17$の元が
+\[7\times 17 - 7 - 17 + 1 = 96\]
+個あることが保証されるが, すでに位数17の元が$560$個保証されているので矛盾である。よって$n_{17} = 1$であり, 定理\ref{theo:sylow}(3)により正規部分群である。\qed
+\end{egans}
+
+\begin{egprob}
+$n,a$を自然数とする。$\phi(a^{n} - 1)$は$n$で割り切れることを示せ。
+\end{egprob}
+\begin{egans}
+$G = (\mb{Z}/(a^{n} - 1)\mb{Z})^{\ast}$ とする。$a$と$a^{n} - 1$は互いに素なので$a\bmod{a^{n} - 1}$は$G$に属す。$a \bmod{a^{n}-1}$の位数が$n$であることは易しい。よって$n$は$|G|$を割り切る。$|G| = \phi(a^{n} - 1)$だから主張が示された。
+\end{egans}
+
+
+\clearpage
+\subsection{演習問題Part1}
+\subsubsection{Level A}
+\begin{prob} (9/26, Quiz)
+$G,H$は有限群であり,$|G|=n,|H|=m$としたとき$n$と$m$は互いに素とする.このとき,準同型写像$f:G\to H$を全て求めよ.
+\end{prob}
+
+\begin{prob} (9/20, Quiz)
+$G$を位数$n$の有限群とするとき, $\text{Hom}(G, \mathbb{C}^{\times})=\text{Hom}(G, \langle \zeta_n\rangle )$を示せ. ただし$\zeta_n$は$1$の原始$n$乗根で, $\text{Hom}(G, H)$は群$G$から群$H$への準同型全体. (さらに$G$が巡回群なら$|\text{Hom}(G, \mathbb{C}^{\times})|=n$となる.)
+\end{prob}
+
+\begin{prob} (2020前期代数演義)
+$X=\bep 0 & 1 \\ 1 & 0 \enp \in GL(2,\mb{R})$とする。
+\[i_X(A) = XAX\quad (A\in SL(2,\mb{R}))\]
+と定義するとき, $i_{X}$は外部自己同型であることを示せ。つまり, 内部自己同型ではないことを示せ。
+\end{prob}
+
+
+\begin{prob} (H24数学I-2)
+$p\geq 3$を奇素数, $n$を自然数とする.
+\[G = \set{\bmat{a&b\\ 0&d} \mid a,b,d\in \cyc{p^n}, ad=1}\]
+には位数$p^{2n-1}$の部分群がただひとつ存在することを示せ.
+\end{prob}
+
+
+\subsubsection{Level B}
+
+
+\begin{prob} (H28東北大選択1)
+正の整数$m,n$に対して$m$次対称群$S_m$の位数$n$の部分群の個数を$N(m,n)$とおく。
+\ben
+\item $N(5,3)$を求めよ。
+\item $N(5,4)$を求めよ。
+\item 整数$m\geq 2$に対し, 次の式を示せ。
+\[N(m,2) = \disp\sum_{k=1}^{[\frac{m}{2}]} \dfrac{m!}{2^{k}k!(m-2k)!}\]
+\een
+\end{prob}
+
+\subsubsection{Level C}
+\begin{prob} (2020前期代数演義, 星問題)
+$SL_{2}(\mb{F}_{3})$のSylow-2-部分群は正規でないことを証明せよ。
+\end{prob}
+
+\begin{prob} (H30専門科目2) \label{prob:H30senmon-2}
+$p$は素数, $k,m$を正の整数で, $k$と$p^2-p$は互いに素であるとする. 位数$kp^m$の有限群$G$が次の性質を満たす部分群$N,H$を持つとする.
+\ben
+\item $N$は位数$p^m$の巡回群で$G$の正規部分群である.
+\item $H$は位数$k$の群である.
+\een
+このとき$G$は$N$と$H$の直積であることを示せ.
+\end{prob}
+
+\begin{prob} (H27専門科目)\label{prob:H27senmon-1}
+$G$は非可換群で次の条件$(\ast)$を満たすとする.
+\begin{center}
+    $N_1,N_2\subset G$が相異なる自明でない($\set{1},G$と異なる)正規部分群なら$N_1\not\subset N_2$である.
+\end{center}
+\ben
+\item $N_1,N_2$が相異なる$G$の自明でない正規部分群なら$G=N_1\times N_2$であることを証明せよ.
+\item $G$の自明でない正規部分群の可zは高々2個であることを示せ.
+
+\een
+\end{prob}
+
+
+
+
+
+
+\subsubsection{Hint・Answer}
+{\small
+
+\begin{probans}
+\chatgpthint{像の位数は$n$と$m$の両方を割るため、準同型は自明です。}
+\end{probans}
+
+\begin{probans}
+\chatgpthint{各元の像の$n$乗が1になることを使ってください。}
+\end{probans}
+
+\begin{probans}
+\chatgpthint{内部自己同型と仮定し、$SL_2(\mb{R})$の中心化群を調べてください。}
+\end{probans}
+
+\begin{probans}
+位数$p^{2n-1}(p-1)$で, Sylow$p$部分群の個数$n$は$n-1\equiv 0\pmod{p}$かつ$p-1$の約数. よって$n=1$なので示せた.
+
+\fbox{別解}$(\cyc{p^{n-1}})^{\times}$が巡回群であることを用いよ($p=2$を除外するのはこのため). $a,d$はこの乗法群に属す. この乗法群の指数$p-1$の部分群$A$を取り, $G$の元で対角成分を$A$に制限した元全体のなす部分群を$H$とすると$H$は位数$p^{2n-1}$の部分群である. これはSylow-$p$部分群であるが, Sylow-$p$部分群はすべて共役のはずである. しかし$H$が正規部分群であることは容易に確かめられるので$H$の一つに限られる.
+
+\end{probans}
+%=============================Level B
+
+
+
+\begin{probans}
+\chatgpthint{部分群を生成する置換の巡回型ごとに数えてください。}
+\end{probans}
+
+\begin{probans}
+\chatgpthint{Sylow部分群が正規なら一意になることと、位数を比較してください。}
+\end{probans}
+
+\begin{probans}
+$\phi:H\to \mr{Aut}(N)$について調べよ. $h\in H$, $n\in N$について $hnh^{-1} = n$を示せ.
+\end{probans}
+
+\begin{probans}
+(i): $N_1N_2$と$N_1\cap N_2$が正規. よって
+$N_1\cap N_2 = \set{e}$が分かる. ゆえに$N_1\times N_2 \to G$; $(n_1,n_2)\mapsto n_1n_2$が群同型($N_1,N_2$の元が互いに可換であることを用いると準同型であることが言える). \\
+(ii): $N_1,N_2,N_3$が相異なる非自明な正規部分群とする. このように3つ取れると, $n_2,m_2\in N_2$に対し, $n_2m_2 = m_2n_2$が成り立つ($n_2 = a_1a_3\in N_1N_3$と書けばわかる). $N_1,N_2$の元は可換で, $G=N_1N_2$だから,  $G$はアーベル群になり, 矛盾. なお, $G$がアーベル群の場合に条件を満たすが正規部分群がいくつもある例として, $(\mb{Z}/p\mb{Z})^2$がある.
+\end{probans}
+}
+
+
+
+
+
+
+\newpage

@@ -1,0 +1,243 @@
+\section{($\heartsuit$)ガロア群}
+ガロア群を計算する問題を取り扱う.
+\subsection{群論パズル}
+ガロア群を群論レベルの話に持ち込んで非自明な議論を行うことがある.このような部分で苦労するくらいなら, いっそ群論を極めたいものなのだが.ここでは, ガロア群を考えるときに重要になる群論レベルの話題についてまとめる.
+\begin{prop} (ガロア群と群論まとめ)
+以下, $K/\mb{Q}$は体拡大とする.
+\ben
+\item (基本) $S_n$は互換全体で生成できる.
+\item (基本) $S_n$は互換一つと$n$-cycleで生成できる.
+\item ($\spadesuit$) $A_p$は$3$次巡回置換一つと$p$-cycleで生成できる.
+\item ($\spadesuit$) $S_{p}$は互換と$p$-cycleで生成できる.
+\item $K$が$n$次の$f(x)\in \mb{Q}[x]$の最小分解体であるとき, 単射準同型$\gal(K/\mb{Q})\hookrightarrow S_{n}$が存在する.
+\item $q$が素数で$\sigma\in S_n$が位数$q > \frac{n}{2}$のとき, $\sigma$は$q$次巡回置換である.
+\een
+\end{prop}
+\prf
+\ben
+\item
+\item
+\item
+\item (\href{https://math.stackexchange.com/questions/2792165/let-a-be-a-p-cycle-in-s-p-and-let-b-be-a-transposition-in-s-p-show-s/2792188}{Stack}) $c= (0123\cdots p-1)$, $t=(0,a)$, $a\in \mb{F}_{p}^{\times}$とする.$G$を$c,t$で生成される部分群とするとき, $ctc^{-1} = (1,a+1)$であり, $c^{k} t c^{-k} = (k,k+a)$となる.よって$(0,a),(a,2a),\cdots$はすべて$G$に属すが, $ab = 1$となる自然数$b$が存在し, すべての$k$で$(0,k)\in G$である(ここがポイント).$(i,j)\in G \iff (0,i)(i,j)(0,i)=(0,j)\in G$なので$(i,j)\in G$でありすべての互換を$G$が含むので$G=S_p$\qed
+\item $j$が$\sigma$で固定されない元であるとするとき, $q$が素数だから, $j$は$\sigma$で$q$回作用して初めて$j$に戻る.このときの軌道が$q$次巡回置換となる.$k$がもうひとつの$\sigma$で固定されない元であるとき, もしこの軌道に属さなければ, $k$の$\lan \sigma \ran$による軌道も$q$次巡回置換を与え, ふたつの交わらない$q$次巡回置換を得る.$2q>n$であるからこの軌道は交わるが, これは$k$が最初の軌道に属さないことに反する(軌道分解は同値類分解である).
+\een
+
+\begin{eg} (H18数学II-1) \label{eg:H18_II_1}
+$S_5$の部分群$H$の位数が$15$で割れるとする.このとき$H=A_5$または$S_5$であることを示す.\par
+Cauchyの定理によって$H$は位数$3$の元と位数$5$の元を含むので, (5)より$H$は3-cycleと5-cycleを含む.よって(3)より$H\supset A_{5}$である.$H$の位数は$60$か$120$なので, $H=A_5$または$H=S_5$である.\par
+これを用いてH18数学II-1を解く.$f(x)$の根の一つを$\alpha$とするとき$f$の既約性から$[\mb{Q}(\alpha):\mb{Q}] = 5$なので$[K:\mb{Q}]$は$5$で割れる.$f(X)$の$F$上の既約因子のうち$3$次のほうの根の一つを$\beta$とおくと$[F(\beta):F] = 3$なので, $G$の位数$=[K:\mb{Q}]$は$15$で割れる.$G=\gal(K/\mb{Q})$は$S_5$の部分群と同一視でき, $15$で割れるから$G \cong A_{5}$または$G\cong S_5$.\qed
+\end{eg}
+
+ガロア群を具体的に決定する状況において, アーベル群のうちはまだいいが非アーベルのものが出ると大変なので, 生成式を覚えておいて当たりをつけよう. とくに, \sout{性格の悪い大学では}2面体群くらいのものが出る可能性がそこそこある.
+\tbox{
+\begin{point}
+\bealn{
+D_n &= \lan \sigma,\tau \mid \sigma^n = \tau^2 = 1, \tau \sigma \tau = \sigma^{-1} \ran
+}
+\end{point}
+}{title=群の生成式}
+この説明だけでは抽象的に感じられるかもしれませんが, 次の表示を用いると具体的に理解しやすくなります.
+\begin{prop} (東北大の問題を解いたときのアイデア)
+$\maf{S}_{4}$に$(1234)$と$(24)$で生成される部分群$G$の位数は8であり, $D_{4}$に同型である. また, $G$は次の条件$(\ast)$を満たすような写像$\phi:\set{1,2,3,4}\to \set{1,2,3,4}$の全体の集合でもある.
+
+\lefba{
+$(\ast)$ $\phi(\set{1,3}) = \set{1,3}$または$\phi(\set{1,3}) = \set{2,4}$.
+}
+\end{prop}
+
+
+
+\begin{egprob} (H2数学I-2)
+次の命題はそれぞれ正しいか.
+\ben
+\item $H$が群$G$の部分群でその指数$n$が$2<n<\infty$のとき, $G$の正規部分群$N$で, $N\neq G$, $N$の$G$での指数$\leq n!/2$を満たすものがある.
+\item $K$が体, $n$が偶数のとき, $K$の$n$次分離拡大体$L$は, 少なくとも一つ$K$の二次拡大体を含む.
+\een
+\end{egprob}
+\begin{egans}
+(1): $G=A_5$は非自明な正規部分群を持たない. $H=\lan (123)\ran$は指数3の部分群だが, 指数3以下の正規部分群は持たない. \\
+
+(2): $L/K$をガロア群が$S_5$であるガロア拡大とする. $A_5$に対応する中間体$M$を取る. $L/M$は60次ガロア拡大である. $\gal{(L/M)}\cong A_5$である. $A_5$は単純群なので, 非自明な正規部分群を持たない. とくに, 指数2の部分群を持たない(指数2は正規だから). 指数2の部分群は, 下の体から2次なものに対応するので, $L/M$は二次拡大体を持たない.
+\end{egans}
+
+
+\subsection{計算問題}
+
+
+
+
+\begin{egprob} (東大B?)
+有理関数体$\mb{R}(X)$を$K$とする. $F=\mb{R}\parena{X^4 - \dfrac{1}{X^4}}$とし, $K$の$F$上のGalois閉包を$L$とおく.
+\ben
+\item $[L:F]$を求めよ.
+\item $\mr{Gal}(L/F)$は位数8の元を持つことを示せ.
+\item $L/F$の4次中間体をすべて求めよ.
+\een
+\end{egprob}
+\begin{egans} (\href{https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14198600154}{知恵袋})
+
+\end{egans}
+
+
+
+
+
+
+
+
+
+
+\begin{egprob} (\cite{aoyukie}問題4.1.17)
+
+\end{egprob}
+\begin{egprob} (\cite{aoyukie}問題4.7.5)
+\ben
+\item $t = \zeta_7 + \zeta_7^{6}$が満たす$\mb{Q}$上の三次方程式を求めよ.
+\item $[\mb{Q}(\zeta_9): \mb{Z}(t)]\leq 2$を示すことにより$[\mb{Q}(t):\mb{Q}] = 3$を示せ.
+\item $\gal{(\mb{Q}(t)/\mb{Q})}$は何か?
+\een
+\end{egprob}
+
+
+
+
+
+
+
+
+
+\subsection{演習問題} %Galois群計算
+\subsubsection{Level A}
+\begin{prob}
+$K$は$x^6+3$の$\mb{Q}$上最小分解体とする. $\gal{(K/\mb{Q})}$を求めよ.
+\end{prob}
+
+
+\subsubsection{Level B}
+\begin{prob} (H24数学II-1)
+$1$以上の整数$a$に対して, $K=\mb{Q}(\sqrt{3+a\sqrt{5}})$が$\mb{Q}$のGalois拡大体となるようなものを求め, そのような$a$に対してGalosi群$\mr{Gal}(K/\mb{Q})$を求めよ.
+\end{prob}
+
+\begin{prob} (H29専門科目3) \label{prob:H29senmon-3}
+\ben
+\item $S_3$を1,2,3に関する対称群と見て$S_3\subset S_5$とみなす. $\sigma = (123)\in S_5$, $G = \lan \sigma \ran$, $\tau = (45)\in S_5$, $h=\lan \tau\ran$とおく.
+$N_{S_5}(G) = \set{\eta\in S_5 \mid \eta G \eta^{-1} = G}$ とおく. このとき$N_{S_5}(G) = S_3\times H$であることを示せ.
+\item $f(X)\in \mb{Q}[X]$は5次で$K\subset \mb{C}$を$f(X)$の$\mb{Q}$上の最小分解体とする. $K$は$[K:F] = 3$となる部分体$F$がただひとつ存在すると仮定する. このとき$f(X)$は$\mb{Q}$係数の3次の既約多項式で割り切れることを示せ.
+\een
+\end{prob}
+
+\subsubsection{Level C}
+
+\begin{prob} (東工大)
+$K=\mb{Q}(\sqrt{1+\sqrt{2}}, i)$とする.
+\ben
+\item $K/\mb{Q}$はGalois拡大であることを示し, そのガロア群を求めよ.
+\item $K/\mb{Q}$のすべての中間体を求めよ.
+\een
+\end{prob}
+
+
+\begin{prob} (R2専門科目2) \label{prob:R2-senmon-2}
+$p\geq 5$を素数とし, $\sqrt{-p}+\sqrt[3]{p}$を含む$\mb{Q}$のガロア拡大体のうち最小のものを$K$とする. このとき
+$\mr{Gal}(K/\mb{Q})$を求めよ.
+\end{prob}
+
+\begin{prob} (H30専門科目3) \label{prob:H30senmon-3}
+$X^7-11$の$\mb{Q}$上最小分解体を$K$とする.
+\ben
+\item $[K:\mb{Q}]$を求めよ.
+\item $K/\mb{Q}$の$\mb{Q},K$でもない真の部分群の個数を求めよ.
+\item (2)の部分群のうち正規部分群であるものの個数を求めよ.
+\een
+
+\end{prob}
+
+
+\begin{prob} (\tf{代数学の基本定理})
+\chatgpthint{問題文が未記入です。}
+\end{prob}
+
+
+\newpage
+
+\subsection{Hint・Answer}
+{\small
+\begin{probans}
+$\alpha = \sqrt[6]{-3}$, $\zeta = \zeta_6$とする. $x^6 + 3$の根は$\alpha\zeta^k$なので$K=\mb{Q}(\alpha,\zeta)$. $2\zeta - 1 = \alpha^3$なので$K=\mb{Q}(\alpha)$. $x^6 + 3$はアイゼンシュタイン多項式なので$[K:\mb{Q}] = 6$. $\sigma\in \gal{(K/\mb{Q})}$は$\sigma(\alpha)\in \set{\alpha\zeta^k\mid k=0,1,\dots, 6}$の写し方で決まる. $\sigma(\alpha) = \alpha\zeta^k$ ($k=1,3,5$)ならば
+\[\sigma(2\zeta) = \sigma(\alpha^3 + 1) = 1-\alpha^3 = 2\zeta^5\]
+だから
+\[\alpha\xmapsto{\sigma} \alpha\zeta^{k} \xmapsto{\sigma}\alpha\zeta^k \cdot \zeta^{5k} = \alpha \]
+より$\sigma$の位数は2である. 位数2の元が3個見つかるのでガロア群は$\cyc{6}$ではあり得ず, $S_3$に同型である($k=1,3,5$のものが互換に対応).
+\end{probans}
+
+\begin{probans}
+$\alpha = \sqrt{3+a\sqrt{5}}$とする. $K\supset \mb{Q}(\sqrt{5})$は明らかである. まず$K\neq \mb{Q}(\sqrt{5})$を示す. もしそうなら, $\alpha^2 = (p+q\sqrt{5})$となる$p,q\in\mb{Q}$がある. これより$p^2 + 5q^2 = 3$, $pq = a/2$を得る. $p^4 + 5(a/2)^2 = 3p^2$より$(2p)^4 -12(2p)^2 + 20a^2 = 0$だから$\mb{Z}$の整閉性より$2p\in \mb{Z}$. これを$(2p)^2$の二次方程式と見た判別式が$144- 80a^2$なので, $a>1$では判別式が負で不適. $a=1$では判別式は$64$で$(2p)^2 = 10, 2$だが, いずれも不適. よって$[K:\mb{Q}] > 2$で, $\mb{Q}(\sqrt{5})$を中間体に含むので, $[K:\mb{Q}]\geq 4$が分かる. \par
+$(\alpha^2 - 3)^2 = 5a^2$で$\alpha$は$f(T) = T^4 - 6T^2 + 9 -5a^2$の根であり, $[K:\mb{Q}]\leq 4$が分かるので, $[K:\mb{Q}]=4$であり, $f$が$\alpha$の最小多項式でなければならない. $f(T)$の$\mb{Q}$上の共役元は$-\alpha, \beta:= \sqrt{3-a\sqrt{5}}, -\beta$であるが, これらが$K$に含まれるためにはすべて実数でなければならないので, $\beta\in \mb{R}$より$3 \geq a\sqrt{5}$でなければならない. よって$a=1$が必要. 逆に$a=1$なら$\alpha \beta = 2$より$\beta = 2/\alpha\in \mb{Q}(\alpha)$なので$K/\mb{Q}$は4次Galois拡大体. よって\bolm{a=1}. \par
+ガロア群を$G$とする. $G$は位数4なのでAbel群. $\sigma\in G$は$\sigma(\alpha)\in\set{\alpha,\-\alpha,\beta,-\beta}$で決まり, 位数と組み合わせが4つなのですべての選択が可能. よって$\tau_1(\alpha) = -\alpha$, $\tau_2(\alpha) = \beta$, $\tau_3(\alpha)=-\beta$なる$\tau_i\in G$が存在し, $G=\set{\mr{id},\tau_1,\tau_2,\tau_3}$である. 明らかに$\tau_1^2 = \mr{id}.$ また, $\alpha\beta = 2$なので$\tau_2(\beta) = \alpha$, $\tau_3(-\beta) = \alpha$が分かるから, $\tau_i$はすべて位数2. よって$G\cong \cyc{2}\times \cyc{2}$.
+\end{probans}
+
+\begin{probans} %H29専門
+(1): $\eta\in N_{S_{5}}(G) \iff \eta G\eta^{-1} = G \iff \lan (\eta(1) \eta(2) \eta(3)) \ran = \lan (123) \ran \iff (\eta(1) \eta(2)\eta(3)) = \sigma, \sigma^2$. よって, $\eta$が$4,5$を固定すれば$\eta\in S_3$で$\eta$が4,5を交換すれば$\eta\tau^{-1} \in S_3$なので, $N_{S_5}(G) = \set{\alpha\tau^k \mid  \alpha\in S_3, k=0,1}$と表せる. $S_3$の元と$\tau\in H$は可換であることに注意. よって$\beta\in S_3$, $\alpha\tau^k\in N_{S_5}(G)$に対し$\alpha\tau^k \beta \tau^{-k} \alpha^{-1} = \alpha\beta\alpha^{-1} \in S_3$だから$S_3$は$N_{S_5}(G)$で正規. $\alpha\tau^k\tau \tau^{-k}\alpha^{-1} = \tau\in H$なので$H$も$N_{S_5}(G)$で正規. よって$S_3H$は群をなし, $S_3\cap H = \set{1}$だから直積に同型. \qed \\
+(2): $f(X) = (X-\alpha_1)\dots (X-\alpha_5)$とせよ. $K/\mb{Q}$はGalois拡大. ガロア群を$G$とすると$\sigma\in G$は$\set{\alpha_1,\dots, \alpha_5}$の置換の様子から決定される. とくに単射群準同型$G\hookrightarrow S_5$があるので, $G$を$S_5$の部分群とみなす($\alpha_i$を文字$i$に見立てる). ガロア対応により$F$に対応する部分群を$S$とする. $[K:F] = 3$だから$S$は位数3の部分群. それは位数3の元で生成されるが, $S_5$の元のサイクル分解を考えるとその形は3次巡回置換の形でなければならない. 適当に文字を入れ替えることで, $S = \lan (123) \ran$であると仮定できる. \ao{また, $\sigma\in G$に対して$\sigma(F)$も$[K:\sigma(F)] = 3$を満たすので$F$の一意性から$\sigma(F) = F$である.} ガロア対応において$\sigma(F)$は$\sigma S \sigma^{-1}$に対応するので$\sigma S \sigma^{-1}  =  S$が従う. よって$\sigma \in N_{S_5}(S) = N_{S_5}(\lan (123)\ran) = S_3\times H$ ($H = \lan (45) \ran$)である. これにより$G\subset N_{S_5}(G)$が従う. \par
+さて, $f(X)$を割り切る既約三次多項式を見つけるには次のような相異なる$\alpha_i,\alpha_j,\alpha_k$を探すとよい:
+\[\alpha_i + \alpha_j + \alpha_k, \alpha_i\alpha_j + \alpha_j \alpha_k + \alpha_k\alpha_i, \alpha_i\alpha_j\alpha_k \in \mb{Q}, \alpha_i,\alpha_j,\alpha_k \notin \mb{Q}\]
+実際, これらが満たされれば$(X-\alpha_i)(X-\alpha_j)(X-\alpha_k)$が$\mb{Q}$上既約であるからだ. $s_1 = \alpha_i + \alpha_j + \alpha_k$, $s_2 = \alpha_i\alpha_j + \alpha_j\alpha_k + \alpha_k \alpha_i$, $s_3 = \alpha_i\alpha_j\alpha_k$とおくと, このような$\alpha_i,\alpha_j,\alpha_k$を探すことは次を満たすものを探すことと同じである:
+\lefba{
+任意の$\sigma\in \gal{(K/\mb{Q})}$に対して$\sigma$は$s_1,s_2,s_3$を固定するが, $\alpha_i,\alpha_j,\alpha_k$はそれぞれあるガロア群の元によって固定されない.
+}
+そして今の場合, $i=1,j=2,k=3$に取れることを示そう. $s_1,s_2,s_3$が$N_{S_5}(S) = S_{3}\times H$の元で固定されることは明らかなので, $G\subset N_{S_5}(S)$により$G$のすべての元で固定される. $G=\gal{K/\mb{Q}}$は$S$を部分群に持つとしているので, $\sigma := (123)\in G$である. $\alpha_1,\alpha_2,\alpha_3$のどれか一つがすべての$G$の元で固定されているとして矛盾を導く. たとえば$\alpha_1$が固定されるものだとすると, $\sigma,\sigma^2$でも固定されるので
+\[\alpha_3 = \sigma^2(\alpha_1) = \alpha_1 = \sigma(\alpha_1) = \alpha_2 \]
+なので$\alpha_1=\alpha_2=\alpha_3$である. $s_1 = 3\alpha_1 \in \mb{Q}$より$\alpha_1\in \mb{Q}$なので$f(X) = (X-\alpha_1)^3 (X=\alpha_4)(X=\alpha_5)$なので$K=\mb{Q}(\alpha_4,\alpha_5)$である. $f(x)$から3乗因子を割った $X^2 - (\alpha_4+\alpha_5)X + \alpha_4\alpha_5$も$\mb{Q}$係数であり, とくに $\alpha_4+\alpha_5 \in \mb{Q}$なので$K=\mb{Q}(\alpha_4)$であるが, $\alpha_4$が二次の$\mb{Q}[X]$の元の根であるということは$K/\mb{Q}$が高々2次であるということになるから$[K:F] = 3 > 2$なる$F$の存在に反する. したがって$\alpha_1,\alpha_2,\alpha_3$のいずれも, あるガロア群の元により固定されないことが従う.\qed
+\end{probans}
+
+
+
+\begin{probans}
+(1): $\alpha = \sqrt{1+\sqrt{2}}$とする. $(\alpha^2 - 1)^2 - 2 = 0$より$T^4 - 2T^2 - 1 = 0$. これは$T=S+1$とおくと$2$に関するEis多項式になり既約である(2次と4次だからこの変換で展開したときに偶数係数が現れることと, $T=1$を代入して$-2$になることから見つけられる). よって$\mb{Q}(\alpha)/\mb{Q}$は4次で, $\mb{R}$に含まれているので$K/\mb{Q}$は8次. $\alpha$の$\mb{Q}$上の共役元は, $-\alpha$, $\beta:= \sqrt{\sqrt{2}-1}i , -\beta$である. $\alpha\beta = i$なので$\beta = i/\alpha \in \mb{Q}(\alpha,i)$であり, $K/\mb{Q}$はGalois拡大. ガロア群を$G$とすると$G$は位数8.  $K=\mb{Q}(\alpha,-\alpha,\beta,-\beta)$だから, $\sigma\in G$は$X=\set{\alpha,\beta,-\alpha,-\beta}$を置換し, 逆にその置換で$\sigma$は決定される. これにより$G\subset \maf{S}_{4}$と思える. \aka{$\alpha,\beta,-\alpha,-\beta$をこの順番に$1,2,3,4$とみなす.} $\maf{S}_{4}$の$H=\lan(1234), (24)\ran\cong D_{4}$と$G$が同型であることを示す. $\sigma\in G$は$\alpha,i$での値によっても決定されることに注意する. $\tau(\alpha) = \beta$, $\tau(i) = -i$なる$\tau \in G$を取る. $\alpha\beta = i$なので$\tau(\beta) = -\alpha$であり, $\alpha\xmapsto{\tau} \beta\xmapsto{\tau}-\alpha \xmapsto{\tau} -\beta$だから$\tau = (1234)$である. また, $\eta\in G$を$\eta(\alpha) = \alpha$, $\eta(i) = -i$となるものとすると$\eta(\beta) = -\beta$だから, $\eta$は$\beta$と$-\beta$のみ交換する. よって$\eta=(24)$であるから$H\subset G$とみなせる. $G$は位数8で, $H$の位数も8なので$G=H$である. \qed \\
+(2): $K,\mb{Q}$は自明な中間体. Galois対応により$G\cong D_{4}$の部分群を見る. 指数4のものは位数2であり位数2の元によって生成される. $H=\set{1, (1234),(13)(24),(1432),(24), (12)(34), (13), (23)(14), }$であり, 位数2の元は4-cycleと単位元以外で5個ある.\par  $\sqrt{2} = \alpha^2 - 1$に注意すると,   次のように4次拡大体が得られる.
+\bealn{
+\lan (13)(24)\ran  の固定体は \mb{Q}(\sqrt{2}, i)\\
+\lan (24) \ran の固定体は \mb{Q}(\alpha) \\
+\lan (12)(34) \ran の固定体は \mb{Q}(\alpha+\beta)\\
+\lan (13) \ran の固定体は\mb{Q}(\beta) \\
+\lan (23)(14) \ran の固定体は\mb{Q}(\alpha-\beta)
+}
+最後に指数2の中間体を見つける. $\eta=(1234)$は, $\eta(i) = -i$と$\eta(\sqrt{2}) = \beta^2 - 1 = -\sqrt{2}$を満たすので$\sqrt{-2}$を固定する. よって
+\bealn{
+\lan (1234) \ran = \lan (1432) \ran の固定体は = \mb{Q}(\sqrt{-2})
+}
+$\mb{Q}(i),\mb{Q}(\sqrt{2})$という中間体から部分群を見つける. $\sqrt{2} = \alpha^2 - 1$だから$\alpha$を$\set{\alpha,-\alpha}$に移すものが$\mb{Q}(\sqrt{2})$を固定する. それらは$(13)(24), (13), (24), 1$だから
+\[\set{1,(13),(24),(13)(24))} の固定体は\mb{Q}(\sqrt{2})\]
+$i=\alpha\beta$なので, $\set{\alpha,\beta}$が$\set{\alpha,\beta}$に移るものや$\set{-\alpha,-\beta}$に移るものは$\mb{Q}(i)$を固定する. そのようなものは$1,(13)(24),(14)(23),(12)(34)$であり, したがって
+\bealn{
+\set{1,(13)(24),(14)(23),(12)(34)}の固定体は\mb{Q}(\sqrt{2}).
+}
+最後に, $G$の位数4の部分群$K$がこれらに限ることを示す. $K$が巡回群なら明らかに$K\ni \lan (1234)\ran$である. $K$が巡回群でないとすれば, $K$の単位元でない元の位数は必ず2である. $K\subset \set{1,(13)(24),(12)(34), (23)(14), (13),(24)}$である. $(13)(24)\in K$の場合, $(13)\in K \iff (24)\in K$であり, $(12)(34)\in K\iff (23)(14)\in K$が分かるので, すでに挙がっている群が得られる. $(13)(24)\notin K$とせよ. このとき$K$は必ず互換$\beta$を含み, 位数2の偶置換$\alpha$も含む. このとき$\alpha\beta$は$\beta$と異なる奇置換である. $\lan (1234) \ran$は互換を含まないので$\alpha\beta$が互換であることが分かる. よって$K$は$(13),(24)$を含まねばならず, $(13)(24)\in K$なので仮定に反する. よって位数4の部分群はこれらで尽くされる.
+\end{probans}
+
+\begin{probans} %R2senmon
+$\alpha = \sqrt{-p} + \sqrt[3]{p}$とする. \[(\alpha - \sqrt{-p})^3 = \alpha^3 -3p\alpha - \sqrt{-p}(3\alpha^2 -p)  = p\]
+より$\sqrt{-p}$が$\alpha$と$p$の有理式で書ける. すなわち$\sqrt{-p} \in \mb{Q}(\alpha)$である. よって$\sqrt[3]{p}\in \mb{Q}(\alpha)$も従う. $[\mb{Q}(\sqrt[3]{p}, \sqrt{p}):\mb{Q}] = 6$なので$\alpha$の最小多項式は6次. それは先の式で平方を取ったものから構成できる.すなわち$\alpha$の最小多項式は
+\[(T^3 - 3pT - p)^2 +p(3T^2 - p)^2 = 0\]
+である. $\alpha_1 = \sqrt{-p}+\zeta_3\sqrt[3]{p}$, $\alpha_2 = \sqrt{-p} + \zeta_3^2\sqrt[3]{p}$もこの方程式を満たすので, これは$\alpha$の$\mb{Q}$上共役元. よって$K\ni \alpha_1,\alpha_2$である. また,
+\[\alpha_2 - \alpha_1 = \zeta_3(\zeta_3-1)\sqrt[3]{p}, \alpha_1-\alpha = (\zeta_3 - 1)\sqrt[3]{p}\]
+も$K$に含まれるので, $\frac{\alpha_2-\alpha_1}{\alpha_1-\alpha} = \zeta_3\in K$. また,
+\[\alpha + \alpha_1 + \alpha_2 = 3\sqrt{-p}\in K\implies \sqrt{-p}\in K\]
+であり, $\alpha - \sqrt{-p} = \sqrt[3]{p}\in K$も得られる. よって, $K\ni \sqrt{-p}, \sqrt[3]{p}, \zeta_3$である. \par
+ここで, $\beta_{t} = - \sqrt{-p} + \zeta_3^{t}\sqrt[3]{p}$とおくと, $\beta_{t}$も先と同じ6次方程式を満たす. なぜなら, たとえば $\beta=\beta_0$の場合は
+\[(\beta + \sqrt{-p})^3 = \beta^3 - 3p\beta + \sqrt{-p}(3\beta^2 - p) = p\]
+となり, $\sqrt{-p}$の前で符号が(先の$\alpha$のものと)異なるだけで, 2乗すれば同じ式が得られるから. よって, $\alpha,\alpha_1,\alpha_2,\beta,\beta_1,\beta_2\in \mb{Q}(\sqrt{-p}, \sqrt[3]{p},\zeta_3)$である. この体は明らかにGalois核大体である($\alpha$の共役元はこの6個の中にある). よって $K$はこの体に含まれる. 逆に任意の$\alpha$を含むGalois拡大体は共役元を含み, この体を含まざるを得ないので$K$はこの体を含む. よって$K=\mb{Q}(\sqrt{-p},\sqrt[3]{p},\zeta_3)$を得る. \par
+さて, $K$を二つのGalois拡大体の合成体$\mb{Q}(\sqrt{-p})\cdot \mb{Q}(\sqrt[3]{p},\zeta_3)$とみる. まず, 6次核大体$\mb{Q}(\sqrt[3]{p},\zeta_3)$のガロア群$G_2$について論じる. $\sigma\in G_2$なら$\sigma(\sqrt[3]{p})\in \set{\sqrt[3]{p},\sqrt[3]{p}\zeta_3,\sqrt[3]{p}\zeta_3^2}, \sigma(\zeta_3)\in \set{\zeta_3,\zeta_3^2}$で決定され, 6次なのでこの選択はすべて実現できる. $\sigma(\sqrt[3]{p})$と$\sigma(\sqrt[3]{p}\zeta_3)$から$\sigma(\zeta_3)$も決まるので, $\sigma$は$\set{\sqrt[3]{p},\sqrt[3]{p}\zeta_3,\sqrt[3]{p}\zeta_3^2}$をどのように置換するかという情報からも決定される. $G_2$がこの3点集合$S$に作用すると考え, $G_2\to \mr{Aut}(S)\cong \maf{S}_{3}$を得る. これが位数6の群の間の単射準同型であるため, 同型である. \\
+次に$K_0 = \mb{Q}(\sqrt{-p})\cap \mb{Q}(\sqrt[3]{p},\zeta_3)$とする. $[K_0:\mb{Q}]\leq 2$は明らかである.
+\lefba{ 仮にこれが2であったとせよ. $\mb{Q}(\sqrt[3]{p},\zeta_3)$の中間体$K_0$は$\maf{S}_{3}$の指数2の部分群に対応する. $\maf{S}_{3}$の指数2の部分群は一つであるから, $K_0 = \mb{Q}(\zeta_3)$が従う. よって$\zeta_3\in \mb{Q}(\sqrt{-p})$なので, $\sqrt{-p} = a\zeta_3 + b$と置いて, $0 = a\zeta_3^2 + 2ab\zeta_3 + b^2 + p$だから, $\zeta_3^2 + \zeta_3 + 1 = 0$と合わせると$a=2ab = b^2+p$. よって$a=0$だが$b^2+p=0$ではなく矛盾. (あるいはKummer理論を使ってもよい)}
+よって$[K_0:\mb{Q}] = 1$より$K_0=\mb{Q}$を得る. Galois推進定理より
+\[\mr{Gal}(K/\mb{Q})\cong \mr{Gal}(\mb{Q}(\sqrt{-p})/\mb{Q}) \times \mr{Gal}(\mb{Q}(\sqrt[3]{p},\zeta_3)/\mb{Q}) \cong \cyc{2}\times \maf{S}_{3}\]
+
+
+\end{probans}
+
+
+
+
+}
+\newpage

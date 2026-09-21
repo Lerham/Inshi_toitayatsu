@@ -1,0 +1,375 @@
+\section{Jacobi行列}
+
+\subsection{接写像}
+微分は, 基点付多様体の圏から$\mb{R}$ベクトル空間の圏への関手である.
+\begin{theo} (chain rule) $M,N,Q$を$m,n,q$次元$C^{\infty}$級多様体, $f:M\to N$, $g:N\to Q$を$c^{\infty}$級写像, $p\in M$とするとき,
+\[d(g\circ f)_{p} = (dg)_{f(p)}\circ (df)_{p} : T_{p}M\to T_{gf(p)}Q\]
+である. とくに, ヤコビ行列に関して
+\[J(g\circ f)_{p} = (Jg)_{f(p)}(Jf))_{p}\]
+である.
+\end{theo}
+
+\begin{egprob} (R2 東北大 専門4)
+$f:\mb{R}^4 \to \mb{R}^4$, $g:\mb{R}^4\to \mb{R}$を
+\[f(x_1,x_2,y_1,y_2) = (x_1y_2 - x_2y_1, x_1^2 + x_2^2 - y_1^2 - y_2^2)\]
+\[g(x_1,x_2,y_1,y_2) = x_1y_1 + x_2y_2\]
+とおく. $M=f^{-1}(\set{(1,0)})$とおく. 以下の問に答えよ.
+\ben
+\item 点$p = (x_1,x_2,y_1,y_2)\in \mb{R}^4$での$f$のヤコビ行列$(Jf)_p$を求めよ.
+\item $p\in \mb{R}^4$が$g(p) \neq 0$を満たすとき, $(Jf)_p$の階数を求めよ.
+\item $M$が$\mb{R}^4$の$C^{\infty}$級部分多様体であることを示し, その次元を求めよ.
+\een
+\end{egprob}
+\begin{egans}
+(1):
+\[
+\bmat{
+y_2 & -y_1 & -x_2 & x_1 \\
+2x_1 & 2x_2 & -2y_1 & -2y_2
+}
+\]
+(2): 上の行列の左2列を見ると$g(p)\neq 0$より行列式が$2g(p) \neq 0$になっているので, 階数は2. \\
+(3): $(1,0)$が正則値, つまりすべての$p\in M$が正則点であればよい. 仮に正則でないとせよ. このとき$(Jf)_p$の階数は2未満であり, 行ベクトルは一次独立である. よって, ある定数$c,d\in \mb{R}$, $(c,d)\neq (0,0)$が存在して
+\[c\bmat{y_2 & -y_1 & -x_2 & x_1} = d\bmat{2x_1 & 2x_2 & -2y_1 & -2y_2}\]
+$x_1y_2 - x_2y_1 \neq 0$だから, $x_i,y_i$のどれかはノンゼロである. よって, $c\neq 0, d\neq 0$が分かる. $2d$を$d$と取り替えて, $c$を1に取り替えてもよい. このとき
+\[y_2 = dx_1, y_1 = -dx_2, x_2 = dy_1, x_1 = -dy_2\]
+であるから
+\[y_2 = -d^2y_2,\quad y_1 = -d^2 y_1\]
+である. $(1+d^2)X = 0$の解$X$は$X=0$であるから$y_i = 0$を得, $x_i = 0$も得られる. しかしこれは$x_1y_2 - x_2y_1 = 1$に反する. よってヤコビ行列は正則なので, 逆関数定理から$M$の$p$における座標近傍が存在し$C^{\infty}$級部分多様体となる. $T_{p}M = \ker{(Jf)_{p}}$と$(Jf)_{p}: \mb{R}^4 \to \mb{R}^2$が階数2を持つことから$\ker{(Jf)_{p}}$の次元は2である(次元公式). 一般に$\dim{T_p M} = \dim M$なので$M$の次元は2である. \qed
+\end{egans}
+
+
+
+\subsection{臨界点・正則点}
+極値問題を求めるとき「微分係数の消失する点」を求めていた。このような点を多様体上で一般化した概念が臨界点である。正則点・臨界点の決定問題をいくつか紹介した後, 重要な定理であるSardの定理とその応用について述べる。
+
+\begin{defn}
+$f:M\to N$を多様体の$C^{\infty}$級写像とする。$p\in M$に対して, $d_{p}f$が全射であるような点$p$を正則点という。全射でない点を臨界点という。
+\end{defn}
+$d_{p}f:T_{p}M\to T_{f(p)}N$は線形写像であって, $p,f(p)$の周りの座標近傍を決めることで$d_{p}f$はその座標表示に関して適当な行列($n$行$m$列)に対応する。これがJacobi行列であり, $(Jf)_{p}$, $J_{p}f$などと書く。したがって, $m < n$であれば$d_{p}f$は決して全射にはならない。$m\geq n$ならば, $p$が正則点であることは, $(Jf)_{p}$のrankが$n$であることと同値である。
+\begin{prac}
+$C^{\infty}$級多様体$M$上の実数値関数$f:M\to \mb{R}$に対して, $p\in M$が臨界点であるというのは, $p$のまわりの局所座標$(U;x_1,\cdots, x_n)$に対して
+\[\parena{\dfrac{\del}{\del x_i}}_{p}f = 0\quad (i=1,\cdots, n)\]
+が成立するということであることを示せ。
+\end{prac}
+
+次の定理は大変重要である。簡単に述べると, \tf{臨界値集合はスカスカ}である。
+\besha
+\begin{theo} (\tf{Sardの定理}) \label{theo:sard}\\
+(第二可算・微分可能)多様体の$C^{k}$級写像$f:N\to M$を与える。集合$X$を次で定める。
+\[ X = \{p\in N\mid  \mr{rank}d_{p} f < \dim{M}\} \]
+$k\geq \max{\{ n-m+1, 1 \}}$であるならば(特に$k=\infty$のとき), $f(X)\subset M$は測度$0$である。
+\end{theo}
+\ensha
+次の定理も非常によく使われる。
+\tbox{
+\begin{theo}
+$f:M^m\to N^n$を$C^{r}$級写像とする. $q\in N$が$f$の正則値で, $f^{-1}(q)$が空でないなら, $f^{-1}(q)$は$M$の$C^{r}$級$m-n$次元部分多様体である.
+\end{theo}
+}{title=正則値逆像は部分多様体}
+\prf 部分多様体の定義からすると, 次を示せばよい.
+\lefba{
+\begin{lem}
+$p_0 \in f^{-1}(q)$に対し, $p_0$のまわりの座標近傍$(U;x_1,\dots, x_m)\subset M$が存在して,
+\[f^{-1}(q) \cap U = \set{(x_1,\dots, x_m)\in U\mid \bolm{x_{m-n+1} = \dots = x_m = 0}}\]
+が成り立つ.
+\end{lem}
+}
+\prf $p_0$は$f$の正則点だから, $(df)_{p_0}$は全射. このとき, \tf{陰関数定理によって！}  $p_0$のまわりの座標系$(x_1,\dots, x_m)$と$f(p)$のまわりの座標系$(y_1,\dots, y_n)$を上手く選んで$f$の局所座標表示が
+\[(x_1,\dots, x_m) \mapsto (x_{m-n+1},\dots, x_{m})\]
+であるようにできる\footnote{\cite{matsumoto}定理10/3}. つまり, うまく近傍を取ると$f$の座標表示は\tf{射影$\mb{R}^{m-n} \times \mb{R}^n \to \mb{R}^n$と同じ}である. また, 陰関数定理は「 $(y_1,\dots, y_n)$を任意に与えてそれに応じて$(x_1,\dots, x_m)$が取れる」ので\footnote{\cite{matsumoto}p.122の注意}, $(V;y_1,\dots, y_n)$という座標が$q$で$y_1=\dots = y_n = 0$であるとしてよい. この座標$(V;y_1,\dots,y_n)$に対して$(U;x_1,\dots, x_m)$を選ぶと.
+\bealn{
+&f^{-1}(q)\cap U \\
+&= \set{p\in U\mid f(p) = q}\\
+&= \set{(x_1,\dots, x_m)\in U\mid f(x_1,\dots, x_m) = (0,0,\dots,0)} \\
+&= \set{(x_1,\dots, x_m)\in U \mid x_{m-n+1} = \dots = x_{n} = 0}
+}
+となる.\qed
+
+
+
+\begin{egprob} (9/12, Quiz)\\
+$C^{\infty}$多様体$M,~N$間の$C^{\infty}$写像$f:M\to N$について,点$q\in N$の$f$に関する逆像$f^{-1}(q)$のすべての点が臨界点になるが,$f^{-1}(q)$が$M$の部分多様体となるような$M,N,f,q$の例をあげよ．
+\end{egprob}
+\begin{egans}
+例えば，$f(x,y)=y^2$は$\mb{R}^2$から$\mb{R}$への$C^{\infty}$写像だが，点$0$での逆像$f^{-1}(0)=\{(x,0)|x\in\mb{R}\}$はすべて臨界点だが一次元部分多様体になる．(臨界点は写像の微分が全射でなくなる点なので極値のようなイメージを考えるとわかりやすいかもしれない)
+\end{egans}
+\begin{egprob}
+$M_n(\mb{R})$を標準的に$\mb{R}^{n^2}$とみなすことで多様体とみなす。$SL_n(\mb{R})$は$M_n(\mb{R})$の部分多様体であることを証明せよ。
+\end{egprob}
+
+
+\begin{comment}
+%\subsection{Morse理論}
+多様体の上の$C^{\infty}$級関数は,その多様体の形状で統制されているとも考えることができる。逆に言えば, その$C^{\infty}$級関数を調べることによって多様体の性質が分かるかもしれない。Morse理論はそのような研究の一つである。
+
+\begin{prac}
+$\mb{R}^2$上の実数値関数$f(x,y) = \pm x^2 \pm y^2$の臨界点とMorse指数を求めよ。また, その臨界点は非退化であることを示せ。
+\end{prac}
+\end{comment}
+
+\begin{egprob} (\cite{matsumoto} 問題15.1) $f:\mb{R}^3\to \mb{R}^3$を$f(x,y,z) = (yz,xz,xy)$で定義する. $f$の臨界点の集合$C_f$と臨界値集合$f(C_f)$を求めよ.
+\end{egprob}
+\begin{egans}
+\[
+\bmat{
+0&z&y \\
+z&0&x \\
+y&x&0
+}
+\]
+の行列式は$2xyz$なので臨界点はどれかの座標が0である点. 臨界値は$(0,0,t)$, $(0,t,0)$, $(t,0,0)$.
+\end{egans}
+
+
+\begin{egprob} (\cite{matsumoto} 問題15.2)
+$C^{\infty}$級写像$f:\mb{R}^3\to \mb{R}$を$f(x,y,z) = x^2+y^2 - z^2$と定義する. $f$の臨界値を求めよ. そして, 逆像$f^{-1}(c)$の様子が, 臨界値の付近での実数$c$の動きにつれてどのように変化するか観察せよ.
+\end{egprob}
+
+\begin{egans} $p=(x_0,y_0,z_0)$に対し
+\[(Jf)_{p} = \bmat{2x_0 & 2y_0 & -2z_0}\]
+よりrankが0であるのは$x_0=y_0=z_0=0$なので臨界点は$(0,0,0)$. 臨界値は$0$. $c> 0$では$x^2+y^2=z^2+c$は二つの連結成分を持つ多様体になっており, $c<0$では一つに繋がったものになっている. 一方, $c=0$では円錐が二つ頂点でくっついた図形になっており, これは多様体になっていない.
+\end{egans}
+
+
+
+
+
+\clearpage
+
+\subsection{($\heartsuit$)接写像のランク}
+以下は, 木津氏の院試(幾何)の付録を参考にした.
+\tbox{
+\begin{theo}
+$m$次元多様体$M$が$C^{\infty}$級写像$g:\mb{R}^{k+m}\to \mb{R}^k$と正則値$c\in \mb{R}^k$を用いて$M=g^{-1}(c)$と書けているとする. このとき, 次が成立する:
+\[すべてのp\in Mについて \bolm{T_pM = \ker{Jg_p}}\]
+\end{theo}
+}{title=ユークリッド空間に埋め込まれた多様体の接空間の記述}
+\prf
+\fbox{$T_{p}M \subset \ker{Jg_p}$} (\tf{これを示すのには正則値の仮定は不要})  $p$における$M$の局所座標$(U_p;x_1,\dots, x_m)$を取る. $q\in U_p$対して $g(p) = c$であり, $g(p)$での座標は$\mb{R}^k$の標準座標で表示できるので, $g:U_p\to \mb{R}^k$の$x_1,\dots, x_m$による表示は
+\[g(x_1,\dots, x_m) = \bmat{ g_1(x_1,\dots, x_m) \\ \dots \\ g_k(x_1,\dots, x_m) }\]
+となる. $M=g^{-1}(c)$だから, $c=(c_1,\dots, c_k)\in \mb{R}^k$とおくと
+\[g_l(x_1,\dots, x_m) = c_l\]
+が成り立つ. これを$p=(x_1(p),\dots, x_m(p))\in U_p$において座標$x_i$で方向微分すると
+\[\dfrac{\del g_l(x_1,\dots ,x_m)}{\del x_i}|_{x_i = x_i(p)}= 0\quad (\forall l,i)\]
+を得る. $g$の値域の$\mb{R}^k$の座標を$y_1,\dots, y_k$とすると,
+\[(d_{p} g)\parena{\parena{\dfrac{\del}{\del x_i}}_{p}} = \sum_{l=1}^{k}\dfrac{\del g_l}{\del x_i}(x_1,\dots, x_m) \parena{\dfrac{\del}{\del y_l}}_{g(p)}\]
+である. 各$\frac{\del g_l}{\del x_i}(x_1,\dots, x_m)$は$0$であるから,  $\parena{\frac{\del}{\del x_i}}_{p} \in T_{p}M$は$\ker{d_{p}g}$に属す. この方向微分作用素は$T_{p}M$の基底であるから, $T_{p}M\subset \ker{d_{p}g}$である. \\
+\fbox{次元比較} $T_{p}M$の次元は$m$である. $\ker{d_{p} g} = \ker{J_{p}g}$の次元が$m$であることを示せば主張は従う. \tf{$c$が正則値であるから}, $M$の任意の点$p$に対し$d_{p}g$は全射である. つまり, $J_{p}g$のランクは$k$である. よって, 次元定理より
+\[\dim{\mb{R}^{m+k}} - \dim{\ker{J_{p}g}} = \rank{J_{g}p} = k\]
+によって$\dim{\ker{J_{p}g}}$が計算でき, $\dim{\ker{J_{p}g}} = m$が分かる. \qed
+\qed
+
+\begin{eg}
+$k=1$の場合は$C^{\infty}$級関数である. たとえば$g(x,y,z) = x^2 + y^2 + z^2$とする. $c=1\in \mb{R}$は正則値であることが容易に分かる. %うめろ
+したがって$M=g^{-1}(c)$は$2$次元多様体である. もちろんこれは$S^2$のことであるから,  $p=(x_0,y_0,z_0)$における接空間は$x_0x + y_0y + z_0z = 0$に対応するもののはずである. 実際, $z_0 > 0$だとして,  $Jg_p$が
+\[\bmat{ 2x & 2y & 2z }\]
+であるから, これの核に属する$\mb{R}^3$の元$(x_0,y_0,z_0)$は$x_0x + y_0y + z_0z = 0$を満たす.
+
+\end{eg}
+そして, 次の問題が最重要のテクニックである.
+\tbox{
+\begin{theo} \label{theo:rankdfp_with_no_chart}
+$m$次元多様体$M$が$C^{\infty}$級写像$g:\mb{R}^{k+m} \to \mb{R}^k$と正則値$c\in \mb{R}^k$を用いて$M=g^{-1}(c)$と書けているとする. このとき, $C^{\infty}$級写像$f:M\to \mb{R}^n$が拡張$\witi{f}:\mb{R}^{k+m}\to \mb{R}^n$を持つならば, 次が成立する:
+\[\bolm{\forall p\in M,\quad \rank{df_p} = \rank \bmat{J \witi{f}_p \\ Jg_p} - k}\]
+\end{theo}
+}{title=$C^{\infty}$級写像の階数の(chartを取らない)公式}
+\prf
+ポイントは次を示すことである.
+\[\bolm{\ker{J_{p}f}= \ker{\bmat{J_{p}\witi{f} \\ Jg_p}}}\]
+これが示されると, 次元定理より
+\bealn{
+\rank{J_{p}f} &= m - \ker{J_{p}f} \\
+&= m - \ker{\bmat{J_{p}\witi{f} \\ J_{p}g}} \\
+&= m - \parenb{ (m+k) - \rank{\bmat{J_{p}\witi{f} \\ J_{p}g}}}\\
+&= \rank{\bmat{J_{p}\witi{f} \\ J_{p}g}} - k
+}
+が言えるからだ. さて, 肝心のこの等式を示そう. $v\in T_{p}M$の元は$p$の局所的な$C^{\infty}$級関数$M\to \mb{R}$から実数を返す関数のことであったが, この$v$は$M$の$p$での局所座標$(U_p;x_1,\dots, x_m)$の各座標関数$x_i:U\to \mb{R}$の写し方により決定される. このことは座標に依らないので, 局所座標として部分多様体の定義から取れるもの($M=g^{-1}(c)$は部分多様体である)を採用すると, $\mb{R}^{k+m}$は$p$で$(V_{p}; x_1,\dots, x_m, x_{m+1},\dots, x_{m+k})$という座標近傍を持ち, $U_p$はこの座標における$x_{m+1} = \dots = x_{m+k} = 0$で記述される部分空間となる. このことに注意して, $v\in T_{p}M$を座標関数$x_{m+i}:V_{p}\to \mb{R}$ ($i=1,\dots, k$)に対しては$v(x_{m+i}) = 0$と定義し拡張することで$v\in T_{p}\mb{R}^{m+k}$とみなせる. このようにして$T_{p}M\subset T_{p}\mb{R}^{m+k}$とみなすとき,
+\[T_{p}\mb{R}^{m+k} = \lan \parena{\dfrac{\del}{\del x_1}}_{p}, \dots, \parena{\dfrac{\del}{\del x_{m+k}}}_{p}  \ran\]
+\[T_{p}M = \lan \parena{\dfrac{\del}{\del x_1}}_{p},\dots, \parena{\dfrac{\del}{\del x_m}}_{p} \ran\]
+である. $p\in M$である限りは, $d_{p}f：T_{p}M\to T_{p}\mb{R}^{n}$と$d_{p}\witi{f}|_{T_{p}M}: T_{p}M\to T_{p}\mb{R}^n$は同じである.
+よって,  $v = \sum_{i=1}^{m+k} a_i \parena{\frac{\del}{\del x_i}}_{p} \in T_{p}\mb{R}^{m+k}$が$v\in \ker{J_p \witi{f}}\cap T_{p}M$を満たすためには, $a_{m+i} = 0$ ($i=1,\dots, k$)かつ$v\in \ker{J_{p}\witi{f}}$を満たすことと同値なので, $v\in \ker{J_{p}f}$に同値である. よって$\ker{J_{p}f} = \ker{J_{p}\witi{f}} \cap T_{p}M$で, $T_{p}M = \ker{J_{p}g}$に注意すれば右辺が$\ker{\bmat{J_{p}\witi{f} \\ J_{p}g}}$に等しいことが分かる. \qed
+
+\qed \\
+これは\tf{ユークリッド空間に埋め込まれて与えられた多様体}には大変有効であり, しかもチャートの分からない多様体に対して臨界点を求めるときに有効である. (ただ, 2020年度の幾何学Iでこれを学習した覚えがなく,答案につかうときは一言欲しいかもしれない)
+
+
+\begin{egprob} (H25数学I-4) \label{prob:H25-I-4}
+写像$F:\mb{R}^4\to \mb{R}^4$を$F(x,y,z,w) = (xy,y,z,w)$と定め, 写像$f:S^3\to \mb{R}^4$を$F$の制限とする. $S^3$の各点$p$における$f$の微分$df_p$の階数を求めよ.
+\end{egprob}
+\begin{egans}
+$g(x,y,z,w) = 1-x^2-y^2-z^2-w^2$として$S^3 = g^{-1}(0)$である. 定理から
+\bealn{ \rank{df_p} =
+\rank{
+\bmat{
+y&x&0&0\\
+0&1&0&0\\
+0&0&1&0\\
+0&0&0&1
+}
+}
+-1
+}
+なので$y=0$で$\rank{df_p} = 2$. $y\neq 0$で$\rank{df_p} = 3$. \qed
+\end{egans}
+
+
+
+
+\begin{egprob} (H21数学II, 4)
+3次元球面$S^3$を$\set{(z_1,z_2)\in \mb{C}^2 \mid |z_1|^2 + |z_2|^2 = 1}$と同一視する. $C^{\infty}$級写像$f:S^3\to S^3$を
+\[f(z_1,z_2) = (z_1^2 - |z_2|^2, z_1z_2 + \ovl{z_1} z_2)\]
+で定義する. $f$の臨界点を求めよ.
+\end{egprob}
+\begin{egans}
+$z_1 = x_1+iy_1$, $z_2 = x_2 + iy_2$により$\mb{C}^2\cong \mb{R}^4$と同一視したとき,
+\[
+z_1z_2 + \ovl{z_1}z_2 = 2x_1(x_2+iy_2) = 2x_1x_2 + i\cdot 2x_1y_2
+\]
+$f$は
+\[
+f(x_1,y_1,x_2,y_2) = (x_{1}^{2} - y_{1}^{2} - x_{2}^{2} - y_{2}^{2}, 2x_1y_1, 2x_1x_2, 2x_1y_2)
+\]
+となる.
+$f$は拡張$\witi{f}:\mb{R}^4 \to \mb{R}^4$を持ち, $S^3$は$g(x_1,y_1,x_2,y_2) = x_1^2+y_1^2+x_2^2+y_2^2$によって$S^3 = g^{-1}(1)$と表される.
+\bealn{
+\rank df_p &= \rank \bmat{
+d\witi{f}_{p} \\ Jg_p\\
+} - 1 \\
+&= \rank\bmat{
+2x_1 & -2y_1 & -2x_2 & -2y_2 \\
+2y_1 & 2x_1 & 0 & 0 \\
+2x_2 & 0 & 2x_1 & 0 \\
+2y_2 & 0 & 0 & 2x_1 \\
+2x_1 & 2y_1 & 2x_2 & 2y_2
+} - 1
+}
+$p$が臨界点であるというのは, $df_p$が全射でないことをいうので $\rank df_p < 3$ということである. よって, 上の$5\times 4$行列のランクが4未満であるときを求めればよい.\par
+$x_1 = 0$のときは明らかに4未満になる. $x_1\neq 0$のときは上から$4\times 4$行列の行列式を取ると$16x_1^4 \neq 0$になるからrankは4になる. よって, 臨界点集合は$x_1 = 0$により記述され, すなわち
+\[\bolm{\set{(z_1,z_2)\in \mb{C}^2\mid |z_1|^2 + |z_2|^2 = 1, \mr{Re}(z_1) = 0}}\]
+
+\end{egans}
+
+
+
+
+
+
+\subsection{はめこみ・うめこみ・しずめこみ}
+\begin{defn} $C~{\infty}$級写像$f:M\to N$とする.
+\ben
+\item すべての$p\in M$で $d_p f: T_{p}M \to T_{f(p)}N$が単射であるとき, $f$を\tf{はめ込み}という.
+\item すべての$p\in M$で$d_{p} f$が全射であるとき, $f$を\tf{沈め込み}という.
+\item すべての$p\in M$で$d_{p} f$が\tf{単射}(すなわちはめ込み)でかつ$M$と$f(M)$(に$N$から定まる部分位相を定義した空間)が同相であるとき, $f$を\tf{埋め込み}という.
+\een
+\end{defn}
+
+\begin{prop}
+\ben
+\item 埋め込みであるならば, 単射なはめ込みである.
+\item はめ込みは, 任意の点$p$に対して十分小さい$p$の開近傍に制限すれば埋め込みとなる.
+\een
+\end{prop}
+
+
+\begin{eg}
+\ben
+\item $f:\mb{R}\to \mb{R}^2$, $f(x) = (x^2,x^3)$は原点の近傍で\tf{はめ込みでも沈め込みでもない.} 実際, $J_0 f = \sumib{ 0 & 0 \\ 0 & 0}$で全単射でないから.
+\item $f:\mb{R}\to \mb{T}^2$を$f(x) = [\sqrt{2}x]$で定めるとこれは\tf{はめ込みであるが埋め込みではない.} 実際, $f(\mb{R})$は$\mb{T}^2$で稠密であり, 像が$\mb{R}$と同相ではないからだ.
+\een
+\end{eg}
+
+\begin{egprob} (基礎数学試験2018No.2-5)
+$f:S^1\times S^1 \to \mb{R}^4$を
+\[f(x,y,z,w) = (x+z,x+w,y+z,y+w)\]
+と定めるとき, $f$がはめ込みになるかどうか判定せよ. $f$がはめ込みでない場合は, $f$の特異点を全て求めよ.
+\end{egprob}
+\begin{egans}
+実ははめ込みでないことは, $S^1\times S^1$のコンパクト性から最大点の存在により従うはずなのだが, 普通に考えよう. 考えたいことは, $d_{p}f:T_{p}(S^1\times S^1)\to T_{p}\mb{R}^4$のランクが2未満になるような点$p$の把握である. ここで$S^1\times S^1$は$g:\mb{R}^4\to \mb{R}^2$;
+\[g(x,y,z,w) = \bmat{x^2+y^2-1\\ z^2+w^2-1 }\]
+の正則値$\bmat{0\\ 0}$の逆像であって, $f$は拡張$\witi{f}: \mb{R}^4\to \mb{R}^4$を持つ. したがって定理\ref{theo:rankdfp_with_no_chart}により
+\[
+2+\rank{d_{p}f} = \rank{\bmat{
+1 & 0 &1&0\\
+1&0&0&1\\
+0&1&1&0\\
+0&1&0&1\\
+2x&2y&0&0\\
+0&0&2z&2w
+}}
+\]
+である(右辺の2は$S^1\times S^1$を逆像として描く$g$の値域の次元であった). さて, $p$が特異点であるというのは, 右辺が3以下であることをいうのである. 右辺に現れる行列を$J$とする. $J$を行基本変形して標準形に直すと
+\[
+\bmat{
+1&0&1&0\\
+0&1&1&0\\
+0&0&1&-1\\
+0&0&-2(x+y)&0\\
+0&0&0&2(z+w)\\
+0&0&0&0
+}
+\]
+になるので(Check!), 特異点であるための条件は$x+y = z+w= 0$となる. よって, $\pm \frac{1}{\sqrt{2}}(1,-1,1,-1), \pm\dfrac{1}{\sqrt{2}}(1,-1,-1,1)$の4点が特異点である.
+\end{egans}
+
+
+
+
+\subsection{演習問題}
+\subsubsection{Level A}
+\begin{prob} (\tf{2020幾何学演義II})\\
+次の関数のすべての臨界点とその点におけるMorse指数を求め, その点が非退化臨界点かどうかを判定せよ。
+\ben
+\item $S^n = \{ (x_0,\cdots, x_n)\in \mb{R}^{n+1}\mid \sum_{i=0}^{n}x_i^2 = 1 \}$上$f(x_0,\cdots, x_n) = x_n$で定義される関数$f$.
+\item $T$を$\mb{R}^3$において$\{ (x,y,0)\mid x^2+(y-2)^2=1\}$を$x$軸まわりに回転させて得られる2次元とトーラスとするとき, $T$上の関数$g(x,y,z) = z$
+\item $T$上の関数$h(x,y,z)=x$.
+\een
+\end{prob}
+
+
+\begin{prob} (\tf{一発ネタ}, H9数学I-5)
+$f(x,y)$は$x$と$y$の実係数の$n$次斉次式とする. $n\geq 1$のとき, $f(x_0,y_0) \neq 0$となる点$(x_0,y_0)\in \mb{R}^2$は関数$f(x,y)$の正則点であることを示せ.
+\end{prob}
+
+\begin{prob} (仮想面接問題) 上の問の設定で,
+逆に, $f(x_0,y_0) = 0$のときに$(x_0,y_0)$は$f(x,y)$の臨界点ですか?
+\end{prob}
+
+\subsubsection{Level B}
+\begin{prob} (\tf{良問}, 2013京大留学生入試\footnote{この問題をゼミでやったところ, 全滅であった。ぜひ一度自力で考えて見てほしい。}) \label{prob:H25_F_4}\\
+$n\geq 1$を整数とし,$M\subset \mathbb{R}^{n+2}$を滑らかな$n$次元部分多様体で,$\mathbb{R}^{n+2}$の中で閉集合とする.
+このとき,任意の$x_0\in M$に対して,$\mathbb{R}^{n+2}$の中のある直線$L$で,
+$$L\cap M=\{x_0\}$$
+を満たすものが存在することを示せ. (\tf{注意}: 閉集合の仮定は不要・・・?)
+\end{prob}
+
+\begin{prob} (2015留学生入試)\label{prob:H27_F_4}
+$S^2=\{(x,y,z)\in\mathbb{R}^3|x^2+y^2+z^2=1\}$とおき,写像$f:S^2\to\mathbb{R}^3$を
+$$f(x,y,z)=(yz-x,zx-y,xy-z)$$
+で定める.このとき$f$の特異点をすべて求めよ.ここで,$p\in S^2$における$f$の微分
+$$df_p:T_pS^2\to T_{f(p)}\mathbb{R}^3$$
+の階数が2より小さいとき,$p$を$f$の特異点という.
+\end{prob}
+
+\subsubsection{Hint・Answer}
+{\small
+\begin{probans}
+\chatgpthint{Lagrangeの未定乗数法で臨界点を求め、制限Hessianの符号を調べてください。}
+\end{probans}
+
+\begin{probans}
+$x\frac{\del f}{\del x}(x,y) + y\frac{\del f}{\del y}(x,y) = nf(x,y)$を用いよ.
+\end{probans}
+
+\begin{probans}
+No. $f(x,y) = x^2-y^2$, $f(1,1) = 0$で反例.
+\end{probans}
+
+\begin{probans}
+\chatgpthint{$x_0$からの距離関数を$M$上で最小化し、その法線方向を使ってください。}
+\end{probans}
+
+\begin{probans}
+\chatgpthint{$T_pS^2=p^\perp$上で$df_p$の核が非自明となる条件を解いてください。}
+\end{probans}
+}

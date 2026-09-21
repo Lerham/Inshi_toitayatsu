@@ -1,0 +1,808 @@
+\section{さまざまな環}
+ここでは, 次の種類の環の性質をまとめる.
+\ben
+\item 整域, UFD, PID. これらは代数入門くらいのものである.
+\item ($\spadesuit$) 整閉整域, Noether環,  Artin環. こちらは代数学I程度のものである.
+\item ($\spadesuit\spadesuit$) Dedekind環, 離散付値環, 正則局所環, Cohen-Macaulay環, カテナリー環. これらは専門レベルである.
+\een
+
+\subsection{整域}
+
+\tbox{
+\begin{prop}
+$A$を環とする。$A$が整域であるとは, いかなる$x,y\in A\setminus{\{ 0 \}}$に対しても$xy \neq 0$であるという性質を満たす環のことをいう。整域$A$について, 次が成り立つ.
+\ben
+\item 整域であることと$(0)$を素イデアルに持つことは同値.
+\item 整域の局所化は整域. \tf{整域の部分環も整域.}
+\item 整域の素イデアル$(0)$による局所化は体である. これを\tf{商体}という.
+\een
+\end{prop}
+}{title=整域のまとめ}
+
+\begin{eg}
+$\mb{Z}[X]$は整域である. $\mb{Z}[X]$の商体は$\mb{Q}(X)$.  $\mb{Z}[X]$の極大イデアル$(p,X)$を考える. このとき$\mb{Z}[X]_{p}\cap \mb{Z}[X]_{X} = \mb{Z}[X]$である.
+\end{eg}
+
+
+\begin{egprob}
+$A$を$\mb{Z}$の素イデアル$(2)$による局所化とする.すなわち
+\[A = \mb{Z}_{(2)} = \set{\dfrac{a}{b} \mid b\notin 2\mb{Z}, a\in \mb{Z}} \subset \mb{Q}\]
+とおく. $A$が整域であることを示せ. また, $A$の素イデアル$\maf{p}$をすべて求めよ. また, $A/\maf{p}$は何か?
+\end{egprob}
+\begin{egans}
+$A$が整域なのは部分環だから. 単純に調べることも可能. \\
+素イデアル$\maf{p}$は$2\mb{Z}_{(2)}$のただひとつ. $A/\maf{p} \cong \mb{F}_{2}$. これの証明は, $A\to \mb{F}_{2}$を分子の$\bmod{2}$に送る写像とすれば核が$\maf{p}$になるから.
+\end{egans}
+
+
+
+\begin{egprob}
+$\phi: \mb{Z}_{(2)} \to \mb{F}_{2}\times \mb{Q}$を
+\[\phi(\dfrac{a}{b}) = (a\bmod{2}, \dfrac{a}{b})\]
+により定める.
+\ben
+\item $\phi$が環準同型であることを示せ.
+\item $\mb{F}_{2}\times \mb{Q}$の素イデアルをすべて求めよ. また, それぞれの素イデアル$P\subset \mb{F}_{2}\times \mb{Q}$に対して, $\phi^{-1}(P)$を求め, 素イデアルを引き戻す写像$P\mapsto \phi^{-1}(P)$が$\set{\mb{F}_{2}\times \mb{Q}の素イデアル}$と$\set{\mb{Z}_{(2)}の素イデアル}$の全単射を与えることを示せ.
+\item ($\spadesuit\spadesuit$) $\phi^{\ast}: \spec{\mb{F}_{2}\times \mb{Q}}\to \spec{\mb{Z}_{(2)}}$は\tf{同相写像ではない}ことを示せ.
+\een
+\end{egprob}
+
+\begin{rem}
+上の問題は, $\phi^{\ast}$が全単射だが同相でない例を定めている.
+\end{rem}
+
+
+
+%-------------------------UFD-----------
+
+\subsection{UFD}
+
+整域$A$の元$p$が生成するイデアル$pA$が素イデアルであるとき, $p$を\textbf{素元}という.
+
+\begin{egprob}
+素元は既約元であることを証明せよ.
+\end{egprob}
+\begin{egans}
+素元$p$を取る. $p=ab$と分解したとき, $a,b$のどちらかが単元であることを示せばよい. $ab$は$p$で割れるから, $a,b$のどちらかは$p$で割り切れる. たとえば$a=pa'$とする. このとき, 整域なので$p\neq 0$で割ると$1=a'b$となる. よって$b$は単元であり, 示せた. \qed
+\end{egans}
+
+
+\tbox{
+\begin{prop}
+整域$A$であって, 次の条件$(\ast)$を満たすとき$A$は\tf{一意分解整域(UFD)}という。
+\ben
+\item[($\ast$)] $A$の$0$でも単元でもない任意の元$a$に対して, ある素元$p_1,\cdots, p_t$が存在して$a=p_1p_2\cdots p_t$が成り立つ。
+\een
+一意分解整域$A$に対して次が成り立つ。
+\ben
+\item 素元分解は本質的に一意である。
+\item 多項式環$A[x]$もUFDである。
+\item \tf{UFDにおいて既約元は素元である. }
+\een
+\end{prop}
+}{title=UFDまとめ}
+
+
+\begin{eg}
+UFDの剰余環は必ずしもUFDではない. たとえば,
+\ben
+\item $k[X,Y]/(X^2-Y^3)$ (整閉ですらない)
+\item $\mb{F}_{3}[X,Y]/(X^2+Y^2-1)$.
+\een
+\end{eg}
+
+\begin{egprob}
+$\mb{F}_{3}[X,Y]/(X^2+Y^2-1)$は整域であることを示せ.
+\end{egprob}
+\begin{egans}
+$\mb{F}_{3}[X,Y]$で$p=Y-1$は素元. $X^2+Y^2-1$はアイゼンシュタイン多項式なので既約. よって整域.
+\end{egans}
+
+
+
+
+\begin{eg} (\tf{円の座標環})
+標数2でない代数閉体$k$に対して$k[x,y]/(x^2+y^2-1)$はPIDであることを示す. まず代数閉体なので$i^2=-1$なる$i\in k$が存在する. そこで, $x^2+y^2=(x+iy)(x-iy)$と分解すると, $f(x,y) \mapsto f(\frac{u+v}{2}, \frac{u-v}{2i})$ は次の同型を誘導する.
+\bealn{
+k[x,y]/(x^2+y^2 - 1) \to k[u,v]/(uv-1)
+}
+右の環は$k[u,1/u]$という環に同型であり, これは1変数多項式環$k[u]$の$\{ 1,u,\cdots\}$による局所化に同型である. 一般にPIDの局所化はPIDであるため\footnote{Hint: 局所化のイデアルは必ず拡大イデアルである. つまり$S^{-1}I$の形で書ける. ここで$S$は積閉集合, $I$は環$A$のイデアル.}, これもPIDであることが従う. なお, ここで用いた$k$の性質は$i^2=-1$となる元の存在正と標数が$2$でないことであるため, $k=\mb{F}_{5}$でも正しい. しかしこのような$i$がないならPIDになるとは限らない.
+\end{eg}
+\begin{prac}
+$k=\mb{F}_{3}$のときにこの環がUFDですらないことを, 次の等式から示せ.
+\[(x-y)(x+y) = 2(x^2+1)\]
+\end{prac}
+
+
+
+
+
+
+
+
+\subsection{PID}
+
+
+\tbox{
+\begin{prop}
+整域であって, すべてのイデアルが一つの元で生成されるもののことを\tf{単項イデアル整域(PID)}という。PIDに対して次が成り立つ。
+\ben
+\item PIDはUFDである。
+\item PIDの0でない素イデアルは極大イデアルである。とくに, $k[X]$の極大イデアルは$k$上既約な多項式によって生成される。
+\item
+\een
+\end{prop}
+}{title=PIDまとめ}
+\prf
+(2): (\tf{自分でできるように！}) $(x),(y)$が0でない素イデアルで $(x)\subsetneq (y)$なるものとする.  このとき$x=ya$と表せる. もし$y\in (x)$なら$(x)=(y)$となるのでおかしい. ゆえに$y\notin (x)$であり, これと$x=ya$により$a\in (x)$が従う. よって$a=xb$と書くと, $1=ab$となり, $a,b$は単元なので, $x=ya$から$x,y$は同伴. すると$(x) = (y)$なのでおかしい. よって極大性が示せた.
+
+\qed
+
+
+
+
+\begin{eg}
+$\mb{C}[x]$はユークリッド整域なのでPIDでありUFDなので整閉整域である.
+\end{eg}
+
+\begin{egprob}
+単項イデアルの共通部分はまた単項イデアルか?
+\end{egprob}
+\begin{egans}
+ちゃんと調べていないが, この問題は平坦性と関係があるらしい. \par
+$A=k[t^2,t^3]$で$(t^2)\cap (t^3) = (t^4,t^5)$になる. これは単項で書けない. $(t^4)$とは等しくないことに注意！
+\end{egans}
+
+
+
+
+
+
+
+\begin{eg}
+次はPIDである: $\mb{Z}$, $k[X]$ ($k$は体).
+\end{eg}
+
+\begin{rem}
+任意のイデアルが単項イデアルだが整域でない例がある. たとえば$A=\mb{C}[X]/(X^2)$を考える. これのイデアルは$(0),(X),(1)$に限られる. 実際, この環はいわゆる局所環で, $(X)$に属さない元はすべて単元であるということに注意すれば, イデアル$I$が$(1)$でも$(0)$でもないなら$X$をh含むしかなく, $I=(X)$とならざるを得ない.
+\end{rem}
+
+\begin{prac} (代数民なら必ず答えられるようにしたい)\\
+PIDでないUFDの例を2個答えよ.
+\end{prac}
+
+
+\subsection{Euclid整域}
+Euclid整域も代数入門レベルの対象であるが, 登場頻度がかなり少ないので短めに述べる.
+\begin{prop}
+
+\end{prop}
+
+
+\begin{egprob}
+$\mb{Z}[i], \mb{Z}[\omega]$がEuclid整域であることを示せ.
+\end{egprob}
+
+
+
+
+
+
+%------------------------整閉--------
+\subsection{整閉整域}
+
+\tbox{
+\begin{prop}
+$A$を環とする。$A$の商体\footnote{積閉集合$S=\{ A\text{の零因子でない元} \}$による局所化$S^{-1}A$のことをいう。}を$K$とする。$A$が整域で, $K$の元で$A$上整なものが$A$の元のみであるとき, $A$は\tf{整閉整域}(または正規環)という。整閉整域$A$にたいして次が成り立つ。
+\ben
+\item $A$の局所化は整閉整域である.
+\item $A$が整閉整域ならば多項式環$A[T]$も整閉整域である.
+\een
+\end{prop}
+}{title=整閉整域まとめ}
+\begin{prac}
+
+\end{prac}
+
+\begin{rem}
+すなわち,$A$が整閉整域とは,  $a\in K$が$A$係数の方程式
+\[x^{n} + a_1x^{n-1} + \cdots + a_{n} = 0\]
+の根であるならば必ず$a\in A$であるということを言っている。$A=\mb{Z}$ならば$K=\mb{Q}$であるが 「ある有理数$a$が整数係数のモニック多項式の根であるならば$a$は整数である」は高校数学でも聞く話であり, 有理数の分母と分子の素因数分解を考えることで初頭整数論的に証明できる。つまり$\mb{Z}$は整閉整域であるのだが,実はUFDは必ず整閉整域である。その証明は$\mb{Z}$での証明とほとんど平行に進むであろう。
+\end{rem}
+
+\begin{recall} $d\neq 0$が平方因子を持たない整数とする.
+$\mb{Q}(\sqrt{d})$の整数環は$d\equiv 1\pmod{4}$で$\mb{Z}[(\sqrt{d}+1)/2]$で$d\equiv 2,3\pmod{4}$なら$\mb{Z}[\sqrt{d}]$.
+\end{recall}
+
+
+\begin{prac}
+$\mb{Z}$が整閉整域であることを直接示せ. (これは実は高校数学でやっている.)
+\end{prac}
+
+\begin{prac} (仮想面接問題)
+整閉整域の局所化は整閉整域ですか?
+\end{prac}
+
+
+
+\begin{egprob} (\cite{aoyukie})
+$A=\mb{C}[X,Y,Z]/(Z^2 - XY)$が正規環であることを示せ。
+\end{egprob}
+\begin{egans}
+$X,Y,Z$の$A$での像を$x,y,z$とする. $\mr{Frac}A =:K  = \mb{C}(x,y,z)$である. $z$は$\mb{C}(x,y)$上代数的なので$K=\mb{C}(x,y)[z]$. よって任意の$K$の元は$f(x,y) + zg(x,y)$と表せる. この元が$A$上整であるとせよ. $A$の自己同型$z\mapsto -z$により共役元$f - zg$も$A$上整であり, トレース$2f$もノルム$f^2-z^2g^2 = f^2-xyg^2$も$A$上整である. $A$は$\mb{C}[x,y]$上整だから$f$も$f^2-xyg^2$も$\mb{C}[x,y]$上整であり, $\mb{C}[x,y]$は整閉だから$f\in\mb{C}[x,y]$かつ$xyg^2\in \mb{C}[x,y]$である. $(xyg)^2 \in (x)\cap (y)$で, $x,y$は素元なので$xyg\in (x)\cap (y)=(xy)$となる. よって$g\in \mb{C}[x,y]$だから$f+zg \in \mb{C}[x,y,z]$となり$A$は整閉である. \qed
+\end{egans}
+
+
+\begin{egprob} (H9 数学II-1)\\
+$K$は標数が2でないとし, $F=F(X_1,\dots, X_n)\in K[X_1,\dots, X_n]$は$K[X_1,\dots, X_n]$の元の二乗にはなっていないと仮定する. $R=K[X_1,\dots, X_n, Y]/(Y^2 - F(X_1,\dots, X_n))$を考える.
+\ben
+\item $R$は整域であることを示せ.
+\item $K[X_1,\dots, X_n]$が正規環であることを利用して\footnote{UFDであることから直ちに従う.}, $R$が正規環であるための必要十分条件は$F$が二乗因子を持っていないことであることを示せ.
+\een
+\end{egprob}
+
+\begin{egans}
+(1): $R$の$X_i,Y$の像をそれぞれ$x_i,y$で書く. $R$の元は$f(x_1,\dots, x_n) + g(x_1,\dots, x_n)y$一意にで表せる. このような元$f_1 + g_1y, f_2+g_2y$をとり, その積$f_1f_2 + y(f_1g_2 + g_1f_2) + y^2g_1g_2 = (f_1f_2 - Fg_1g_2) + y(f_1g_2 + g_1f_2) $が0であるとしよう. このとき$f_1f_2 - Fg_1g_2 = 0$かつ$f_1g_2 + g_1f_2 = 0$を得る. よって
+\[g_1f_1f_2 - Fg_1^2g_2 = -f_1^2g_2 - Fg_1^2g_2 = 0\]
+を得る. \par
+もし$g_2\neq 0$なら$f_1^2 + Fg_1^2 = 0\in R$. すなわち$f_1^2 + Fg_1^2 \in k[X_1,\dots, X_n]\cap (Y^2-F(X_1,\dots,X_n)) = (0)$だから$f_1^2 + Fg_1^2 = 0 \in K[X_1,\dots, X_n]$である. $g_1\neq 0$なら$F$の素元分解を考えて$F$が平方元となるのでおかしい. よって$g_1=0$とすると$f_1^2=0$で$f_1=0$になるからこの場合はよい. \par
+また, $g_2 = 0$で$g_1\neq 0$なら, 先の$g_1,g_2$を入れ替えた議論が可能である. $g_1=g_2=0$の場合, $f_1f_2 = 0 \in K[X_1,\dots, X_n]\cap (Y^2-F(X_1,\dots, X_n)) = (0)$なので$f_1,f_2$のどちらかは0で, この場合も整域の定義を満たす. よって$R$は整域. \qed \\
+(2): \bolm{K(x_1,\dots, x_n)(y) = K(x_1,\dots, x_n)[y]}に注意せよ($\because y$が代数的). したがって$\mr{Frac}R$の任意の元は$ f_1(x_1,\dots, x_n) + f_2(x_1,\dots, x_n)y$と表せる($f_1,f_2\in K(x_1\dots, x_n)$).
+$F$が二乗因子を持たないとし, $R$が正規であることを証明する. 自然な単射 $\phi:K[X_1,\dots,X_n]\hookrightarrow R$により部分環とみなす. $y$は整等式$y^2 - F = 0$を満たすので, $\phi$は整準同型である.   $\alpha=f_1 + yf_2$が$R$上整であるとする. $K(x_1,\dots, x_n)$上の共役元は$\beta := f_1 - yf_2$で, $\mr{Tr}(\alpha) = \alpha + \beta = 2f_1(x_1,\dots, x_n)$, $\mr{N}(\alpha) = \alpha\beta = f_1^2 - Ff_2^2$も$R$上整である. $\phi$は整準同型なので, $2f_1$と$f_1^2 - Ff_2^2$は$K[X_1,\dots, X_n] \cong K[x_1,\dots, x_n]$ 上整. これは正規環上整であるから, $2f_1, f_1^2 - Ff_2^2 \in K[x_1,\dots, x_n]$が従う. $K$は標数2でないので$f_1\in K[x_1,\dots, x_n]$である. あとは$f_2\in K[x_1,\dots, x_n]$を示せばよいが, それも正しい. 実際, $f_2 = a_2/b_2$で$a_2,b_2\in K[x_1,\dots, x_n]$は互いに素とすると, $Fa_2^2 = gb_2^2 (g\in K[x_1,\dots,x_n])$という式がある. $b_2$がもしある素元$p$で割れるなら, 互いに素の仮定より$a_2^2$は$p$で割れない. $b_2^2$は$p^2$で割れるので, $F$が$p^2$で割れなければならない.  これは平方因子を持たないことに反する. よって$b_2$はいかなる素元でも割れないので単元であり, $b_2\in K\setminus{\set{0}}$が従うので$f_2 = b_2^{-1}a_2 \in K[x_1,\dots, x_n]$となる. よって$\alpha \in K[x_1,\dots, x_n,y]$だから$R$は正規環である. \par
+逆に$F(x_1,\dots, x_n)$が平方因子$p^2$を持つとする. $F/p^2 = F_0(x_1,\dots, x_n)$とおく. $f_2 = 1/p$とすると $f_2y \notin K[x_1,\dots, x_n,y]$であるが, これは
+\[(f_2y)^2 - F_0 = 0\]
+という整等式を満たすので$R$が正規でないことが分かる.\qed
+\end{egans}
+
+
+
+
+
+
+
+
+
+
+
+%-------------------局所環-----------
+\subsection{局所環}
+
+\begin{prop}
+環$A$であって, $A$  がただひとつの極大イデアル$\maf{m}$を持つとき, 組$(A,\maf{m})$を局所環という. 局所環$(A,\maf{m})$について次が成り立つ.
+\ben
+\item \bolm{A^{\times} = A - \maf{m}}
+\item イデアル$I\neq A$は$I\subset \maf{m}$を満たす,
+\een
+\end{prop}
+\begin{egprob}
+環$A$で, $A-A^{\times}$がイデアルであるとき, $A$は局所環であることを示せ.
+\end{egprob}
+\begin{egans}
+\chatgpthint{$A-A^{\times}$がすべての真のイデアルを含むことを示してください。}
+\end{egans}
+局所環は幾何的な文脈で自然に現れる. たとえば原点のある近傍で定義される$C^{\infty}$級関数の環$A$を考えよう. これは厳密に書くと$\varinjlim_{U\ni 0} C^{\infty}(U)$である. ただし, $U$は$0$を含む開集合を走る. すなわちこの環の元は, 開集合$U$と$C^{\infty}(U)$の元$f_{U}$の組$(U,f_U)$の 「0の十分近くで関数が一致する」という同値関係で割ったときの同値類$[U,f_U]$である. この環において, $[U,f_U]$がもし$f_U(0)\neq 0$であるなら任意の代表元に関して$f$の0での値は0でない. したがって$0$の近傍$V\subset U$で$1/f_U$が考えられ, $[V,(1/f_U)|_{V}]$が定まる. 明らかにこれは$[U,f_U] = [V,f|_{V}]$の逆元であるから, $A^{\times}$の元であることと$f(0)\neq 0$なる$f：U\to\mb{R}$で代表されることが同値であると分かる. 一方で$[U,f_U]$で$f_U(0)=0$を満たすものの全体を$\maf{m}\subset A$とおくと, 容易に分かるように$\maf{m}=A-A^{\times}$はイデアルをなす. したがって, 先の例題により$(A,\maf{m})$は局所環である. このように, \tf{関数環の茎}として現れるのが局所環である.
+
+\begin{prac}
+$(A,\maf{m})$をNoether局所環とする. $\bigcap_{n>0}\maf{m}^n = 0$を示せ.
+\end{prac}
+
+
+%-------------------Noether---------
+\subsection{Noether環}
+環の有限性条件である.
+
+\tbox{
+\begin{prop}
+$A$を環とする。$A$が次の同値な条件のいずれか(したがってすべて)を満たすとき, $A$をNoether環という。
+\ben[label=(\roman*)]
+\item $A$のすべてのイデアルは有限生成である。
+\item (\tf{asscending chain condition}) 任意の$A$のイデアルの昇鎖
+\[I_1\subset I_2\subset \cdots \]
+は停留する。つまり, ある番号$N$が存在して$I_N = I_{N+1} = \cdots$が成り立つ.
+\item $A$の任意の空でないイデアル族が極大元を持つ.
+\een
+Noether環$A$に対して次が成り立つ。
+\ben
+\item (\tf{Hilbertの基底定理}) $A[x]$もNoether環である。
+\item Noether環上の有限生成代数と局所化はNoether環である.
+\item ($\spadesuit\spadesuit$, Krullの標高定理) $I$が$A$の$r$個の元で生成されるイデアルとするとき, $\mr{ht}(I) \leq r$である.
+\een
+\end{prop}
+}{title=Noether環}
+\prf (2): (1)が示せれば, 多項式環$A[x_1,\dots,x_n]$もNoetherで, その剰余環もNoetherである. 局所化がNoether環なのは, イデアルが拡大したものしかないことから明らか.\\
+(1): これの証明は独特であり, しかし代数Iレベルなので覚えておこう. $\maf{a}\subset A[x]$が有限生成であることを示したい. $\maf{a}$から次の$A$のイデアル$I$を構成する:
+\[I=\set{a\in A\mid aは\maf{a}の元の最高次係数として取れる}\]
+これがイデアルであることはやさしい. よって$I$は有限生成で$I=(a_1,\dots, a_n)$と書ける. $f_i \in \maf{a}$が$f_i = a_ix^{r_i} + (\text{lower term})$と書けるとせよ. $r:=\max_{i=1}^{n}r_i$とおく. さて, $f\in \maf{a}$を取る. $f=ax^m + (\text{lower term})$とせよ. $a\in I$なので$a=\sum_{i} u_i a_i$と書ける. もし$m\geq r$であるなら,
+\[f - \sum_{i} u_i f_ix^{m-r_i}\]
+を考える. これは次数$m$未満の$\maf{a}$の元である. このように$f$から$\maf{b}=(f_1,\dots, f_n)\subset $の元を差し引いて, 次数$r$未満の元$g$を得ることができる. つまり,$f$に対してある次数$r$未満の$g$が存在し, $f-g\in \maf{b}$とできる. \par
+$M=A1+Ax + \dots +Ax^{r-1}$とする. 先ほど示したことは$\maf{a} = (M\cap \maf{a}) + \maf{b}$である. $\maf{b}$は$A$上有限生成. $M\cap \maf{a}$も有限生成である. なぜなら, $M\cap \maf{a}\subset M$で, $M$が有限生成$A$加群で$A$はNoetherだからNoether $A$加群で, 部分加群$M\cap \maf{a}$も$A$加群として有限生成だから. \qed
+
+
+
+\begin{prac}
+Noether環の二つの同値な条件, の同値性を示せ.
+\end{prac}
+
+\begin{eg}
+よく見る環はたいていNoetherである. たとえば$\mb{Z}, \mb{C}[X_1,\dots,X_n]$はNoetherであり, その剰余環や局所化もNoetherである.
+\end{eg}
+
+\begin{egprob} (仮想面接問題)
+\ben
+\item 非Noetherな環の例をあげてください.
+\item 素イデアルが一つの環で非Noetherなものはありますか?
+\een
+\end{egprob}
+\begin{egans}
+(1): $k[x_1,\dots, ]$ \\
+(2): $k[x_1,\dots]/(x_1^2,\dots)$
+\end{egans}
+
+
+\begin{rem}
+Noether環の次元は有限とは限らない.  これは永田先生により反例が得られており, かなり難しい例がある.
+\end{rem}
+
+\begin{egprob}
+Noether環の冪零元根基$\sqrt{(0)}$は冪零であることを示してください. もしNoether性を外すとどうなりますか?
+\end{egprob}
+\begin{egans}
+$\sqrt{(0)}$が有限生成なので, その生成元が消える指数をすべて足したものでイデアルのべき乗を取ればよい. Noether性を外した場合, 次の例は$\sqrt{(0)}$が冪零ではない.
+\[k[x_1,x_2,x_3,\dots],\quad (x_n^{n} = 0)\]
+このことを見る. まず, この環の素イデアルは$(x_1,x_2,\dots)$のただひとつであることに注意. よって, このイデアル自身が冪零元根基である. ところが, このイデアルを$N$乗しても0にはならない. 実際, $x_{N+1}^{N}\neq 0$が残るから. \qed
+\end{egans}
+
+
+Noether局所環も重要である.
+\begin{egprob}
+Noether局所環$(A,\maf{m})$に対して, 次は同値であることを示せ.
+\ben
+\item $\dim{A} = 0$
+\item $\maf{m} = \sqrt{0}$
+\item $\maf{m}^q = 0$なる自然数$q$がある.
+\item $A$はアルティン環.
+\een
+\end{egprob}
+\begin{egans}
+(i)$\implies$(ii): 冪零元根基が素イデアル共通部分なことと局所環であることから明らか.\\
+(ii)$\implies$ (iii): $\maf{m}$が有限生成なことからただちに分かる. \\
+(iv)$\implies$(i): アルティン整域は体だから. \\
+(iii)$\implies$(iv): $k=A/\maf{m}$とする. $(I_n)_{n}$を$A$のイデアル減少列とする. $M_r = \maf{m}^r/\maf{m}^{r+1}$は$k$ベクトル空間である($r\geq q$では0である). このとき\bolm{(I_n\cap \maf{m}^r)/(I_n\cap \maf{m}^{r+1})}は$\maf{m}^{r}/\maf{m}^{r+1}$の$k$部分ベクトル空間の($n$に
+関する)減少列をなす. $0\leq r\leq q$で$r$は有限通りであるから, 十分大きい$n_0$があり, $n\geq n_0$ならば$(I_n\cap \maf{m}^{r})/(I_n\cap \maf{m}^{r+1}) = (I_{n+1}\cap \maf{m}^{r})./(I_{n+1}\cap \maf{m}^{r+1})$である. $x\in I_n\cap \maf{m}^r$とするとき, ある$y\in I_{n+1}\cap \maf{m}^r$が存在して, $x-y \in I_n \cap \maf{m}^r$である. よって$I_{n}\cap \maf{m}^r \subset I_{n+1} +  (I_n\cap \maf{m}^r)$が従う. これがすべての$0\leq r\leq q$で成り立つので$I_n\cap \maf{m}^r\subset I_{n+1} + (I_n \cap \maf{m}^{q}) = I_{n+1}$となり$I_n - I_{n+1}$ ($n\geq n_0$)が得られた. \qed
+\end{egans}
+
+\begin{egprob}  \label{egprob:dimA_leq_m/m^2}
+$(A,\maf{m})$をNoether局所環, $k=A/\maf{m}$とする. $\dim{A} \leq \dim_{k}\maf{m}/\maf{m}^2$を示せ.
+\end{egprob}
+\begin{egans}
+$\maf{m}/\maf{m}^2 = kx_1 + \dots + kx_e$のとき$\maf{m} = Ax_1+\dots + Ax_e + \maf{m}^2$より, 中山の補題で$\maf{m}/ (Ax_1 + \dots + Ax_e) = 0$が言えるので$\maf{m}$は$e$元生成. よって標高定理から$\dim{A} = \mr{ht}(\maf{m}) \leq e$.\qed
+\end{egans}
+
+
+
+
+
+%---------------Artin----------------
+\subsection{Artin環}
+
+\tbox{
+\begin{prop}
+$A$を環とする。$A$が\tf{desscending chain condition}, すなわち「任意の$A$のイデアルの降鎖
+\[I_1\supset I_2\supset \cdots \]
+は停留する。つまり, ある番号$N$が存在して$I_N = I_{N+1} = \cdots$が成り立つ。」を満たすとき, $A$はArtin環という。Artin環について次が成り立つ。
+\ben
+\item Artin環の素イデアルは極大で, 素イデアルは有限個である。すなわち$\spec{A}$は離散位相空間である。
+\item (\tf{秋月の定理}) Artin環であることと, 次元0のNoether環であることは同値である。
+\item (\tf{Artin環の構造定理}) $A$はArtin局所環の積に同型であり, その積は一意的に定まる.
+\een
+\end{prop}
+}{title= ($\spadesuit$) Artin環まとめ}
+
+
+\begin{prac}
+$\mb{Z}$はNoether環であることを示せ。$\mb{Z}$はArtin環ではないことをArtin環の定義から示せ.
+\end{prac}
+\begin{prac} (有名問題)
+\tf{Artin整域は体であることを示せ.}
+\end{prac}
+
+\begin{rem}
+$\spec{A}$が離散的でも$A$がArtin環であるとは限らない. ただし$A$がNoetherであるという亜k底をつければこれは同値である. 非Noetherだが素イデアルが一つしかないような例としては$\mb{C}[X_1,\dots, X_n,\dots]/(X_1^2,\dots, X_n^2,\dots,)$などがある.
+\end{rem}
+
+\begin{egprob}
+Noether環$A$に関して, 次は同値であることを示せ.
+\ben
+\item $A$はArtin環
+\item $\spec{A}$は離散位相空間
+\een
+\end{egprob}
+\begin{egans}
+(1)$\implies$(2)はよい. (2)$\implies$(1)を示す.  離散位相なのですべての点は閉点であり, すべての素イデアルが極大イデアルとなる. $A$はNoetherであるから, 秋月の定理より$A$はArtin環である.
+\end{egans}
+
+
+次はなかなか不思議な問題かもしれない.
+\begin{egprob}
+\ben
+\item (\tf{有名}) $\spec{A}$がZariski位相でコンパクトであることを示せ.
+\item $\spec{A}$が離散位相を持つなら, 有限集合であることを示せ.
+\item 体$k$の可算直積環$\prod_{i=1}^{\infty} k$には$k\times k\times \dots k \times 0 \times k\times k\times \dots$以外の素イデアルが存在することを証明せよ.
+\een
+\end{egprob}
+
+
+
+
+\begin{egprob}
+$(A,\maf{m})$をNoether局所環とする. このとき, 次のいずれかが成り立つことを示せ.
+\ben
+\item すべての$k\geq 1$で$\maf{m}^k \neq \maf{m}^{k+1}$
+\item ある$k\geq 1$で$\maf{m}^{k} = 0$.
+\een
+また, (2)が成り立つことと$A$がArtin局所環であることは同値であることを示せ. 秋月の定理は認めてよい.
+\end{egprob}
+\begin{egans}
+(1)が成り立たないとせよ. もし$\maf{m}^k = \maf{m}^{k+1}$なら, 中山の補題($\maf{m}^k$は有限生成かつJacobson根基は$\maf{m}$)より$\maf{m}^{k} = 0$. このとき任意のイデアル$\maf{p}$は$\maf{p}\supset \maf{m}^k$で, $\maf{p}$が素だから$\maf{p}\supset \maf{m}$となる. よって$\maf{p} = \maf{m}$で$A$は0次元Noetherだから秋月の定理よりArtin. \par
+逆に任意のArtin局所環を考える. この場合$\maf{m}$は冪零元根基でもあり, 有限生成であるから$\maf{m}^n = (0)$となる$n$が取れる(生成元が消える冪乗を総和すればよい).\qed
+\end{egans}
+
+%M1
+次はできなくてもよいが, 証明が面白いので載せておく.
+\begin{egprob}
+Artin環がNoetherであることを用いずに, Artin環において冪零元根基$N=\mr{nil}A$は冪零であることを示せ.
+\end{egprob}
+\prf $N^k= N^{k+1} = \dots$なる$k$がある. $N^k \neq 0$と仮定する. $\maf{b}N^k\neq 0$を満たすすべてのイデアル$\maf{b}$の集合$\Sigma$は$N\in \Sigma$なので, Zornの補題から$\Sigma$の極小元$I$がある. $IN^k \neq 0$のとき, ある$x\in I$が存在して$xN^k \neq 0$なので(とくに$x\neq 0$かつ)極小性より$I=(x)$である. $xN^k \subset (x)$かつ$xN^k\in \Sigma$なので$xN^k=(x)$である. よって$x=xy$ ($y\in N^k$)と書ける. 一方, このとき$x=xy=xy^2=\dots = xy^n = \dots$で, $y\in N^k \subset N$だから$r$が十分大きいと$x = xy^{r} = 0$となり, $x$の選び方に反する.
+\qed
+
+
+\subsection{有限生成$k$代数}
+体上の有限生成代数は, アファイン多様体の座標環に現れる環であり非常に重要である. とくに, Hilbertの零点定理が重要である.
+
+\tbox{
+\begin{prop}
+\ben
+\item (\tf{Noether正規化定理}) $A$を体$k$上の有限生成代数とする. つまり, $A=k[t_1,\cdots, t_r]$と書けるとする. このとき$T_1,\cdots, T_d\in A$という代数的独立\footnote{いかなる多項式関係式も満足しないという関係. このとき$k[T_1,\cdots, T_d]$は$d$変数多項式環に同型.} な元が存在して, $k[T_1,\cdots, T_d] \subset A$が整拡大であるようにできる. (ただし$d\geq 0$であり, $d=0$の場合は$k[T_1,\cdots, T_d] = k$と考える. )
+\item (\tf{Zariski's Lemma}) $k$を体とする。有限生成$k$代数$A$の極大イデアルを$\maf{m}$とするとき, $A/\maf{m}$は$k$の有限次拡大体である。
+\item (\tf{Hilbeltの弱零点定理}) とくに, $k$が\tf{代数閉体}ならば多項式環$k[T_1,\cdots,T_n]$の極大イデアルは$(T_1-\alpha_1,\cdots, T_n-\alpha_n)$という形をしている.
+\item (\tf{Hilbertの強零点定理})$k$が\tf{代数閉体}であるとき, $\mac{I}\mac{Z}(I) = \sqrt{I}$
+\een
+\end{prop}
+}{title=有限生成$k$代数まとめ}
+
+どれも重要なのだが, \tf{正規化定理が一番強い.} それを例題として述べておく.
+\begin{egprob}
+$(1)\implies (2) \implies (3)$を示せ.
+\end{egprob}
+\begin{egans}
+(1)を仮定せよ. $A/\maf{m}$は体であり, 有限生成$k$代数である. よって$k[T_1,\cdots, T_d]\subset A/\maf{m}$は整拡大だが, 右が体なので左も体である. よって$d=0$なので$A/\maf{m}$は$k$上整. つまり$k$上代数的. 有限次なのは有限生成だから. よって(2)が成り立つ. \\
+(2)を仮定せよ. $k$を代数閉体とする. $k[T_1,\cdots, T_n]$の極大イデアル$\maf{m}$をとるとき, $k[T_1,\cdots, T_n]/\maf{m}$は$k$の有限次代数拡大である. しかし$k$は代数閉体なのでこれは$k$を超えることは出来ず, $k[T_1,\cdots, T_n]/\maf{m} = k$となる. よって, $T_i + \maf{m} = \alpha_i$なる$\alpha\in k$を見つけることができるので, $T_i - \alpha_i \in \maf{m}$である. よって$\maf{m}\supset (T_i - \alpha_i)_{1\leq i\leq n}$になる. 右は極大なので等号が成り立つ. よって示せた.\qed
+
+\begin{egprob}
+$A$が商体$K$を持つ整域で有限生成$k$代数であるとき, $\dim{A} = \mr{trdeg}_{k}K$であることを示せ. (スキーム論的に: $X$を整代数多様体とする. このとき任意の空でない部分代数多様体$U$に対して$\dim{X} = \mr{trdeg}_{k}K(X)$であることを示せ.)
+\end{egprob}
+\begin{egans}
+\aka{正規化補題から単射整準同型$k[T_1,\dots,T_d] \hookrightarrow A$が存在.} $k[T_1,\dots,T_d]$の次元は$d$で, 整拡大の間で次元は不変なので(\ref{egprob:dimA_dimB_integral_ext}参照), $d=\dim{A}$である. この準同型を零イデアルで局所化して誘導されるものを考えると$k(T_1,\dots, T_n) \hookrightarrow K$を得る. これも体の間の単射整準同型であり, したがって代数拡大とみなせる. よって超越次数は$d$であるから示せた. \qed
+\end{egans}
+
+
+
+
+\begin{egprob}
+$\sqrt{I} = \bigcap_{I\subset \maf{m}} \maf{m}$を示せ.
+\end{egprob}
+次はおぼえておくとよい.
+\tbox{
+\begin{egprob} \label{egprob:fg-k-alg-closedpt-to-closedpt}
+$\phi:A\to B$を有限生成$k$代数の間の射とするとき, $\maf{n}\subset B$が極大ならば$\phi^{-1}(\maf{n})$も極大であることを示せ.
+\end{egprob}
+}{}
+\begin{egans}
+$\phi$は単射$A/\phi^{-1}(\maf{n})\to B/\maf{n}$を引き起こし, $B/\maf{n}$は$k$の有限次拡大. とくに$k$上の代数拡大であり, $k\subset A/\phi^{-1}(\maf{n})$とみなせるので$B/\maf{n}$は$A/\phi^{-1}(\maf{n})$上整である. よって$B/\maf{n}$が体だから$A/\phi^{-1}(\maf{n})$も体. \qed
+\end{egans}
+
+
+\end{egans}
+次は専門題からの出題である.
+\begin{egprob} (H29-専門2)
+$K$を標数2でない代数閉体, $a\in K$とし
+\[R_a = K[X,Y]/(X^2-Y^2-X-Y-a)\]
+とおく.
+\ben
+\item $a=0$の場合に$R_a$の極大イデアル$\maf{m}$に対し$\dim_{K}\maf{m}/\maf{m}^2$を計算せよ. また, $\maf{m}$が単項イデアルになることはあるか.
+\item $a\neq 0$の場合に上の問題を考えよ.
+\een
+\end{egprob}
+\begin{screen}
+$K$が代数閉体なので, $K=\mb{C}$の場合が基本である. $R_a$は曲線$X^2 - Y^2 - X - Y - a = 0$の上の関数環である. この曲線はよく見ると双曲線であるが, 中心がずれている. まずは, 平行移動するなどしてこの曲線を\tf{扱いやすい形に変える}ことが重要だ. 代数閉体なので$R_a$の極大イデアルは\tf{零点定理から曲線上の点に対応する.}  $\dim_{K}\maf{m}/\maf{m}^2$は, 代数幾何になじみがあれば答えが予測できるのだが, \tf{曲線の接空間の次元}になる.
+\end{screen}
+\begin{egans}
+標数が2でないので$2^{-1}\in K$. よって, 次のような同型が作れる.
+\bealn{
+R_a &= k[X,Y]/(X^2-Y^2-X-Y-a) \\
+&=k[X,Y]/((X-2^{-1})^2 - (Y+2^{-1})^2 - a) \\
+&=k[T_1,T_2]/(T_1^2 - T_2^2 - a)\quad (T_1= X-2^{-1}, T_2 = Y+2^{-1})\\
+&=k[T_1,T_2]/((T_1-T_2)(T_1+T_2) - a) \\
+&\cong k[S_1,S_2]/(S_1S_2 - a)\quad (T_1+T_2 = S_1, T_1-T_2 = S_2)
+}
+$R_a$を最後の環と同一視する. $K$は代数閉体なので, 零点定理から$R_a$の極大イデアルは$xy = a$上の点$(x,y)\in K^2$と全単射対応する:
+\[ (S_1-x, S_2-y)/(S_1S_2-a) \leftrightarrow (x,y)\in \set{xy=a}\subset K^2 \]
+左を$\maf{m}$とおき, $S_{1,x} = S_1-x$, $S_{2,y} = S_2-y$とおく. $S_1S_2 - a = S_{1,x}S_{2,y} + xS_{2,y} + yS_{1,x}$である. $K$ベクトル空間として
+\bealn{
+\maf{m}/\maf{m}^2 &\cong (S_{1,x}, S_{2,y})/(S_{1,x}^2, S_{1,x}S_{2,y}, S_{2,y}^2, S_1S_2 - a)\\
+&= (S_{1,x}, S_{2,y})/(S_{1,x}^2, S_{1,x}S_{2,y}, S_{2,y}^2, xS_{2,y}+yS_{1,x})\\
+}
+最後のベクトル空間で$f\in (S_{1,x},S_{2,y})$の類を$[f]$で表すと,
+\bealn{
+&= (S_{1,x}, S_{2,y})/(S_{1,x}^2, S_{1,x}S_{2,y}, S_{2,y}^2, xS_{2,y}+yS_{1,x})\\
+&= K[S_{1,x}] + K[S_{2,y}] \neq 0
+}
+\\
+となる. ここまでくれば, $[S_{1,x}]$と$[S_{2,y}]$が一次独立かどうかで$\dim_{K}\maf{m}/\maf{m}^2$が1か2かが決まる. 剰余加群の分母に$xS_{2,y} + yS_{1,x}$があるので, $x[S_{2,y}] + y[S_{1,x}] = 0$である. したがって, $(x,y)\neq (0,0)$なら$[S_{1,x}]$と$[S_{2,y}]$は一次従属であり, 逆に$(x,y)=(0,0)$なら一次独立である. $(x,y) = (0,0)$となるのは$a=0$のときだけなので, $\dim_{K}\maf{m}/\maf{m}^2$は以下の通り\footnote{曲線$xy=a$を$\mb{R}$上で図示すれば, 接空間の次元と一致することが確かめられる. }.
+\[
+\dim_{K}\maf{m}/\maf{m}^2 =
+\begin{cases}
+2\quad (a=0, x=y=0)\\
+1\quad (otherwise)
+\end{cases}
+\]
+%%%単項イデアル
+$a=x=y=0$の場合, $\maf{m} = (s_1,s_2)$である($s_i = S_i \bmod{(S_1S_2)}$). もし$\maf{m} = (f(s_1,s_2))$となるとしよう. $f(s_1,s_2) = c + s_1f(s_1) + s_2f_2(s_2)$と一意に表せるが, 仮定より$c=0$が分かる. 条件より$(b + g_1(s_1)s_1 + g_2(s_2)s_2)(s_1f_1(s_1) + s_2f_2(s_2)) = s_1$となる$b\in k$, $g_1(s_1)\in k[s_1]$, $g_2(s_2)\in k[s_2]$が存在する. 右辺は$0+s_1\cdot 1 + s_2\cdot 0$だと思える. この形の表示は一意であることから考えれば, $b\neq 0$, $bf_1 = 1$ $f_1g_1 = 0$, $f_2g_2 = 0$が分かり, そこから$f_1\in k^{\times}$を得る. 同様に$s_2\in (f(s_1,s_2))$の表す式を書くことで$f_2\in k^{\times}$を得る. すると$f_ig_i = 0$に戻って$g_i = 0$を得るが, $bf_1 s_1 + bf_2s_2 = s_1$となるが, $bf_2 \neq 0$なのでおかしい. よって単項イデアルにならない. \par
+それ以外の場合, $\maf{m} = (s_1 - x, s_2 - y)$である. $s_i := S_i \bmod{(S_1S_2 - a)}$である.\par
+まず$a\neq 0$の場合は, 次の式から$\maf{m}$が単項イデアルになると分かる.
+\[(-a)^{-1} xs_1(s_2 - y) =(-a)^{-1}(xa - as_1) = s_1 - x\]
+最後に$a=0$の場合は, $x,y$のどちらか一方が0であり, $x\neq 0$なら次の式から$\maf{m} = (s_2)$が分かる.
+\[s_2(s_1 - x) = - x s_2\]
+\end{egans}
+
+\begin{rem}
+$\set{s_1s_2 = 0}$上の関数と見て考察するというのも考えられるが, これは標数0でない場合には危険である. $0$でない多項式がどこかの点で0でない値を取るとは限らないからだ.
+\end{rem}
+
+\begin{tips} より一般に$R$が代数曲線の座標環で$a$が曲線の点としよう. $R_{a}$の極大イデアル$\maf{m}$で局所化$A = (R_a)_{\maf{m}_{a}}$が考えられるが, このとき$\maf{m}A$が$A$の極大イデアルであり, $k=R_a/\maf{m}$ベクトル空間として$\maf{m}A / \maf{m}^2A \cong \maf{m}/\maf{m}^2$である. このときの$\maf{m}A/\maf{m}^2A$の$k$上の双対空間をZariski接空間といい, 一般に\tf{曲線の非特異点では$\dim{A} = \dim{\maf{m}/\maf{m}^2}$}が成り立つ.  このときの$\maf{m}A$が\tf{何項で生成されるか}という情報は実は重要で, 非特異点$a$の局所環$A$では$\maf{m}A$が$d=\dim{A}$項生成になるというのがある. いまは曲線だから非特異点で$d=1$であり, $\maf{m}A$は単項生成になる. $\maf{m}$と$\maf{m}A$はもしかしたら違うかもしれないが\footnote{正確な情報求む.}, こういう背景であたりをつけることができる. 逆に特異点では$\dim{A} < \dim{\maf{m}/\maf{m}^2}$となり, $\maf{m}$が$d=\dim{A}$項より多くないと生成できないことがある.
+\end{tips}
+
+\tbox{
+\begin{prac} (仮想面接問題)\\
+$A$を$d$次元正則局所環であるとき, $\maf{m}$は$d$個の元で生成できることを示せ.  (\tf{Hint:中山の補題})
+\end{prac}
+}{}
+% 正則局所環なので$\dim_{k}\maf{m}/\maf{m}^2 = d = \dim{A}$である. よって$\maf{m}/\maf{m}^2 = kx_1+\dots + kx_d$となる$x_1,\dots, x_d\in \maf{m}/\maf{m}^2$がある. $x_i$が$y_i \bmod{\maf{m}^2}$ ($y_i \in \maf{m}$)であるとすると, $\maf{m} = Ay_1+\dots + Ay_d + \maf{m}^2$が集合論的に示せる. このとき, $M = Ay_1+\dots + Ay_d$として$\maf{m}/M = \maf{m}(\maf{m}/M)$であり$A$は局所環だから中山の補題より$\maf{m} = M$である. \qed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+これから述べる環は発展的である.
+
+
+
+\subsection{Dedekind環}
+
+\begin{prop} (\tf{Dedekind環まとめ})\\
+1次元のNoether整閉整域を\tf{Dedekind環}という。Dedekind環$A$について次が成り立つ。
+\ben
+\item 素イデアル分解が可能である.
+\item 任意の素イデアル$\maf{p}$に対して$A_{\maf{p}}$は離散付値環である.
+\een
+\end{prop}
+こと代数的整数論では整数環を扱う.
+\begin{theo}
+代数体$K$の整数環$\mac{O}_K$はDedekind環である.
+\end{theo}
+
+\begin{recall} $d\neq 0$が平方因子を持たない整数とする.
+$\mb{Q}(\sqrt{d})$の整数環は$d\equiv 1\pmod{4}$で$\mb{Z}[(\sqrt{d}+1)/2]$で$d\equiv 2,3\pmod{4}$なら$\mb{Z}[\sqrt{d}]$.
+\end{recall}
+
+素イデアル分解が口頭試問で問われる可能性は高いだろう. 「上にある素イデアル」を求めるのが筋である.
+
+
+
+\begin{egprob}
+$\mb{Z}[\sqrt{-5}]$において, $(6)$の素イデアル分解は?
+\end{egprob}
+
+\begin{egans}
+$(2),(3)$を分解して得られる. $\mb{Z}[\sqrt{-5}]/(2)\cong \mb{F}_{2}[X]/((X-1)^2)$より$\maf{p}_{2}=(2,1+\sqrt{-5})$は$\maf{p}_{2}^2 = (2)$. $\mb{Z}[\sqrt{-5}]/(3)\cong \mb{F}_{3}[X]/(X^2-1)$より$\maf{p}_{3,1} = (3,\sqrt{-5} + 1)$, $\maf{p}_{3,2} = (3,\sqrt{-5}-1)$が$\maf{p}_{3,1}\maf{p}_{3,2} = (3)$. よって$(6) = \maf{p}_{2}^2\maf{p}_{3,1}\maf{p}_{3,2}$.
+\end{egans}
+
+\begin{recall}
+\tf{$\mb{Z}[\sqrt{-5}]$はUFDでない整閉整域の例. }
+\end{recall}
+
+\subsection{付値環} %M1に追加
+院試では見たことがないが, \cite{atimac}の5章にある.
+\begin{defn}
+整域$B$と商体$K$が, 「$x\in K$なら$x\in B$か$x^{-1}\in B$のどちらか少なくとも一方が成立する」を満たすとき, $B$を\tf{付値環}という.
+\end{defn}
+
+\begin{prop} 付値環$B$に対し,次が成り立つ.
+\ben
+\item $B$は局所整閉整域である.
+\een
+\end{prop}
+\prf
+(1): \\
+\fbox{局所環であること}$\maf{m} = B-B^{\times}$がイデアルをなすことを示せばよい(単元を含まない最大の集合なので明らかに唯一の極大イデアルである). $a\in B, x\in \maf{m}\implies ax\in \mac{m}$は簡単. $x,y\in \maf{m}$のとき, $x+y = x(1+x^{-1}y) = y(xy^{-1} + 1)$に注意し, $xy^{-1}$か$x^{-1}y$が$B$に属すことに注意すれば, $x+y\in\maf{m}$がわかる. \\
+\fbox{整閉整域であること} \\
+$x\in K$を$B$上整とする. $x\notin B$だとせよ. このとき$x^{-1}\in B$である. 整等式
+\[x^n + b_1x^{n-1} + \dots + b_n = 0\]
+に$x^{1-n}$をかけると$x\in B$が分かるがこれは矛盾. \\
+(2):
+
+
+
+
+\subsection{正則局所環}
+代数幾何で正則性を定義するにあたって重要な環である.
+\tbox{
+\begin{defn}
+$A$が正則局所環であるとは, Noether局所環$(A,\maf{m})$であって, $k=A/\maf{m}$とするとき, Noether局所環では一般に成り立つ「$\dim_{k} \maf{m}/\maf{m}^2 \geq \dim{A}$」の等号が成り立つような環のことをいう. $d$次元正則局所環$(A,\maf{m})$について, 次が成り立つ.
+\ben
+\item \tf{$\maf{m}$は$d$個の元で生成される. } また, これがNoether局所環に対する, $d$次元正則局所環であることと同値な条件である.
+\item $A$は整域である.
+\item $A$はUFDである. (\tf{これはかなり難しい命題})
+\item $\maf{p}\in\spec{A}$に対し$A_{\maf{p}}$も正則.
+\een
+\end{defn}
+}{title=$(\spadesuit\spadesuit)$ 正則局所環}
+
+
+
+
+
+
+Noether環の次元論については様々なことが知られている. 証明はしない.
+\begin{prop} (\cite{liu}2.5.2節などを参照)
+$A$をNoether環とする.
+\ben
+\item $\maf{m}$が極大イデアルで$\maf{n}$が$A[T_1,\dots, T_n]$の極大イデアルで$\maf{n}\cap A = \maf{m}$を満たすものとする. このとき\bolm{\mr{ht}(\maf{n}) = \mr{ht}(\maf{m}) + n}
+\item \bolm{\dim{A[T_1,\dots, T_n] = \dim{A} + n}}
+\een
+\end{prop}
+
+\begin{eg}
+\ben
+\item $\maf{n}$を$\mb{Z}[T_1,\dots, T_n]$の極大イデアルとする. 実は$\maf{n}$はある素数を含むので$\mr{ht}(\maf{n}) = n+1$.
+\item $\maf{m}$を$k[T_1,\dots, T_n]$ ($k$は体) の極大イデアルとする. $\maf{m}\cap k = (0)$なので$\mr{ht}(\maf{m}) = n$であるから$\dim{A_{\maf{m}}} = n$である.  また, $\maf{m}$は$n$元で生成されることが知られているので$\maf{m}A_{\maf{m}}$は$n$個の元で生成される. よって$\maf{m}A_{\maf{m}}/\maf{m}^2A_{\maf{m}}$ は$A_{\maf{m}}/\maf{m}A_{\maf{m}} = k$ベクトル空間として$n = \dim{A_{\maf{m}}}$個の元で生成され, (\ref{egprob:dimA_leq_m/m^2})により基底にもなっていなければならない. よって$\dim{A_{\maf{m}}} = \dim_{k}\maf{m}A_{\maf{m}}/\maf{m}^2A_{\maf{m}}$が成り立つので, $A_{\maf{m}}$は\tf{正則局所環}である.
+\een
+\end{eg}
+
+
+
+
+
+\subsection{離散付値環}
+代数曲線の非特異点の局所環として現れるのが離散付値環であり, その極大イデアルは一意化元の役割を果たす. 雰囲気としてはかなり, リーマン面の関数環の局所環のように思える. 1次元正則局所環なので, 正則局所環の性質も持っているが, 離散付値環はその次元の小ささから比較的扱いやすい.
+
+\tbox{
+\begin{defn}
+1次元のNoether整閉整域で局所環であるもの, あるいは「離散付値」の付置環であるものを離散付値環(DVR)という. DVR$(A,\maf{m})$に対し, 次が成り立つ.
+\ben
+\item
+\item \tf{1次元正則局所環と離散付値環は同じである. }とくに, $\maf{m}$が1つの元$t$で生成される.
+\item $A$の任意の0でないイデアルは$(t^n)$ ($n\geq 0$) の形に表せる. とくに, \tf{DVRはPIDである.}
+\een
+\end{defn}
+}{title= ($\spadesuit\spadesuit$)DVRまとめ}
+
+\begin{eg}
+$\mb{Z}_{(p)}$は$p\mb{Z}_{(p)}$を極大イデアルとする離散付値環である. 実際, 1次元であることはよい. Noether, 整閉も局所化で不変だからよい. 任意のイデアルは$p^n\mb{Z}_{(p)}$の形で表せる. 要は, 分子が$p$で何回割り切れるかでイデアルが分類できる.
+\end{eg}
+
+
+\begin{egprob} (H12数学II-2) \label{prob:H12-II-2}
+離散付値環$(R,\maf{m})$とその一意化元$t\in \maf{m}$を考える. (この問での離散付値環の定義は1次元局所Noether整閉整域である) $K=\mr{Frac}R$とする.
+\ben
+\item 自然数$n$に対し$X^n-t$は$K[X]$で既約であることを示せ.
+\item $R[X]/(X^n-t)R[X]$は離散付値環になることを示せ.
+\een
+\end{egprob}
+\begin{egans}
+(1): DVRはUFDで, $t$は素元で, $X^n - t$はアイゼンシュタイン多項式なので既約. \\
+\fbox{ちゃんと書きたい場合} $X^n - t$が$K$上可約であるとする. $X^n - t = f(X)g(X)$とし, $f,g\in K[x]$はモニックかつ次数は1以上とする. $R$はUFDなので, 最小公倍元が定義できる. $f,g$の係数の分母の最小公倍元をそれぞれ$a,b$とすると, $af(X)$と$bg(X)
+$は$R$の原始多項式であり, $ab(X^n - t) = (af(X))(bg(X))$である. 右辺は\tf{原始多項式の積だからまた原始多項式}であり, $ab$は素元を持ち得ない. よって$ab\in R^{\times}$だから, $a,b\in R^{\times}$であり, もともと$f,g\in R[X]$であることが分かる (よって$X^n-t$は$R[X]$でも可約). このとき$X^n \equiv f(X)g(X) \bmod{(t)}$である. $f(X) \bmod{t},g(X)\bmod{t} \in (R/tR)[X]$の最低次の部分に注目すれば, $f(X),g(X)$はそれぞれ, 最高次以外の項が$t$で割れることが分かる. $f,g$は一次以上だから, とくに定数項がそれぞれ$t$で割れるが, これは$X^n-t$の定数項が$t$であることに反する. よって既約である. \qed \\
+(2): $A=R[X]/(X^n-t)$とする. $A$がNoetherは自明. $R[X]$はUFDであるから, $R[X]$の既約元は素元でもあり, したがって$A$は整域である. \\
+\fbox{整閉性} $L=\mr{Frac}A = K(u)$ ($u^n = t$)である. $u$は$R$上整($K$上代数的)なので$L=K[u]$である. (1)より$[L:K] = n$である. $L$の元は$\alpha = \sum_{j=0}^{n-1} a_jt^{n_j} u^j$と書ける. ただし$a_j\in R, n_j\in \mb{Z}$.  いまこの元が$A=R[u]$上整であるとする(予想: $\alpha \in A$). $n_j$の最小値を$m$とし, $n_{i_1},\dots, n_{i_r} = m$であるとする. \ao{仮に$m<0$であったとせよ.}
+$\alpha$に$t^{-m-1}\in R$をかければ, $n_j > m$であるような$u^j$の係数が$R$の元になり, $n_j = m$であるような$u^j$の係数は$\dfrac{a_j}{t}$になる. $\alpha t^{-m-1}$もまた$R[u]$上整なので, $R[u]$の元になった部分を差し引くことで, $\beta:=\sum_{j=1}^{r} \dfrac{a_{i_j}}{t}u^j\in L$が$R[u]$上整である. $i_1<\dots < i_r$であるようにする. \ao{$\beta$に$u^{n-1-i_1}$回掛けることで, $\dfrac{a_{i_1}}{t}u^{n-1}$が$R[u]$上整であることが分かる. }これを$n$乗して$\gamma:=\dfrac{a_{i_1}^n}{t^n}u^{n(n-1)} = \dfrac{a_{i_1}^n}{t}$が$R[u]$上整である. $R\subset R[u]$は整拡大だから$\gamma\in K$は$R$上整である. しかし$\gamma$は明らかに$R$に属しておらず, $R$が整閉であることに反する. したがって$m\geq 0$なので$A$が整閉であることが示された. \\
+\fbox{局所環であること} $R\subset A = R[u]$は整拡大であるから, $f:\spec{A}\to \spec{R}$は閉点を閉点に移す($\because R/f(\maf{p})\subset A/\maf{p}$は整拡大なので, $R/f(\maf{p})$が体$\iff$ $A/\maf{p}$が体). いま$A$の極大イデアル$\maf{m}$を任意に取る. $f(\maf{m}) = \maf{m}\cap R$は$\spec{R}$の閉点だから$f(\maf{m}) = tR$である.  よって$\maf{m}$は一意化元$t = u^n$を含むから, $u\in \maf{m}$である. よって $\maf{m} \supset uA$が従う. $uA$は実は極大イデアルである. 実際,
+\[A/uA \cong \dfrac{R[X]}{(X^n-t)} / \dfrac{(X,X^n-t)}{(X^n-t)} \cong R[X]/(X,t) \cong R/tR\]
+は体であるからだ. よって$\maf{m} = uA$となり, $A$が局所環であることが示せた. \\
+\fbox{1次元であること} $R\subset A$が整拡大であることを用いれば, $\dim{A} = \dim{R} = 1$なのでよい.\\
+\fbox{1次元であること(ちゃんとやる場合)} 例の「整拡大ではファイバーの点同士に埋没がない」の証明を真似る. $\dim{A} \geq 1$はよいだろう. $R\subset A$は整拡大である. $\maf{p}\in\spec{A}$という極大でない素イデアルを任意に取る. $R\subset A$が整拡大であることから, $f(\maf{p})$は閉点にはならない. よって$f(\maf{p}) = 0R$である. ここで$R\subset A$が整拡大なので$R_{0R} = K\subset A_{\maf{p}}$も整拡大. $K$は体だから$A_{\maf{p}}$も体だが, このとき$\maf{p}A_{\maf{p}} = 0 = 0A_{\maf{p}}$である. よって局所化における素イデアル対応定理から$\maf{p} = 0A$を得る. したがって次元は1である. \qed
+
+\end{egans}
+
+
+\subsection{Cohen-Macaulay環}
+可換環論で最も重要と言われているが, アティマクにも載っていない. 某IUTの教授が\kenten{アティマクからの質問として}CM環について聞いてきたという三次情報がある.
+
+\begin{defn}
+Cohen-Macauley環
+\end{defn}
+
+
+
+
+
+
+
+\subsection{カテナリー環}
+素イデアルの減少列
+\[\maf{p}_0\supsetneq \maf{p}_1\supsetneq \dots \supsetneq \maf{p}_n\]
+\[\maf{q}_{0} \supsetneq \maf{q}_1\supsetneq  \dots \supsetneq \maf{q}_m\]
+に関して, $\maf{p}_0 - \maf{q}_0$, $\maf{p}_n = \maf{q}_m$かつ$\maf{p}_i$が$\maf{q}_j$のどれかに等しいとき, 下の列は上の列の\tf{細分}であるという.
+
+\begin{prop} $A$の任意の素イデアル$\maf{p}\subset \maf{q}$に対し, $\maf{p}$から始まり$\maf{q}$に終わる素イデアル減少列であって細分のできないようなものの長さが同じ(ただしその長さは$\maf{p},\maf{q}$に依存)であるとき,
+\end{prop}
+
+
+
+
+
+
+\subsection{演習問題}
+
+\subsubsection{Level A}
+
+\subsubsection{Level B}
+\begin{prob}
+Noether局所環$(A,\maf{m})$について, $\bigcap_{n\geq 0} \maf{m}^n = 0$を示せ.
+\end{prob}
+
+
+\begin{prob} (H1数学II-1)
+単位的可換環$R$に関する次の命題1,2,3のおのおのについて, 次の問に答えよ.
+\ben
+\item 命題が正しいかどうか, 理由をつけて答えよ.
+\item 命題が正しくない場合には, $R$に適当な条件をつけ加えて正しい命題にし, それを証明せよ.
+\een
+\begin{enumerate}[label=命題\arabic*]
+\item $a_1,\dots, a_n\in R$, $f(x) = x^n + a_1x^{n-1} + \dots + a_n$に対し, $\set{c\in R\mid f(c) = 0}$の元数は$n$以内である.
+\item $a\in R$が$R$の拡大環の中に逆元$a^{-1}$を持っていて, さらに
+$R[a^{-1}]$が$R$加群として有限生成であれば$a^{-1}\in R$.
+\item $R$上の一変数多項式環$R[x]$において逆元をもつ元は$R$の元に限る.
+\end{enumerate}
+\end{prob}
+
+
+
+\subsubsection{Level C}
+
+
+\subsubsection{Hint・Answer}
+
+
+\begin{probans}
+Artin-Reesの補題から中山の補題. なお, $\maf{m}$を真のイデアルにしても成り立つ.
+\end{probans}
+
+
+\begin{probans}
+(1): \fbox{命題1}整域ではない$R$に対してこれは成り立たない. $ab=0$, $a,b\neq 0$として, $f(x) = x(x+b-a)$とする. これは$x=0,a,a-b$を根に持つが, $0\neq a-b$でないならこれは3種類になる. そのような整域はあるから, 正しくない. \\
+\fbox{命題2} $a^{-1}$が$R$上整である. 整等式を立てれば良い. 正しい. \\
+\fbox{命題3} 偽. $R$が被約でないとき, $a^N = 0$なる$a$に対し$aX - 1$は可逆(等比級数を考えよ).\\
+(2): \fbox{命題1}$R$が整域のときに正しい. 次数に関する帰納法と除法を考えれば良い. \\
+\fbox{命題3} アティマクの演習を復習しよう. $f(x)$が可逆であるための必要十分条件は, $a_0$が可逆でかつ$a_i$ ($i\geq 1$)が冪零であること. 単元と冪零元の和は単元であることに注意.
+\end{probans}
+
+
+
+
+
+\newpage

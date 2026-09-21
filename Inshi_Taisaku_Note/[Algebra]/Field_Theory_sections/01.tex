@@ -1,0 +1,285 @@
+\section{基礎事項}
+\subsection{既約多項式・最小多項式}
+
+\tf{参考}
+\ben
+\item 雪江整数論1, 8章2節, 241p~
+\een
+
+
+体拡大の次数を求めるには, 多項式の既約性を調べることがしばしば必要である.
+
+次は高校数学でも知られている可約判定である.
+\begin{prop}
+$f(x) = \sum_{i=0}^{n} a_i x^{n}\in \mb{Z}[x]$ ($a_n\neq 0$)とする.このとき, $f(x)$の有理数の根はかならず
+\[\pm \dfrac{(\text{$a_0$の約数})}{\text{$a_n$の約数}}\]
+の形をしている.とくに$f$がモニック($a_n=1$)ならば, 有理数根は必ず整数である.
+\end{prop}
+\lefba{
+\begin{prop} (\tf{Eisensteinの既約判定法})
+$A$をUFD(たとえば$\mb{Z}, \mb{C}[X,Y]$など), $p$を素元として.  $f(T)\in A[T]$が次の条件を満たすとする:
+\[f(T) = T^n + a_{n-1}T^{n-1} + \dots + a_1 T + a_0\]
+と表したとき, $p|a_i$ ($0\leq i\leq n-1$)かつ$p^2\not | a_0$. \par
+このとき, $f(T)$は$A[T]$において既約である.
+\end{prop}
+}
+上は便利だが, 万能ではない.次の方法があることも覚えておくと良い.
+\begin{prop}
+$A$を正規環, $K$を$A$の商体, $\maf{p}\subset A$を素イデアル, $f(x) \in A[x]$をモニック, $\deg{f(x)} = n$とする.このとき, $f(x)$の係数を$\maf{p}$を法として考えた多項式$\ovl{f}(x)$が$(A/\maf{p})[x]$で$m<n$次の因子を持たなければ, $f(x)$も$m$次の因子を持たない.とくに$\ovl{f}(x)$が$A/\maf{p}$の商体上既約なら$f(x)$も既約である.
+\end{prop}
+\begin{cor}
+$p$を素数, $f(x)\in \mb{Z}[x]$をモニック, $\deg{f(x)} = n$とする.$f(x)$の係数を$\bmod{p}$した多項式$\ovl{f}(x)$が$\mb{F}_{p}[x]$で$m<n$次の因子を持たなければ, $f(x)$も$m$次の因子を持たない.とくに$\ovl{f}(x)$が$\mb{F}_{p}$上既約なら$f(x)$も既約である.
+\end{cor}
+次も重要な補題である.$\mb{Z}$の範囲のみで済むというのが非常に効果を発揮する場面がよくある.
+\tbox{
+\begin{prop} $A$を\tf{UFD}, $f,g\in A[x]$を原始多項式, $K$を$A$の商体とする.
+\ben
+\item $fg$も原始多項式である.
+\item $f$が$A[x]$で既約$\iff$ $f$が$K[x]$で既約.
+\een
+\end{prop}
+}{title=ガウスの補題}
+\begin{eg} ガウスの補題により, 既約性が保証される範囲を広げることができる.
+\ben
+\item $A=\mb{Z}$のとき$K=\mb{Q}$である. $f(x) = x^2 - 2\in \mb{Z}[x]$は原始多項式である.  $f(x)$が$\mb{Z}[x]$で既約であることを示す. 可約なら $f(x) = (ax+b)(cx+d)$と書けるはずだが, $ac = 1$より$a=c=\pm 1$で, $a=c=1$としてもよい. このとき$b+d=0$で, $bd = -b^2 = -2$となるが, このような$b$は無いので矛盾. したがって$f(x)$は$\mb{Z}[x]$において既約であり, ガウスの補題から自動的に$\mb{Q}[x]$でも既約であることが従う.
+\item $A=\mb{C}[X]$のとき$K=\mb{C}(X)$である. $\mb{C}[X,Y]$を$\mb{C}[X][Y]$と見る. $f(Y) = Y^2 - X^3$は$A[Y]$において既約である(上と同様にせよ). よって, $f(Y)$は$\mb{C}(X)[Y]$において既約である. すなわち, いかなる有理関数$p(X),q(X),r(X),s(X)$を用いても$(p(X)Y+q(X))(r(X)Y + s(X))$と表すことは不可能である.
+\een
+\end{eg}
+
+\tbox{
+\begin{prop}
+$A$をUFD, $\mr{Frac}A = K$とする. $\alpha \in K$の$K$上最小多項式を
+\[F(T) = T^m + k_1T^{m-1} + \dots + k_{m-1}T + k_m\]
+とする($k_i\in K$). さらに$\alpha$が$A$上整で, その整等式の中で最小次数のものを
+\[G(T) = T^n + a_1T^{n-1} + \dots + a_{n-1}T + a_n\]
+とする($a_i\in A$). このとき, \bolm{F(T) = G(T)}である.
+\end{prop}
+}{title=整元の最小多項式は環のほうの係数で取れる}
+\prf $F$は$K$上の最小多項式であるから, $K[T]$において $F(T)|G(T)$である. $G(T) = F(T)H(T)$と表す($H(T) \in K[T]$). $F,H$の係数の最小公倍数を払って原始多項式$\witi{F}(T), \witi{H}(T)$を得るとする. $a,b\in A$に対して, $\witi{F}(T) = aF(T)$, $\witi{H}(T) = bH(T)$とおく. このとき$ab\cdot G(T) = \witi{F}(T)\witi{H}(T)$で, 右辺は原始多項式なので左辺は原始多項式. $G(T)$はモニックなので原始的であり, $ab\in A^{\times}$である. よって$a,b\in A^{\times}$である. \ao{よって, もともと$F,H$の分母は無かった. }したがって$F,H\in A[T]$であり, とくに$F$は$A$係数. $G\in A[T]$の最小性より$G(T) | F(T)$であり, ともにモニックなので $F(T) = G(T)$が従う
+
+\qed
+
+
+
+
+
+\begin{prac}
+$k$を体とする. $k[X,Y]/(Y^2 - X^3)$が整域であることを示せ. (\tf{Hint}: $Y^2 - X^3$が"既約元"であることを示せば, 素元となるので素イデアルによる剰余環と見れる. )
+\end{prac}
+
+
+\begin{prac} (京大の\tf{学部入試})\\
+有理数係数多項式$P(x)$が$P(\sqrt[3]{2})=0$を満たすならば, $P(x)$は$x^3-2$で割り切れることを証明せよ.
+\end{prac}
+
+\begin{egprob}
+次の多項式が$\mb{Q}$上既約であることを示せ.
+\ben
+\item $f(x) = x^{p-1} + x^{p-2} + \cdots + x + 1$ ($p$は素数)
+\item $f(x) = x^4 - x - 1$
+\item $f(x) = x^4 + x + 1$
+\een
+\end{egprob}
+\begin{egprob}
+$x=t+1$とおく.$(x-1)f(x) = x^{p} - 1$から$tf(x) = (t+1)^{p} - 1$である.右辺は$t(t^{p-1} + pt^{p-2} + \cdots + {}_{p}\mr{C}_{2} t^2 + p)$だから$f(x) = t^{p-1} + p t^{p-2} + \cdots + p$でEisensteinの既約判定法からこれは$t$の多項式とみて既約である.よって$x$の多項式とみても既約である.\qed
+\end{egprob}
+
+\begin{prob}
+次の多項式が$\mb{Q}$上既約であることを示せ.
+\ben
+\item $f(x) = x^3 - 105x^2 + 147x + 63 $
+\item $f(x) = x^4 + x^2 - x  + 2$
+\item $f(x) = x^5 - x - 1$
+\een
+\end{prob}
+\begin{prob}
+\chatgpthint{問題文が未記入です。}
+\end{prob}
+
+
+根の最小多項式を求める場面もあります. このとき, 試行錯誤によって多項式を推測せずに求める方法があります.
+\begin{egprob} (\href{https://www.math.kyoto-u.ac.jp/~yukie/Alg-II-final.pdf}{代数学II期末試験(年度不詳)})
+$f(x) = x^3 - 2x + 2$の一つの根を$\alpha$とする. $\beta:= \alpha^2 + \alpha$の最小多項式を求めよ.
+\end{egprob}
+\begin{egans} $K=\mb{Q}(\alpha)$とする. $f$はEis多項式なので既約. よって$[K:\mb{Q}] = 3$. $\set{1,\alpha,\alpha^2}$は$K$の$\mb{Q}$上の基底. この基底に関し, $\beta$倍写像の行列表示を求める.
+\bealn{
+\beta \alpha &= \alpha^3 + \alpha^2 = \alpha^2 + 2\alpha - 2 \\
+\beta \alpha^2 &= 2\alpha^2 -2
+}
+より, $\beta$倍写像は
+\[
+\bmat{
+0&-2&-2 \\
+1&2&0\\
+1&1&2
+}
+\]
+であり, これの特性多項式が$\beta$を根に持つはずである. 計算するとそては$x^3 - 4x^2 + 8x - 6$になり, Eis多項式である. よってこれが答え.
+\end{egans}
+
+たまに次も使える.
+
+
+\begin{prop}
+$f(x)$を$K$上の分離多項式とする. $f(x)$の根を$\alpha_1,\dots, \alpha_n$とする. $L=K(\alpha_1,\dots, \alpha_n)$とする.
+\ben
+\item $f(x)$は$K$上既約.
+\item $\gal{(L/K)}$は集合$\set{\alpha_1,\dots,\alpha_n}$に推移的に作用する.
+\een
+\end{prop}
+
+
+
+
+\subsection{拡大次数}
+$L/K$が体の拡大であるとする.包含写像$K\to L$によって$L$は$K$代数(環の構造を持った$K$ベクトル空間)と考えられる.このベクトル空間としての次元を$L/K$の\tf{拡大次数}といい, $[L:K]$で表す.
+\begin{prop} (\tf{拡大次数まとめ})
+\ben
+\item \bolm{[L:K] = [L:M][M:K]}
+\een
+\end{prop}
+
+\begin{prac}
+$n,m$を自然数とする.$\mb{Q}(\sqrt{m})\cap \mb{Q}(\sqrt[3]{n}) = \mb{Q}$を示せ.($m,n$で場合分けする必要が少しある)
+\end{prac}
+\begin{prac}
+$[\ovl{\mb{Q}}:\mb{Q}] = \infty$を示せ.
+\end{prac}
+
+\begin{eg}
+$p$を素数とする.$\mb{Q}(\cos{\dfrac{2\pi}{p}})/\mb{Q}$と$\mb{Q}(\sin{\dfrac{2\pi}{p}})/\mb{Q}$の拡大次数を求める.
+\end{eg}
+
+\subsection{代数拡大}
+\begin{defn} (代数閉体・代数閉包)\\
+\ben
+\item $K$が代数閉体(algebraic closed field)であるとは, 任意の定数でない$f(x) \in K[x]$が$K$に根をもつことをいう.
+\item 体$K$を含む代数閉体$L$を$K$の代数閉包(algebraic closure)という.
+\een
+\end{defn}
+
+\begin{rem}
+任意の代数閉体$K$は無限集合である.標数$0$なら$\mb{Q}\subset K$だから明らか.標数$p$かつ$|K| = n$だと仮定すると,$n$より大きい$p$で割れない整数$N$を取って $K$係数の$N$次多項式$x^{N} - 1$は分離多項式であり, $K$が代数閉体であるという仮定から1次式に分解されるが, $|K|=n$なのでそのとき同じ根が二つ以上現れてしまい矛盾である.よって$K$は無限集合である.
+\end{rem}
+
+\begin{theo}
+任意の体$K$は代数閉包を同型を除いてただひとつ持つ.したがって$K$の代数閉包を$\ovl{K}$と書く.
+\end{theo}
+
+\begin{egprob}
+$L/K$を代数拡大, $\alpha_1,\dots, \alpha_n\in L$を$K$上代数的な元とするとき, $K[\alpha_1,\dots, \alpha_n] = K(\alpha_1,\dots, \alpha_n)$であることを示せ.
+\end{egprob}
+\begin{egans}
+まず両辺の集合の意味を復習しておこう. 左辺は, $\set{\alpha_i}$で生成される有限生成$K$代数であり, 多項式の代入した元の全体になる. 右辺は, 有理関数(で分母が0にならないもの)を代入した元で生成される体である. \par
+左辺は実は体である. [証明] $\alpha_i$が$K$上代数的という仮定から, $K[\alpha_1,\dots, \alpha_n]\supset K$が整拡大であって, $K$が体であることから環論的に従う. [終] よって, どのような$f(\alpha_1,\dots, \alpha_n)$の逆元も存在し, $K(\alpha_1,\dots, \alpha_n)\subset K[\alpha_1,\dots, \alpha_n]$となる. 逆の包含は自明.\qed
+\end{egans}
+
+\begin{prac}
+体拡大$L/K$について, 任意の$\alpha \in L$に対して$K[\alpha] = K(\alpha)$であることを示せ.
+\end{prac}
+
+
+\subsection{分離拡大}
+\begin{prop} (\tf{分離拡大まとめ})
+\ben
+\item \tf{有限次分離拡大は単拡大である. }
+\een
+\end{prop}
+\prf
+(1): $K$の2元生成分離拡大体$L=K(\alpha_1,\alpha_2)$が$K(\alpha)$と書けるような$\alpha=\alpha_1+c\alpha_2$を発見できれば帰納的に示せる. まず, $K$が有限体であった場合は乗法群が生成元であることから明らかなので, $K$は無限体であるとする. $[L:K] = n$とする. 分離性より$|\mr{Hom}_{K}(L,\ovl{K})| = n$である. $K(\alpha) = L$であることを示すには, $[K(\alpha):K] = |\mr{Hom}_{K}(K(\alpha), \ovl{K})| = n$であることを示せばよいから, $\alpha$が満たすべき条件というのは次である:
+\lefba{
+任意の相異なる$\phi_i,\phi_j\in \mr{Hom}_{K}(L,\ovl{K})$に対して$\phi_i(\alpha) \neq \phi_j(\alpha)$である.
+}
+このような$c,d$が発見できればよい. そこで, 次の多項式を考える.
+\[F(x) = \prod_{i\neq j}(\phi_i(\alpha_1) + x\phi_i(\alpha_2) - \phi_j(\alpha_1) - x\phi_j(\alpha_2)  )\in L[x]\]
+さて, $L=K(\alpha_1,\alpha_2)$なので$\phi\in \mr{Hom}_{K}(L,\ovl{K})$は$\alpha_1,\alpha_2$の写し方で決定されていることに注意すると, 上の$F$の各因子は零多項式ではない. したがって$F(x)$は0多項式ではない. したがって, \tf{$K$は無限体なので}ある$x=c$が存在して$F(c) \neq 0$である. ゆえに, このように$c$を取れば$\phi_i(\alpha)\neq \phi_j(\alpha)$が言えるので$L=K(\alpha)$が成り立つ.\qed
+
+
+\subsection{$\spadesuit$純非分離拡大}
+
+\subsection{正規拡大}
+\begin{prop} (\tf{正規拡大まとめ})
+\ben
+\item $L/K$が正規拡大のとき, 任意の$\sigma\in\mr{Hom}_{K}(L,\ovl{K})$に対し$\sigma(L)\subset L$である. よって$\mr{Hom}_{K}(L,\ovl{K}) = \mr{Hom}_{K}(L,L)$.
+\item $L=K(\alpha_1,\dots, \alpha_n)$と書けるとき, これが正規拡大なら$\alpha_i$の$K$共役元はまた$L$に含まれる. 逆にすべての$\alpha_i$の$K$共役元を$L$が持つならば, $L/K$は正規拡大である.
+\een
+\end{prop}
+
+\begin{tips}
+\ben
+\item 2次の体拡大は\tf{標数2の場合を除き}正規拡大である.これは群論からすれば「指数2の部分群は正規部分群である」ということに対応する.
+\een
+\end{tips}
+
+\begin{egprob}
+$L/M,M/K$が正規拡大のとき$L/K$もまた正規拡大か?
+\end{egprob}
+\begin{egans}
+No. $L=\mb{Q}(\sqrt[4]{2})$, $M=\mb{Q}(\sqrt{2})$, $K=\mb{Q}$とせよ.
+\end{egans}
+
+\begin{egprob} (2020代数学II, 11/10練習問題)
+次の拡大体は正規拡大か? ただし, $n\geq 3$とし, $\zeta = \zeta_n$は1の原始$n$乗根とする.
+\ben
+\item $\mb{Q}(\sqrt{2},\sqrt{3},\sqrt{5})/\mb{Q}$
+\item $\mb{Q}(\zeta)/\mb{Q}$
+\item $\mb{Q}(\sqrt[n]{2})/\mb{Q}$
+\item $\mb{Q}(\sqrt[n]{2},\zeta)/\mb{Q}$
+\item $\mb{Q}(\sqrt[n]{2},\zeta)/\mb{Q}(\zeta)$
+\item $p$を素数, $\mb{F}_{p}(X)$を1変数有理関数体とし, $\mb{F}_{p}(X)/\mb{F}_{p}(X^p)$.
+\een
+\end{egprob}
+\begin{egans}
+(1):○ (2):○ (3):$\zeta$の共役元は$\mb{R}$にないものもあるので× (4):○ (5):正規拡大から下の体を挙げても正規なので○. (6): $X$の$\mb{F}_{p}(X^p)$上の多項式$T^p - X^p$の零点であるが, これを分解すると$(T-X)^p$なので, 共役元は$T=X$のみであると分かる. したがって正規拡大.
+\end{egans}
+
+
+
+\subsection{Galois拡大}
+Galois拡大とは, 分離拡大かつ正規拡大であるような体拡大である. 分離拡大$L/K$に対し, $L$の$K$上の\tf{Galois閉包}$\witi{L}$とは, $L$の$K$上の共役元をすべて添加した体のことをいう. $L$の$K$代数としての自己同形全体の群$\mr{Aut}_{K}^{\mr{alg}}L$を一般に$\gal{(L/K)}$と表し, $L/K$のガロア群と呼ぶ. \par
+\tbox{
+\begin{prop} (\tf{ガロア群まとめ}) $L/K$を有限次ガロア拡大とする.
+\ben
+\item $\gal{(L/K)}$の位数は$[L:K]$である.
+\item $M$が中間体のとき, $L/M$もガロア拡大である.
+\item $L=K(\alpha)$と書けるとする. $\sigma\in \gal{(L/K)}$は$\sigma(\alpha)$で決定され, $\sigma(\alpha)$は$\alpha$の$K$共役元に移る. したがって, $\alpha$が$d$次の$K$係数多項式の根になることが分かっている場合, $\sigma(\alpha)$としてあり得るのは$d$通りであり, $[L:K]\leq d$が従う.
+\een
+\end{prop}
+}{title=ガロア群まとめ}
+\prf
+(1): 分離性より$|\mr{Hom}_{K}(L,\ovl{K})| = [L:K]$. 正規性より$\mr{Hom}_{K}(L,\ovl{K}) = \mr{Hom}(L,L) = \mr{Aut}_{K}L = \gal{(L/K)}$だから.
+\qed
+
+\begin{rem} ここで, 一般の$K$準同型に関する簡単ですが重要な命題を述べます. $S$が$K$代数$A$の生成系, すなわち$A=K[S]$であるとします. $K$代数の準同型$\phi:A\to B$は, $\phi(s)$ ($s\in S$)の値によって一意に決まります. とくに, $A=B=L$で$L$が単拡大$L=K(\alpha)$の場合, $\phi(\alpha)$の値を見れば$\phi$は一意に決まります. この事実は, ガロア群の位数を評価するときなどに用いられます.
+\end{rem}
+
+$L/M$はガロア拡大になるのに対し, 次には注意しよう.
+\tbox{
+\begin{egprob}
+$L/K$をガロア拡大とし, $M$を中間体とする. $M/K$はガロア拡大であるか?
+\end{egprob}
+}{}
+\begin{egans}
+一般にならない. たとえば$L=\mb{Q}(\omega,\sqrt[3]{2})$, $M=\mb{Q}(\sqrt[3]{2})$とすると$M/\mb{Q}$は正規拡大ではない.
+\end{egans}
+
+
+
+\begin{egprob}
+次の体$L$の$\mb{Q}$上のガロア閉包$F$を求め, $\gal{(F/\mb{Q})}$を決定せよ: $L=\mb{Q}(\sqrt[3]{3})$/
+\end{egprob}
+\begin{egans}
+$L=\mb{Q}(\sqrt[3]{3})$のとき, $\mr{Irr}(\sqrt[3]{3},\mb{Q};x) = x^3 - 3$であり, 共役元は$\sqrt[3]{3}\omega^{k}$ ($k=0,1,2$)である. よって, $F = \mb{Q}(\sqrt[3]{3}, \sqrt[3]{3}\omega, \sqrt[3]{3}\omega^2) = \mb{Q}(\sqrt[3]{3},\omega)$. これの拡大次数は6の倍数であること, および6以下であることが容易に分かるので拡大次数は6である. よって$|\gal{(L/K)}| = 6$.  $\sigma\in \gal{(L/K)}$は集合$\set{\sqrt[3]{3}, \sqrt[3]{3}\omega, \sqrt[3]{3}\omega^2}$の置換を引き起こし, 逆に, この集合が$L$を生成するのでその置換の情報から$\sigma$は一意に決定される. 置換は6通りあり, ガロア群の位数も6通りなので, すべての置換を実現できる. すなわち, 次のような$\sigma, \tau\in \gal{(L/K)}$が存在する:
+\[\sigma(\sqrt[3]{3}) = \sqrt[3]{3}\omega, \sigma(\sqrt[3]{3}\omega) =\sqrt[3]{3}\]
+\[\tau(\sqrt[3]{3}\omega^k) = \sqrt[3]{3}\omega^{k+1}\]
+これを生成系$\set{\sqrt[3]{3},\omega}$の行き先から表現する式に書き換えると
+\[\sigma(\sqrt[3]{3}) = \sqrt[3]{3}\omega,\quad \sigma(\omega) = \omega^2\]
+\[ \tau(\sqrt[3]{3}) = \sqrt[3]{3}\omega , \tau(\omega) = \tau(\omega) = \omega \]
+である. $\sigma$は互換に対応しており, $\tau$は3-cycleに対応している. $\gal{(L/K)}$はこの$\tau,\sigma$で生成される群である.
+\end{egans}
+
+
+
+
+
+\newpage

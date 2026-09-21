@@ -1,0 +1,315 @@
+\section{有理数体上の拡大体}
+最も出る問題は有理数体上の問題である.
+\subsection{雑題}
+
+神戸大のガロア群の計算問題が標準的である.
+\begin{egprob} (H30神戸大B) \label{egprob:H30_kobe_B}
+$f(x) = x^6-8$に対し, その最小分解体を$F$とする.
+\ben
+\item $f(x)$を$\mb{C}$で一次式に分解せよ.
+\item $[F:\mb{Q}]$を求めよ.
+\item $\gal{F/\mb{Q}}$の構造を求めよ.
+\item 拡大$F/\mb{Q}$の$F,\mb{Q}$以外の中間体をすべて求めよ.
+\een
+\end{egprob}
+\begin{egans}
+(1):
+\[f(x) = (x-\sqrt{2})(x-\sqrt{2}\omega)(x-\sqrt{2}\omega^2)(x+\sqrt{2})(x+\sqrt{2}\omega)(x+\sqrt{2}\omega^2)\]
+(2):$F=\mb{Q}(\sqrt{2},\sqrt{-3})$が容易に分かる.$[\mb{Q}(\sqrt{2}):\mb{Q}]=2$, $[F:\mb{Q}(\sqrt{2})]=2$より$[F:\mb{Q}] = 4$
+
+(3):Galであることをまず示さなければならない.分離性は完全体だから自明.生成元の共役根も$F$に属すから正規であることも自明.よってGal. 推進定理を使うと$(\mb{Z}/2\mb{Z})^{2}$.
+
+(4):ひとつめの$\mb{Z}/2\mb{Z}$が$\gal{\mb{Q}(\sqrt{2})/\mb{Q}}$に対応するものであるとする.ガロア群の中間体で非自明なものは3つあることは容易.$\lan (1,0)\ran$に対応する体は, $\mb{Q}(\sqrt{-3})$である.$\lan (0,1)\ran$では$\mb{Q}(\sqrt{2})$である.$\lan (1,1) \ran$では$\mb{Q}(\sqrt{-6})$である.これらで全て.
+\end{egans}
+
+
+\begin{egprob} (\tf{有名問題}, \cite{aoyukie}問題4.1.16(1))
+$p$を素数, $f(x)\in \mb{Q}[x]$とする.$f(x)$は$p-2$個の実数解と$2$個の虚数解を持つとする.$K$を$f$の最小分解体とするとき, $\gal{K/\mb{Q}} \cong \maf{S}_{p}$であることを証明せよ.
+\end{egprob}
+\begin{egans}
+条件より複素共役$\sigma$はガロア群の元である. これは位数2である. ガロア群の元は$p$個の根の置換を引き起こし, その置換によって最小分解体から自身への$K$上の自己同形は一意に決定されるため, 単射準同型$\Phi: \gal{(K/\mb{Q})} \to \maf{S}_{p}$が引き起こされる. これによりガロア群を対称群の部分群に同一視する
+. 既約性から$[L:K]$は$p$の倍数であり, Cauchyの定理という群論的事実から$\gal{L/K}$が位数$p$の元($p$-cycle)を持つことが従う. 一般に対称群$\maf{S}_n$は互換と$n$-cycleにより生成できるので$\gal{K/\mb{Q}}$が実は$\maf{S}_{p}$に一致する.
+\end{egans}
+
+\begin{prac} (\cite{aoyukie} 問題4.1.16(2))
+$f(x) = x^5 - 4x + 2$の$\mb{Q}$上のガロア群は$\maf{S}_{5}$と同型であることを証明せよ.
+\end{prac}
+
+\tbox{
+\begin{egprob} \label{prob:H25-II-1}
+体$K=\mb{Q}(\sqrt{N},\sqrt{i+1})$が$\mb{Q}$上のGalois拡大体となるような最小の正の整数$N$と, そのときのGalois群$\gal{K/\mb{Q}}$を求めよ.
+\end{egprob}
+}{title=H25数学II-1}
+\begin{egans}
+$N\neq 1$を示す. $\alpha = \sqrt{i+1}$は偏角を$\pi/8$とする. $\beta = \ovl{\alpha} = \sqrt{1-i}$とすると$\alpha + \beta = \sqrt{2+\sqrt{2}}/2$が(半角公式より)分かるので$\sqrt{2+\sqrt{2}}\in K$だが, これは4次の根である(Check!). $K=\mb{Q}(\alpha)$も4次拡大なので$K=\mb{Q}(\sqrt{2+\sqrt{2}})$となるが, $K$は$\mb{R}$に含まれないのでおかしい. \par
+$N=2$のとき, $K=\mb{Q}(\alpha,\sqrt{2})$は$\mb{Q}$上8次Galois拡大である. なぜなら$K\supsetneq \mb{Q}(\sqrt{2+\sqrt{2}})$で8次以上であるし, 8次以下であることも明らかだし, $\alpha\beta = \sqrt{2}$だからである. ガロア群を$G$とする. $\sigma\in G$は$\sigma(\sqrt{2})\in \set{\sqrt{2},-\sqrt{2}}$, $\sigma(\alpha) = \set{\alpha,-\alpha,\beta,-\beta}$であり, この選択で$\sigma$は一意に決まる. また, 8次だからいずれの選択も実現する元$\sigma$がある. \par
+$\sigma_i$は$\sqrt{2}$を固定する元で$\sigma_1=\mr{id}$, $\sigma_2(\alpha) = -\alpha$, $\sigma_3(\alpha) = \beta$, $\sigma_4(\alpha) = -\beta$とする. $\tau$は$\tau(\sqrt{2}) = -\sqrt{2}$, $\tau(\alpha) = -\alpha$とする. このとき$G$の任意の元は$\sigma_i \tau^k$の形で書ける(Check!). たとえば$\tau \sigma_3\tau = \sigma_4$によって非アーベルがわかるので$D_4$と当たりをつけるのが妥当. 実際, $D_4$の生成式で$x = \tau$, $y=\tau\sigma_3$に取ると関係式が満たされる(Chekc!). よって$G\cong D_4$. \qed
+
+\end{egans}
+\begin{prac}
+上の証明の細部をいくつか埋めよ.
+\end{prac}
+
+次も過去問だが, 比較的易しい.
+\tbox{
+\begin{egprob}
+$x^4+9$の$\mb{Q}$上の最小分解体を$K$とするとき, $\mr{Gal}(K/\mb{Q})$を求めよ.
+\end{egprob}
+}{title=H19数学II}
+\begin{egans}
+最小分解体が$K=\mb{Q}(\sqrt{6}, i)$であることを示す. まず$x^4 + 9$の根は$\sqrt{3}\zeta_8^{t}$ ($t=1,3,5,7$)であり, $\mb{Q}(\sqrt{3}\zeta_8)\ni \sqrt{3}\zeta_8^{t}$なので
+\bealn{
+K&= \mb{Q}(\sqrt{3}\zeta_8) = \mb{Q}(\sqrt{3}\zeta_8, \sqrt{3}\zeta_8 + \sqrt{3}\zeta_8^7) \\
+&= \mb{Q}(\sqrt{3}\zeta_8, \sqrt{6}) = \mb{Q}(\dfrac{1}{\sqrt{2}}\zeta_8, \sqrt{6}) \\
+&= \mb{Q}(1+i,\sqrt{6}) = \mb{Q}(i,\sqrt{6})
+}
+よって$[K:\mb{Q}] = 4$である. ガロア群は位数4である. $\sigma\in \mr{Gal}(L/K)$は$\sigma(i) \in \set{i,-i}$と$\sigma(\sqrt{6}) \in \set{\sqrt{6}, -\sqrt{6}}$で決定され, 位数4だからすべての選択が可能である. $i$と$\sqrt{6}$の符号が変わるだけなので, ガロア群の任意の二つの元が可換であることが示せる. よってAbel群で, いずれの元も位数2なので$\cyc{2}\times \cyc{2}$であることが分かる.\qed
+\end{egans}
+
+
+
+
+\tbox{
+\begin{egprob} \label{prob:H22-II-1}
+$K=\mb{Q}(\sqrt{-17-4\sqrt{17}})$. $K/\mb{Q}$がガロア拡大であることを示し, $\mr{Gal}(K/\mb{Q})$を求めよ.
+\end{egprob}
+}{title=H22数学II}
+\begin{egans}
+$\alpha = \sqrt{-17-4\sqrt{17}}$とする.
+$(\alpha^2 + 17)^2 -16\cdot 17 = \alpha^4 + 34\alpha^2 + 17 $であるから$T^4+34T^2+17$は$\alpha$を根に持つ. これは17に関してEis多項式で既約より, $K$は4次拡大. $\alpha$の$\mb{Q}$上共役元は$-\alpha, \beta:=\sqrt{-17 + 4\sqrt{17}}, -\beta$である. $\alpha,\beta$は虚である. $\alpha,\beta$の偏角は$\pi/2$とする. このとき
+$\alpha\beta = - \sqrt{17}$である. $\alpha^2 \in K\implies \sqrt{17}\in K$なので$\beta\in K$が従う. よって$K=\mb{Q}(\alpha)$は$\alpha$の共役元をすべて持ち, $K/\mb{Q}$は4次ガロア拡大体. ガロア群を$G$とする. $G$は位数4だからアーベル群になる. $\sigma\in G$は$\sigma(\alpha)\in\set{\alpha,-\alpha,\beta,-\beta}$で決定され, この4通りがいずれも可能である. $\sigma(\alpha) = \alpha$なら$\sigma=\mr{id}$. $\sigma(\alpha) = -\alpha$なら$\sigma(\alpha^2) = \alpha^2$により$\sigma$が$\sqrt{17}$を固定すｒことが分かり, $\alpha\beta=-\sqrt{17}$から$\sigma(\beta)=-\beta$が分かる. $\sigma(\alpha) = \beta$ならば$\sigma(\alpha^2) = \beta^2$により$\sqrt{17}$の符号は反転し, $\sigma(\beta) = -\alpha$を得る. 同様に$\sigma(\alpha) = -\beta$なら$\sqrt{-17}$が反転し$\sigma(\beta) = \alpha$が分かる. 最後二つの元は明らかに位数4であるから$G$は$\cyc{4}$に同型である.
+\end{egans}
+
+\begin{rem}
+なぜか知らないが, H23数学IIでも同じ問題が出ている(どころか, 誘導まで付いている).
+\end{rem}
+
+
+
+
+
+
+\tbox{
+
+}{title=}
+
+
+
+\begin{egprob}
+$L$を$\mb{Q}(\sqrt[3]{3})$の$\mb{Q}$上のガロア閉包とするとき, $L/\mb{Q}$の中間体をすべて求めよ.
+\end{egprob}
+\begin{egans}
+ガロア群が$\maf{S}_{3}$であることはすでに見た(cf.「Galois拡大」の節). これの中間体は, 非自明なものを見ると, 巡回部分群しかなく, 互換で生成されるものか$A_3$である. $A_3$は指数2で, これは$\tau$, つまり$\tau(\sqrt[3]{3}) = \sqrt[3]{3}\omega$, $\tau(\omega) = \omega$の固定体であるから$\mb{Q}(\omega)$である. \par
+それぞれの互換が何を固定するかを調べよう. %つづく
+\end{egans}
+
+
+
+
+
+
+
+
+\subsection{4次既約多項式のガロア群}
+
+\tbox{
+\begin{egprob} \label{prob:H6-I-3}
+$f(X) = X^4 + aX^2 + b$を$\mb{Q}$上の既約多項式とする. また$\mb{Q}$上での$f(X)$のガロア群を$G$で表す.
+\ben
+\item $b$が$\mb{Q}$の平方元なら, $G\cong \cyc{2}\times \cyc{2}$であることを示せ.
+\item $\mb{Q}$において, $b$は平方元ではないが, $b(a^2-4b)$が平方元である場合には, $G\cong \cyc{4}$であることを示せ.
+\item もし$b$も$b(a^2-4b)$も$\mb{Q}$において平方元でなければ, $G$は位数$8$の群であることを示せ.
+\een
+\end{egprob}
+}{title=H6数学I-3}
+\begin{egans}
+$b=c^2$とする. $f(X)$の根は
+\[\alpha = \sqrt{-\dfrac{a}{2} +\sqrt{\dfrac{a^2}{4} - b}},\quad  \beta = \sqrt{-\dfrac{a}{2} - \sqrt{\dfrac{a^2}{4} - b}}\]
+を一つ選んで, $\pm \alpha, \pm \beta$ですべてである. $\alpha\beta = \sqrt{b}$であるように $\alpha,\beta$を選ぶことができる. $f(X)$の$\mb{Q}$上最小分解体を$K$とすると, $K=\mb{Q}(\alpha,\beta)$である. \\
+(1): $\alpha\beta = c$であるように$c$を取り変える. $\beta = c/\alpha$なので, $K=\mb{Q}(\alpha)$である. とくに$[K:\mb{Q}] = |G| = 4$. $\sigma\in G$は$\sigma(\alpha)\in \set{\pm \alpha, \pm \dfrac{c}{\alpha}}$の行き先で決まり, どの元も位数2であるから$G$は巡回群ではないAbel群である. よって$G\cong \cyc{2}\times \cyc{2}$である. \\
+(2): $b(a^2-4b) = d^2$とする. まず$b,d\neq 0$に注意しよう. 実際, $b=0$や$a^2-4b = 0$では$f(X)$の既約性に反することが分かるからだ. $\sqrt{b}\sqrt{a^2-4b} = d$であるように$d$を選ぶ. このとき,
+\[\alpha^2 -\beta^2 = \dfrac{\sqrt{b}\sqrt{(a^2-4b)}}{\sqrt{b}} = \dfrac{d}{\sqrt{b}}\]
+に注意. $\alpha\beta = \sqrt{b}$だから$K=\mb{Q}(\alpha,\sqrt{b})$である. $2\alpha^2 + a = \sqrt{a^2-4b}$なので$\sqrt{a^2-4b} \in \mb{Q}(\alpha)$であり, $d=\sqrt{b}\sqrt{a^2-4b}\in \mb{Q}$なので$\sqrt{b}\in \mb{Q}(\alpha)$である. よって$[K:\mb{Q}] = 4$, $|G| = 4$で, $\sigma\in G$のうち$\sigma:\alpha\mapsto -\beta$なるものが取れる. $\alpha^2-\beta^2 = \frac{d}{\sqrt{b}}$に$\sigma$を作用させたとき, 右辺は0にならず, $\sigma(\alpha) = -\beta$だから$\sigma(\beta) \in \set{\alpha,-\alpha}$である. このとき, 左辺の符号が変化するので$\sigma(\sqrt{b}) = -\sqrt{b}$である. よって$\alpha\beta = \sqrt{b}$から$\sigma(\beta) = \alpha$が従う. よって$\sigma^2(\alpha) =\sigma(-\beta) = -\alpha$なので$\sigma$は位数4の元でガロア群は$\cyc{4}$に同型である. \qed \\
+(3): $G$が位数4の倍数かつ8以下なのは明らかで, $|G|=8$でないとするなら$|G| = 4$である. $\sqrt{b} \in \mb{Q}(\alpha)$である. $e=b(a^2-4b)\in \mb{Q}$とおく. $\sqrt{e} = p+q\sqrt{b}$なる$p,q\in \mb{Q}$がもし有れば, $e=p^2 + q^2b + 2pq\sqrt{b}$で, $pq=0$でなければならない. $q=0$なら$e$が平方元になり矛盾. $p=0$なら$e=q^2b$で, $b\neq 0$なので$a^2-4b = 0$である. これでは$f(X)$が平方完成されてしまうのであったから, 矛盾である. よって$K=\mb{Q}(\sqrt{b},\sqrt{e})$である. $d=a^2-4b$とおき, $e=bd$なので$K=\mb{Q}(\sqrt{b},\sqrt{d})$である. $\alpha^2 = -\frac{a}{2} + \frac{1}{2}\sqrt{d}$である. $\alpha = p+q\sqrt{b}+r\sqrt{d} + s\sqrt{bd}$とおく.
+\bealn{
+pq + rds = 0\\
+ps + qr = 0\\
+pr + qsb = \dfrac{1}{2}\\
+p^2 + q^2b + r^2d + s^2bd = -\frac{a}{2}
+}
+だから, もし$qrs\neq 0$なら, $x=\dfrac{p}{r}, y=\dfrac{q}{s}$とすると$y\neq 0$であって,
+\[\dfrac{pq}{rs} = xy = -d,\quad \dfrac{ps}{qr} = \dfrac{x}{y} = -1\]
+であるから, $y=-x$で, $d=x^2$となるが, $d=a^2-4b$は平方元になってはならないので矛盾である. よって$qrs = 0$である. \\
+\fbox{$q=0$のとき} $pr = 1/2$, $ps = rds = 0$ により$s=0$だがこのとき$\alpha$は4次既約多項式の根ではないので矛盾. \\
+\fbox{$r=0$のとき} $pq=ps=0$, $qsb = 1/2$より$p=0$で, $\alpha = \sqrt{b}(q+s\sqrt{d})$である. $\alpha^2 = b(q^2 + s^2d) + 2bqs\sqrt{d}$なので,
+\[q^2 + s^2d = -\frac{a}{2b},\quad qs\sqrt{d} = \frac{\sqrt{d}}{4b}\]
+であるから, $q^2$と$s^2d$は$T^2 + \frac{a}{2b}T + \frac{d}{16b^2}$の\tf{有理数解}である. 特にこれの判別式が有理数の平方元であるべきだが, 実際は$\frac{a^2 -d}{4b^2} = \frac{a^2-(a^2-4b)}{4b^2} = \frac{1}{b}$だから, 仮定より平方元になっておらず矛盾である. \\
+\fbox{$s=0$のとき} $pq=0, qr=0, pr=1/2$により, $q=0$を得るがこのとき$\alpha=p+r\sqrt{d}$は既約4次多項式の根になり得ない. \par
+以上より, $\alpha\notin \mb{Q}(\sqrt{b},\sqrt{d})$が示されたので矛盾である. よって$|G|=8$. \qed
+\end{egans}
+
+
+
+\subsection{円分体}
+\begin{prop}
+\ben
+\item $\gal{\mb{Q}(\zeta_n)/\mb{Q}}\cong (\mb{Z}/n\mb{Z})^{\times}$
+\een
+\end{prop}
+
+\begin{eg} 任意の自然数$n$に対し, 有理数体上のガロア拡大で$\mb{Z}/n\mb{Z}$に同型なガロア群を持つものが存在することを示す. 算術級数定理により$p-1$が$n$で割れるような素数$p$が(無限個)存在するので, それを一つ取る. このとき$\mb{Q}(\zeta_{p})/\mb{Q}$のガロア群が$\mb{Z}/(p-1)\mb{Z}$である. この群の指数$n$の巡回部分群$H$が存在し, 基本定理から$H$に対応する中間体$M$があるが, $M/\mb{Q}$は$H$が正規部分群なのでガロア拡大になる. そして, $\gal{M/\mb{Q}} \cong \gal{(\mb{Q}(\zeta_n)/\mb{Q})}/H \cong \mb{Z}/n\mb{Z}$となる.
+\end{eg}
+
+
+
+
+\begin{comment}
+%\subsection{($\spadesuit$)整数環の基底と絶対判別式}
+\begin{defn}
+$K$を代数体とする.$K$は自然に$\mb{Z}$を含んでいるが, $K$の元で$\mb{Z}$上整なもの全体(つまり$K$における$\mb{Z}$の整閉包)を$K$の\tf{整数環}といい, $\mac{O}_{K}$で表す.$\mac{O}_{K}$の$\mb{Z}$基底を\tf{整基底}といい, 整基底$\{ \omega_{i}\}_{i=1,\cdots, n}$ ($[K:\mb{Q}]=n$)に対して$\mb{Q}$係数の行列
+\[(\mr{Tr}(\omega_{i}\omega_j))_{i,j}\]
+の行列式を絶対判別式といい, $\Delta_{K}$と書く.$\Delta_{K}$は代数体の不変量である.
+\end{defn}
+
+$p$進完備化によって, 代数体$K$の整数環$\mac{O}_{K}$の基底や絶対判別式$\Delta_{K}$を決定することができるようになる.
+\end{comment}
+
+
+
+
+
+\subsection{$\cos{\dfrac{2\pi}{n}}$を添加した体}
+$2\cos{\dfrac{2\pi}{n}} = \zeta_n + \zeta_n^{-1}$であり, $\zeta_n$は
+\[T^2 - (\zeta_n + \zeta_n^{-1})T + 1\]
+の根であるから$[\mb{Q}(\zeta_n): \mb{Q}(\zeta_n + \zeta_n^{-1})]\leq 2$である. また, $\mb{Q}(\zeta_n)/\mb{Q}$のガロア群の元$(\zeta_n\mapsto \zeta_{n}^{-1})$によりこの値は固定される.
+したがって, $\mb{Q}(\zeta_n)\supsetneq \mb{Q}(\zeta_n + \zeta_n^{-1})$ は二次拡大である. すなわち, 円分体の中間体として現れる体である. このような体は演習問題に頻繁に現れるので, これについて調べよう. \par
+まず, $2\cos{\dfrac{2\pi}{n}}$の$\mb{Q}$上の最小多項式を調べる際に三角関数の公式を用いることがあるので, 高校数学だがこれをおさらいしておこう.
+
+\begin{prop}
+\ben
+\item $2\cos{2\theta} = (2\cos{\theta})^2 - 2$
+\item $2\cos{3\theta} = (2\cos{\theta})^{3} - 3(2\cos{\theta})$.
+\item
+\een
+\end{prop}
+
+\begin{egprob} (\cite{aoyukie} 問題4.7.4)
+$t=\zeta_7 + \zeta_7^{-1}$が満たす$\mb{Q}$上の三次方程式を求めよ.
+\end{egprob}
+\begin{egans} $\theta = \dfrac{2\pi}{7}$とおく.
+$\gal{(\mb{Q}(\zeta_7)/\mb{Q})}\cong (\mb{Z}/7\mb{Z})^{\times}$の生成元は$\zeta_7 \mapsto \zeta_7^{3}$であるから, これにより$t$を写し続けることで$t$の$\mb{Q}$上共役元は
+\[2\cos{2\theta} = \zeta_7^{2} + \zeta_7^{-2} = t^2-2,\quad 2\cos{3\theta} = \zeta_{7}^{3} + \zeta_7^{-3} = t^3 - 3t\]
+となる. $1+\zeta_7 + \dots + \zeta_7^{6} = 0$なので
+\[1 + t + (t^2 - 2) + (t^3-3t) = 0\]
+これより$t^3 + t^2 -2t -1 = 0$.
+\end{egans}
+\begin{egans} (相反方程式的解法) 三角関数がだるかったら次のようにしてもよい.  $1+\zeta_7 + \dots + \zeta_7^6 = 0$なので, これを$\zeta_7^3$で割ると
+\[(\zeta_7^3 + \zeta_7^{-3}) + (\zeta_7 + \zeta_7^{-2}) + (\zeta_7 + \zeta_7^{-1}) + 1 = 0\]
+$t$の多項式で$\zeta_7^{k} + \zeta_7^{-k}$を記述できるので, その計算をすれば求められる.
+\end{egans}
+
+\begin{egprob}
+$\alpha=2\cos{\dfrac{\pi}{9}}$の$\mb{Q}$上最小多項式を求めよ.
+\end{egprob}
+\begin{egans} (参考:2020代数II, 10/20練習問題)
+3倍角公式のほうで\bolm{\theta = \dfrac{\pi}{9}}と置いて, $\cos{\dfrac{\pi}{3}} = \dfrac{1}{2}$なので, ただちに$T^3- 3T-1 = 0$を得る. これの最小性を示す方法は二つある. まず, $T=1$を代入すると$-3$であるから,  $T$を$T+1$に置き換えればEis多項式になると予想され, 実際$T^3 + 3T^2 - 3$なのでそうである. あるいは, これを$\mb{Z}$上で見たときに整数根を持たないことを論じるか, $\mb{F}_{2}$上に還元して$T^3 + T^2 + 1$が零点を持たないことを論じるかにより, これが$\mb{Z}[T]$で既約であることが分かるから, Gaussの補題により$\mb{Q}[T]$でも既約と言える.
+\end{egans}
+
+
+\begin{egprob} (2020代数学II, 12/15練習問題)
+$\sqrt{5}\in \mb{Q}(\zeta_5)$を示せ. また, $\sqrt{-5}\notin \mb{Q}(\zeta_5)$を示せ.
+\end{egprob}
+\begin{egans} ガロア群が$\mb{Z}/4\mb{Z}$なので二次拡大は一つである. よって, その二次拡大を求めればよいと予想される.
+$t=\zeta_5 + \zeta_5^{-1}$とするとこれは$\mr{id}$と$\zeta_5\mapsto \zeta_{5}^{-1}$で固定される元なので$\mb{Q}(t)$がまさしく2次拡大体である. $t$の$\mb{Q}$上の共役元は, $\zeta_5\mapsto \zeta_5^2$で移した$s=\zeta_5^2 + \zeta_5^{-2}$であるから, $(X-t)(X-s)$を考えると
+\[t+s = -1, \quad ts = -1\]
+が計算で得られ, $(X-t)(X-s) = X^2 + X - 1$である. よって$t,s$は$X^2 + X - 1$の根なので$\dfrac{-1\pm \sqrt{5}}{2}$であり, $\mb{Q}(t) = \mb{Q}(\sqrt{5})$を得る. これと$\mb{Q}(\sqrt{-5})$は異なるので$\sqrt{-5}$は属さない. \qed
+\end{egans}
+
+
+\begin{prac}前の問題の「相反方程式的解法」を真似して上の問題をもう一度解いてみよう.
+\end{prac}
+
+\tbox{
+\begin{egprob} (2020代数学II, 12/22練習問題)
+$n$を奇数とする. $\gamma:=\sin{\dfrac{2\pi}{n}}\notin \mb{Q}(\cos{\dfrac{2\pi}{n}})$を示せ.
+\end{egprob}
+}{}
+\begin{egans}次に注意せよ!
+\[\bolm{\gamma = \cos{\parena{\dfrac{\pi}{2} - \dfrac{2\pi}{n}}} = \cos{\dfrac{2(n-4)\pi}{4n}}}\]
+$n$は奇数なので$n-4$と$4n$は互いに素である. よって, 右辺は$\mb{Q}(\zeta_{4n})$において$\cos{\dfrac{2\pi}{4n}}$と$\mb{Q}$上共役である. よって,
+\[ [\mb{Q}(\gamma):\mb{Q}] = [\mb{Q}(\cos{\dfrac{2\pi}{4n}}):\mb{Q}] = \dfrac{\phi(4n)}{2}  \]
+である. $\phi(4n) = 2\phi(n)$なので
+\[[\mb{Q}(\gamma):\mb{Q}] = \phi(n) > \dfrac{\phi(n)}{2} = [\mb{Q}(\cos{\dfrac{2\pi}{n}}): \mb{Q}] \]
+により$\gamma \notin \mb{Q}(\cos{\dfrac{2\pi}{n}})$でなければならない. \qed
+\end{egans}
+
+\begin{egprob} (\cite{aoyukie} 問題4.7.5, 改) \label{egprob:gal=z/3z_example}
+$\gal{(\mb{Q}(\cos{\dfrac{2\pi}{9}})/\mb{Q})}$は何か?
+\end{egprob}
+\begin{point}
+円分体に埋め込めば, アーベル拡大の中間体として取り扱える.
+\end{point}
+\begin{egans}
+$t=2\cos{\dfrac{2\pi}{9}} = \zeta_9 + \zeta_9^{-1}$とおく. $t$は$t^3 - 3t - 1= 0$を満たす(略). よって$[\mb{Q}(t):\mb{Q}]\leq 3$である. 一方, $\zeta_9$が$T - tT + 1 = 0$の根なので$[\mb{Q}(\zeta_9):\mb{Q}]\leq 2$であり, これと$[\mb{Q}(\zeta_9): \mb{Q}] = 6$により, 不等式的に$[\mb{Q}(t):\mb{Q}] = 3$でなければならないことが分かる. 中間体$\mb{Q}(t)$に対応する部分群$H$の指数は3, つまり位数は2で, ガロア群の元$\sigma: \zeta_9\mapsto \zeta_9^{8}$が$\mb{Q}(t)$を固定することを考えると$H = \set{1,\sigma}$である. これを$\mb{Z}/6\mb{Z}$に翻訳すると, $H\cong \set{0,3}\subset \mb{Z}/6\mb{Z}$である. よって, ガロア対応から
+\[\gal{(\mb{Q}(t)/\mb{Q})} \cong (\mb{Z}/6\mb{Z}) / H \cong \mb{Z}/3\mb{Z}.\]
+
+\end{egans}
+
+
+\subsection{演習問題}
+
+
+\subsubsection{Level A}
+
+
+
+\subsubsection{Level B}
+\begin{prob} (H31専門科目3)
+多項式$f(X) = X^4 + 6X^2 + 2\in \mb{Q}[X]$の$\mb{Q}$上の最小分解体を$K$とおく. $K$を$\mb{C}$の部分体とみなし,$F=K\cap \mb{R}$とおく.
+\ben
+\item $[K:\mb{Q}]$を求めよ.
+\item $F/\mb{Q}$はガロア拡大であることを示せ.
+\een
+\end{prob}
+
+
+\begin{prob} (H12数学II-1)
+$\zeta = \exp{2\pi i/85}\in \mb{C}$, $K=\mb{Q}(\zeta)\cap \mb{R}$とするとき, $K$の$\mb{Q}$上のガロア群$\gal{K/\mb{Q}}$を求めよ.
+\end{prob}
+
+\begin{prob} (H2数学II-1)
+$K=\mb{Q}(\sqrt[6]{3} + \sqrt{-3})$について次の問に答えよ.
+\ben
+\item $\mb{Q}$上の$K$のガロア閉包$\witi{K}$は$K$と一致するか?
+\item $\gal{(\witi{K}/\mb{Q})}$を求めよ.
+\item $\witi{K}$の部分体のうち$\mb{Q}$上6次拡大のものは?
+\een
+\end{prob}
+
+
+\subsubsection{Level C}
+
+\subsubsection{Hint・Answer}
+{\small
+\begin{probans}
+(1): $[K:\mb{Q}] = 8$\\
+(2): $F=\mb{Q}(\sqrt{3},\sqrt{7})$を拡大次数の比較から示せばよい.
+\end{probans}
+
+\begin{probans}
+$K\supset \mb{Q}(\cos{\frac{2\pi }{85}})$で, $[\mb{Q}(\zeta): \mb{Q}(\cos{\frac{2\pi i}{85}})] = 2$かつ$K\neq \mb{Q}(\zeta)$なので$K=\mb{Q}(\cos{\frac{2\pi }{85}})$である. 円分体はアーベル拡大で, $K$に対応する部分群$H_K = \gal{(\mb{Q}(\zeta))/K}$は必ず正規. このとき$\gal{(K/\mb{Q})}\cong \gal{(\mb{Q}(\zeta))}/H_K$である.  ガロア群は$(\cyc{85})^{\times}\cong (\cyc{5})^{\times} \times (\cyc{17})^{\times} \cong \cyc{4}\times \cyc{16}$であり, $\zeta\mapsto \zeta^a$なる自己同型と$a\in (\cyc{85})^{\times}$が対応する. $\zeta + \zeta^{-1}$を固定する元が$a=1,-1$のものに限るから, $H_K = \set{1,-1}\subset (\cyc{85})^{\times}$である. これは$(\cyc{5})^{\times}\times (\cyc{17})^{\times}$において$\set{(1,1), (-1,-1)}$に対応し, 生成元は$(2,0)$と$(0,6)$なので, $2^2 \equiv -1\pmod{5}$と$6^8 \equiv -1\pmod{17}$に注意すると, $H_K$は$\cyc{4}\times \cyc{16}$の$\set{(0,0),(2,8)} = 2\mb{Z}/4\mb{Z}\times 8\mb{Z}/16\mb{Z}$に対応する. したがって
+\[\gal{(K/\mb{Q})} \cong \mb{Z}/2\mb{Z}\times \mb{Z}/8\mb{Z}\]
+\end{probans}
+
+
+\begin{probans}
+(2): $\witi{K} = \mb{Q}(\sqrt[6]{3}, \sqrt{-3})$は明らかであろう. これは位数12である. $\sigma\in \gal{(\witi{K}/\mb{Q})}$は$\sigma(\sqrt{-3}) \in \set{\pm \sqrt{-3}}$と$\sigma(\sqrt[6]{3})\in \set{\zeta^k \sqrt[6]{3}}$, $\zeta = \frac{1+\sqrt{-3}}{2}$で決まる. $\sigma: (\sqrt[6]{3},\sqrt{-3}) = (\zeta\sqrt[6]{3}, \sqrt{-3})$, $\tau:(\sqrt[6]{3},\sqrt{-3}) \to (\sqrt[6]{3}, -\sqrt{-3})$とすれば$\tau$は位数2, $\sigma$は($\zeta$を不変にするので)位数6であり, $\tau\sigma\tau = \sigma^{-1}$が分かるから $D_{6}$に同型. \\
+(1): $\gal{\witi{K}/\mb{Q}}$のすべての元で$\alpha=\sqrt[6]{3} + \sqrt{-3}$が固定されたなら$\witi{K} = K$である. 実際は7個の元で固定されることを見ればよく, それはすぐ分かる. よって$K=\witi{K}$.
+\\
+(3): $D_6$の位数2の元の個数は$7$である. それは$\sigma^3$, $\sigma^k \tau$ ($k=0,1,\dots, 6$)である. あとは作業.
+\end{probans}
+
+
+}
+
+\clearpage

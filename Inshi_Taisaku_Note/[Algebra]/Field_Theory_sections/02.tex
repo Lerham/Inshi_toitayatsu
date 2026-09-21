@@ -1,0 +1,301 @@
+\section{Galois理論の基礎}
+\subsection{ガロア拡大とArtinの定理}
+
+\tbox{
+\begin{theo}
+$G$を有限群, $L$を体, $\rho:G\to \mr{Aut}L$を単射準同型とし,
+\[K := L^{G} := \{ \alpha \in L \mid \forall g\in G,  \rho(g) (\alpha) = \alpha \}\]
+とおく.このとき, $L/K$は有限次ガロア拡大であり,
+\[\bolm{\gal(L/L^{G}) \cong G}\]
+である.\
+\end{theo}
+}{title=Artinの定理}
+\begin{point}
+この定理の証明のめんどくさい部分は「有限次ガロア拡大であることを示す部分」であり, そこを認めれば実は同型は位数比較で示せる.だから, 特定の状況下で有限次ガロア拡大であることが分かっていたら, かなり使い勝手がよいものである.(It先生曰く一番重要な定理である)
+\end{point}
+\prf \tf{有限次ガロア拡大であることを認めて最後の同型を示す.} 有限次ガロア拡大であることは\cite{aoyukie}などを見よ. \par
+次の不等式に注意しよう.
+\[|G| \leq |\mr{Aut}_{L^G}L| = |\mr{Gal}(L/L^G)| \leq |\mr{Hom}_{L^G}(L,\ovl{K})| = [L:L^G]  \]
+最初の不等号は$\rho$の単射性による. よって$[L:L^G] \leq |G|$を示せばよくなる. $L/L^G$を有限次ガロア拡大と認めたので, とくに単拡大である. $L=L^G(\alpha)$と書ける. \ao{$[L:L^{G}]\leq |G|$を示すには, $\alpha$が$L^G$係数の$|G|$次以下の多項式の根になればよい. } $\set{\rho(g)(\alpha) \mid g\in G } = \set{\alpha_1,\dots, \alpha_n}$とおき, $i\neq j$なら$\alpha_i\neq \alpha_j$であるようにする(よって\bolm{n\leq |G|}である). このとき$\alpha_1,\dots,\alpha_m$の第$i$次対称式$s_i$は$\rho:G\to \mr{Aut}L$の作用で不変であり,
+\[f(t) = \prod_{i=1}^{m} (t-\alpha_i) = t^n - s_1t^{n-1} + \dots + (-1)^{m} s_m\]
+は$L^G[t]$の元で, $y$を根に持つ$L^G$係数の$n$次多項式が得られたから$[L^G(\alpha):L^G] \leq n\leq |G|$である.  $\rho$の像は$\mr{Aut}_{L^G}L$に含まれるから, $\rho:G\to \mr{Aut}_{L^G}L$が全単射となり同型が従う.
+
+\begin{comment}
+$n=[L:L^G]$とする.$L^{G}$の定義から, $\rho(G) \subset \mr{Aut}_{L^G}L = \gal(L/L^G)$であり, $\rho$は単射なので$|G|\leq n$である.\par
+逆の不等号を示す.$|G| < n$であるとする. $t> |G|$で, $x_1,\cdots, x_t\in L$を$L^G$上一次独立とするなら, $[L^G(x_1,\cdots, x_t):L^G] > |G|$だが, $L^G(x_1,\cdots, x_t)$は単拡大$L^G(y)$と書け, $y$の最小多項式は$|G|$次より大であるということになる.\par
+$y$の$G$の作用による軌道の元を$\{ y=y_1,\cdots, y_r\}$とするとき,
+\ben
+\item $G$軌道が$r$個の元しか作らないのだから当然$r\leq |G| $である.
+\item $s_i$を$y_j$の基本対称式とすれば
+\[F(T) = \sum_{i=0}^{r} (-1)^i s_i T \in L^G[T]\]
+は$\{ y=y_1,\cdots, y_r \}$を根に持つので, \aka{最小性から$r > |G|$である.}
+\een
+これは矛盾である.よって$|G| \geq n$が示され, $|G| = n$である.よって, $\rho:G\to \gal{(L/L^G)}$は群同型である.   \qed
+\end{comment}
+
+
+
+\begin{eg}
+$G=\maf{S}_{n}$は有理関数体$L=k(x_1,\cdots, x_n)$に置換として忠実に作用する。\textcolor{blue}{よって命題より
+\[\mr{Gal}(L/L^{G}) \cong \maf{S}_{n}\]
+だから$[L:L^{G}] = n!$である。}
+
+$x_1,\cdots, x_n$の基本対称式を$s_1,\cdots, s_n$とする。不変体$L^{G}$が何であるかを調べよう。$k(s_1,\cdots, s_n)$はいかにも不変体らしく見える。実際そうである。$F=k(s_1,\cdots, s_n)$としよう。$F\subset L^{G}$は明らかである。よって$[L:F] \geq n!$である。逆の包含関係を示すためには, 拡大次数が$\leq n!$であると言えればよい。(このような使い方が典型的)
+
+まず$L/F$はガロア拡大である。なぜなら, $L= F(x_1,\cdots, x_n)$であり, $T^{n} - s_1T + \cdots + (-1)^{n}s_n$は$x_i$をすべて根にもつから正規であり, この多項式$\in F[T]$は重根を持たないから分離的である。 係数は$G$で不変であるから, $\sigma\in \mr{Gal}(L/F)$は$f(t)$の根の置換を起こす。\ao{よって準同型$G\to \maf{S}_n$が得られる。}逆にこの置換を一つ定めることで$\sigma$は完全に決定されるので準同型は単射。よって$|\mr{Gal}(L/F)| = [L:F]\leq n!$である. 以上より$F=L^{G}$, すなわち次が言えたことになる.
+
+\textcolor{blue}{有理関数のうち, 置換を施して変わらないものはいずれも基本対称式の有理関数として表すことができる。}
+\end{eg}
+
+
+
+
+\begin{egprob} (東工大R2午後2)
+$k$を標数$p>0$の体とし, $n\in\mb{N}$とする. $n$変数有理関数体$L=k(t_1,\dots, t_n)$を考える. $V$により, $t_1,\dots, t_n$の生成する$L$の$n$次元部分$\mb{F}_{p}$ベクトル空間を表す. $\mr{GL}_n(\mb{F}_{p})$を$L$に次のように作用させる: $g=(g_{ij})\in \mr{GL}_{n}(\mb{F}_p)$と$f=f(t_1,\dots, t_n)\in L$に対し,
+\[(gf)(t_1,\dots, t_n) = f(g(t_1), \dots g(t_n)),\quad g(t_j) = \sum_{i=1}^{n} g_{ij}t_i.\]
+さらに$F(X) = \prod_{v\in V} (X-v)$とおく.
+\ben
+\item $F(X) = X^{p^n} + s_1 X^{p^{n-1}} + \dots + s_{n-1}X^p + s_n X$, $s_i \in L^{\mr{GL}_{n}(\mb{F}_p)}$と表せることを証明せよ. ここで$L^{\mr{GL}_{n}(\mb{F}_{p})}$は$L$の$\mr{GL}_{n}(\mb{F}_p)$による固定部分体を表す.
+\item $L$の部分体$K=k(s_1,\dots, s_n)$を考える. $L/K$は有限次ガロア拡大であり, そのガロア群は$\mr{GL}_{n}(\mb{F}_{p})$と同型であることを証明せよ.
+\een
+\end{egprob}
+
+\begin{egans}
+(1): 帰納的に考える. $n=1$のときは$F(X) = X^{p} - Xt_1^{p-1}$なのでよい.  \par
+$F(X)$の係数が$L^{\mr{GL}_{n}(\mb{F}_{p})}$に属すことは, $v\in V$たちの基本対称式で表されていることから明らかである.
+$W=\mb{F}_{p}t_1 \oplus \dots \oplus \mb{F}_{p}t_{n-1}$とするとき, \[F(X) = \prod_{w\in W}\prod_{m=0}^{p-1} (X-w-mt_n)\]
+である. $X-mt_n$を$X_m$と書いて一文字と見ると,
+\[\prod_{w\in W} (X_m - w) = X_m^{p^{n-1}} + s_1X_m^{p^{n-2}} + \dots + s_{n-1} \]
+と表せる. これを$G(X_m)$と書くと, 指数が$p$の冪の部分しかないので, $G(X_m) = G(X) - mG(t_n)$が分かる. よって,
+\[F(X) = \prod_{m=0}^{p-1} (G(X) - mG(t_n)) = G(X^{p}) - G(X) G(t_n)^{p-1} \]
+となり, 明らかに$p$冪次以外の部分は消失している. \\
+(2): (本問はArtinの定理を用いるが, 答案に書くための流れでいきたい)\\
+まず$t_i$は$F(X)$の根であり, $t_i$の共役元は$F(X)$の根の中にあることは分かるので, $L/L^{\mr{GL}_{n}(\mb{F}_p)}$が正規拡大であることは分かる. そして, $F'(X) = s_n \neq 0$なので分離拡大である(この拡大では下の体が完全体ではないのでこの確認は必須). よって有限次ガロア拡大である. \\
+\fbox{$\gal{(L/L^{\mr{GL}_{n}(\mb{F}_p)})} \cong \mr{GL}_{n}(\mb{F}_p)$} $G=\mr{GL}_{n}(\mb{F}_p)$とおく. 問題文によって忠実作用$\rho:G\to \mr{Aut}_{L^{G}}L$が与えられる. 次に注意する.
+\[|G| \leq |\mr{Aut}_{L^G}L| \leq |\mr{Hom}_{L^G}(L,\ovl{L^G})| = [L:L^G]\]
+$L/L^G$は有限次分離拡大だから$L=L^G(\alpha)$と表せる. $\rho(g)(\alpha)$という形の元のうち異なるものを$\alpha=\alpha_1,\dots, \alpha_m$とすると$m\leq |G|$である. そして, $\alpha_1,\dots, \alpha_m$の基本対称式$l_1,\dots, l_m\in L^G$を用いて
+\[T^m - l_1T^{m-1} + \dots + (-1)^{m}l_m\]
+は$\alpha_1,\dots, \alpha_m$を根に持つので$[L^G(\alpha):L^G]\leq m \leq |G|$である. よって$\rho$は全単射だから同型. ゆえに$\gal{(L/L^G)}\cong G$. \\
+\fbox{$k(s_1,\dots, s_n) = L^{G}$} $\subset$は明らかである. よって $L/k(s_1,\dots,s_n)$もガロア拡大であり, $[L:k(s_1,\dots, s_n)] \leq |G|$が示せれば拡大次数を比較して$L^G=k(s_1,\dots, s_n)$が従う.
+$\sigma\in \gal{(L/k(s_1,\dots, s_n))}$は$\sigma(t_i)$の移り方で決まる. $\sigma(t_i)$の写し先としてあり得るのは$V$の元である. しかし, $\sigma$は同型写像で$V$の元は$t_1,\dots, t_n$で生成されているので, $\sigma(t_1),\dots, \sigma(t_n)$の移り方は, $\sigma$を$V$に制限して置換になるようにするべきである. このため, $\sigma(t_1),\dots, \sigma(t_n)$は$V$の一次独立系でなければならない. よって$\sigma$にただひとつの$G$の元が(表現行列として)対応するべきであるから, 単射準同型$\gal{(L/k(s_1,\dots, s_n))}\hookrightarrow G$がある.よって$|\gal{(L/k(s_1,\dots, s_n))}|\leq |G| = [L:L^G]$であるから, これと$k(s_1,\dots, s_n)\subset L^G$より$L^G = k(s_1,\dots, s_n)$である.\qed
+\end{egans}
+
+
+
+
+\subsection{Galois理論の基本定理}
+Galois群の部分群と拡大体の中間体が1:1に対応するということの正確な主張は以下の通りである.
+\tbox{
+\begin{theo} $L/K$を有限次ガロア拡大とする. $\mb{M}$を$L/K$の中間体の集合, $\mb{H}$を$\gal{(L/K)}$の部分群の集合とするとき, 次の(1)-(3)が成り立つ.
+\ben
+\item 次の二つの写像は互いの逆写像である:
+\bealn{
+\mb{M}\ni M  &&\mapsto && H(M) \in \mb{H}\\
+\mb{M} \ni M_{H} && \mapsfrom && H\in \mb{H}
+}
+ただし, $H(M)$は$M$を固定するガロア群の元全体$\set{g\in \gal{(L/K)} \mid \forall x\in M, gx = x}$であり, $M_H$は$H$により固定される中間体$\set{x\in L \mid \forall g\in H \mid gx = x}$である(不変体という).
+\item $M_1,M_2\in\mb{M}$が$H_1,H_2\in\mb{H}$に対応するとき, 『$\cap$とSpanで双対的かつ順序を反対にする』対応になる.
+\bealn{
+M_1\subset M_2 &&\iff && H_1\supset H_2&\quad (\tf{反変性}) \\
+M_1\cdot M_2 && \leftrightarrow && H_1\cap H_2
+ & \\
+ M_1 \cap M_2 && \leftrightarrow && \lan H_1,H_2 \ran
+ }
+ \item $M\in \mb{M}$が$H\in \mb{H}$と対応し, $\sigma \in \gal{(L/K)}$ならば,
+ \[\sigma(M) \leftrightarrow \sigma H \sigma^{-1}\]
+ と対応する. さらに,
+ \[\bolm{ M/K がガロア拡大 \iff H が \gal{(L/K)}で正規}\]
+ である. また, $H$が正規部分群であるとき, $\gal{(L/K)}$の元を$M$に制限することにより
+ \[\bolm{\gal{(M/K)} \cong \gal{(L/K)}/H}\]
+ である.
+\een
+
+\end{theo}
+}{title=ガロアの基本定理}
+\prf
+\step{1.1}{$M\mapsto H(M) \mapsto M_{H(M)}$は恒等写像}
+定義から$M_{H(M)}$は$H(M) = \gal{(L/M)}$の全ての元で固定される体であるから$M_{H(M)} \supset M$が従う. $[L:M] = n$としよう. $|H(M)| = n$である. 包含射$\rho:\gal{(L/M)}\to \mr{Aut}L$の作用に関する$L$の固定体が$L^{\gal{(L/M)}} = M_{H(M)}$であるから, アルティンの定理により$\gal{(L/M_{H(M)})} \cong \gal{(L/M)}$であり(\tf{ここがポイント}), とくに位数が等しいので$[L:M_{H(M)}] = n$である. $M_{H(M)}\supset M$なので, 等号が成り立つ. \\
+\step{1.2}{$H\mapsto M_H\mapsto H(M_H)$は恒等写像}
+定義により$H(M_H) = \gal{(L/M_H)}$であり, $H$の元は$M_H$を固定するので$H \subset H(M_H)$である. $\rho:H\to \mr{Aut}L$により$L$に忠実に作用し, $L^H := M_H$なのでアルティンの定理から$\gal{(L/M_H)} = H(M_H) \cong H$(ここがポイント). とくに$H$と$H(M_H)$の位数は等しいので$H=H(M_H)$.
+(2): \\
+(3):
+\qed
+
+
+
+\begin{egprob}
+$K/\mb{Q}$を拡大で, ある$n$により$K\subset \mb{Q}(\zeta_n)$であるとするとき, $K/\mb{Q}$はガロア拡大であることを示せ. また, これを用いて $K=\mb{Q}(\tan{\dfrac{2\pi}{n}})$が$\mb{Q}$上ガロア拡大であることを示せ.
+\end{egprob}
+\begin{egans}
+$\mb{Q}(\zeta_n)/\mb{Q}$はアーベル拡大であるから, 中間体に対応する部分群は必ず正規部分群であり, そのため$K/\mb{Q}$がガロア拡大になる. $K=\mb{Q}(\tan{\dfrac{2\pi}{n}})$の場合, $K\subset \mb{Q}(\zeta_{4n})$なのでよい($\zeta_{4n}^{n} = i$に注意).
+\end{egans}
+
+
+次は過去問ですが, ここで用いる議論はほかの問題にも応用できます.
+
+\begin{egprob} (H28専門科目1) \label{prob:H28senmon-1}
+$\mb{Q}$係数既約多項式$f(x) = x^3 + ax+b$を考え, $K\subset \mb{C}$を$f(x)$の最小分解体とする. $a>0$のとき, $K/\mb{Q}$のガロア群が3次対称群と同型であることを示せ.
+\end{egprob}
+\begin{egans}
+$f'(x) = 3x^2+a>0$なので中間値の定理より実根$r$がただひとつ存在する. 虚根を$\alpha$とすると$\ovl{\alpha}, \alpha , r$が根のすべてになる. $r+\alpha + \ovl{\alpha} = 0$なので$\ovl{\alpha} \in \mb{Q}(\alpha,r)$. よって$K=\mb{Q}(\alpha,r)$である. これが$\mb{Q}$上の6次ガロア拡大であることは容易に分かる. ガロア群を$G$とする. $\sigma\in G$は$\sigma(r)$と$\sigma(\alpha)$によって決まる. これは$X=\set{r,\alpha,\ovl{\alpha}}$の置換によって決まるということと同じである. よって$G$は$X$に作用し, $G\to \mr{Aut}(X)\cong \maf{S}_{3}$という群準同型を得るが, これは位数が同じで単射なので全単射でもある. よって同型である. \qed
+\end{egans}
+
+\begin{prac}
+$a=0$の場合にも同様の議論が成り立つか確かめよ.
+\end{prac}
+
+\begin{egprob} (仮想面接問題)
+先の例題で$a<0$の場合に$S_3$と同型にならない例をあげてください. 難しければ$f(x)=X^3+aX^2+bX+c$の最小分解体からでもよいです.
+\end{egprob}
+
+\begin{egans}
+実根が3つあるということが起こりうるので, それを狙う. $t_k=\zeta_7^k + \zeta_7^{-k}$とし, $t_1$の最小多項式を求める. $2\in (\cyc{7})^{\ast}$が位数3であることを利用して,
+\[(X-t_1)(X-t_2)(X-t_4)\]
+とする.
+\bealn{
+t_1+t_2+t_4 &= -1\\
+t_1t_2 + t_2t_4 + t_4t_1 = -2 \\
+t_1t_2t_4 &= 1
+}
+と計算でき, $X^3 + X^2 - 2X - 1$を得る. これの最小分解体は$\mb{Q}(t_1)$である(普通に計算するか, チェビシェフ多項式などを考えよ). よってこの拡大は3次であり, ガロア群は$\cyc{3}$である.
+\end{egans}
+\begin{egans} 案外, $S_3$にならない例というのは限られている.  ここでの例は「三次多項式のガロア群」の節を参照すると具合がわかる. 実は$f(x) = x^3-3x-1$の最小分解体が$\cyc{3}$である. 解答は\ref{egprob:gal=z/3z_example}にて.
+\end{egans}
+
+
+
+
+
+
+
+
+
+
+\subsection{Galois拡大の推進定理}
+合成体のGalois群は推進定理を考えると良いことがある.
+\tbox{
+\begin{theo}
+$L = M_1\cdot M_2$, $M_1\cap M_2 = K$とする.
+\ben
+\item $M/K$が有限次ガロア拡大ならば, $L/N$も有限次ガロア拡大で,
+\[\gal{(L/N)}\cong \gal{(M/K)}\]
+\item $M/K, N/K$が有限次ガロア拡大ならば$L/K$も有限次ガロア拡大で,
+\[\gal{(L/K)}\cong \gal{(M/K)}\times \gal{(N/K)}\]
+\een
+\end{theo}
+}{title=Galois拡大の推進定理}
+\begin{point}
+\ben
+\item 「平行四辺形」の向かい合う辺のうち下にあるほうがFin.Galならば, もう片方も同じガロア群を持つFin.Galである.
+\item 下の2辺がFin.Galならば, 下から上までのガロア群は直積.
+\een
+\end{point}
+\begin{cor} (簡易版1)
+上の設定で, $L/K$, $M/K$が有限次ガロア拡大ならば, $L/N$も有限次ガロア拡大で
+\[\gal{(L/N)}\cong \gal{(M/K)}\]
+であり, $N/K$も有限次ガロア拡大ならば
+\[\gal{(L/K)}\cong \gal{(M/K)}\times \gal{(N/K)}\]
+\end{cor}
+
+\begin{eg}
+有限次ガロア拡大でない拡大がある場合の使用例を一つ考える. $\mb{Q}\subset \mb{R}\subset \mb{C}$という体拡大を考え, $K/\mb{Q}$を有限次ガロア拡大で, $K\neq K\cap \mb{R}$であるとする. このとき$K\cdot \mb{R} = \mb{C}$に注意する. もし$K\cap \mb{R} = \mb{Q}$であれば, 定理の(1)によって
+\[\gal{(K/\mb{Q})}\cong \gal{(\mb{C}/\mb{R})} \cong \mb{Z}/2\mb{Z}\]
+である. よって$K$は虚2次体$\mb{Q}(\sqrt{-d})$である. $K\cap \mb{R}$が分からなくても, $K/K\cap \mb{R}$に上を適用すれば\tf{これが2次拡大であると分かる.}
+\end{eg}
+\begin{egprob} $x^3+2$の$\mb{Q}$上の最小分解体$K$に対し, $K\cap \mb{R}$を求めよ.
+\end{egprob}
+\begin{egans}
+$K=\mb{Q}(\sqrt[3]{2}, \zeta_6)$が用意に分かる. $K$は$K\cap \mb{R}$上2次なので$[K\cap \mb{R}:\mb{Q}] = 3$である. 明らかに$K\cap \mb{R}\supset \mb{Q}(\sqrt[3]{2})$なので$K\cap \mb{R} = \mb{Q}(\sqrt[3]{2})$.
+\end{egans}
+\begin{prac}
+$K/\mb{Q}$が奇数次ガロア拡大のとき$K\subset \mb{R}$を推進定理で示せ\footnote{推進定理なしなら, 複素共役という自己同形をがあるのを考えれば簡単. }.
+\end{prac}
+
+
+
+
+
+
+
+\subsection{Kummer理論}
+\begin{assume} \label{assume:kummer}
+$n$を固定した2以上の正の整数とする. 体$K$は, 標数$p$が$p=0$あるいは$n$を割り切らない素数$p$であるとして,  1の原始$n$乗根$\zeta_n$を含むものであるとする.
+\end{assume}
+\begin{eg}
+\ben
+\item $n=2$なら, $\mb{Q}$や$\mb{F}_{p^{k}}$ ($p$は奇素数) は条件を満たす.$a_i\in \mb{Z}$として, \textcolor{blue}{$\mb{Q}(\sqrt{a_1}, \sqrt{a_2}, \cdots, \sqrt{a_k})$のような拡大体も条件を満たす.}
+\item $n=3$なら, $\mb{Q}(\omega) = \mb{Q}(\sqrt{-3})$や$\mb{F}_{p}$ ($p=6k+1$型) は条件を満たす.
+\een
+\end{eg}
+
+\tbox{
+\begin{theo} $K$はある$n\geq 2$に対して仮定\ref{assume:kummer}を満たす体とする.$R$は部分群$K^{\times} \supset R \supset (K^{\times})^{n}$で, $R/(K^{\times})^{n}$が有限であるとする.このとき$K(\sqrt[n]{R})/K$はGalois拡大であって, そのGalois群に対して
+\[\gal{(K(\sqrt[n]{R})/K)} \cong \hom{{R/(K^{\times})^{n}}, \mb{C}^{1}}\]
+が成り立つ.ただし, 右辺は$R/(K^{\times})^{n}$から$\mb{C}^{1}= \{ z\in \mb{C} \mid |z| = 1 \}$ への群準同型全体の集合に\tf{通常の積の演算}を入れたものである\footnote{有限Abel群$G$に対して$\hom{G,\mb{C}^{1}}$を$G^{\ast}$とも書く本もある(\cite{aoyukie}).また, $G^{\ast} = \hom{G,\mb{C}^{\times}}$である.}.
+\end{theo}
+}{title=\tf{Kummer拡大のGalois群}}
+すなわち, $K$に有限的な条件を守りながら冪根の集合$R$を添加した体$K(\sqrt[n]{R})$の$K$上のガロア群は, 群$R/(K^{\times})^n$の\tf{双対群}に同型である. \\
+\prf
+方針を述べる. $\mu_n$を$\mb{C}_1$の$1$の$n$乗根の集合とする.
+\ben
+\item $\Phi:\gal{(L/K)}\times R\to \mu_n$を
+\[\bolm{\Phi(\sigma, a) = \dfrac{\sigma(\sqrt[n]{a})}{\sqrt[n]{a}}}\]
+と定めると, これは$\sqrt[n]{a}$の選択に依存しない.
+\item $\Phi$はPerfect Pairing $\gal{(L/K)}\times R/(K^{\times})^n \to \mu_n$を引き起こす. すなわち, この写像は非退化$\mb{Z}$双線型写像である.
+\item 一般にPerfect Pairing$\Phi:G\times H \to \mb{C}_1$があｒとき, $H\cong G^{\ast}, G\cong H^{\ast}$である,
+\een
+\qed
+
+
+\begin{eg}
+素数を小さい順に並べた数列を$p_1,p_2,\cdots$とする.$L = \mb{Q}(\sqrt{p_1},\sqrt{p_2},\cdots, \sqrt{p_k})$の拡大次数は$2^{k}$であると予想できる.実際正しい.初等整数論的に解けるかもしれない.だがこれはよく見るとKummer拡大であることが分かるので,  Kummer理論を使って拡大次数を求めることができるのである.そのためには$L$が$\mb{Q}(\sqrt[2]{R})$と思えるように部分群$\mb{Q}^{\times} \supset R \supset (\mb{Q}^{\times})^{2}$を取らなければならない. ここれは, $R$を$p_1,\dots, p_k$と$(\mb{Q}^{\times})^2$で生成される$\mb{Q}^{\times}$の部分群とする. $R/(\mb{Q}^{\times})^2 \cong (\mb{Z}/2\mb{Z})^k$が示せる. これの双対群もまた$(\mb{Z}/2\mb{Z})^k$である.
+\end{eg}
+
+\begin{eg}
+$l$を素数, $\mu\in \mb{Z}$を整数の$l$乗ではないとする.$K=\mb{Q}(\sqrt[l]{\mu})$とするとき, $[K:\mb{Q}] = l$であることを示そう.
+\end{eg}
+
+
+
+\begin{egprob} (\cite{momoyukie}演習2.2.2)\\
+$K=\mb{Q}(\sqrt[5]{2},\sqrt[5]{3})$, $\zeta = \exp{(2\pi \sqrt{-1}/5)}$, $L=K(\zeta)$とする.
+\ben
+\item $L/\mb{Q}(\zeta)$はガロア拡大で$\gal{L/\mb{Q}(\zeta)} \cong (\mb{Z}/5\mb{Z})^2$であることを証明せよ.
+\item $[K:\mb{Q}] = 25$であることを証明せよ.
+\een
+\end{egprob}
+\begin{egans}
+(1): $K_0 = \mb{Q}(\zeta)$とする. $R$を$(K_0^{\times})^5$と$2,3$で生成される群とする. $K_0$を1の5乗根を含む体である. $K=K_0(\sqrt[5]{R})$と表せるので, Kummer理論により
+\[\gal{(K_0(\sqrt[5]{R})/K_0)} \cong (R/(K_0^{\times})^5)^{\ast}\]
+である. $f:\mb{Z}^2 \to K_0^{\times}/(K_0^{\times})^5$を$f(a,b) = [2^a3^b]$とする. $\ker{f} = (5\mb{Z})^2$であることを示そう. もし$2^a3^b\in (K_0^{\times})^5$に属すなら, $2^a3^b = \alpha^5$なる$\alpha\in K_0$が存在する. これにより
+\[N_{K_0/\mb{Q}}(2^a3^b)= 2^{4a}3^{4b} = N_{K_0/\mb{Q}}(\alpha^5) = (N_{K_0/\mb{Q}}(\alpha))^5 \]
+であり, $N_{K_0/\mb{Q}}(\alpha) \in \mb{Q}$なので$a,b\in 5\mb{Z}$. 逆にこのときに$\ker{f}$に属すのは明らか. よって$\ker{f} - (5\mb{Z})^2$なので, 準同型定理より$\im{f} \cong (\mb{Z}/5\mb{Z})^{2}$である. \qed \\
+(2): $K\cap K_0 \subset \mb{R} \cap \mb{Q}(\zeta) = \mb{Q}$なので$K\cap K_0 = \mb{Q}$. よって推新定理より$K_0/\mb{Q}$と同じく, $L/K$は4次拡大. よって(1)$[L:\mb{Q}] = 4[K:\mb{Q}]$である. 一方で(1)から$[L:\mb{Q}] = [L:K_0][K_0:\mb{Q}] = 25\times 4  =100$だから, $[K:\mb{Q}] = 25$が従う.\qed
+\end{egans}
+
+
+
+
+
+\newpage
+
+
+\subsubsection{演習問題}
+\subsubsection{Level A}
+\begin{prob} (20代数学IIレポート)\\
+$f(T)\in \mb{Q}[T]$を既約な3次多項式で, 3つの実根をもつものとする.$\alpha\in \ovl{Q}$を$f(T)$の根とする.このとき, 次の条件をみたす$\beta\in /mb{Q}(\alpha)$は存在しないことを示せ.
+\[\beta^{3}\in \mb{Q}, \mb{Q}(\alpha) = \mb{Q}(\beta)\]
+\end{prob}
+
+\subsubsection{Hint・Answer}
+{\small
+\begin{probans}
+$\beta$が存在するとせよ. $\alpha=:\alpha_1$の共役を$\alpha_2,\alpha_3\in \mb{R}$とする.$\mb{Q}(\alpha_1,\alpha_2,\alpha_3) = \mb{Q}(\beta,\alpha_2,\alpha_3)$であり, 左辺は$\mb{Q}$の正規拡大でかつ$\mb{R}$に含まれる体である.よって右辺も正規拡大かつ$\mb{R}$に含まれるので, とくに$\beta$の共役元はすべて実数である.しかし, $\beta^{3}\in \mb{Q}$から$\beta$の共役元には虚数も含まれるので矛盾である.\qed
+\end{probans}
+
+
+}
+
+
+
+\clearpage

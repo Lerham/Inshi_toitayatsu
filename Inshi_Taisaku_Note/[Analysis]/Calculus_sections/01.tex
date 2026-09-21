@@ -1,0 +1,606 @@
+\section{収束と一様収束}
+この節では収束と一様収束について取り扱う.京大院試では一様収束関連の問題が\tf{頻出}であり, 近年の問題はかなり難易度が高く, ぜひとも得点したい部分である.
+
+\subsection{収束と発散}
+\begin{egprob} (\cite{rikou}, 演習5-15)
+\ben
+\item $\sum a_n$は発散, $\sum b_n$は収束, かつ$\dfrac{a_n}{b_n}\to 0$を満たす$\{ a_n\}, \{ b_n \}$の例をあげよ.
+\item $\sum a_n$は発散, $\sum b_n$は収束, かつ$\dfrac{a_n}{b_n}\to 1$を満たす$\{ a_n\}, \{ b_n \}$の例をあげよ.
+\een
+\end{egprob}
+\begin{egans}
+まず, 正項級数で探してはならない.実際, $\dfrac{a_n}{b_n}\to 0$で$a_n,b_n>0$なら, 十分大きい$n$からは$a_n < b_n$であり, 級数の収束発散性と噛み合わないことになる.$\dfrac{a_n}{b_n}\to 1$なら十分大きい$n$からは$a_n < 2b_n$であり, やはり噛み合わない.つまり, 正項級数では構成することが出来ない.
+
+(1): $a_n = \dfrac{1}{n}$, $b_n = \dfrac{(-1)^{n}}{\sqrt{n}}$でよい.$b_n$の収束性は定理\ref{theo:leibniz_theorem}による.
+
+(2): $a_n = \dfrac{1}{n} + \dfrac{(-1)^{n}}{\sqrt{n}}$, $b_n = \dfrac{(-1)^{n}}{\sqrt{n}}$でよい.なお, (1)の答えを見つけられたら, その$a_n,b_n$に対して$a_n + b_n$, $b_n$を与えるだけで本問は解決する.
+\end{egans}
+
+\begin{egprob} (神戸大H30基礎3(3))
+$[0,\infty)$上の非負値単調減少な連続関数$f(x)$に対し,
+\[a_n = \int_{0}^{n} f(x)\, dx - \sum_{k=1}^{n} f(k)\]
+とおく.$a_n$は収束することを示せ.
+\end{egprob}
+\begin{screen}
+このような「積分と総和の差」を扱う問題はしばしば見られます. 曲線で囲まれた部分の面積と帯の面積の総和との差ですから, 解答のように$a_n$を式変形するのが自然です. 収束値を直接求めにくい場合は, Cauchy列であることを調べるとよいでしょう.
+\end{screen}
+\begin{egans}
+$m>n$とする.$f$は非負値連続だから
+\beqn
+a_m - a_n &=& \sum_{k=n+1}^{m} \int_{k-1}^{k} f(x)\, dx - \sum_{k=n+1}^{m} f(k)\\
+&=& \sum_{k=n+1}^{m} \int_{k-1}^{k} (f(x) - f(k))\, dx\\
+&\leq& \sum_{k=n+1}^{m}\int_{k-1}^{k} (f(k-1) - f(k))\, dx\\
+&=& \sum_{k=n+1}^{m}(f(k-1) - f(k)) \\
+&=& f(n) - f(m)
+\eeqn
+また, 2行目から$a_m - a_n$が正であることも分かる.$\{ f(n)\}_{n=1,2,\cdots}$は単調減少で下に有界なので収束し, コーシー列である.よって各$\epsilon>0$に対しある$N$があり, $m>n\geq N$なら$f(n) - f(m) <\epsilon$だが, このとき$|a_m - a_n| = a_m - a_n < \epsilon$なので$\{ a_n\}$もコーシー列である.よって収束する.\qed
+\end{egans}
+
+非自明な極限といえば次が代表的であろう.
+\begin{egprob} (\tf{Strilingの公式})
+次の等式が成り立つ.
+\[\disp\lim_{n\to \infty} \dfrac{2^{2n}(n!)^2}{\sqrt{n} (2n!)} = \sqrt{\pi}\]
+\end{egprob}
+\prf
+$n\in \mb{N}\cup \{ 0\}$に対して $I_n = \disp\int_{0}^{\frac{\pi}{2}}(\sin{x})^n\, dx$と定めると, $n\geq 2$のとき, 部分積分公式より
+\beqn
+I_n &=& \disp\int_{0}^{\frac{\pi}{2}} (\sin{x})^{n-1}(-\cos{x})' \, dx\\
+&=& (n-1)\disp\int_{0}^{\frac{\pi}{2}}(\sin{x})^{n-2}(1-\sin^{2}{x} dx\\
+&=& (n-1)I_{n-2} - (n-1)I_n
+\eeqn
+となるので,
+\[I_n = \dfrac{n-1}{n}I_{n-2}　(n\geq 2)\]
+が成り立つ.したがって$I_0  =\dfrac{\pi}{2}, I_1=1$に注意すると,
+\[I_{2n} = \dfrac{(2n-1)!!}{(2n)!!}\cdot\dfrac{\pi}{2},　　I_{2n+1} = \dfrac{(2n)!!}{(2n+1)!!}\]
+が得られる.ここで, $0<\sin{x} <1$であるから
+\[0<I_{2n+1}<I_{2n}<I_{2n-1} \]
+となり,
+\[1<\dfrac{I_{2n}}{I_{2n+1}} < \dfrac{I_{2n-1}}{I_{2n+1}} = \dfrac{2n+1}{2n}\]
+だからはさみうちの原理より
+\[\disp\lim_{n\to\infty}\dfrac{I_{2n}}{I_{2n+1}} = 1\]
+が分かる.一方,
+\[\dfrac{I_{2n+1}}{I_{2n}} = \disp\prod_{k=1} \dfrac{2k}{2k+1} \cdot \dfrac{2}{\pi} \disp\prod_{k=1}^{n} \dfrac{2k}{2k-1} = \dfrac{2}{\pi} \disp\prod_{k=1}^{n}\dfrac{(2k)^2}{(2k+1)(2k-1)}\]
+となる.これと$\disp\lim_{n\to\infty}\dfrac{I_{2n}}{I_{2n+1}} = 1$から
+\[\disp\prod_{n=1}^{\infty}\dfrac{(2n)^2}{(2n-1)(2n+1)} = \dfrac{\pi}{2}\]
+が成り立つ.\footnote{これはWallis積と呼ばれる.} $I_{2n}I_{2n+1} = \frac{\pi}{2(2n+1)}$ であるから,
+\beqn
+\disp\lim_{n\to\infty} \sqrt{n}I_{2n+1}&=& \disp\lim_{n\to \infty} \sqrt{nI_{2n}I_{2n+1}}\sqrt{\dfrac{I_{2n+1}}{I_{2n}}}\\
+&=& \disp\lim_{n\to \infty} \sqrt{\dfrac{\pi n}{2(2n+1)}} \cdot \sqrt{ \dfrac{I_{2n+1}}{I_{2n}} }\\
+&=& \dfrac{\sqrt{\pi}}{2}
+\eeqn
+となる.したがって ,
+\beqn
+\disp\lim_{n\to\infty} \dfrac{2^{2n}(n!)^2}{\sqrt{n}(2n)!} &=& \disp\lim_{n\to\infty} \dfrac{((2n)!!)^2}{\sqrt{n}(2n)!}\\
+&=& \disp\lim_{n\to\infty} \dfrac{(2n)!!}{\sqrt{n}(2n-1)!!}\\
+&=& \disp\lim_{n\to\infty} \dfrac{2n+1}{\sqrt{n}} \cdot \dfrac{(2n)!!}{(2n+1)!!}\\
+&=& \disp\lim_{n\to\infty} \dfrac{2n+1}{n}\cdot \sqrt{n}I_{2n+1} = \sqrt{\pi}
+\eeqn
+が得られる.
+\qed
+\begin{tips}
+$I_{2n} = \dfrac{(2n-1)!!}{(2n)!!} \cdot \dfrac{\pi}{2}$, $I_{2n+1} = \dfrac{(2n)!!}{(2n+1)!!}$は覚えて損はない!
+\[\bolm{I_n=\dfrac{(n-1)!!}{n!!} c(n)} ,\quad c(n) = \bcas \dfrac{\pi}{2} \quad (n:\text{偶数})\\ 1 \quad (n:\text{奇数})\ecas\]
+とも書ける.どちらが$c(n) = 1$であるかは, $I_0 = \dfrac{\pi}{2}$から判断.\redwave{$0$から$\frac{\pi}{2}$までの積分ということも忘れないように！}
+\end{tips}
+
+
+\begin{egprob} \label{egprob:phi_diverge}
+Eulerのトーシェント関数$\phi$について$\lim_{n\to \infty}\phi(n) = \infty$を示せ.
+\end{egprob}
+\begin{egans}
+$\phi(n)$を大きくする要因には素数の増加と指数の増加の二種類があるので, それを両方おおきくするように範囲を拡大していく. $p_1,\dots$を素数を小さい順番に並べた列とする.  $N\in \mb{N}$に対し
+\[S_N =\set{ p_i^{e_i}\mid 1\leq i\leq N, 0\leq e_i\leq N,  }\]
+とおく. $S_N$は有限集合である. $n$のすべての素数冪の約数が$S_N$に属すようなとき, $n\leq (p_1\dots p_N)^N$である. よって, $n>(p_1\dots p_N)^N$であるとき$n$のある素冪の約数$p^e$が存在して$p^e\notin S_N$である. 与えられた正数$A$に対し, $2^{N-1} \geq A$かつ$p_N >A$であるような$N$を取ることができる. このような$N$を固定したとき, $n>(p_1\dots p_N)^N$であるような$n$では常に, $p^e\notin S_N$なる$n$の約数$p^e$を取ると
+\bealn{
+\phi(n) &\geq \phi(p^e) \\
+&\geq \min{\set{\phi(2^N), \phi(3^N),\dots, \phi(p_{N}^{N-1}), \phi(p_N), \phi(p_{N+1}), \dots}}\\
+&=\min{\set{2^{N-1}, p_N-1} } \geq A
+}
+が成り立つ. よって示せた. \qed
+
+\end{egans}
+
+
+\subsection{一様収束}
+
+\tf{基礎数学では一様収束の問題が頻出である.}M判定法を復習しよう.
+\begin{theo}
+$\{ f_n \}_{n=1,2,\cdots}$を区間$I$上の連続関数列で, $f$に$I$上一様収束するとする.このとき, $f$は$I$上連続である.
+\end{theo}
+\prf $\epsilon >0$, $x_0 \in \mb{R}$を固定する.一様収束性よりある番号$N$が存在して$n\geq N$ならば
+\[\norm{f- f_n}_{\infty} < \epsilon\]
+を満たす.また, $f_n$の連続性よりある$\delta > 0$が存在して$|x-x_0| < \delta$ならば
+\
+よって, $n>N$なる$n$をひとつ固定しておけば, 同じ$x$の範囲で
+\begin{eqnarray*}
+&&\abs{f(x) - f(x_0)}\\
+&\leq&\abs{f(x) - f_n(x)} + \abs{f_n(x) - f_n(x_0)} + \abs{f_n(x_0) - f(x_0)}\\
+& < & 3\varepsilon
+\end{eqnarray*}
+より連続である.\qed\par
+この定理が関数列が一様収束するための必要条件を与えているので, 一様収束性を否定したいときはその極限関数の振る舞いを見ると良いことがある.
+\begin{eg}
+$I=[0,1]$とする.$f_n(x) = x^{n}$ ($n=1,2,\cdots$) は$0$に一様収束しない.もしすれば, 極限関数は連続であるが, 極限関数は$\mb{I}_{\{ 1 \}}(x)$であり明らかに連続ではなく, 矛盾である.
+
+$I=(0,1)$では上の方法は使えませんが, それでも一様収束しません. $x=1$付近で関数値を一様に小さくできないことが要点です. $\sup_{x\in [0,1]} |f_n(x)| \geq f_n(\sqrt[n]{1/2}) = \dfrac{1}{2}$より分かります.
+\end{eg}
+複雑そうな級数が一様収束することを示したいときに次の判定法が使いやすい.
+\besha
+\begin{theo} (WeierstrassのM判定法)\\
+$A$を集合とする(とくに$\mb{R}$の区間など).$A$上の複素, または実数値関数列$\{ f_n(x)\}_{n\in \mb{N}}$を考える.各$n$に対して
+\[\disp\sup_{x\in A}|f_n(x)| < M_n\]
+を満たすような実数列$\{ M_n\}_{n\in \mb{N}}$であって,
+\[\disp\sum_{n=1}^{\infty} M_n < \infty\]
+を満たすようなものが存在するとき, 関数項級数$\parenb{\disp\sum_{n=1}^{N} f_n(x) }_{N\in \mb{N}}$は$\disp\sum_{n=1}^{\infty} f_n(x)$に$A$上一様収束する.
+\end{theo}
+\ensha
+\prf 次より分かる.
+\[\sup_{x\in A} \abs{ \sum_{n=N+1}^{\infty}f_n(x) } \leq \sup_{x\in A} \sum_{n=N+1}^{\infty}\abs{f_n(x)} \leq \sum_{n=N+1}^{\infty} M_n \to 0 \]
+\qed
+
+
+\begin{prac}
+次の関数は$\mb{R}$上一様収束することを示せ.
+\[\sum_{k=-\infty}^{\infty} \dfrac{1}{k^2+k+3}\cos{kx}\]
+\end{prac}
+
+一様収束はこのような問題にのみ留まるのでは無い.一様収束性によって極限と積分の交換が可能になるという定理は解析学で威力を発揮する.それらについては5章を参照せよ.
+
+\begin{egprob} (H12数学I)
+閉区間$[0,1]$で定義された連続関数の列$\set{f_n}$が, $f$に一様収束すると仮定する. どの$n$に対しても$f_n$の像が$f_n([0,1]) = [0,1]$を満足すれば, $f$の像に関しても$f([0,1]) = [0,1]$が成り立つことを示せ.
+\end{egprob}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\subsection{$\epsilon\delta$-論法}
+院試の基礎問題では,
+$\epsilon\delta$論法をパズルのように使いこなさないとできない問題が頻出である. ここではそれを寄せ集めてみることにした.後半に解答を述べる.基本的なテクを次にまとめておく.
+\tbox{
+\begin{point}
+\ben
+\item $\lim_{x\to \infty} f(x) = c$のような条件のとき, $f(x) - c$を考えて$c=0$に帰着できればそうする(圧倒的にそっちのほうが見やすいので).
+\item 無限遠で収束するという条件が備わっている場合, 無限遠と有界区間で2カ所を評価することが多い.
+\item 有界区間では, 連続関数が最大値で抑えられることも有効である. たとえば積分極限において, しばしば有界区間での積分は無視できる. 特異的なふるまいをする点において何が起こっているかを見極めて, 何かしらの問題の仮定にある「値を小さくする要因」を抑えておく.
+\item \tf{有界閉区間上の連続関数は一様連続である.}
+\item $C^1$級という条件がある場合, $|f'|$が連続なので有界閉区間上で$|f'|$が有界であったり一様連続であったりする.
+\een
+\end{point}
+}{title=ポイント}
+
+\begin{prac} (\tf{一次関数で抑える方法}. )
+$f(x)$が$[-1,1]$で$C^1$級でかつ$f(0) = 0$であるとするとき, ある定数$C$が存在して$|f(x)|\leq C|x|$であることを証明せよ.
+\end{prac}
+
+\lefba{
+\begin{egprob}
+$f(x)$は実連続関数で$\lim_{x\to \infty} f(x) = c$となるものとする.このとき,
+\[\lim_{x\to \infty} \dfrac{1}{x}\int_{0}^{x}f(x)\, dx = c\]
+であることを示せ.
+\end{egprob}
+}
+\begin{egans}
+$f(x)$を$f(x)-c$と置き換えることで$c=0$としてよい.$\epsilon > 0$を任意に取る.条件より, ある$R>0$が存在して, $x > R$ならば常に$|f(x)| < \epsilon$である.よって$x>R_{\epsilon}$ならば
+\[\dfrac{1}{x} \int_{0}^{R}f(x)\,dx + \dfrac{1}{x}\int_{R}^{x} f(x)\, dx \leq \dfrac{1}{x}O(1) + \epsilon\cdot (1- R/x)\]
+であり, 右辺は$x$がさらにある定数$K_{\epsilon}$より大きいときは$2\epsilon$未満にできるので, 題意は示された.\qed
+\end{egans}
+\begin{rem}
+この問題は, チェザロ平均の連続版と考えれば全く自然な証明方法であろう.
+\end{rem}
+
+\lefba{
+\begin{egprob} (H17数学I-4)
+$C^1$級関数$f(x)$が$\lim_{x\to \infty} (xf'(x) + f(x)) = 0$を満たすならば, $\lim_{x\to \infty} f(x) = 0$であることを示せ.
+\end{egprob}
+}
+\begin{point}
+まず, $xf'(x) + f(x)$は$(xf(x))'$と気付かねばならない. よって, $g(x)=xf(x)$と置くのが見やすい. $|g(x)/x|$が0に収束しないとなると, $|g(x)|$はある一次関数$\epsilon x$を時々越えるということが起こりうる. そのイメージから不等式を立てる.
+\end{point}
+\begin{egans}
+$g(x) = xf(x)$とおくと$g'(x) = xf'(x) + f(x)$. 背理法で示す. 主張が成り立たないなら, ある$1>\epsilon > 0$により, 任意の$n\in\mb{N}$に対し$x_N > N$かつ$|g(x_n)/x_n| \geq \epsilon$となる$x_N$が有る.$g'(x)\to 0$なのである実数$R>0$が存在して$x>R$ならば$|g'(x)|<\epsilon/3$である. $\epsilon x_n > R$となるような$n$を固定する. このとき$x_n>R$である. 平均値の定理($C^1$級より可能)と$R$の取り方から, 任意の$y > x_n$に対して
+\[\abs{\dfrac{g(y) - g(x_n)}{y-x_n}} < \dfrac{\epsilon}{3}\]
+が成り立つ. $y=x_m$とし, $m(>n)$を十分大きくとれば, $g(x_m) - g(x_n) > \frac{1}{2}g(x_m)$としてよく,
+\[\dfrac{\epsilon}{3} > \dfrac{g(x_m) - g(x_n)}{x_m - x_n} > \dfrac{g(x_m)}{2(x_m-x_n)} > \dfrac{\epsilon x_m}{2x_m} = \dfrac{\epsilon}{2}\]
+となるから矛盾.
+\end{egans}
+
+\lefba{
+\begin{egprob} (H26基礎科目II)
+$f:[0,\infty) \to \mb{R}$は連続で$\lim_{x\to \infty} f(x) = 1$とする. このとき,
+\[\lim_{n\to \infty} \dfrac{1}{n!} \int_{0}^{\infty} f(x)e^{-x}x^n\, dx = 1\]
+であることを証明せよ.
+\end{egprob}
+}
+
+\begin{point}
+極限を0に帰着すると扱いやすいため, $f(x) - 1 = g(x)$とおきます.
+\end{point}
+\begin{egans}
+\chatgpthint{$g(x)=f(x)-1$とおき、$g(x)/x$の極限を調べてください。}
+\end{egans}
+
+\lefba{
+\begin{egprob}
+定数でない連続関数$f$が周期$t>0$を持つとき, その周期の中で最小のものが存在することを示せ.
+\end{egprob}
+}
+\begin{egans}
+周期の集合$P$の下限を$T$とおく. $T\geq 0$であるが, $T>0$であることを示す. もし$T=0$なら, $P$の減少列$t_n \to +0$がある. $f$の最大値を$M$とおく. $M=f(0)$を示す. もし$M>f(0)$ならば, $f(0) + \epsilon < M$となる$\epsilon>0$を取る. この$\epsilon$に対し十分小さい$\delta$を取ると$|x|<\delta$で$|f(x) - f(0)| < \epsilon$とできる. $|t_n| < \delta$なる$n$があり, $f$の値域は$[0,t_n]\subset (-\delta, \delta)$上で決まるので, $f$は$f(0) + \epsilon$以上の値を取らないことになるが, これは$M>f(x) + \epsilon$に反する. よって$M=f(0)$で, 同様に最小値も$f(0)$に等しく, $f$が定数となるのでおかしい.\par
+$T>0$とする. 減少列$t_n \to T$を取る. $T\in P$であることを示そう. 実際,
+\bealn{
+|f(t+T) - f(t)| &\leq |f(t+T) - f(t+t_n)| + |f(t+t_n) - f(t)|\\
+&= |f(t+T) - f(t+t_n)| \quad (\because t_nは周期)\\
+&\to 0\quad (n\to \infty)
+}
+であるから. よって$T\in P$は最小の周期である. \qed
+\end{egans}
+
+
+
+
+
+
+\lefba{
+\begin{egprob} (H30基礎科目-4) \label{prob:H30kiso-4}
+閉区間$[0,1]$上の実数値関数列$\set{f_n}_{n=1}^{\infty}$について, 各$f_n$は広義単調増加であるものとする. つまり, $0\leq x < y \leq 1$なら$f_n(x) \leq f_n(y)$である. この関数列$\set{f_n}_{n=1}^{\infty}$が$n\to \infty$で関数$f$に各点収束したとする.
+\ben
+\item 任意の$0\leq x < y \leq 1$に対し, 不等式
+\[\sup_{z\in [x,y]} |f_n(z) - f(z)| \leq \max{\set{|f_n(X) - f(y)|, |f_n(y) - f(x)|}}\]
+を示せ.
+\item 関数$f$が連続であるとき, 関数列$\set{f_n}_{n=1}^{\infty}$は$f$に$[0,1]$上で一様収束することを示せ.
+\een
+\end{egprob}
+}
+\begin{egans}
+(1): 各点収束性から$f$が広義単調増加であることがわかる. $x\leq z\leq y$のとき 常に
+\[ f_n(x) - f(y) \leq   f_n(z) - f(z) \leq f_n(y) - f(x)\]
+だからここからただちに得られる. \\
+(2): 区間を$N$等分して, $k/N \leq z \leq (k+1)/N$に対して$|f_n(z) - f(z)|$を評価したい. (1)より, この$z$に対して
+{\small
+\[|f_n(z) - f(z)| \leq \max{\set{|f_n(\frac{k+1}{N}) - f(\frac{k}{N})|, |f_n(\frac{k}{N}) - f(\frac{k+1}{N}) |}}\]
+}
+が成り立つ. ここで$\epsilon > 0$を任意に与え, 上の値が$C\epsilon$未満にできることを示す.  $f$は$[0,1]$上連続なので一様連続でもある. よって自然数$N$を十分大きく取ると
+\[\forall k=0,1,\dots, N-1,\quad |f(\frac{k}{N}) - f(\frac{k+1}{N})| < \epsilon \]
+が成り立つ. このような$N$を固定しておく. このとき, すべての$k$で
+\bealn{
+&|f_n(\frac{k+1}{N}) - f(\frac{k}{N})|\\
+&\leq |f_n(\frac{k+1}{N}) - f(\frac{k+1}{N})| + |f(\frac{k+1}{N}) - f(\frac{k}{N})|\\
+&< |f_n(\frac{k+1}{N}) - f(\frac{k+1}{N})| + \epsilon
+}
+となる. $k$は有限通りであって, 各点収束により, 十分大きい$n>>n_0$からは\tf{すべての$k$で}
+\[|f_n(\frac{k}{N}) - f(\frac{k}{N})| < \epsilon\]
+が成り立つ. よって
+\[|f_n(\frac{k+1}{N}) - f(\frac{k}{N})| < 2\epsilon\]
+となる. 同様に$|f_n(\frac{k}{N}) - f(\frac{k+1}{N})| < 2\epsilon$も示せる. すべての$k$で成り立つから, すべての$z\in [0,1]$で$|f_n(z) - f(z)| < 2\epsilon$が成り立つ.\qed
+\end{egans}
+
+
+
+\lefba{
+\begin{egprob} (H23数学I,2) \label{prob:H23-I-2}
+区間$[0,1]$上の実数値連続関数$f(x)$は$f(0) = 0$, $f(1) = 1$を満たしている. このとき, 極限値$\disp\lim_{n\to\infty} n\int_{0}^{1} f(x)x^{2n}dx$を求めよ.
+\end{egprob}
+}
+\begin{egans} $f(x) = x$とすると$1/2$が出るので$1/2$と予想する.
+$g(x) = f(x) - x$とおき, $n\int_{0}^{1}g(x)x^{2n}dx \to 0$を示す. $\epsilon>0$を任意に与える. $g(1) = 0$なので, ある$\delta>0$があり, $1-\delta\leq x\leq 1$では$|g(x)| < \epsilon$がなりたつ. $g(x)$は連続だから$|g(x)|\leq M$なる定数$M$がある. $n$を十分大きく取れば
+\[n\int_{0}^{1-\delta} g(x)x^{2n}dx \leq Mn(1-\delta)^{2n} < \epsilon \]
+とできる. さらに$n$が十分大きいなら,
+\[n\int_{1-\delta}^{1} g(x)x^{2n}dx \leq n\epsilon \parenb{\dfrac{1-(1-\delta)^{2n+1}}{2n+1}} < \epsilon\]
+とできるので, $\int_{0}^{1}g(x)x^{2n}dx\to 0$が示せた. \qed
+\end{egans}
+\begin{rem}
+最後の$[1-\delta,1]$での積分で, $x^{2n}$を$1$で評価すると失敗する！$x^{2n}$は$1$を除き$0$に各点収束しているのだから, そのような評価は大きな効果を生み出してしまうのである.
+\end{rem}
+
+先の問題とほとんど同じ類題があるので, 練習問題とする.
+\begin{prac} (H13数学I-4)
+閉区間$[0,1]$で連続な関数$f(x)$に対し$\disp\lim_{n\to \infty} x^nf(x)dx = f(1)$を示せ.
+\end{prac}
+
+
+
+\begin{egprob}
+$f(x)$と$\phi(x)$は区間$[0,\infty)$上の実数値連続関数とし, さらに$\phi(x)$は
+\[\phi(x) = \phi(x+1)\quad (x\geq 0), \int_{0}^{1}\phi(x)dx = 1\]
+を満たすとする. このとき任意の実数$a>0$に対し,
+\[\lim_{\lambda \to \infty} \int_{0}^{a} f(x)\phi(\lambda x) dx = \int_{0}^{a} f(x)dx\]
+\end{egprob}
+
+\begin{egans}
+$\psi(x):= \phi(x) - 1$とおくと$\psi(x)$も周期1を持ち, $\int_{0}^1 \psi(x) dx = 0$を満たす. 示すべき等式は
+\[\lim_{\lambda\to \infty} \int_{0}^{a} f(x)\psi(\lambda x) dx = 0\]
+$f(x)$は$[0,a]$上で有界であるから, $|f(x)|\leq M$ ($0\leq x\leq a$)となる定数$M_{f,a}$を取る. また, $\psi$は$[0,1]$上で値が決まるので$[0,\infty)$上で有界である. $|\psi(x)|\leq M_{\psi}$となる定数$M_{\psi}$が存在する. $n(\lambda) \leq a\lambda < n(\lambda) + 1$なる$n(\lambda)\in\mb{N}$を取ると, $|a\lambda-n(\lambda)| < 1$であって
+\bealn{
+\abs{\int_{n(\lambda)/\lambda}^{a} f(x)\psi(\lambda x) dx} &= M_{f,a}\int_{n(\lambda)/\lambda}^{a} \psi(\lambda x)dx\\
+&= M_{f,a}\int_{n(\lambda)}^{a\lambda} \psi(t) \dfrac{dt}{\lambda}\\
+&\leq \dfrac{M_{f,a} M_{\psi}}{\lambda} |a\lambda - n(\lambda)| \to 0
+}
+であるから, $\int_{0}^{n(\lambda)/\lambda} f(x)\psi(\lambda x)dx \to 0$を示せばよい. これは
+\bealn{
+&\int_{0}^{n(\lambda)} f\parena{\dfrac{t}{\lambda}} \psi(t) \dfrac{dt}{\lambda} \\
+&= \dfrac{1}{\lambda}\sum_{k=1}^{n(\lambda)} \int_{k-1}^{k} f\parena{\dfrac{t}{\lambda}}\psi(t)dt\\
+&= \dfrac{1}{\lambda} \int_{0}^{1} \sum_{k=1}^{n(\lambda)} f\parena{\dfrac{t+(k-1)}{\lambda}}\psi(t-(k-1))dt \\
+&= \dfrac{1}{\lambda} \int_{0}^{1} \sum_{k=1}^{n(\lambda)} f\parena{\dfrac{t+(k-1)}{\lambda}} \psi(t) \, dt
+}
+に等しい. いま$\epsilon > 0$を任意に与える. 上の積分が$C\epsilon$未満になることを示せばよい. $f$は$[0,a]$上で一様連続であるから, ある$\delta>0$が存在して$|x-y| < \delta$なら$|f(x) - f(y)|<\epsilon$が成り立つ. いま$\delta > \frac{1}{\lambda}$となるほど十分大きい$\lambda$を固定する. このとき$[0,1]$上の$|f(\frac{t+(k-1)}{\lambda})|$の最大値が$|f(\frac{t_{\lambda,k} + (k-1)}{\lambda})|$であるとし,
+\[\delta_{\lambda,k}(t) := f\parena{\dfrac{t+(k-1)}{\lambda}} - f\parena{\dfrac{t_{\lambda,k} + (k-1)}{\lambda}}\]
+とおくと, $\lambda$の取り方と一様連続性から$|\delta_{\lambda,k}(t)|<\epsilon$が$0\leq t\leq 1$で成り立つ. このとき
+\bealn{
+&\dfrac{1}{\lambda} \int_{0}^{1} \sum_{k=1}^{n(\lambda)} f\parena{\dfrac{t+(k-1)}{\lambda}} \psi(t) \, dt \\
+&\leq \dfrac{1}{\lambda} \int_{0}^{1} \sum_{k=1}^{n(\lambda)} \delta_{k,\lambda}(t)dt\qquad (\because \int_{0}^{1}\psi(t)\, dt = 0) \\
+& < \dfrac{1}{\lambda}\int_{0}^{1}  \sum_{k=1}^{n(\lambda)}\epsilon \\
+& = \dfrac{1}{\lambda} n(\lambda)\epsilon \\
+& \leq  a\epsilon\quad (\because n(\lambda) \leq a\lambda)
+}
+よって示せた. \qed
+\end{egans}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\subsection{様々な例題}
+\begin{egprob}
+$f:\mb{R}\to \mb{R}$は正値単調減少関数で, $\dfrac{f(x)}{\sqrt{x}}$が$[1,\infty)$上可積分であるとする.このとき, $\disp\lim_{x\to \infty} \sqrt{x} f(x) = 0$であることを示せ.
+\end{egprob}
+\begin{egans}
+$\disp\int_{R}^{2R} \dfrac{f(x)}{\sqrt{x}}\, dx \to 0$である.また, $\dfrac{f(x)}{\sqrt{x}}$も正値単調減少であるから
+\[\disp\int_{R}^{2R} \dfrac{f(x)}{\sqrt{x}}\, dx \geq \disp\int_{R}^{2R} \dfrac{f(2R)}{\sqrt{2R}} \, dx \geq 0\]
+であり, 真ん中は$\sqrt{R}f(2R)\cdot \dfrac{1}{\sqrt{2}}$でこれは0に収束する.ここから直ちに従う.
+\end{egans}
+
+\begin{egprob} (\tf{Feketeの劣加法補題}, 2020前期解析演義)\\
+実数列$\{ a_n \}_{n=1}^{\infty}$が劣加法的, すなわち任意の$m,n\in \mb{N}$に対して$a_{m+n}\leq a_{n} + a_m$が成り立つとき, $\disp\lim_{n\to \infty}\dfrac{a_n}{n}$が$[-\infty, \infty)$の範囲で存在し, $\disp\lim_{n\to \infty} \dfrac{a_n}{n} = \disp\inf_{n\in\mb{N}} \dfrac{a_n}{n}$が成り立つことを示せ.
+\end{egprob}
+
+\begin{egprob} (H28大阪大 問題A) \label{egprob:H28-osaka-A}\\
+本問はすべて実数の範囲で考える.
+\ben
+\item $|x| \leq \frac{1}{2}$ならば$|\log{(1+x)} - x|\leq Cx^2$をみたすような定数$C>0$が存在することを示せ.
+\item $\sum_{k=1}^{\infty}a_k$, $\sum_{k=1}^{\infty}a_k^2$が収束するならば, 無限積$\prod_{k=1}^{\infty} (1+a_k) = \lim_{n\to \infty} \prod_{k=1}^{n} (1+a_k)$も収束することを示せ.
+\item $\prod_{k=1}^{\infty} \left(1+\frac{(-1)^{k}}{3k+1}\right)$は収束することを示せ.
+\een
+\end{egprob}
+\begin{egans} (本問はいろいろ工夫して解答することができるので必見!)\\
+(1): $x=0$のとき不等式は成立しているので$x\neq 0$とする.$x\neq 0$において$f(x) = \frac{\log{(1+x)} - x}{x^2}$とする.$\log{(1+x)} = x - \frac{x^2}{2} + O(x^3)$なので$f(0) = \frac{1}{2}$とすると$f$は$\mb{R}$全体に拡張される.$f$を制限して$[-\frac{1}{2}, \frac{1}{2}]$上の連続関数と考えると, 最大値原理から$|f(x)|\leq C$ ($-\frac{1}{2}\leq x\leq \frac{1}{2}$)を満たす$C>0$が取れる.この$C$が所望の定数である.\qed
+
+(2): $\sum a_k$が収束するので$a_k\to 0$である.よってある$N\in \mb{N}$が存在し, $n\geq N$ならば$|a_n|\leq \frac{1}{2}$であるとしてよい.仮定から$\sum_{k=N}^{\infty} Ca_k^2$は収束するので(1)および$|a_k|\leq \frac{1}{2}$から$\sum_{k=N}^{\infty} |\log{(1+a_k)} - a_k|$は収束する.よって$\sum_{k=N}^{\infty}(\log{(1+a_k)} - a_k)$も収束する.$\sum_{k=N}^{\infty}a_k$は収束するので$\sum_{k=N}^{\infty} \log{(1+a_k)}$も収束する.よって$\prod_{k=N}^{\infty}(1+a_k)$は収束するので$\prod_{k=1}^{\infty}(1+a_k)$も収束する.\qed
+
+(3): $b_k = \frac{1}{3k+1}$, $a_k = (-1)^{k}b_k$とおく.$\sum a_k^2 = \sum b_k^2 \leq \sum \frac{1}{k^2}<\infty$なので$\sum a_k^2$は収束する.$b_k$は単調減少でかつ$b_k \to 0$なので, 交代級数$\sum (-1)^{k}b_k = \sum a_k$はLeibnizの定理から収束する.よって(2)から主張が示される.\qed
+\end{egans}
+
+
+\clearpage
+\subsection{演習問題Part1}
+解答は\ref{subsection:ans_calculus_1}へ.
+
+\subsubsection{Level A}
+\begin{prob} (H21基礎4) \label{prob:H21B4}
+\ben
+\item  $f_n(x) = x(1-x)^{n}$は$[0,1]$上一様収束することを示せ.
+\item  $f_n'(x)$は$[0,1]$上一様収束しないことを示せ.
+\een
+\end{prob}
+
+
+\begin{prob} (H20基礎4) \label{prob:H20B4}
+閉区間$[0,1]$で定義された次の2つの連続関数列を考える.
+\[
+\mr{(a)}: \parenb{\dfrac{x}{1+nx}}_{n\in \mb{N}},\quad  \mr{(b)}: \parenb{\dfrac{nx}{1+n^2x^2}}_{n\in \mb{N}}
+\]
+\ben
+\item 関数列(a)は$[0,1]$上一様収束することを示せ.
+\item 関数列(b)は$[0,1]$上一様収束しないことを示せ.
+\een
+\end{prob}
+
+\begin{prob} (H30東北大)
+$\alpha$は実数, $\{ a_n \}$は狭義単調増加とし, $\disp\lim_{n\to \infty} \dfrac{1}{n} \disp\sum_{k=1}^{n} a_k = \alpha$を満たすとする.
+\ben
+\item すべての$n$に対して$a_n \leq \alpha$を示せ.
+\item $\disp\lim_{n\to \infty} a_n = \alpha$を示せ.
+\item $\disp\lim_{n\to \infty} \dfrac{1}{n}\disp\sum_{k=1}^{n}k(a_{k+1} - a_k) = 0$を示せ.
+\een
+\end{prob}
+
+\begin{prob} (H24数学I-2) \label{prob:H24-I-2}
+$f(x)$は$[0,\infty)$上の非負値実数値連続関数で単調非増加であり, かつ$f(x)/\sqrt{x}$は$[0,\infty)$上広義積分をもつと仮定する.
+\ben
+\item $\disp\lim_{x\to \infty}\sqrt{x} f(x) = 0$を示せ.
+\item 任意の$0<\epsilon<1$に対し, $\disp\lim_{x\to \infty} \int_{\epsilon x}^{x} \dfrac{f(y)}{\sqrt{x-y}}dy = 0$を示せ.
+\een
+\end{prob}
+
+
+
+\subsubsection{Level B}
+\begin{prob} (H28東北大共同4) (\href{https://drive.google.com/file/d/1anaTAHLXhDH8Ng_6pvw6pPFb4MDD5v7i/view?usp=sharing}{解答})\\
+正の実数列$\{ a_n \}_{n=1}^{\infty}$に対して, 極限$\disp\lim_{n\to \infty}\parenb{a_n - n(\log{(1+n)})^2}$が存在すると仮定する.
+\ben
+\item 数列$\{ a_n - \frac{n}{2}(\log{(1+n)})^2\}_{n=1}^{\infty}$が無限大に発散することを示せ.
+\item $\disp\sum_{n=1}^{\infty} \dfrac{1}{a_n}$が収束することを示せ.
+\item $\disp\sum_{n=1}^{\infty} \dfrac{\log{(1+n)}}{a_n}$が無限大に発散することを示せ.
+\een
+\end{prob}
+
+\begin{prob} (H19-I-2, \ref{ans:H19I2}) \label{prob:H19I2}\\
+$x$を実変数とする関数項級数
+\[\disp\sum_{n=1}^{\infty} \dfrac{x}{n^2x^2 + 1}\]
+について次の問いに答えよ.
+\ben
+\item この和を$S(x)$とするとき, $x\neq 0$に対して
+\[|S(x)| \geq \dfrac{\pi}{2} - \tan^{-1}{|x|}\]
+であることを示せ.
+\item この級数は$\mb{R}$上一様収束しないことを示せ.
+\een
+\end{prob}
+
+\begin{prob}
+$f_n(x) = (1+x)(1+\frac{x}{2})\cdots (1+\frac{x}{n})$とおく.極限関数$f(x) = \disp\lim_{n\to \infty} f_n(x)$を求めよ.
+\end{prob}
+
+\begin{prob} (\tf{良問}, 2018解析学入門演習) \\
+次は$\{ |z|\leq 1\}\subset \mb{C}$上一様収束するかどうか調べよ.
+\[f_n(z) = \parena{\dfrac{1-z}{2}}^{n}\parena{\dfrac{1+z}{2}}\]
+\end{prob}
+
+\begin{prob} (R2基礎科目7)
+$f:\mb{R}\to \mb{R}$が$C^1$級のとき, 極限
+\[\lim_{n\to \infty}\parena{\sum_{k=1}^{n} f(\dfrac{k}{n})   -n\int_{0}^{1} f(x)\, dx }  \]
+を求めよ.
+\end{prob}
+
+\begin{que} (未解決)
+$C^1$を外した場合, 反例があるだろうか?
+\end{que}
+
+
+
+\subsubsection{Level C}
+\begin{prob} (H30基礎科目4)\label{prob:H30kiso-4}
+$[0,1]$上の実数値関数列$\set{f_n}_{n=1}^{\infty}$について, 各$f_n$は広義単調増加とする. この$\set{f_n}$が$f$に$n\to \infty$で各点収束したとする.
+\ben
+\item 任意の$0\leq x < y\leq 1$に対し,次を示せ.
+\[\sup_{z\in [x,y]}|f_n(z) - f(z)| \leq \max{\set{|f_n(x) - f(y)|, |f_n(y) - f(x)|}}\]
+\item 関数$f$が連続であるとき, $\set{f_n}$は$f$に$[0,1]$上一様収束することを示せ.
+\een
+\end{prob}
+
+
+
+
+\begin{prob} (19解析演義I)
+$(a_n)_{n}$を正の実数列であって, $\sum_{n=1}^{\infty}a_n = \infty$となるものとし, $(b_n)_{n}$を有界な実数列とする.このとき, 単調増加な自然数列$k_1<k_2<\cdots$であって, $(b_{k_n})_{n}$は収束し, $\sum_{n=1}^{\infty}a_{k_n} = \infty$となるものが取れることを示せ.
+\end{prob}
+
+\newpage
+\subsubsection{Hint・Answer}
+
+{\small
+\begin{probans}
+まずは極限関数を見ること.
+\end{probans}
+\begin{probans}
+最大値を考察せよ.
+\end{probans}
+\begin{probans}
+チェザロ平均の議論を思い出せ.
+\end{probans}
+\begin{probans}
+(1): $\int_{R}^{2R}\dfrac{f(x)}{\sqrt{x}}\, dx$を考えると分かる. \\
+(2):積分が上から, 次で抑えられる.
+\[f(\epsilon x) \int_{\epsilon x}^{x} \dfrac{dy}{\sqrt{x-y}} = f(\epsilon x)\cdot 2\sqrt{(1-\epsilon)x} = 2\sqrt{\frac{1-\epsilon}{\epsilon}}f(\epsilon x)\sqrt{\epsilon x}\]
+\end{probans}
+
+
+
+%==========================Level B===============
+
+\begin{probans}
+\chatgpthint{主項を取り出し、比較判定法を使ってください。}
+\end{probans}
+\begin{probans}
+\chatgpthint{和を積分で下から評価してください。}
+\end{probans}
+\begin{probans} %2017微積B
+\chatgpthint{対数を取り、調和級数の発散を使ってください。}
+\end{probans}
+
+\begin{probans} %2018解析入門
+$z=re^{i\theta}$とおいて$|f_n(z)|$を計算し, 最大値がどうなるか考えよ(AMGMを使うと良い).
+\end{probans}
+
+\begin{probans} \label{prob:R2kiso-7} %R2基礎科目
+答えは$(f(1) - f(0)) /2$である(これ自体はよく聞く). \par
+$f$の$[0,1]$上の値にしか興味がない. $f$に対し, 次のような折れ線近似の$g_n(x)$を考える.
+\[g_n(x) = n(f(\frac{k}{n}) - f(\frac{k-1}{n}))(x - \frac{k-1}{n}) + f(\frac{k-1}{n}) \quad \mr{on}  \parenc{\frac{k-1}{n}, \frac{k}{n}}
+\]
+ただし$k=1,\dots, n$である.
+このとき$g_n(\frac{k}{n}) = f(\frac{k}{n})$が$k=0,1,\dots, n$で成り立つ. 幾何的に
+\[\lim_{n\to \infty} \parenb{\sum_{k=1}^{n} g_n(\frac{k}{n}) - n\int_{0}^{1} g_n(x) \, dx} =  \dfrac{g_n(1) - g_n(0)}{2} = \dfrac{f(1) - f(0)}{2}\]
+である(三角形の面積). したがって,
+\[\lim_{n\to \infty} \parenb{\sum_{k=1}^{n}\parena{f(\frac{k}{n}) - g_n(\frac{k}{n})} - n\int_{0}^{1}\parena{f(x) - g_n(x)}\, dx } = 0\]
+を示すとよい. $f-g_n = d_n$とおく. $d_n(k/n) = 0$であるから$\sum d_n(k/n) = 0$である.
+ $d_n$は$k/n$という点を除き微分可能である. \par
+ $\epsilon > 0$を任意に与える. $k$をひとつ固定し, $[\frac{k-1}{n}, \frac{k}{n}]$で考える. $x\neq \frac{k-1}{n},\frac{k}
+ {n}$において $d_n'(x) = f'(x) - n\parena{f(\frac{k}{n}) - f(\frac{k-1}{n})}$であるが, これを $f'(x) - \dfrac{f(\frac{k}{n}) - f(\frac{k-1}{n})}{\frac{k}{n} - \frac{k-1}{n}}$
+と見る. 第二項は平均値の定理から$f'(c_k)$という値で書ける($c_k \in [\frac{k-1}{n}, \frac{k}{n}]$). よって, $n$を十分大きくすれば, $[\frac{k-1}{n}, \frac{k}{n}]$の点と$c_k$は十分近くなり, $f'(x)$がコンパクト集合$[0,1]$上一様連続であることを用いれば, \aka{すべての$k$に対して}この微分係数$d_n'(x)$が絶対値$\epsilon$未満であるとしてよい. よって, $d_n(\frac{k-1}{n}) = d_n(\frac{k}{n}) = 0$と微分可能な点で$|d_n'(x)| < \epsilon$であるという情報から, すべての$1\leq k\leq n$で $|d_n| \leq \epsilon/n \quad (x\in [\frac{k-1}{n},\frac{k}{n}])$が言える. よって
+\[\abs{n\int_{0}^{1} d_n(x)\, dx} \leq \epsilon\]
+なので示せた .
+
+\end{probans}
+
+
+\begin{probans} %19解析演義
+適当な変換により$0 < b_n \leq 1$としてよい.$n$で$0<b_n \leq 1/2$となるものと$1/2< b_n \leq 1$となるものに分類したとき, どちらかのグループは無限個の$n$を含む.そのようなグループから少なくとも一つ適当なグループ$X$を選べば, $\sum_{n\in X} a_n = \infty$を満たすようにできる.このとき,  $X$を数列$x_1,x_2,\cdots$とすると$\sum_{i}a_{x_i} = \infty$かつ$b_{x_i}$は長さ1/2の区間に含まれる数列であるようにできる.これを繰り返して部分列を取っていけば$\sum a_k = \infty$の条件を保ちながら$b_{x_{i}}$の含まれる区間は次第に小さくなるようにできる.
+\end{probans}
+
+}
+
+\newpage

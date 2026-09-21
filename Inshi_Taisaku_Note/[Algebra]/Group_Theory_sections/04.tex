@@ -1,0 +1,70 @@
+\section{一般線形群・特殊線形群}
+
+\subsection{有限体上の線型代数}
+以降, $p$は素数とする. 有限体上で線型代数を考える問題が専門レベルではたまにある. 代数閉体でもないので, 何が有限体上で行えるのか, それとも代数閉体をつかわないと行けないのかに注意することは大事である. たとえば, $\mb{F}_{p}$成分の行列は必ずしも$\mb{F}_{p}$において固有値を持つとは限らないし, 対角化するときの行列$P$は$\mr{GL}_{n}(\ovl{\mb{F}_{p}})$の中に存在するが, $\mb{F}_{p}$成分であるとは限らない. \par
+次は覚えておきたい問題である.
+\begin{egprob}
+$\mr{GL}_{n}(\mb{F}_{p})$の位数を求めよ.
+\end{egprob}
+\begin{egans}
+正則性と列ベクトルの一次独立性は有限体上でも同値である. したがって, $\mb{F}_{p}^{n}$の順序を考慮した基底の個数だけあるので, 組み合わせ論的に考えると
+\[\bolm{(p^n - 1) (p^n - p) \cdots (p^n - p^{n-1})}\]
+となる.
+\end{egans}
+
+
+\begin{egprob}
+$X\in \mr{M}_{2}(\mb{F}_{p})$であって, $X^p = I$なるものはいくつあるか.
+\end{egprob}
+\begin{egans}
+$\ovl{\mb{F}_{p}}$を一つ固定して$X^{p} = I$なる$X$をJordan標準形にする$P\in \mr{GL}_{2}(\ovl{\mb{F}_{p}})$を取る. $P^{-1}X^{p}P = I$なので, $P^{-1}XP = \begin{bmatrix}a&b\\ 0& d\end{bmatrix}$とすると$a^{p} = d^{p} = 1$である. $a,d\in \ovl{\mb{F}_{p}}$なので, $a^{p^r} = a$, $d^{p^s} = d$となる$r,s$がある. ここから$a=d=1$を得る. すなわち$X$の固有多項式は$(t-1)^2$である. 逆に$X$の固有多項式が$(t-1)^2$ならば, Jordan標準形において
+\[P^{-1}X P = \begin{bmatrix} 1& b\\ 0&1 \end{bmatrix} \]
+の形になるが, このとき
+\[X^{p} = P \begin{bmatrix}1&b\\ 0&1\end{bmatrix}^{p} P^{-1} = \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}\]
+となる. よって, 固有多項式が$(t-1)^2 = t^2 - 2t + 1$であるような$X$をｓべて求めればよいから,
+\[a+d = -2,\quad ad-bc = 1\]
+となるような$a,b,c,d$がいくつあるかを求めればよい. それは頑張ればできる.
+\end{egans}
+
+
+
+\subsection{演習問題}
+
+\subsubsection{Level A}
+
+\subsubsection{Level B}
+
+\subsubsection{Level C}
+
+\begin{prob} (H28専門科目) \label{prob:H28senmon-3}
+$G = \mr{GL}_{2}(\mb{F}_{p})$とおく.
+\ben
+\item $G$の元で対角行列と共役でないものの個数を求めよ.
+\item $G$の二つの元$X,Y$の最小多項式$\phi_X(t)$, $\phi_Y(t)\in \mb{F}_{p}[t]$が一致すれば $X,Y$は互いに共役であることを示せ.
+\item
+\een
+\end{prob}
+
+
+
+\subsubsection{Hint・Answer}
+\begin{probans}
+(1): $\sumib{a&0\\0 &d}$と共役な対角行列は自身と$\sumib{d&0\\ 0&a}$のみ. $G$から$G$への共役作用を考え, 各$x=\sumib{a&0\\ 0&d}$の軌道$O_{x}$の元の個数を考え,次のように足せばよい.
+\[\sum_{a\in \mb{F}_{p}^{\times}} |O_{aI}| + \dfrac{1}{2}\sum_{a,d \in \mb{F}_{p}^{\times} } |O_{\sumib{a&0 \\ 0 & d}}|  \]
+$|O_x||G_x| = |G| = (p^2-1)(p^2-p)$なので, $|G_x|$を求めると答えが分かる. さて, $P^{-1}(aI)P = aI$だから$|G_{aI}| = |G|$より$|O_{aI}| = 1$. また, $P=\sumib{x&y\\ z&w}$のとき,
+\[\bmat{a& 0\\ 0&d}P = P\bmat{a&0 \\ 0 &d}\implies \bmat{ax & ay \\ dz & dw} = \bmat{ax & dy \\ az & dw}\]
+となるから, $a\neq d$ならば$y=z=0$が条件. よって$P$は$(p-1)^2$通りあり, $a\neq d$なら $|G_{\sumib{a&0\\0&d}}| = (p-1)^2$となる よって, $|O_{\sumib{a&0\\ 0&d}}| = p(p+1)$. 以上より求める個数は
+\[\dfrac{1}{2}(p^2- 1)(p^2-p) - (p-1)\]
+(2):
+
+
+\end{probans}
+
+
+
+
+
+
+
+
+\clearpage

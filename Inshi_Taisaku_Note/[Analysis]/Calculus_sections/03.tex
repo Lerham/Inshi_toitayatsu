@@ -1,0 +1,604 @@
+\section{積分法}
+\subsection{積分の定義}
+
+
+
+
+
+\subsection{広義積分と収束}
+広義積分は基本的に, 有界閉集合の適切な増大列$K_n$を取り, $K_n$上の積分値の極限として定義します. 厳密には, 平面上の点集合(非有界でもよい)$D$に対して, $D$の\tf{近似列}$\set{K_n}_{n=1}^{\infty}$を次の条件を満たす増大列と定めます.
+\ben
+\item $K_1\subset K_2\subset \dots \subset D$
+\item 各$K_n$は有界閉集合である.
+\item $D$内の任意の有界閉集合$K$に対して, ある番号$n$を取れば$K\subset K_n$である.
+\een
+
+\begin{eg}
+\ben
+\item $D=\mb{R}$の近似列として$K_n = [-n,n]$がある.
+\item $K_n = \mb{R} \setminus{(-1/n, 1/n)}$は(1),(2)を満たすが(3)は満たさない. なお, このとき$D\neq \bigcup_{n=1}^{\infty} K_n$である.
+\item $D=\mb{R}^2$に対し, $K_n = \set{\sqrt{x^2+y^2}\leq n}$は近似列. これは極座標変換でよく使われる.
+\item $D = \mb{R}\times [0,1]$において, $K_n = [-n,n]\times [0,1]$は近似列.
+\een
+\end{eg}
+
+\begin{prac}
+実数列$a_n,b_n$で$a_n\leq b_n$を満たすものについて, $K_n = [a_n,b_n]$が(1),(2),(3)の条件を満たすための必要十分条件を$a_n,b_n$たちで表せるか?
+\end{prac}
+$D$の任意の近似列$\set{K_n}$に対して極限値$\lim_{n\to \infty}\iint_{K_n} fdxdy$が存在し, かつその値が$\set{K_n}$の選び方に依存しないとき, $f$は$D$上で広義可積分であると定めます. 実際には, 一つの近似列$\set{K_n}$を用いて計算した広義積分が収束すれば, 別の近似列$\set{L_n}$を用いて計算した広義積分も同じ値に収束します.
+\begin{prac}
+上の事実を証明せよ.((3)の条件が効く)
+\end{prac}
+広義積分の問題を解く際には, 計算だけでなく, 必要に応じてこの定義に基づく説明も示すとよいでしょう.
+\tbox{
+\begin{prop}
+区間$(a,\infty)$上の連続関数$F,G$について, ある\tf{ノンゼロな}実数$C$が存在して
+\[\lim_{x\to \infty} \dfrac{F(x)}{G(x)} = C\]
+が成り立つとする. このとき,
+\[\int_{a}^{\infty} |F(x)|dx が収束 \iff \int_{a}^{\infty} |G(x)|dxが収束.\]
+\end{prop}
+}{}
+\prf $C$がノンゼロなので, $F$と$G$の役割は対称的である. したがって$\Leftarrow$のみ示せば十分(もちろん, $C=0$の場合に少し議論を変更すれば$\Leftarrow$のみを示すことができるだろう). \par
+極限の条件から, 十分大きい実数$R>a$については, $x>R$で常に$|F(x)/G(x)| < |C|+1$が成り立つ.
+よって
+\bealn{
+&\int_{a}^{R} |F(x)|dx + \int_{R}^{\infty}|F(x)|dx \\
+&\leq \int_{a}^{R}|F(x)|dx + (|C|+1)\int_{R}^{\infty} |F(x)|dx < \infty
+}
+だから収束する(有界区間上の連続関数の積分は有限である). \qed
+\begin{rem}
+答案で使うときは証明を入れた方がよいと思われる.
+\end{rem}
+\begin{egprob} (オリジナル) $a,b$を実数とする. 次の積分が収束するための$a,b$の必要十分条件を求めよ.
+\[
+\int_{e}^{\infty} \dfrac{x^a}{(1+x^2)^{b}\log{x}}\, dx
+\]
+\end{egprob}
+\begin{egans}
+被積分関数と$F(x) = \dfrac{x^{a-2b}}{\log{x}}$の比は$x\to \infty$で1に収束するので定理より$F(x) = \dfrac{1}{x^{c} \log{x}}$の$(e,\infty)$上の積分が収束する$c$の値の範囲から答えがわかる. $c>1$が必要十分条件であることを示す. まず$c\leq 1$であるときは, $x>e$で$x^c\leq x$なので
+\[\dfrac{1}{x^c\log{x}} \geq \dfrac{1}{x\log{x}} \]
+であるが, $\int_{e}^{\infty} \frac{1}{x\log{x}}\, dx = [\log{\log{x}}]_{e}^{\infty} = \infty$は発散するので不適. そして$c>1$であるときは
+\[\int_{e}^{\infty}F(x)dx \leq \int_{e}^{\infty}\dfrac{dx}{x^c} < \infty \]
+なので収束. \qed
+\end{egans}
+
+
+
+
+基礎科目レベルで使ったことはないが, 次も挙げておく.
+\besha
+\begin{theo} (\tf{優収束定理}\footnote{Lebesgue積分論のLebesgue収束定理\ref{theo:Lebesgue_convergence}に対応する.}, \cite{rikou}演習5-25) \label{theo:dom_con_theorem} %dominated convergence theorem
+$(a,\infty)$上の連続な関数列$\{ f_n(x)\}$が$f(x)$に広義一様収束するとする.$(a,\infty)$上広義可積分な関数$g(x)$が存在して$|f_n(x)|\leq g(x)$を満たすならば, $f(x)$も$(a,\infty)$上可積分で,
+\[\disp\lim_{n\to \infty} \int_{0}^{\infty} f_n(x) \, dx = \int_{0}^{\infty} f(x)\, dx\]
+を満たす.
+\end{theo}
+\ensha
+
+
+
+次の問題は, 広義積分の感覚でやらないとなぜか解きづらい問題である.
+\begin{egprob} (Quiz)
+$f$を$[0,\infty)$で非負連続かつ単調減少とする．$\int_{0}^{\infty}f(x)dx$が収束すれば，$\lim_{x\to\infty}xf(x)=0$であることを示せ．
+\end{egprob}
+この問題は意外とできなかったりするかもしれない.可積分性というのが局所的な情報ではなく「全体的に平均を取ると有限」というような大局的な情報であるため, $f(x)$を局所的に評価するという手法は成功しないということをよく教えてくれる.
+\begin{egans}
+$\int_0^{\infty}f(x)dx$が収束するから，任意の$\epsilon$に対し，ある$M>0$が存在して，任意の$x,x'\geq M$に対し，$\int_{x}^{x'}f(t)dt<\epsilon$．したがって，$x/2\geq M$ならば，$\epsilon>\int_{x/2}^{x}f(t)dt\geq f(x)x/2\geq0$．
+\end{egans}
+
+
+\begin{egprob} (H13数学I)
+$\lim_{\epsilon \to +0} \int_{\epsilon}^{1} \log{\sin{x}}\, dx$が存在することを示せ.
+\end{egprob}
+\begin{egans} $k=2/\pi$として$\sin{x} \leq kx \leq 1$より$\log{\sin{x}}$の積分より$\log{kx}$の積分のほうが大きいが, 値が常に負なので次が成り立つ:
+\bealn{
+\abs{\int_{a}^{b} \log{\sin{x}}\, dx} &\leq \abs{\int_{a}^{b} \log{kx} \, dx}\\
+&= \abs{ \log{\dfrac{b^b}{a^a}} + (\log{k} - 1)(b-a) }
+}
+となる. 二変数関数$x^x/y^y$は$[0,\delta]\times [0,\delta]$で十分1に近いので, $h=|\log{k} - 1|$とおくと上は$\abs{\log{\dfrac{a^a}{b^b}}} + h\epsilon$で抑えられる. $x$が十分小さいときに適当な正の数で$|Ax| > |\log{(1+x)}|$かつ$\abs{\dfrac{a^a}{b^b} - 1} < \epsilon$ とできるから,
+\[\abs{\log{\dfrac{a^a}{b^b}}} < |A(\dfrac{a^a}{b^b} - 1)| < A\epsilon\]
+が成り立つ.
+\end{egans}
+
+
+\begin{egprob} (H28基礎科目II,1)
+次の積分が収束するような実数$\alpha$の範囲を求めよ.
+\[\iint_{D}\dfrac{dxdy}{(x^2+y^2)^{\alpha}}\]
+\[D=\set{(x,y)\in \mb{R}^2\mid -\infty<x<\infty, 0<y<1}\]
+\end{egprob}
+\begin{point}
+積分で発散しそうな部分だけを切り取って議論する.
+\end{point}
+\begin{egans}
+$D$の部分集合$C$を
+\[C= \set{(x,y)\in \mb{R}^2\mid y>0, x^2+y^2<1}\]
+で定める. $f(x,y) = \dfrac{1}{(x^2+y^2)^{\alpha}}$とおく. $\iint_{D}f(x,y)\,dxdy$が収束と仮定する. このとき$\iint_{C}f(x,y)\,dxdy$も収束する.
+\[\iint_{C}f(x,y)dxdy = \int_{0}^{1} \int_{0}^{\pi} = \pi\int_{0}^{1}r^{1-2\alpha}dr\]
+が収束するのは$1-2\alpha > -1$のときであるから$1>\alpha$が必要. また,
+\[L = \set{(x,y)\in D\mid x>1}\]
+とすると, $\iint_{L}f(x,y)dxdy$も収束する. よって$\iint_{L}\frac{dxdy}{(x^2+1)^{\alpha}}\,dxdy$も収束し, \ao{$x>1$で$x^2+1 < 2x^2$}に注意すると, $\iint_{L}\frac{dxdy}{(2x^2)^{\alpha}} = \frac{1}{2^{\alpha}} \iint_{L}\frac{dxdy}{x^{2\alpha}}$も収束する. $\iint_{L}\frac{dxdy}{x^{2\alpha}} = \int_{1}^{\infty} \frac{dx}{x^{2\alpha}}$であり, これが収束するのは$2\alpha > 1$のときだから$\alpha>\frac{1}{2}$も必要である. \par
+逆に$\frac{1}{2}<\alpha<1$であるとする. このとき, 上の計算で$C,L$上の積分が収束することは明らか. $L' = \set{(x,y)\in D\mid x<-1}$での積分は$L$での積分と同じなので, $L'$上の積分も収束する. $D-(C\cup L\cup L')$の上で$f(x,y)$は有界であり, 領域も有界なのでこの領域での積分も収束する. よって$D$上の積分が収束する. 以上より, \bolm{\frac{1}{2}<\alpha<1}が必要十分条件.
+\end{egans}
+
+上の解答でも使われているように, 多項式を支配的な項により評価するテクニックはたいへん重要である.
+\begin{prop}
+\ben
+\item 任意の$n$次多項式$f(x) = a_nx^n + \dots$に対し, ある実数$R>0, C>|a_n|$が存在して, $|f(x)| < Cx^n$が$|x|>R$で常に成り立つ.
+\item 任意の$n$次多項式$f(x)=a_nx^n + \dots + a_rx^r$ ($n\geq r\geq 0$, $a_r\neq 0$) に対し, ある実数$\epsilon>0$, $0<C<|a_r|$が存在して, $|x| < \epsilon$で$|f(x)| > Cx^r$が$|x| < \epsilon$で常に成り立つ.
+\een
+\end{prop}
+
+
+\newpage
+\subsection{積分計算テクニック}
+この節では積分を計算するときの基本的なテクニックについて紹介する.
+\subsubsection{Fubiniの定理(順序交換)}
+粗く言うと, \tf{可積分関数は, すべての空でない断面に制限しても可積分なとき, 逐次積分ができる}というものが以下の主張である.
+\begin{theo}
+$A\subset \mb{R}^{d}$を有界領域とし, $(x,y)\in \mb{R}^{d_1} \times \mb{R}^{d_2}$ ($d_1+d_2 = d$)に対して
+\[A_2(x) = \{ y\in \mb{R}^{d_2} \mid (x,y)\in A\}\]
+とする(Aの$x$による断面).$A_2(x)\neq\varnothing$である$x$全体を$A_1$とする.以下を仮定する.
+\ben
+\item $f$は$A$上可積分
+\item すべての$x\in A_1$に対して,
+\[A_2(x)\ni y\mapsto f(x,y)\]
+は$A_2(x)$上可積分である.
+\een
+すると
+\[F_1(x) := \disp\int_{A_2(x)} f(x,y)\, dy\]
+が定義され, このとき$F_1$は$A_1$上可積分であり,
+\[\disp\int_{A} f(x,y) \, dxdy = \disp\int_{A_1} F_1(x)\, dx\]
+が成立する.
+\end{theo}
+
+
+
+\subsubsection{変数変換}
+領域や関数が複雑で適当な変数変換をしてシンプルな形にできるとき, そうするのがいいものである.重積分でも変数変換にあたるものがあるが, Jacobianの計算をしっかり行わなければならない.
+\begin{theo}
+$f(x(u,v), y(u,v)) = g(u,v)$とするとき
+\[\disp\int_{A} f(x,y)\, dxdy
+= \disp\int_{\witi{A}} g(u,v)
+\abs{\det{
+\begin{pmatrix}
+x_u & x_v\\
+y_u & y_v
+\end{pmatrix}
+}
+}\, dudv \]
+\end{theo}
+変数変換で現れた$\begin{pmatrix}
+x_u & x_v\\
+y_u & y_v
+\end{pmatrix}$はJacobi行列と呼ばれる.その行列式をJacobianといい, 上の設定では$\dfrac{\del(x,y)}{\del(u,v)}$とも書かれる.これは微少平行四辺形がどれくらい変化したかを表す量になっている.また, $\dfrac{\del(x,y)}{\del(u,v)} = \parena{\dfrac{\del(u,v)}{\del(x,y)}}^{-1}$である.この公式もたまに使う(右辺のほうが計算しやすいということが起こりうるため).
+\begin{tips}
+ヤコビアンの結果を掲載しておく.\tf{この結果に絶対値をつけること.}
+\ben
+\item (\tf{2次元線形変換}): $x=au + bv$, $y=cu + dv$のとき
+\[\dfrac{\del(x,y)}{\del(u,v)} = \det{\begin{pmatrix} a & b \\ c & d \end{pmatrix}}\]
+\item (\tf{2次元極座標変換}): $x=r\cos{\theta}$, $y=r\sin{\theta}$のとき
+\[\dfrac{\del(x,y)}{\del(r,\theta)}
+= \det{
+\begin{pmatrix}
+\cos{\theta} & -r\sin{\theta}\\
+\sin{\theta} & r\cos{\theta}
+\end{pmatrix}
+}
+=
+r
+\]
+\item (\tf{3次元極座標変換}) $x=r\sin{\theta}\cos{\phi}$, $y=r\sin{\theta} \sin{\phi}$, $z=r\cos{\theta}$ ($r>0$, $0\leq \theta \leq \pi$, $0\leq \phi \leq 2\pi$) のとき
+\[\dfrac{\del(x,y,z)}{\del(r,\theta,\phi)} = r^2\sin{\theta}\]
+\een
+\end{tips}
+
+まれに妙な変数変換で解けるような積分もあるようである. しかしそのようなものは問題に与えられるであろう.
+\begin{egprob} (慶應の過去問)\\
+$\mb{R}^2$の部分集合$D = \{ (x,y)\mid x\geq 0, y\geq 0, 1\leq x+y\leq 2 \}$で定義された関数
+\[f(x,y) = \dfrac{(x+y)^3}{(x^2+y^2)^{\frac{3}{2}}}e^{-(x+y)^2}\]
+を考える.
+\ben
+\item 変数変換
+\[x= \dfrac{r\cos{\theta}}{\cos{\theta} + \sin{\theta}},\quad y=\dfrac{r\sin{\theta}}{\cos{\theta} + \sin{\theta}}\quad (r>0, 0\leq \theta \leq \dfrac{\pi}{2})\]
+に対して, $(x,y)$が$D$を動くときの$(r,\theta)$が動く範囲を求めよ.
+\item 重積分$\iint_{D} f(x,y) \, dxdy$の値を求めよ.
+\een
+\end{egprob}
+\begin{point}
+極座標変換や正則線形変換は標準的ですが, このような一般の変数変換を用いる場合には, それが別の領域への\tf{全単射を定めることとヤコビ行列の正則性}を, 時間に余裕があれば説明するとよいでしょう. 変数変換には本来これらの条件が必要だからです.
+\end{point}
+
+\begin{egans}
+\chatgpthint{指定された変数変換のJacobianと像の領域を先に求めてください。}
+\end{egans}
+
+
+\clearpage
+\subsubsection{知っておくと良い結果}
+基本は, わかる積分に帰着させることである.
+
+Gauss積分は基本的なので覚えておくこと.
+\begin{prop} (Gauss積分\footnote{積分区間が$[0,\infty)$だと当然$\frac{\sqrt{\pi}}{2}$になる.たまに$\sqrt{\pi}$か$\dfrac{\sqrt{\pi}}{2}$か, $(-\infty,\infty)$か$[0,\infty)$かで分からなくなるが, その4通りで迷うのであれば, $\sqrt{\pi}$が積分区間の広い方に対応するはずである.だから$\mb{R}$で積分して$\sqrt{\pi}$である.
+}) \label{prop:gauss_integral}
+\[\disp\int_{-\infty}^{\infty} e^{-x^2}\, dx = \sqrt{\pi}\]
+\end{prop}
+
+
+高校数学でもおなじみの三角関数の積分についての結果をまとめておく.ベクトル解析などで重宝することがある.
+\begin{prop}
+\[
+\int_{0}^{\frac{\pi}{2}} \sin^{n}{x} \, dx = \int_{0}^{\frac{\pi}{2}} \cos^{n}{x}\, dx = C(n) \dfrac{(n-1)!!}{n!!}
+\]
+ただし$n$が偶数なら$C(n) = \dfrac{\pi}{2}$で$n$が奇数なら$C(n) = 1$.
+\end{prop}
+次のような分母に$1+x^2$が現れる積分は, $x=\tan{\theta}$と置換するとよい.\tf{複素積分でできるときもあるが, $f(x)$が多項式ならこの置換をするほうがよい.}
+\begin{prop}
+\[\int_{0}^{\infty} \dfrac{f(x)}{(1+x^2)^n}\, dx = \int_{0}^{\frac{\pi}{2}} (\cos{\theta})^{2n-2} f(\tan{\theta})\, d\theta\]
+\end{prop}
+\begin{egprob} (H27留学生入試)
+Caluculate the following integral:
+\[\int_{0}^{\infty} \dfrac{\sqrt{x}}{(1+x)^2}\, dx\]
+\end{egprob}
+\begin{egans}
+$\sqrt{x} = t$とし$\dfrac{dx}{2t} = dt$だから積分は
+\beqn
+\int_{0}^{\infty} \dfrac{2t^2}{(1+t^2)^2}\, dt &=& 2\int_{0}^{\frac{\pi}{2}} \cos^{2}{\theta} \tan^{2}{\theta}\, d\theta\\
+&=& 2\int_{0}^{\frac{\pi}{2}} \sin^{2}{\theta}\, d\theta \\
+&=& 2\cdot C(2)\dfrac{1!!}{2!!} = \bolm{\dfrac{\pi}{2}}
+\eeqn
+\end{egans}
+
+高校数学レベルだけど計算に手間取るとよくないので, 原始関数のリストを挙げておこう.
+\tbox{
+\bealn{
+&\int \dfrac{dx}{x\log{x}} = \log{\log{x}} + C
+}
+}{title=原始関数}
+
+
+\subsubsection{とにかく計算問題}
+
+\begin{egprob} [\tf{重積分計算問題}] (H21留学生入試) \label{egprob:H21F2}
+\[\iint_{D} x^2e^{-x^2-y^2}\, dxdy, D=\{ (x,y)\in \mb{R}^2\mid 0\leq y\leq x \}\]
+\end{egprob}
+\begin{egans}.
+\begin{screen}
+このままでは$e^{-x^2 - y^2}$が厄介だと思われる.巨大な直角二等辺三角形だから, $\pi/4$ 極座標変換とは相性が良い.\tf{正直$x^2+y^2$を見たらすぐに極座標をやりたくもある.}
+\end{screen}
+$D_{R} = D\cap  \{ x^2+y^2 \leq R^2 \}$ とする($R>0$).$\lim_{R\to \infty} \iint_{D_R}$を計算すればよい.$x=r\cos{\theta}, y=r\sin{\theta}$と置換すると
+\beqn
+& &\iint_{D_R} r^2\cos^{2}{\theta} e^{-r^2} \abs{\dfrac{\del(x,y)}{\del (r,\theta)}} drd\theta \\
+&=& \int_{0}^{\frac{\pi}{4}} \dfrac{1+\cos{2\theta}}{2} d\theta \int_{0}^{R} r^3e^{-r^2} \, dr\\
+&=& \parenc{\dfrac{\theta}{2} + \dfrac{\sin{2\theta}}{4}}_{0}^{\frac{\pi}{4}} \int_{0}^{\sqrt{R}} \dfrac{s}{2} e^{-s}\, ds\quad (s=r^2)\\
+&=&\parena{\dfrac{\pi}{16} + \dfrac{1}{8}} \parenc{-(1+s)e^{-s}}_{0}^{\sqrt{R}} \\
+&\to& \bolm{\dfrac{\pi}{16} + \dfrac{1}{8}}\quad (R\to \infty)
+\eeqn
+\end{egans}
+
+
+\begin{egprob} (2021基礎数学試験-1)
+\[\iint_{D} y^2 \, dxdy\]
+\[D = \set{(x,y)\mid x^2 + 2xy + 3y^2 \leq 1, y\geq 0}\]
+\end{egprob}
+\begin{point}
+二次形式が現れたら, 対角化する(2変数では平方完成すればよい).
+\end{point}
+\begin{egans}
+$x^2 + 2xy + 3y^2 = (x+y)^2 + (\sqrt{2}y)^2$より$s=x+y, t=\sqrt{2} y$とおくことで, $D$は次の$E$に対応する.
+\[E = \set{(s,t)\mid s^2 + t^2 \leq 1, t\geq 0}\]
+すなわち上半円である. $y^2 = t^2/2$, $dsdt = (dx + dy)(\sqrt{2}dy) = \sqrt{2}dxdy$ (微分形式のノリで計算した)なので,
+\bealn{
+\iint_{D} y^2dxdy &= \dfrac{1}{2\sqrt{2}}\iint_{E} t^2dsdt \\
+&= \dfrac{1}{2\sqrt{2}}\int_{0}^{1}\int_{0}^{\pi} (r\sin{\theta})^2\, r drd\theta \\
+&= \dfrac{1}{2\sqrt{2}}\parenb{\int_{0}^{1}r^3dr} \parenb{\int_{0}^{\pi} \sin^{2}{\theta}\, d\theta} \\
+&= \dfrac{1}{2\sqrt{2}}\cdot \dfrac{1}{4}\cdot \dfrac{\pi}{2}\cdot 2\times \dfrac{1!!}{2!!} = \bolm{\dfrac{\sqrt{2}}{32}\pi}.
+}
+\end{egans}
+
+
+
+
+
+
+
+\begin{egprob} [\tf{積分とJensenの不等式}] (東北大H31共同)\\
+実関数$\Phi$を$\mb{R}$上の凸関数, すなわち
+\[\Phi(tx + (1-t)y) \leq t\Phi(x) + (1-t)\Phi(y)\]
+がすべての$x,y\in \mb{R}$, $t\in (0,1)$について成り立つようなものとする.
+\ben
+\item $\Phi$が連続であることを示せ.
+\item $\sum_{j=1}^{n} t_j = 1$を満たす$t_j > 0$と$x_j \in \mb{R}$ ($j=1,2,\cdots, n$) に対して次を示せ.
+\[\Phi\left(\sum_{j=1}^{n} t_j x_j\right) \leq \sum_{j=1}^{n} \Phi(t_j x_j)\]
+\item $a>0$とする.$f\in C([0,a])$に対して次を示せ.
+\[\Phi\left(\dfrac{1}{a} \int_{0}^{a} f(x)\, dx\right) \leq \dfrac{1}{a} \int_{0}^{a} \Phi(f(x))\, dx\]
+\een
+\end{egprob}
+\begin{egans}.\\
+\begin{screen}
+(1),(2)はやるだけ.(3)は積分で$x=ay$と置くと$a=1$の場合に帰着することが分かる.このような「\tf{本質的ケースへの帰着}」は小難しい状況をよりシンプルに考えるにあたって重要なので, それができるときはやってみると良いと思う. さて, 総和は「有限的積分」だから, (2),(3)はそう違った問題ではないと思いたい.
+\end{screen}
+(1),(2)は省略する.
+(3): $\frac{1}{a}\int_{0}^{a} f(x)\, dx = \int_{0}^{1} f(ay)\, dy$なので$a=1$で示せばよい.$f$と$\Phi f$はともに$[0,1]$上の連続関数だからRiemann可積分であり, $\frac{1}{n}\sum_{k=1}^{n}f(\frac{k}{n})$の極限として積分を計算してもよい.よって
+\beqn
+\Phi\parena{\frac{1}{n} \sum_{k=1}^{n} f\parena{\frac{k}{n}}} \leq \sum_{k=1}^{n} \frac{1}{n} \Phi\parena{f\parena{\frac{k}{n}}}
+\eeqn
+である.ここで$n\to \infty$として, (1)から$\Phi$と$\lim$を交換すれば
+\[\Phi\parena{\int_{0}^{1} f(x)\, dx} \leq \int_{0}^{1} \Phi(f(x))\, dx\]
+を得る.\qed
+\end{egans}
+
+
+\begin{egprob} (\cite{rikou} 演習7.18)
+$f(x)$は$[0,\infty)$で$C^{1}$級, $\disp\int_{1}^{\infty}\dfrac{f(x)}{x}\, dx$が収束するならば, $0<a<b$に対して
+\[\int_{0}^{\infty} \dfrac{f(bx) - f(ax)}{x}\, dx = f(0)\log{\dfrac{b}{a}}\]
+であることを証明せよ.
+\end{egprob}
+\begin{screen}
+$\int \frac{f(cx)}{x}\, dx$という形が見えるので, 変数変換してどちらも$\frac{f(x)}{x}$に直してしまおう.答えにはlogが出ているが, どのように変形したらlogが出せるだろうかと考えると良い.
+\end{screen}
+\begin{egans}
+求める積分を$I$とする.定数$c>0$に対し $\int_{0}^{R} \frac{f(cx)}{x}\, dx = \int_{0}^{cR}\frac{f(x)}{x}\, dx$より
+{\small
+\beqn
+I &=& \lim_{r\to +0,R\to \infty}\int_{r}^{R}\dfrac{f(bx)-f(ax)}{x}\, dx \\
+&=& \lim_{r\to +0, R\to \infty} \parena{\int_{aR}^{bR}\dfrac{f(x)}{x}\, dx - \int_{ar}^{br}\dfrac{f(x)}{x}\, dx}\\
+&=&\disp\lim_{r\to +0} \int_{ar}^{br}\dfrac{f(x)}{x}\, dx\qquad (\because \int_{1}^{\infty}\frac{f(x)}{x}\, dx\text{が収束})\\
+&=& \int_{ar}^{br}(\log{x})'f(x)\, dx \\
+&=& \parenc{(\log{x})f(x)}_{ar}^{br} - \int_{ar}^{br} (\log{x})f'(x)\, dx
+\eeqn
+}
+$f$が$C^{1}$級, $r^{\frac{1}{r}}\to 1$だから, 第1項は$f(0)\log{\frac{a}{b}}$に収束する:
+{\small
+\beqn
+&&\log{(br)}^{br}\dfrac{f(br) - f(0)}{br} - \log{(ar)}^{ar}\dfrac{f(ar)-f(0)}{ar} \\
+&&+ f(0) \log{\dfrac{a}{b}} \to (\log{1})f'(0) - (\log{1})f'(0) + f(0)\log{\dfrac{a}{b}}
+\eeqn
+}
+$f$は$C^{1}$級だから$f'$は$[0,1]$上連続であり, $|f'(x)|<M$となる定数$M$が存在する\footnote{有界閉集合上で連続関数は有界.}.$r$が十分小さければ
+{\small
+\beqn
+&&\abs{\int_{ar}^{br} (\log{x})f'(x)\, dx} \leq M\int_{ar}^{br}|\log{x}|\, dx\\
+&=& - M \parenc{x(\log{x} - 1)}_{ar}^{br}\\
+&=& M(br-ar) - M\log{\dfrac{(br)^{br}}{(ar)^{ar}}} \to M\cdot 0 - M \log{\dfrac{1}{1}} = 0
+\eeqn
+}
+以上より題意は示された.\qed
+\end{egans}
+次は面白い.
+\begin{egprob} (出典不明)
+$n$次実対称行列$A=(a_{ij})$の固有値はすべて正であるとし, $n$変数関数$f$を
+\[f(\bolm{x}) = \inpr{A\bolm{x}}{\bolm{x}} = \sum_{i,j=1}^{n}a_{ij}x_ix_j\]
+と定める. このとき
+\[\int_{\mb{R}^n} e^{-f(\bolm{x})} dx_1dx_2\dots dx_n = \dfrac{\pi^{n/2}}{\sqrt{\det{A}}}\]
+が成り立つことを示せ.
+\end{egprob}
+\begin{egans}
+実対称行列なので直交行列$P$により$P^{-1}AP$が対角行列とできる. $\bolm{x} = P\bolm{y}$と置換すると
+\[f(\bolm{x}) = \inpr{AP\bolm{y}}{P\bolm{y}} = \inpr{P^{-1}AP\bolm{y}}{\bolm{y}} = \sum_{i=1}^{n} \lambda_i y_i^2\]
+であり, $P$は直交行列なので$|\det{P}| = 1$であり, $dx_1\dots dx_n = dy_1\dots dy_n$である. よって,
+\[\disp\prod_{i=1}^{n} \int_{\mb{R}}e^{-\lambda_i y_i^2}\, dy_i\]
+を計算すればよくなる. よってガウス積分から
+\[\prod_{i=1}^{n} \dfrac{\sqrt{\pi}}{\sqrt{\lambda_i}} = \dfrac{\pi^{n/2}}{\sqrt{\det{A}}}\]
+\end{egans}
+
+\newpage
+
+
+
+
+
+
+\clearpage
+\subsection{演習問題}
+
+
+\subsubsection{Level A}
+\begin{prob} (\tf{積分問題集1})
+\ben
+\item (京大H21基礎3)
+\[\disp\iint_{A} \sqrt{a^2 - x^2 - xy - y^2}\, dxdy\]
+\[A:= \{ (x,y)\in \mb{R}^2 \mid x^2 + xy + y^2 \leq a^2 \}\]
+\item (京大H20基礎3)
+\[ f(x,y) = \bcas 2xy\cos{\dfrac{y^2}{x}} \quad (x\neq 0, (x,y)\in D)\\ 0\quad  (x=0, (0,y)\in D) \ecas\]
+のとき
+\[\disp\iint_{D} f(x,y)dxdy\]
+\item (H19基礎3) \label{prob:H18B3}
+\[\disp\iint_{D} (x^2 - y^2) \, dxdy\]
+\[D:= \{ (x,y)\in \mb{R}^2\mid x-y \geq 0, \quad x+y\leq 2,\quad y\geq 0 \}\]
+\item  (H27基礎科目I)
+\[\iint_{D} \dfrac{y^2e^{-xy}}{x^2+y^2}\, dxdy, D=\{ (x,y)\in \mb{R}^2 \mid 0\leq y\leq x \}\]
+\item (神戸大H30基礎3(1))
+\[\iint_{\substack{0<x^2+y^2\leq 1\\ |y| \leq \sqrt{3}x}} x\log{|x^2+y^2|}\, dxdy\]
+\een
+\end{prob}
+
+
+
+
+
+
+
+\subsubsection{Level B}
+\begin{prob} (\tf{積分問題集2})
+\ben
+\item (\cite{rikou}演習7.13)
+\[\iint_{0\leq x,y} \dfrac{dxdy}{e^{x}+e^{y}}\]
+\item
+\item
+\item
+\item
+\een
+\end{prob}
+
+\begin{prob} (H28東北大共同2) [解答あり]\\
+実数$\alpha$と正の実数$t$に対し, 広義積分
+\[I(\alpha,t) := \disp\iiint_{\mb{R}^{3}} \dfrac{\sqrt{x^2+y^2+z^2}^{\alpha}}{(\sqrt{2\pi t})^{3}}e^{-\frac{x^2+y^2+z^2}{2}}\, dxdydz\]
+を考える.以下の問いに答えよ.
+\ben
+\item $\alpha > -3$のとき, 広義積分$I(\alpha,t)$が存在することを示せ.
+\item 広義積分 $\disp\int_{1}^{\infty} I(\alpha,t)\, dt$が存在するような$\alpha$の範囲を求めよ.
+\een
+\end{prob}
+
+\begin{prob} (2018微分積分学A期末)\\
+ガンマ関数$\Gamma(x) = \int_{0}^{\infty} y^{x-1}e^{-y}\, dy$, $x>0$について,
+\ben
+\item 任意の自然数$n$に対し次を示せ.
+\[\disp\int_{0}^{1} (1-t^2)^{n} \, dt < \disp\int_{0}^{\infty} e^{-nt^2}\, dt = \dfrac{1}{2\sqrt{n}}\Gamma(1/2) < \disp\int_{0}^{\infty}(1+t^2)^{-n}\, dt\]
+\item $\Gamma(1/2)$の値を求めよ.
+\een
+\end{prob}
+
+\begin{prob} (2019解析演義I)\\
+次の極限を計算せよ.
+\[\disp\lim_{n\to \infty} \disp\int_{0}^{\infty} e^{-x^2} (nx - [nx])\, dx\]
+\end{prob}
+
+\begin{prob} (\cite{rikou} Ex.7.16) [解答あり]
+閉区間$[a,b]$で連続かつ正値な$f(x)$に対して次を示せ.
+\[\parena{\int_{a}^{b}f(x)\, dx }\parena{\int_{a}^{b} \dfrac{dx}{f(x)}} \geq (b-a)^2\]
+\end{prob}
+
+\begin{prob} (\cite{rikou} Ex7.18)
+$f(x)$は$[0,\infty)$で$C^{1}$級, $\int_{1}^{\infty} \dfrac{f(x)}{x}\, dx$が収束ならば, $0<a<b$に対して
+\[\int_{0}^{\infty} \dfrac{f(bx) - f(ax)}{x}\, dx = f(0)\log{\dfrac{a}{b}}\]
+であることを示せ.
+\end{prob}
+
+
+\begin{prob}
+
+\end{prob}
+
+
+
+\subsubsection{Level C}
+\begin{prob} (良問) [解答(動画)\href{https://www.youtube.com/watch?v=rpPJQ_70QZw}{Youtube}]
+次を示せ.
+\[
+\int_{0}^{\pi} \log{(a+b\cos{x})}\, dx = \pi\log{\parena{\dfrac{a+\sqrt{a^2-b^2}}{2}}}
+\]
+\end{prob}
+
+\begin{prob} (H31基礎科目4) \label{prob:H31kiso4}\\
+$f$は$\mb{R}$上の$C^1$級関数で任意の$x\in \mb{R}$に対して$f(x+1) = f(x)$をみたすとする. このとき以下の2条件は同値であることを示せ.
+\ben
+\item[(A)] 広義積分$\int_{1}^{\infty}\dfrac{1}{x^{1+f(x)^2}}\, dx$が収束する.
+\item[(B)] $f(x) = 0$となる$x\in \mb{R}$が存在する.
+\een
+\end{prob}
+
+\subsubsection{Hint・Answer}
+{\small
+
+\begin{probans}
+\chatgpthint{二次形式を対角化してから極座標へ変換してください。}
+\end{probans}
+\begin{probans}
+\chatgpthint{積分順序の交換と適切な変数変換を試してください。}
+\end{probans}
+\begin{probans}
+\chatgpthint{球座標に変換し、原点と無限遠での収束条件を分けてください。}
+\end{probans}
+\begin{probans}
+\chatgpthint{$\log(1+u)$の評価を用いて二つの積分で挟んでください。}
+\end{probans}
+\begin{probans}
+\chatgpthint{区間$[k/n,(k+1)/n)$ごとに積分してください。}
+\end{probans}
+\begin{probans}
+\chatgpthint{Cauchy--Schwarzの不等式を$f^{1/2}$と$f^{-1/2}$に適用してください。}
+\end{probans}
+\begin{probans}
+\chatgpthint{問題文が未記入です。}
+\end{probans}
+\begin{probans}
+重積分に書き直せ.
+\end{probans}
+\begin{probans}
+\chatgpthint{周期ごとに積分を分割し、零点近傍を一次関数で評価してください。}
+\end{probans}
+\begin{probans} % H31基礎科目
+(B)$\implies$(A)はやさしい. (A)$\implies$(B)を示す.
+$f(z) = 0$となる$z\in [1,2)$がある. \ao{$C^1$級の使い方をまず考えるとよい. 今回は, $|f'(x)|$に最大値$M$があるという使い方をする. } (A)により, $f(x)$のこの積分が収束しているのなら, \ao{$f(x)$より大きい値を取る関数$g(x)$に対しても対応する積分は収束している}ということに注意せよ. このことから, $f(x)$の\tf{零点付近の状態}のみが積分の収束性にとって危険であると思うことができる. $|f'(x)|<M$なので, 零点$z$付近では$|M(x-z)|$という一次関数により$|f(x)|$を大きめに評価できるので, $f(x)$の零点$z+n$ ($n=0,1,2,\dots$) において$|f(x)|$を$M|x-z-n|$で評価することで, \[\int_{1}^{\infty} \dfrac{dx}{x^{1+f(x)^2}} \geq \sum_{n=0}^{\infty} \int_{z+n}^{z+n+\delta} \dfrac{dx}{x^{1+(M|x-z-n|)^2}}\]
+とできる($\delta>0$は十分小さい). 右辺は, 左辺の積分の零点付近の積分値を小さく評価したものである. 右辺が$\infty$に発散するというこおを示せばよい. そこで,
+\[I_n= \int_{0}^{\delta} \dfrac{dx}{(x+z+n)^{1+M^2x^2}}\]
+について考える. このままだと計算しづらいので, (少し神頼みになるが)被積分関数を(\tf{積分の計算できる形で})評価する. まず, $\delta$を十分小さくして$M^2x^2 < x$が$[0,\delta]$上で成り立つとしてよい. $x+z+n\leq \delta + z + n$で評価し,
+\[I_n\geq \int_{0}^{\delta} \dfrac{dx}{(\delta + z +n)^{1+x}}\]
+だから, $k_n = 1/(z+\delta + n)$とおけば$k_n^{1+x}$という指数関数の積分で計算できる:
+\[\int_{0}^{\delta} k_n^{1+x}\, dx = \parenc{ \dfrac{k_n^{1+x}}{\log{k_n}}}_{0}^{\delta} = \dfrac{k_n}{\log{k_n}}(k_n^{\delta} - 1) \]
+以降, $\delta$は固定する. $k_n\to 0$なので,  $N\in \mb{N}$を十分大きくすれば$n\geq N$で$|k_n^{\delta} - 1| \leq 1/2$としてよい. よって, 上の左辺を$J_n$とすると
+\[I_n\geq J_n \geq \dfrac{1}{2(n+z+\delta)\log{(n+z+\delta)}} \geq \dfrac{1}{2(2n)\log{n^2}} = \dfrac{1}{8n\log{n}}\]
+としてよい. さて, これで$\sum I_n$を考えると
+\[\sum_{n\geq N} \dfrac{1}{n\log{n}} \geq \int_{N}^{\infty} \dfrac{dx}{x\log{x}} = \parenc{\log{\log{x}}}_{N}^{\infty} = \infty \]
+なのでおかしい. \qed
+
+\end{probans}
+
+\begin{probans}
+\chatgpthint{問題との対応が未記入です。}
+\end{probans}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage

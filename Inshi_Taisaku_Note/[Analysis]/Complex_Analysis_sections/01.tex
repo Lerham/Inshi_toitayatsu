@@ -1,0 +1,641 @@
+\section{基礎事項}
+\subsection{正則函数}
+
+実に, 正則函数には豊かな性質が多い。後にも見るが, それらをまとめておこう。
+\tbox{
+\begin{prop}
+領域$D$上の正則函数について, 次が成り立つ。
+\ben
+\item 正則函数は解析的である。とくに無限回微分できる。
+\item (\tf{一致の定理})$D$が連結であるとき, $f,g\in\mac{O}(D)$が$D$の空でない開集合上一致すれば$D$全体で一致する。また, $f$の零点は孤立していないなら$f\equiv 0$である。
+\item (\tf{最大値原理}) $f\in \mac{O}(D)$が$\ovl{D}$上連続であると仮定するとき, $|f|$の最大値は必ず境界$\del D$で取る。
+
+\een
+\end{prop}
+}{title=正則函数の性質のまとめ}
+
+
+Cauchy-Riemann方程式とは, 「正則函数を特徴づける偏微分方程式」である。
+\begin{prop}
+複素関数$f(z)$に対して, 次は同値である。
+\ben
+\item $f(z)$はすべての点で複素微分可能, つまり$\disp\lim_{h\to 0, h\in \mb{C}} \dfrac{f(z+h) - f(z)}{h}$が存在。
+\item Cauchy-Riemannの関係式が成立: $f(x+iy) = u(x,y) + iv(x,y)$のとき, \bolm{u_x = v_y,$ $u_y = -v_x}
+\item $f(z)=u(x,y) + iv(x,y)$は$C^1$級で, すべての点で複素微分可能である。
+\een
+\end{prop}
+\prf
+(1)$\implies$(2). $h=k,k\in\mb{R}$で$k\to 0$とするのと, $h=ki$で$k\to 0, k\in \mb{R}$とすればわかる。
+
+(2)$\implies$(3). $f(z)$が$z_0=x_0 + iy_0$において複素微分可能とは, 一次近似式
+\[f(z) = f(z_0) + \alpha(z-z_0) + o(|z-z_0|),\quad \alpha = \dfrac{df}{dz}(z_0)\]
+が成り立つことをいう。$\alpha = a + ib$だとして, $f(z) = u(x,y) + iv(x,y)$によって 上の式を書き直せば
+\[u(x,y) = u(x_0,y_0) + a(x-x_0) - b(y-y_0) + o(\sqrt{|x-x_0|^2 + |y-y_0|^2})\]
+\[v(x,y) = v(x_0,y_0) + b(x-x_0) + a(y-y_0) + o(\sqrt{|x-x_0|^2 + |y-y_0|^2})\]
+これらの式は, 実2変数関数$u,v$が$(x_0,y_0)$で微分可能であり, さらにその偏微分係数の間に
+\[u_x = v_y,\quad u_y = -v_x\]
+が成り立つということを言っている。
+
+(3)$\implies$(1) \qed
+\qed
+
+\begin{prac}
+$f(z) = \ovl{z}$は正則でないことを示せ。
+\end{prac}
+
+\begin{egprob}
+次の関数は$\im{z} > -1$上で正則であることを示せ。
+\end{egprob}
+
+
+
+その他, 極限を飛ばしたときの正則性については, 次を参照せよ。
+\ben
+\item 正則函数列の広義一様収束極限(これが実は正則になる) →Moreraの定理
+\een
+
+
+次のような証明もおそらくよく見るものであろう. 次の問題で正則函数が調和関数から得られてくる対象であるということが理解できる.
+\begin{egprob} (H29東北大専門7番)
+$z=x+iy=(x,y)$で$\mb{C}$と$\mb{R}^2$を同一視する. $\mb{C}$の開集合上で定義された$C^2$級実数値関数$w=w(x,y)$が$\frac{\del^2 w}{\del x^2} + \frac{\del^2 w}{\del y^2} = 0$を満たすとき, \tf{調和関数}であるという.
+\ben
+\item $f$を正則函数とするとき, $f$の実部$u=u(x,y)$と虚部$v=v(x,y)$がそれぞれ調和関数であることを示せ.
+\item $u$を$\mb{C}$上の調和関数とする. 原点$0$と$z=x+iy$を結ぶなめらかな曲線を$C_z$と表すとき, 関数
+\[v(x,y) = v(z) = \int_{C_z} \parena{\frac{\del u}{\del x} dy - \frac{\del u }{\del y} dx}\]
+が$C_z$の取り方によらないことを示せ.
+\item $\mb{C}$上の調和関数$u=u(x,y)$に対し$v=v(x,y)$を上で定めるとき, $f(x+iy) = u(x,y) + iv(x,y)$が$\mb{C}$上の正則函数であることを示せ.
+\item $\mb{C}\setminus{\set{0}}$上の実数値関数$u$を$u(x,y) = \log{(x^2+y^2)}$で定める. このとき, $u$は$\mb{C}\setminus{\set{0}}$上の調和関数であるが, $u$を実部にもつ$\mb{C}\setminus{\set{0}}$上の正則函数は存在しないことを示せ.
+\een
+\end{egprob}
+
+恒等式を函数論的に示したいとき, 次の問題のようなアイデアはよく見るのでぜひ覚えておこう.
+\begin{egprob} (H21 RIMS 基礎5)
+$n\in\mb{N}$, $\alpha\neq 0$に対しての$\alpha$の$n$乗根を$\beta_i$ ($i=1,\dots, n$)とする. 次の複素変数$z$に関する恒等式を示せ.
+\[\dfrac{1}{1-\alpha z^n} = \dfrac{1}{n} \sum_{j=1}^{n} \dfrac{1}{1-\beta_i z^n}\]
+\end{egprob}
+\begin{point}
+左辺-右辺を$f(z)$とおく. $f(z)$が全平面で正則であることを示して, かつ有界であると言えればLiouvilleが使えるのでよい.
+\end{point}
+\begin{prac}
+ポイントに注意し, 解いてみよ.
+\end{prac}
+
+
+
+\begin{egprob} (H 数学I-4)
+整関数$f(z)=u(z) + iv(z)$, ($u,v$はそれぞれ実部, 虚部)に対し,
+\[|u(z)| > |v(z)|\quad \forall z\in \mb{C}\]
+ならば$f(z)$は定数であることを示せ.
+\end{egprob}
+
+\begin{egans}
+仮定より, $u(z)$は0にならないので符号が一定である. $-f(z)$に取りかえることで$f(z)$の実部は常に正であるとしてよい. このとき, $e^{-f(z)}$は有界正則函数であるから0でない定数である. よってある複素数$c$に対して$-f(z)\in c + 2\pi i \mb{Z} $であるが, 連続性から$f(z)$は定数である. \qed
+\end{egans}
+
+
+
+
+\subsection{初等関数}
+
+
+
+
+
+\newpage
+\subsection{Cauchyの積分公式}
+理論的にかなり重要なのがCauchy積分公式である。Cauchy積分公式は「正則函数の積分表示を与える」。感覚的には, それは値の分布の平均的な状況を与えることになるので,正則函数の大域的な穏やかさを引き出すことができる。この定理から分かることは非常に多い(解析性や一致の定理など)。証明も教育的である。
+\tbox{
+\begin{theo} (\tf{Cauchy積分公式})\\
+$f(z)$が閉円盤$\ovl{D}(c;R)$を含む領域で正則であれば, 円盤の内部の点, すなわち$|z-c|<R$を満たす点$z$において
+\begin{equation} \label{equztion:CIF}
+    f(z) = \disp\int_{|\zeta -z| = R} \dfrac{f(\zeta)}{\zeta - c}\, \dfrac{d\zeta}{2\pi i}
+\end{equation}
+\end{theo}
+}{title=Cauchyの積分公式}
+\prf
+\qed
+$z=c+re^{i\theta}$とおいて置換積分をすることで次が容易に得られる。
+
+\tbox{
+\begin{cor}
+領域$\mac{D}$, $c\in \mac{D}$とし, $r>0$は$\ovl{D}(C;r)\subset \mac{D}$を満たすとすると
+\[f(c) = \disp\int_{0}^{2\pi} f(c+re^{i\theta})\dfrac{d\theta}{2\pi}.\]
+すなわち, $f$の$c$での値は「$c$の点を中心とする円周上の値の平均」である。
+\end{cor}
+}{title=平均値の定理}
+次の定理もかなり重要である。
+\tbox{
+\begin{cor}
+関数$f(z)$は$\ovl{D}(c;R)$で連続かつ$D(c;R)$で正則とする。$f(z)$が定数でないならば, $|f(z)|$は円盤の内部$|z-c|<R$において最大値を取らない。
+\end{cor}
+}{title=最大値の原理}
+\prf $|z_0-c|<R$なる$z_0$で最大値を取ると仮定する。まず$z_0=c$の場合を考える。 この場合実は, いかなる$0<r\leq R$に対しても$|f(c+re^{i\theta})| = |f(c)|$が常に成り立つ。実際, ある$r,\theta_0$で$|f(c+re^{i\theta_0})| < |f(c)|$が成り立つとすれば,$\theta$が$\theta_0$に十分近いときも$|f(c+re^{i\theta}| < |f(c)|$であるから, 平均値の定理から
+\[f(c)=\dfrac{1}{2\pi i} \disp\int_{0}^{2\pi} f(c+re^{i\theta})\, d\theta < \dfrac{1}{2\pi}\disp\int_{0}^{2\pi} f(c)\, d\theta = f(c)\]
+で矛盾である。$z_0$が一般の場合は, $|f(z)|$は$z_0$を中心とする十分小さい円盤の中では最大値を$z_0$で取っているので, $z_0=c$の場合に帰着される。\qed
+
+\begin{egprob} (H29留学生入試)\\
+$D=\{ |z|<1\}$, $f,g\in \mac{O}(D)$かつ$\ovl{D}$上連続とし,
+\[|f(z)|\leq |g(z)| \quad \text{on $D$}\]
+\[|f(z)| = |g(z)|\quad \text{on $\del D$}\]
+\[f(z) \neq 0\quad (\text{on  $\ovl{D} - \{ 0 \}$})\]
+とする。$f(z) = \alpha z^m g(z)$となる定数$\alpha$と自然数$m$が存在することを示せ。
+\end{egprob}
+
+
+次の定理から\tf{正則性と解析性が等価}であることが従う:
+\begin{theo}
+閉円盤$\ovl{D}(c;R)$上の連続関数$f(z)$に対して, 積分公式(\ref{equation:CIF})が成り立っているものとする。このとき$f(z)$は$|z-c|<R$で次の収束冪級数に展開される:
+\[f(z) = \sum_{n=0}^{\infty} a_n(z-c)^{n}\]
+\[a_n = \int_{|\zeta - c| = R} \dfrac{f(\zeta)}{(\zeta-c)^{n+1}}\, \dfrac{d\zeta}{2\pi i}\]
+とくに任意の正則函数は各点で収束冪級数展開を持つ。\bbox
+\end{theo}
+\prf
+\qed
+
+\tbox{
+\begin{prop} (Goursatの定理)
+Cauchy積分公式の仮定で,
+\[f^{(n)}(z) = n!\int_{|\zeta-z|=R} \dfrac{f(\zeta)}{(\zeta-z)^{n+1}}\dfrac{d\zeta}{2\pi i}\]
+\end{prop}
+}{title=Goursatの定理}
+\prf Cauchy積分公式を$z$で微分すれば従う。経路上で被積分関数は滑らかであり, パラメータ$z$で偏微分した導関数が$C^1$級であるため, 積分記号下の微分を適用できる。\qed
+
+\begin{prac}
+$f(z)\in \mac{O}(D)$が定数$M$に対して$|f(z)|\leq M$を満たすならば, $|f'(z)|\leq M$であることを示せ。
+\end{prac}
+
+\begin{prac} (H11数学I-7, 誘導追加)
+$f$は$\ovl{\Delta}$を含む開集合で正則な関数とする。$|f|$が$\ovl{D}$上で最大値$M$を取るとき, $|f'(0)| \leq M$であることを示せ。またこのことを用いて, 次の不等式を示せ。
+\[|f(z) - f(0) - f'(0)z| \leq 3M|z|^2\]
+また, $|f(z) - f(0) - f'(0)z - f''(0)z^2|$は何で抑えられるか?
+\end{prac}
+
+Cauchy積分定理のある意味の反対がMoreraの定理である。理論的には重要である。
+\tbox{
+\begin{theo}
+複素平面内のある連結開集合 $D$ 上で定義される連続な複素数値函数 $f$ で, $D$ 内のすべての区分的 $C_1$ 閉曲線 $γ$ に対して
+\[\displaystyle \oint _{\gamma }f(z)\,dz=0\]
+を満たすものは, 必ず $D$ 上で正則である。
+\end{theo}
+}{title=Moreraの定理}
+\begin{point}
+\ben
+\item いまは$f$に正則性はないのだけれども, 閉曲線で積分して0という性質さえあれば, 「正則函数の原始関数の複素微分が元の正則函数」という議論を並行にできる(Claimで示す部分である)。
+\een
+\end{point}
+\prf $D$内の点$z_0$をひとつ固定し, $z\in D$とする。$\gamma:[0,1]\to D$を, $\gamma(0) = z_0$, $\gamma(1) = z$となるような任意の道として,
+\[F(z) = \int_{\gamma} f(\zeta)d\zeta\]
+とする。閉曲線上の積分が0であることから, これは$\gamma$の取り方によらない。$F$は原始関数に当たる。以下では, \tf{この$F$が正則であることを示す。}この主張自体も覚えておくとよい。
+\begin{claim}
+\[\lim_{w\to 0} \abs{\dfrac{F(z+w) - F(z)}{w} - f(z)}\]
+\end{claim}
+(\tf{Claim証明})
+\begin{eqnarray}
+&&\lim_{w\to 0} \dfrac{F(z+w) - F(z)}{w} = \lim_{w\to 0} \int_{z\to z+w} \dfrac{f(\zeta)}{w}\, d\zeta \\
+&=&  \lim_{w\to 0} \int_{0}^{1} \dfrac{f(z+tw)}{w} d(z+tw) = \lim_{w\to 0} \int_{0}^{1} f(z+tw)\, dt
+\end{eqnarray}
+次の不等式の議論に注意せよ。$f$は連続ゆえ, 任意の$\epsilon$に対して$|\zeta - z| < \delta\implies |f(\zeta) - f(z)| < \epsilon$となる$\delta$が存在するので, $|w|$が十分小さいときは
+\begin{eqnarray}
+\abs{\dfrac{F(z+w) - F(z)}{w} - f(z)} \leq \int_{0}^{1} |f(z+tw) - f(z)|\, dt \leq \int_{0}^{1} \epsilon \, dt = \epsilon
+\end{eqnarray}
+(\tf{Claim証明終})\\
+以上より, $F'(z) = f(z)$だから$F(z)$は$D$で複素微分可能となり,すなわち $F(z)$は領域$D$で正則である。Grousatの定理より, 正則函数の微分は正則であるから$f(z)$も正則である。\qed
+
+\tf{このMoreraの定理で次の定理が示されるのが大事。}
+\begin{theo}
+領域上の正則函数列$\{ f_n \}$が$f$に広義一様収束するとき, $f$も正則である。
+\end{theo}
+\prf
+$\gamma$を$D$内の任意の閉曲線とする。$\int_{\gamma} f(\zeta) \, d\zeta = 0$を示せばよい。Moreraの定理より$\int_{\gamma} f_n d\zeta = 0$である。よって, 極限と積分の順序交換ができればよいが, これは広義一様収束性によって, $f_n\to f$が$\gamma$上一様収束であるからよいのである。\qed
+
+\tbox{
+\begin{theo}
+$\{ f_n \}$が領域$D$上の正則函数列で$f$に広義一様収束するとき, $\{ f_n'\}$は$f'$に広義一様収束する。\tf{特に, 広義一様収束する正則函数項級数は正則で, 項別微分可能である。}
+\end{theo}
+}{title=Wierstrassの二重級数定理}
+
+最後に, 過去問を一題掲載します. 非常によい問題なので, ぜひ自分で考えてみてください.
+\begin{prob} (H28基礎科目II-3番)\\
+$f(z)$は$z=0$の近傍で正則な複素関数で$f(z)e^{f(z)} = z$を満たすとする\footnote{$f(z)$はランベルト関数と呼ばれている.}.
+\ben
+\item $n\in \mb{Z}_{\geq 0}$, $\epsilon>0$(十分小)に対して
+\[\dfrac{f^{(n)}(0)}{n!} = \dfrac{1}{2\pi i}\int_{C_{\epsilon}} \dfrac{1+u}{e^{nu}u^n} du\]
+を示せ. ここで, 積分路$C_{\epsilon}$は演習$\set{u\in\mb{C}\mid |u|=\epsilon}$を正の向きに一周するものとする.
+\item $f(z)$の$z=0$における冪級数展開を求め, その収束半径を求めよ.
+\item
+\een
+\end{prob}
+
+
+
+
+\newpage
+\subsection{偏角原理・Rouch\'{e}の定理}
+\besha
+\begin{theo} (\tf{偏角原理}) \label{theo:henkaku}\\
+$\Omega \subset \mb{C}$が有界領域, $\del \Omega$が区分的$C^1$旧単純閉曲線の非交和であるとする。$f$は$\del \Omega$上に零点も極ももたないとする。このとき,次が成立する。
+\[\disp\int_{\del\Omega}\dfrac{f'(\zeta)}{f(\zeta)}g(\zeta)d\zeta = 2\pi i\disp\sum_{a\in\Omega}g(a)\mr{ord}_{a}(f)\]
+\end{theo}
+\ensha
+\begin{rem}
+とくに$g\equiv 1$とすれば
+\[\disp\int_{\del \Omega}\dfrac{f'(\zeta)}{f(\zeta)}d\zeta =2\pi i\disp\sum_{a\in\Omega} \mr{ord}_{a}(f)\]
+を得る。これは代数学の基本定理の証明にも登場する。\bbox
+\end{rem}
+\prf
+$F(z)=\dfrac{f'(z)}{f(z)}g(z)$に留数定理を適用すれば,
+\[\disp\int_{\del\Omega}F(\zeta)d\zeta=2\pi i\disp\sum_{a\in\Omega}\mbox{Res}(F,a)\qquad (\star)\]
+である。
+$F$が$a$で極をもつなら, $a$は$f$の零点または極である(少なくとも正則, 真性特異点ではないということ)。したがって$\mr{ord}_{a}(f)$は$0$でない整数である。\par
+$a\in\Omega$において
+\[f(z)=(z-a)^m h(z), h(z)\in\mac{O}(\Delta_{a}(\epsilon)), h(a)\neq 0\]
+という表示ができる。このとき, 積の微分より$f'(z)=m(z-a)^{m-1}h(z)+(z-a)^mh'(z)$であるから,
+\[\dfrac{f'(z)}{f(z)}=\dfrac{m}{z-a} +\dfrac{h'(z)}{h(z)}=\dfrac{\mbox{ord}_a(f)}{z-a}+(正則関数)\]
+正則な部分は留数に影響を与えない。したがって,
+\[\res{z=a}{F(z)} =\res{z=a}{\dfrac{\mbox{ord}_a(f)}{z-a}g(z)}=(\mr{ord}_{a}(f))g(a)\] これを$(\star)$に代入すればよい。\qed
+
+\begin{defn} (\tf{回転数})\\
+$\gamma:[0,1]\to \mb{C}$を区分的$C^1$級閉曲線(単純性は仮定しない)とする。曲線上にない点$a$に対して, 回転数$\eta(\gamma, a)$とは次で定められる\tf{整数}であるとする。
+\[\bolm{\eta(\gamma ,a)=\dfrac{1}{2\pi i}\disp\int_{\gamma}\dfrac{d\zeta}{\zeta-a}}\]
+\end{defn}
+
+\begin{rem} (\cite[122～133p]{ahl}も参照せよ)\\
+回転数が整数である理由は, 次の証明による。
+
+$\gamma$の極座標表示を考える: $\gamma(t)-a=|\gamma(t)-a|e^{i\theta(t)}$\\
+ここで $\theta: I=[0,1]\to \mb{R}$は一意に定まらないが, $\theta(0)$を決めれば一意に定まる。このとき
+
+\begin{eqnarray*}
+\dfrac{\gamma'(t)}{\gamma(t)-a}&=&\dfrac{\parena{\frac{d}{dt}|\gamma(t)-a|}e^{i\theta(t)}+|\gamma(t)-a|i\theta'(t)e^{i\theta(t)} }{|\gamma(t)-a|e^{i\theta(t)}}\\
+&=&\dfrac{|\gamma(t)-a|'}{|\gamma(t)-a|} +i\theta'(t)
+\end{eqnarray*}
+($\gamma(t)\neq a$に注意。)　線積分の定義から
+\begin{eqnarray*}
+\eta(\gamma, a)&=& \dfrac{1}{2\pi i}\disp\int_{0}^{1} \dfrac{d(\gamma(t))}{\gamma(t) - a} \\
+&=&\dfrac{1}{2\pi i} \disp\int_{0}^{1}\left(\dfrac{d}{dt}\log{|\gamma(t)-a|}+i\dfrac{d\theta}{dt}(t)\right)dt \\
+&=&\dfrac{1}{2\pi i}\left(\log{\left|\dfrac{\gamma(1) -a}{\gamma(0) -a}\right|} +i(\theta(1)-\theta(0))\right) \\
+&=& \dfrac{\theta(1)-\theta(0)}{2\pi}
+\end{eqnarray*}
+
+$e^{i\theta(0)}=e^{i(\theta(1))}$であるから, $ \theta(0) - \theta(1) \in 2\pi \mb{Z}$である。ゆえに回転数は整数として定まり, 幾何的には$\eta(\gamma, a)$が$\gamma$が$a$のまわりを回るときの偏角の変動を表す。\bbox
+\end{rem}
+
+回転数を使うと, 偏角原理$g=1$の場合は次のように述べられる。
+
+\begin{recall} (回転数と位数の関係) \label{recall:kaiten}
+曲線$f|_{\del\Omega}$の$0$における回転数は, $\Omega$の各点の$f$の位数を計上する。すなわち,
+\[\eta(f|_{\del\Omega}, 0)=\disp\sum_{a\in \Omega} \mbox{ord}_a(f)\]
+ただし, $f\in \mac{M}(\bar{\Omega})$でかつ, $f$は$\del\Omega$上に零点も極も持たない\footnote{この条件は, $\gamma$の有界性と, 曲線$f|_{\del\Omega}$が$0$を通らないという条件を反映したものと考えられよう. ある曲線の点$a$における回転数を考えるとき,$a$は曲線上の点ではないことを要請していたことを思いだそう。} ものとする。\bbox
+\end{recall}
+\begin{rem}
+$\del\Omega =C_1\cup \cdots C_N$と単純閉曲線の非交和と表すとき
+\[\eta(f|_{\del\Omega}, 0)=\disp\sum_{i=1}^{N}\eta(f_{C_i},0)\]
+と定義する。（区分的なものに定義を自然に拡張した。）
+\end{rem}
+
+
+\begin{egprob} (\cite{mag},62番)
+$f(z) = \dfrac{(z^2+1)^2}{(z^2+2z+2)^3}$とするとき,
+\[\dfrac{1}{2\pi i} \int_{|z|=4} \dfrac{f'(z)}{f(z)}dz\]
+を計算せよ. ただし経路は反時計回り.
+\end{egprob}
+
+\begin{egans}
+偏角原理の「Null マイナス Pole」を用いる. $f(z)$の零点は$\pm i$(位数2)で極は$\pm i - 1$ (位数3)なので$4- 6 = -2$.
+\end{egans}
+
+
+理論上非常に強力なRoch\'{e}の定理について復習する.
+\begin{comment}
+$D$を複素平面のある単連結な開集合（領域）、$\partial D$ をその境界 （ただし、連続曲線であるなど、十分に良い性質を持つものとする）、$K$を$D$の閉包とし$f(z),g(z)$を$K$ 上で定数でない正則な複素関数で、\textcolor{blue}{$\partial D$上で、$|f(z)|>|g(z)|$を満たす}とすれば、$D$ 内での $f(z)+g(z)$と$f(z)$の零点の個数 （ただし位数$n$の零点は$n$個として数える）は一致する。
+\end{comment}
+\tbox{
+\begin{theo}
+$\Omega \subset \mb{C}$が有界領域, $\del \Omega$が区分的$C^1$級単純閉曲線の非交和であるとする. $f,g\in\mac{O}(\ovl{\Omega})$は次の条件を満たしている:
+\[|f(z)-g(z)|<|f(z)| \qquad (\forall z\in\del \Omega) \quad (\star)\]
+このとき, $f$の$\Omega$にある零点の個数と$g$の$\Omega$にある零点の個数は, 重複度も含めて考えれば等しい:
+\[\disp\sum_{a\in\Omega}\mbox{ord}_a(f) =\disp\sum_{a\in\Omega}\mbox{ord}_a(g)\]
+\end{theo}
+}{title=Rouch\'{e}の定理}
+\begin{point}
+\tf{$f(z)$に, ちょっと小さいもの($g(z)-f(z)$)を足しても零点の個数は変わらない！}
+\end{point}
+
+\prf
+
+
+条件($\star$)より$\del \Omega$上$|f| > 0$である。また, ある$z\in \del \Omega$で$|g(z)| = 0$とすると$|f(z)|<|f(z)|$となるので不合理。したがって, $f,g$は$\del \Omega$上に零点を持たないことが従う。\par
+\[g(z)=f(z)+(g(z)-f(z))=f(z)\left(1+\dfrac{g(z)-f(z)}{f(z)}\right)\]
+と書けるから, \bolm{h(z)=1+\dfrac{g(z)-f(z)}{f(z)}}とおくと, $g=fh$である。よって,
+\[\bolm{\dfrac{g'}{g}=\dfrac{f'}{f}+\dfrac{h'}{h}}\]
+したがって$0$における回転数を取る(偏角原理, 定理\ref{theo:henkaku})と,
+\[\bolm{\eta(g|_{\del\Omega}, 0)=\eta(f|_{\del\Omega}, 0)+\eta(h|_{\del\Omega}, 0)}\]
+となる。$(\star)$より, $\left.\dfrac{g(z)-f(z)}{f(z)}\right|_{\del\Omega}\subset \Delta$ (単位円)であるから,
+\[h|_{\del\Omega}=\left.\left(1+\dfrac{g-f}{f}\right)\right|_{\del\Omega}\subset 1+\Delta =\Delta_1(1)\]
+となる。すなわち, 曲線$h|_{\del\Omega}$ は\footnote{というより, $h$による$\del \Omega$の像}円盤$\Delta_1(1)$に含まれる。したがって, 曲線$h|_{\del\Omega}$は$0$を通らず, $0$の周りを回らないので, 偏角の変動は0である。また, $h$は$\del \Omega$上に極を持たないことは明らかである。よって, 回転数の定義より
+\[\eta(h|_{\del\Omega},0)=0\]
+である。この結果から$\eta(f|_{\del\Omega},0)=\eta(g|_{\del\Omega},0)$を得る。$f,g\in \mac{O}(\ovl{\Omega})$は$\del \Omega$上正則で, $\del \Omega$上零点を持たない。よって, 回転数と位数の関係(\ref{recall:kaiten}) から, 位数の和は等しいことが分かる。
+\qed
+
+この定理を用いて代数学の基本定理を再証明する。
+\begin{cor}
+$\mb{C}$は代数閉体である。
+\end{cor}
+\prf
+
+\qed
+\begin{tips}
+この代数学の基本定理の証明を覚えておくと, Rouch\'{e}の定理の主張も思い出しやすくなります。両方を関連づけて覚えておくとよいでしょう。
+\end{tips}
+
+この定理を用いて解く問題もいろいろあり, 関数論の演習で一度はやっておきたいものである。たとえば次のような問題を解くことが出来る。
+\begin{egprob} (10/24, Quiz, by Fujioka)\\
+5次方程式$z^5+13z-5=0$の複素数解の絶対値の大きさは2未満になることを示せ．
+\end{egprob}
+\begin{egans} \label{egans:10/24_quiz_by_fujioka}
+Rouch\'{e}の定理を用いる。$f(z) = z^{5}$, $g(z) = 13z -5$とすると, $|z| = 2$のとき
+\[|f(z)+g(z)| \leq 31 < 32 = |f(z)|\]
+が成り立つ。Roucheの定理より$f$と$f+g = z^{5} +13z - 5$の$|z|<2$における零点の個数は一致する。$f$が5重解$0$をもつから$5$個である。よって$f+g$の5個の零点はすべて$|z|<2$の範囲にある。\qed
+\end{egans}
+
+
+
+
+次の問題は一発問題ではない.
+\begin{egprob} (東大)
+$z^6+6z+20$は$D=\set{x+iy \mid x,y>0}$においていくつ根をもつか.
+\end{egprob}
+\begin{egans}
+$C_1(R), C_2(R), C_3(R)$を四分円の経路とする. $R$を十分大きくとれば$D$内の零点はすべて$C=C_1(R)+\cdots + C_3(R)$の内部に含まれる. その零点が$n$個あるとせよ. $f(z) = z^6 + 6z + 20$とする.  $C$で偏角原理より, 十分大きい$R$に対して
+\[n = \dfrac{1}{2\pi i} \int_{C} \dfrac{f'(z)}{f(z)}\, dz\]
+右辺の積分のうち$C_1(R)$, $C_3(R)$上の積分は, 偏角の増分から計算できる. \par
+$C_1(R)$上では, $f(z)$が実数値であるため, 偏角の増分は0である. \par
+$C_3(R)$上では, $f(ti) = -t^6 + 20 + 6ti$なので, $f(Ri)$の偏角はほとんど$\pi$であることが分かる. $C_3(R)$の向きに注意すると, $C_3(R)$上の積分の偏角の増分は$-\pi$であり, 積分値は$-\frac{1}{2}$である.  \par
+$C_2(R)$上の偏角の増分は$3\pi$である. 短絡的に$\pi$としないよう注意する. $f(z)$は$z$の6次多項式なので, $z$が$S^1$を一周すると$f(z)$は6周すると考えられる. $C_2(R)$はその$0.25$周分に当たるため, $f(z)$は$1.5$周すると予想できる. \par
+実際に少し計算的に示してみよう. $z=Re^{i\theta}$とおく. $z$は十分大きいので$z^6$が支配的である.
+\[f(Re^{i\theta}) = R^6e^{6i\theta}\parena{1 + 6R^{-5}e^{-5i\theta} + 20R^{-6}e^{-6i\theta}} \]
+$1+6R^{-5}e^{-5i\theta} + 20R^{-6}e^{-6i\theta}$は十分1に近いと考えられる. $1$を中心とする十分小さい円板に値を収めることができ, その円板上の複素数による積は偏角をほとんど変化させないので, $0\leq \theta\leq 2\pi$において, $f(Re^{i\theta})$と$R^6e^{6i\theta}$の間を結ぶホモトピーがあると考えられ,  $\theta$を$0\to 2\pi$と動かすと, $f(Re^{i\theta}) $はやはり$1.5$回転する. したがって偏角の増分は$3/2\pi$である. よって, $C_2(R)$上の積分は$R\to \infty$で$\frac{3}{2}$に収束する. これらを
+\end{egans}
+
+
+
+
+\subsubsection{補足}
+\tbox{
+\begin{theo} (逆関数定理)
+$f\in\mac{O}(\Delta)$とする。$\mbox{ord}_0(f)=n>0$とする。\\
+(1) ある$0<\epsilon,\delta<<1$が存在して次が成立する:
+\lefba{
+$\forall w\in \Delta(\delta)$に対して, 方程式$f(z)=w, |z|<\epsilon $は重複度も含め$n$個の解を持つ。
+}
+(2) $n=1$,つまり $f(0)=0, f'(0)\neq 0$とする。このとき, 原点の近傍$U=f^{-1}(\Delta(\delta))\cap \Delta(\epsilon)$が存在して, $f|_{U}:U\to \Delta(\delta)$は正則な位相同型であり, 逆写像は次式で与えられる。
+\[(f|_U)^{-1}(w)=\dfrac{1}{2\pi i}\disp\int_{\del \Delta(\epsilon)} \dfrac{f'(\zeta)}{f(\zeta)-w}\zeta d\zeta\]
+\end{theo}
+}{title=逆関数定理}
+\prf
+(1) 正則関数の零点は孤立しているので, 十分小さい$\epsilon>0$を取ると, $\bar{\Delta(\epsilon)}$に存在する$f(z)$の零点は$z=0$に限る。このとき, $|f|$は$\del\Delta(\epsilon)$上の連続関数で零を取らないので, $\delta>0$を次で定められる:
+\[2\delta =\mbox{min}_{z\in \del\Delta(\epsilon)}|f(z)|\]
+このとき, $w\in \Delta(\delta)$ならば, $\forall z\in \del\Delta(\epsilon)$に対して
+\[|(f(z)-w)-f(z)|=|w|<\delta<2\delta =\mbox{min}_{z\in\del\Delta(\epsilon)}|f(z)|\leq |f(z)|\]
+したがって$\Delta(\epsilon)$上の函数$f(z)$と$f(z)-w$に関してRoucheの定理を適用できる。$f(z)$は$\Delta(\epsilon)$上に重複も含めて$n$個の零点を持つので, $f(z)-w$も$\Delta(\epsilon)$に重複も含め$n$個の零点を持つ。\qed\\
+(2) $\epsilon, \delta$は(1)と同様に取る。このとき, $w\in \Delta(\delta)$に対して, $g(w)\in\Delta(\epsilon)$を方程式$f(z)=w$, $z\in \Delta(\epsilon)$の唯一の解とする。
+\fbox{Step1.}
+\[g(\Delta(\delta))=f^{-1}(\Delta(\delta))\cap\Delta(\epsilon)\]
+を示す。$g$の構成から, $w\in \Delta(\delta)$に対し$f(g(w))=w$かつ$g(w)\in\Delta(\epsilon)$が定義から従うので, $g(w)\in f^{-1}(\Delta(\delta))\cap\Delta(\epsilon)$, つまり $g(\Delta(\delta))\subset f^{-1}(\Delta(\delta))\cap \Delta(\epsilon)$.\\
+逆に $z\in f^{-1}(\Delta(\delta))\cap\Delta(\epsilon)$とする。$w=f(z)$とおけば, $w\in \Delta(\delta)$である。このとき, $z$は方程式$f(z)=w, z\in \Delta(\epsilon)$を満たすので, $g$の定義から$z=g(w)$である。ゆえに$g(\Delta(\delta))\supset f^{-1}(\Delta(\delta))\cap \Delta(\epsilon)$.\\
+\fbox{Step2.}\\
+そこで $U=g(\Delta(\delta))= f^{-1}(\Delta(\delta))\cap \Delta(\epsilon)$とおけば, $U$は原点を含む$\Delta$の開集合である。$g$の正則性を見る。偏角原理から
+\[g(w)=\dfrac{1}{2\pi i}\disp\int_{\del\Delta(\epsilon)}\dfrac{f'(\zeta)}{f(\zeta)-w}\zeta d\zeta=\disp\sum_{a\in \Delta(\epsilon)}(a\mr{ord}_{a}(f-w))　\label{eq: argument}\]
+偏角原理で$D=\Delta(\epsilon), F(z)=f(z)-w, g(z)=z$として適用すれば(\ref{eq:argument})が得られる。\\
+$g(w)$の積分表示から, $g(w)$は$\Delta(\delta)$上で複素微分可能なので$\Delta(\delta)$上の正則関数である。定義から$f(g(w))=w$が$\forall w\in \Delta(\delta)$に対して成立する。$g(f(z))=z$も, $z\in U$が$z=g(w), w\in \Delta(\delta)$と書けることから従う。\footnote{$g(f(z))=g(f(g(w)))=g(w)=z$}
+以上から$U$は$\Delta$の原点を含む領域で, $f|_U:U\to \Delta(\delta)$は正則な位相同型であり, 逆写像$f^{-1}=g$も正則である。\qed\\
+\begin{cor}
+$\Omega\subset\mb{C}$を領域, $\phi\in\mac{O}(\Omega)$とする。
+\ben
+\item $\phi$が定数でないならば$\phi(\Omega)\subset \mb{C}$は領域である。\\
+\item $\phi$が単葉(univalent), つまり $\phi:\Omega\to\phi(\Omega)$が一対一写像のとき, $\phi^{-1}:\phi(\Omega)\to\Omega$も正則函数である。
+\een
+\end{cor}
+\prf
+(1) $\phi\in\mac{O}(\Omega)$は定数でないとする。$\phi(\Omega)$の連結性は明らかである。$\phi(\Omega)$が開集合であることを示すため, $b\in\phi(\Omega)$を任意に取り, $b$が内点であることを示す。すなわち,
+\[\exists \delta>0, \mr{s.t.} \Delta_{b}(\delta)\subset\phi(\Omega)\]
+を示せばよい。$b\in\phi(\Omega)$より, ある$a\in\Omega$によって$b=\phi(a)$と表される。そこで,
+\[f(z):=\phi(z+a)-\phi(a)=\phi(z+a)-b\]
+と定義すれば, $f$は原点の近傍で定義された正則函数である。よってTheorem3.4(1)により, $0<\epsilon, \delta<<1$が存在して
+\[\forall w\in\Delta(\delta), \exists z\in\Delta(\epsilon) \mr{s.t.} f(z)=w\]
+となる。\footnote{$f$は定数でないので$\mr{ord}_0(f)>0$のためTheorem3.4(1)が適用可能。}これから,
+\[\forall w\in\Delta_b(\delta), \exists z\in\Delta_a(\epsilon) \mr{s.t.} \phi(z)=w\]
+ゆえに $\Delta_b(\delta)\subset \phi(\Delta_a(\epsilon))$. これにより$b$は$\phi(\Omega)$の内点であるから, $\phi(\Omega)$は開集合。\qed\\
+(2) Theorem3.4(2)より明らか。\qed
+\besha
+\begin{theo} (\tf{Hurwitzの定理})\\
+$D\subset \mb{C}$を領域, $\{f_n\}_{n\in\mb{N}}\subset \mac{O}(D)$とする。任意の$n\in\mb{N}$に対して, $f_n$は$D$上に零点を持たないとする。函数列$\{f_n\}$が$D$上の正則函数$f$に広義一様収束すると仮定する。このとき, 次のどちらか一方が成立する:\\
+(1) $f$は$D$上に零点を持たない。\\
+(2) $f$は$D$上で恒等的に零である。
+\end{theo}
+\ensha
+\prf \\
+\step{1}{背理法→$\disp\min_{z\in\del\Delta_a(r)}|f(z)|\geq Cr^{\mu}$}\\
+$f$が恒等的に零ではないとする。このとき, $f$が$D$上に零点を持つと仮定して矛盾を導く。\\
+$a\in D$において$f(a)=0$とする。$f$は恒等的に零ではないので$f$の任意の零点は孤立した零点である。つまり,
+\[\exists \nu\in\mb{N}, \exists \rho>0, \exists g\in\mac{O}(\Delta_a(\rho))\backslash\{0\} \mr{s.t.} f(z)=(z-a)^{\nu}g(z)\]
+が$\Delta_a(\rho)$上で成立する。($\nu=\mr{ord}_a(f)$)\\
+このとき, $0<{}^{\exists}r<<1 \mr{s.t.} g(z)$は$\overline{\Delta_a(r)}$上に零点を持たない。($g\not 0$より)\\
+$C=\disp\min_{z\in\overline{\Delta_a(r)}} |g(z)|>0$とおく。このとき, $\del\Delta_a(r)$上で
+\[|f(z)|=|z-a|^{\nu}\cdot|g(z)|=r^{\nu}|g(z)|\geq Cr^{\nu}\]
+が成り立つ。よって
+\[\disp\min_{z\in\del\Delta_a(r)}|f(z)|\geq Cr^{\mu}　\label{eq: min}\]
+である。\\
+\step{2}{矛盾を導く}\\
+$\{f_n\}$は$f$に$D$上で広義一様収束するから, $\{f_n\}$は$\overline{\Delta_a(r)}$上で$f$に一様収束する。ゆえに
+\[\exists N\in\mb{N} \mr{s.t.} \disp\sup_{z\in\overline{\Delta_a(r)}}|f_n(z)-f(z)|<\dfrac{1}{2}Cr^{\nu}　(\forall n>N)　\label{eq: sup}\]
+このとき, (\ref{eq:min}), (\ref{eq: sup})から $\forall z\in \del\Delta_a(r)$に対して
+\[|f_n(z)-f(z)|\leq \dfrac{1}{2}Cr^{\nu}<Cr^{\nu}\leq |f(z)|\]
+だからRoucheの定理より$f_n$は$\Delta_a(r)$において$f$と同数の零点を持つ。$f$は$\Delta_a(r)$に$\nu$位の零点を持つので, $f_n$の仮定に矛盾。\qed
+\tbox{
+\begin{theo}
+$D\subset \mb{C}$を領域とし, $\{f_n\}\subset \mac{O}(D)$とする。$\forall n\in\mb{N}$に対して$f_n$は$D$上の\uwave{単葉正則函数}であるとする。$\{f_n\}$が$f\in\mac{O}(D)$に$D$上で\uwave{広義一様収束}するとする。このとき, $f$が定数でなければ, $f$は$D$上で\uwave{単葉である。}
+\end{theo}
+}{}
+\prf
+$f$は定数でないとして, $f$が単葉でないと仮定する。このとき,
+\[\exists a\in D \mr{s.t.} 方程式f(z)=f(a)はz=a以外の解をもつ.\]
+である。$g(z)=f(z)-f(a)$とおけば, $f$が定数出ないので$g$も定数でなく, $g$は$z=a$以外の零点を$D$に持つ。$0<\delta<<1$を十分小さく選べば, $g(z)$の$\overline{\Delta_a(\delta)}$における$g$の零点は$a$のみである。つまり\uwave{$\Omega=D\backslash\overline{\Delta_a(\delta)}$にその零点が存在する。}$\Omega$上で正則函数列$\{g_n\}_{n\in\mb{N}}$を $g_n(z)=f_n(z)-f_n(a)$で定義する。このとき, $f_n$が$D$上単葉なので, $g_n$は$\Omega$上に零点を持たない。仮定から$\{g_n\}$は$g$に$\Omega$上広義一様収束する。Hurwitzの定理より次の(1),(2)のどちらかが成立する。
+\ben
+\item $g$は$\Omega$に零点を持たない。
+\item $g$は$\Omega$上で恒等的に零である。
+\een
+(1)と仮定すると, $g$の$a$と異なる零点が$\Omega$にあることに矛盾する。(2)と仮定すると一致の定理から$f(z)=f(a)$が$D$上で成立し, $f$が定数でないという仮定に矛盾する。よって仮定が矛盾し, $f$は$D$上で単葉である。\qed
+
+
+
+
+
+
+
+
+\subsection{例題集} \label{subsection:c-analysis_egprobs1}
+\begin{egprob} (Quiz, 2018金2関数論(吉川)期末試験)\\
+$f(z)$を$\mb{C}$上の正則函数とする。正実数$M$が存在して不等式
+\[|f(z)| \leq M\log{(|z| + 2)}\]
+が成り立つとき, $f(z)$は定数関数であることを示せ。
+\end{egprob}
+
+\begin{egans} Liouvilleの定理の証明を真似すればよい。
+$f(z)$の$0$におけるTaylor展開を$\sum_{n=0}^{\infty}a_nz^{n}$とおけば, Cauchyの積分公式から任意の$n\geq 1$と任意の正数$R$に対して
+\[a_n = \dfrac{1}{2\pi i} \disp\int_{|\zeta|=R} \dfrac{f(\zeta)}{\zeta^{n+1}}\, d\zeta\]
+である。したがって
+\[|a_n| \leq \dfrac{1}{2\pi} \disp\int_{|\zeta|=R} \dfrac{M\log{(R+2)}}{R^{n+1}}d\zeta = \dfrac{M\log{(R+2)}}{R^{n}}\]
+である。$R>0$は任意だから$a_n=0$である。よって$f(z) = a_0$となり定数である。
+\end{egans}
+
+上の問いは\textcolor{blue}{$|a_n|$がCauchy積分公式によって評価されることがアイデアであった}ように, 基本的には$|a_n|$は上から抑える方法がある。この手法は院試でそれなりに見たので, 抑えておくとよい。
+
+
+\begin{egprob} (\tf{Cauchyの係数評価})\\
+上
+$f(z) = \sum_{n=0}^{\infty}a_nz^{n}$は$|z|\leq R$の近傍で正則であるとし, $M(r) = \sup_{|z|=r}|f(z)|$とおく。
+\ben
+\item $0<r<R$において$M(r)$は(広義)単調増加であることを示せ。
+\item $|a_n| \leq \dfrac{M(R)}{R^{n}}$
+\een
+\end{egprob}
+\begin{egans}
+(1): $0<r_1<r_2<R$で$M(r_1)>M(r_2)$であるとすると, $|z|\leq r_2$の領域において$|f(z)|$は境界で最大値を取らない。最大値原理から, これは$f(z)$が定数であることを意味する。すると$M(r_1) = M(r_2)$なので矛盾。よって広義単調増大である。
+
+(2): Cauchy積分公式から
+\[|a_n| \leq  \disp\int_{|\zeta| = R} \dfrac{|f(z)|}{\zeta^{n+1}}\, \dfrac{d\zeta}{2\pi} \leq 2\pi R \dfrac{M(R)}{R^{n+1}}\cdot \dfrac{1}{2\pi} = \dfrac{M(R)}{R^{n}}\]
+\end{egans}
+だから極端なことを言えば, $\mb{C}$で正則な$f$が
+\[|f(z)| \leq 999999999|z|^{0.999999999999999}(\log{(|z|+1)})^{99999999999}\]
+を常に満たすときも$f(z)$は定数である。
+
+この手の練習題については(\ref{prob:H21F5}), (\ref{prob:H20I5})を参照せよ。
+
+
+\begin{egprob} (H8数学I-7)
+整関数$f$が二乗可積分, すなわち
+\[\iint_{\mb{R}^2} |f(x+iy)|^2dxdy < \infty\]
+ならば, $f$は恒等的に0であることを示せ.
+\end{egprob}
+\begin{egans}
+条件を極座標で表し,
+\[\int_{r\geq 0, 0\leq \theta\leq 2\pi} |f(r,\theta)|^2rdrd\theta < \infty\]
+となる. $f(z)$のLaurent展開を$f(z) = \sum_{n\geq 0} a_nz^n$とする.
+\bealn{
+&\int_{0}^{\infty} \int_{0}^{2\pi} \parena{\sum_{n\geq 0} a_n r^ne^{in\theta}}\parena{\sum_{n\geq 0}\ovl{a_n}r^ne^{-in\theta}}r d\theta dr\\
+&= \int_{0}^{\infty}\int_{0}^{2\pi} \sum_{n\geq 0}|a_n|^2 r^{2n+1} \, d\theta dr \\
+&= 2\pi  \sum_{n\geq 0} |a_n|^2\int_{0}^{\infty} r^{2n+1}dr
+}
+各$n$でこの積分単体は発散するから$|a_n| = 0$がすべての$n$で成り立つ. よって$f\equiv 0$である.\qed
+\end{egans}
+
+
+
+
+\newpage
+\subsection{演習問題}
+解答は(\ref{section:ans_c_analysis})へ。
+
+\subsubsection{Level A}
+\begin{prob} (有名問題)[解答あり]\\
+$f(z)$は領域$D$で正則で任意の$z$に対し$|f(z)|$は定数であるとする。このとき$f(z)$は定数関数であることを示せ。
+\end{prob}
+
+\begin{prob}(2018関数論(金2)期末試験) [解答あり]\\
+$D$を複素平面の有界領域とし, $\ovl{D}$上定義された複素数値連続関数$f(z)$は$D$で正則であり, 定数関数ではないとする。次の(1),(2)を示せ。
+\ben
+\item $f$が$D$上で$0$という値をとらなければ, $|f(z)|$は$D$上で最小値を取らない。
+\item $|f(z)|$が$D$の境界$\del D$で定数であれば, $f(a) = 0$を満たす$a\in D$が存在する。
+\een
+\end{prob}
+
+\begin{prob} (H21留学生入試) [解答あり] \label{prob:H21F5}
+Let $f(z)$ be a holomorphic function defined on $\{ z\in \mb{C} \mid |z|>1\}$. Suppose that $f$ satisfies
+\[|f(z)| < \sqrt{|z|}\]
+for all $z$.  Show that $\lim_{z\to \infty} f(z)$ exists.
+\end{prob}
+\subsubsection{Level B}
+\begin{prob} (H21数学I) \label{prob:H21I5}
+$\mb{C}$上で零点を持たない整関数の列$f_n(z)$, $n=1,2,\cdots$がある。もし$f_n(z)$が$\mb{C}$上で多項式$p(z)$に広義一様収束するならば, $p(z)$は定数であることを示せ。
+\end{prob}
+
+\begin{prob}
+$f:\mb{C}\to \mb{C}$を実部が上に有界な正則函数とする. このとき$f$は定数であることを示せ.
+\end{prob}
+
+
+
+\subsubsection{Level C}
+
+
+
+
+\subsubsection{Hint・Answer}
+
+\begin{probans}
+$f(x+yi) = u(x,y) + v(x,y)i$とする。$u^2 + v^2 = c$ ($c>0$は定数)とする。正則性からCR方程式によって
+\[u_x = v_y, u_y = -v_x\]
+である。$u^2+v^2 = c$を偏微分し, 上を用いて整理することで
+\[
+\bcas
+uu_x + vv_x = 0\\
+uu_y + vv_y = 0
+\ecas
+\iff
+\bcas
+uu_x + vv_x = 0\\
+vu_x - uv_x= 0
+\ecas
+\]
+を得る。行列で書けば
+\[
+\bep
+u & v\\
+v & -u
+\enp
+\bep
+u_x\\
+v_x
+\enp
+=
+\bep
+0\\
+0
+\enp
+\]
+である。ここで$c>0$であるなら, 左辺の行列の行列式は常に$0$ではないからこの行列は可逆であり, $u_x=v_x=0$を得る。CR方程式から$_y=v_y = 0$を得る。よって$f(z)$は定数である。$c=0$なら$u,v\equiv 0$なのでこの場合も定数である。\qed
+\end{probans}
+
+
+\begin{probans}
+(1): 最大値の原理を真似するのみである。
+
+(2): $f(a)=0$を満たす$a\in D$が存在しないと仮定する。(1)と最大値の原理を合わせることで, $|f(z)|$は有界閉集合$\ovl{D}$上で最大値も最小値も取り, かつそれを実現する点は$D$には存在しない。すなわち$\ovl{D}-D = \del D$上で実現する。よって$\del D$上で取る定数は, $|f(z)|$の最大値かつ最小値なので$|f(z)|$は$\ovl{D}$上定数である。ここから$f(z)$が定数であることがCauchy-Riemannの関係式を用いることで証明される(前問参照)。しかし$f(z)$は仮定から定数ではないので矛盾である。
+\end{probans}
+
+\begin{probans}
+$f(z) = \sum_{n\in \mb{Z}} a_nz^{n}$を$|z|>1$におけるLaurent展開とする。例題同様にやることで$n>0$なら$a_n = 0$が示せる。$\lim_{z\to \infty}$と$\sum$の交換は, 級数の$\infty$の近傍における連続性と収束性から可能である。厳密に示すことも可能である。たとえば, 次のようにする: 同様の議論で$a_{-n} < r^{n+1}$が示せる。ここから$|z| > r^3$においてLaurent級数の絶対値が$\sum_{n\geq 0} \dfrac{r^{n+1}}{r^{3n}}$で押さえられ, $r\to \infty$で$0$に収束する。
+\end{probans}
+
+\begin{probans}
+$a_n$の積分表示を使う.
+\end{probans}
+\begin{probans} $p(z)$が定数でなければ, $p(x)$には零点が有限個存在する.
+$g_n(z) := f_n(z) - p(z)$とおく. $K_R = \set{|z|\leq R}$とする. $R$が十分大きければ, $K_R$内に $p(z)$の零点が少なくとも一つ存在する. さらに$R$が十分大きいときは常に, $|p(z)| > 1$が境界$\del K_R$上で成り立つ. このような$R$を固定する. コンパクト集合$K_R$上で$g_n$は$0$に一様収束するから, 十分大きい$n$で$|g_n(z)| < 1$が$z\in K_R$で成り立つとしてよい. このような$n$を固定する. この$n,R$に対し,
+\[\forall z\in K_R,\quad |g_n(z)| <1< |p(z)|\]
+が成立する. Roucheの定理により, $K_R$の内部における$p(z)$と$g_n(z) + p(z) = f_n(z)$の零点の個数が等しいが, これは仮定に反する. \qed
+\end{probans}
+
+\begin{probans}
+$e^{f(z)}$にLiouvilleの定理を適用.
+\end{probans}
+
+
+
+
+
+
+
+
+\newpage

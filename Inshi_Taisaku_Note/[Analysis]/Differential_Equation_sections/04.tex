@@ -1,0 +1,157 @@
+\section{解の一意性}
+\tbox{
+\begin{theo} (常微分方程式の解の一意性)\\
+$D\subset \mb{R}\times \mb{R}^n$は開集合, $f:D\to \mb{R}^n$は連続, $x'(t) = f(t,x(t))$は一意的\footnote{ODEが一意的とは, 2つの解$x:I_1\to \mb{R}, y:I_2\to \mb{R}$があって$x(t_0) = y(t_0) $となる$t_0 \in I_1\cap I_2$が存在すれば$I_1\cap I_2$上で$x=y$となることをいう. }だとする. このとき, $(t_0,x_0)\in D$に対して次を満たす区間$I\subset \mb{R}$と関数$x:I\to \mb{R}^n$が存在する: \par
+$t_0 \in I$, $x(t_0) = x_0$, $x(t)$は
+\[x'(t) = f(t,x(t)),  x(t_0) = x_0\]
+の最大解\footnote{それ以上延長できない解のこと. }である. さらに, この$I$と$x$は一意的に定まる.
+\end{theo}
+}{title=解の存在と一意性}
+\prf \qed
+
+
+\begin{rem}
+上より, \tf{線形ODEは解が$\mb{R}$全体に延長できる}ことが分かる. [証明] 仮に全体に延長できないなら, 最大解の定義域ば$I=(a,b)\neq \mb{R}$だが, すると$a$か$b$を初期値として解を(解の存在と一意性により)延長することができるので, 最大解であることに反する.
+\end{rem}
+
+\begin{eg}
+
+\end{eg}
+
+\begin{eg}
+
+\end{eg}
+
+\begin{eg} (解の一意性が成り立たない例)\\
+$x:\mb{R}\to \mb{R}$とする。
+\[x(0) = 0, \dfrac{dx}{dt}(t) = -2\sqrt{|x(t)|}\]
+この方程式の解は一意ではない。実際, $x(t) \equiv 0$と
+\[x(t) = (1-t)^2\quad (t\leq 1), x(t) = 0 \quad (1\leq t)\]
+詳しくは\href{https://trtmfile.com/2018/09/02/post-933/}{他所のブログ}。
+\end{eg}
+
+
+\newpage
+\subsection{例題}
+\begin{egprob} (H26基礎科目II, 6)
+$a$は0でない実数, $p(t)$は$\mb{R}$上の連続な周期関数で周期$T>0$を持つとする. このとき常微分方程式
+\[\dfrac{d}{dt}x(t) = ax(t) + p(t)\]
+の解$x(t)$で周期$T$をもつ周期関数となるものがただ一つ存在することを証明せよ.
+\end{egprob}
+\begin{egans}
+$x(t) = e^{at}y(t)$とおくと
+\[e^{at}y'(t) = p(t)\]
+なので, $y(t) = \int_{0}^{t}e^{-ax}p(x)\, dx$は上の解. よって$x_0(t) = e^{at}\int_{0}^{t} e^{-ax}p(x)\, dx$は元の常微分方程式の解. 一般解$x(t)$について, $\delta(t) = x(t)-x_0(t)$は$\delta'(t) = a\delta(t)$を満たすので$\delta(t) = Ae^{at}$と表せる. よって, 一般解は
+\[x(t) = Ae^{at} + e^{at} \int_{0}^{t} e^{-ax}p(x)\, dx\]
+である. $T$だけずらしたものは
+\[x(t+T) = Ae^{aT}e^{at} + e^{aT}e^{at}\int_{0}^{T+t} e^{-ax} p(x)\, dx\]
+である. $I = \int_{0}^{T} e^{-ax}p(x)\, dx$とおくと,
+\bealn{
+x(t+T) &= Ae^{aT}e^{at} + e^{aT}e^{at}\parenb{I + \int_{T}^{T+t}e^{-ax}p(x)\, dx}\\
+&= (A+I)e^{a(t+T)} + e^{a(t+T)}\int_{0}^{t} e^{-a(x+T)}p(x)\, dx\\
+&= (A+I)e^{a(t+T)} + e^{at}\int_{0}^{t}e^{-ax}p(x)\, dx\\
+&= (A+I)e^{aT}\cdot e^t + e^{at}\int_{0}^{t} e^{-ax}p(x)\, dx
+}
+である. これと$x(t)$を見比べて
+\[(A+I)e^{aT} = A\]
+であるように$A$を選べば周期的になるとわかる. 逆に, このような$A$以外で周期的にはならない. この方程式は
+\[A = \dfrac{-Ie^{aT}}{e^{aT} - 1}\]
+と解ける($a\neq 0$より分母はノンゼロ). よってこの$A$に対する$x(t)$が周期的である. \qed
+\end{egans}
+
+
+\begin{egprob}
+$\lambda$を負の定数とし，$V (x)$ は $\mb{R}$ 上の $C
+^{\infty}$ 級関数で $x > 1$ において $V (x) = 0$ とな
+るものとする．無限遠で境界条件を持つ次の常微分方程式の $C^2$ 級解を考える．
+\[
+\bcas
+-\dfrac{d^2 u}{dx^2} u + V(x) u = \lambda u,  x\in \mb{R} \\
+u(x) \to 0\quad (x\to \infty)
+\ecas
+\]
+このとき，解全体のなす実ベクトル空間の次元は 1 であることを示せ．ただし，関
+数はすべて実数値関数であるものとする．
+\end{egprob}
+
+
+
+
+
+
+\clearpage
+\subsection{演習問題}
+\subsubsection{Level X}
+\begin{prob} (Masseraの定理, 2019解析学入門演習レポート) [解答あり]\\
+連続関数$f:\mb{R}\times\mb{R}\to \mb{R}$について, 微分方程式
+\[\dfrac{dy}{dt}(t) = f(t,y(t))\]
+を考える。実数$\omega > 0$に対し, $f(t+\omega,x) = f(t,x)$ ($\forall t,x\in \mb{R}$) であり, この微分方程式の解は初期条件を固定すると一意的であると仮定する。以下の主張を示せ。
+\ben
+\item この微分方程式の解$y$が$y(0) < y(\omega)$ であれば, 任意の$t\in \mb{R}$に対して$y(t) < y(t+\omega)$となる。
+\item この微分方程式が有界な解を持てば, $\omega$周期の関数を解として持つ。
+\een
+\end{prob}
+
+\subsection{Hint・Answer}
+
+\begin{ans}
+(1) 背理法で示す。ある$t_0 \in \mb{R}$で$y(t_0) \geq y(t_0 + \omega)$であったとしよう。解$y$の連続性より$y(t_1) - y(t_1+\omega) = 0$となる$t_1\in \mb{R}$を取ることができる。そこで, $y(t_1) = y(t+\omega)= c$と置き, $y_1(t) := y(t+\omega)$と定める。$y(0) < y(\omega)$により$y\neq y_1$である。しかし, $f$の時刻周期性より
+\beqn
+\dfrac{dy_1}{dt}(t) &=& \dfrac{dy}{dt}(t+\omega) = f(t+\omega, y(t+\omega))\\
+&=& f(t,y_1(t))
+\eeqn
+となる。すると, $y$と$y_1$はともに, 初期値の与えられた微分方程式
+\[
+\bcas
+\dfrac{du}{dt}(t) = f(t, u(t))\\
+u(t_1) = c
+\ecas
+\]
+の異なる2つの解であるため, 解の一意性の条件に反する。よって, このような$t_0$を取ることは出来ないから$y(t) < y(t+\omega)$が常に成り立つ。\qed
+
+(2): (1)と同様にして, 解$y$が$y(0)>y(\omega)$を満たすならば$y(t) > y(t+\omega)$がすべての$t\in \mb{R}$で成り立つ。\par
+有界な解$y$を取り, $|y(t)| < M$がすべての$t$で成り立つ定数$M>0$を取る。 $y_n(t):= y(t+n\omega)$ ($t\in \mb{R}$, $n\geq 0$) とする。\par
+$y(0) = y(\omega)$である場合, 解の一意性の条件から$y=y_1$となるので$y$自身が周期的である。そこで, $y(0)\neq y(\omega)$と仮定する。$y(0) < y(\omega)$の場合, (1)で示したことから
+\[y(t) < y_1(t) < y_2(t)< \cdots < y_n(t) < y_{n+1}(t) < \cdots < M\]
+がすべての$t$で成り立つ。$y(0) > y(\omega)$なら不等号を逆転させ, $M$を$-M$に変える。よって, $t$を固定するごとに $\disp\lim_{n\to \infty} y_n(t)$が定まる(有界単調列は収束するため)。よって, 各点収束極限関数$\witi{y}(t) := \disp\lim_{n\to \infty} y_n(t)$ が$\witi{y}:\mb{R} \to \mb{R}$として定まる。目標は, この$\witi{y}$が所望の周期解であることを示すことである。正当化の問題は後に解決するとして, 「議論の戦略」を述べよう。
+\ben
+\item[(a)] $y_n \to \witi{y}$の収束はまだ各点としか分かっていないが, 広義一様収束であることをAscoli-Arzelaの定理から示す。そのために, 十分大きい$R>\omega$を任意に固定し, 有界閉区間上の連続関数列$\{ y_n:[-R,R]\to \mb{R} \}_{n\geq 0}$ に対して\tf{一様有界性}と\tf{同程度連続性}を言う。
+\item[(b)] 元の微分方程式は
+\[y(t) = y(0) + \disp\int_{0}^{t} f(s,y(s))\, ds\]
+に同値であることに注意する。$\witi{y}$がこの方程式の解であることを見たい。各$y_n$については解であるので, 次のように計算したい。
+\beqn
+\witi{y}(t) = \disp\lim_{n\to \infty} y_n(t) &=& \disp\lim_{n\to \infty} \parena{y_n(0) + \disp\int_{0}^{t} f(s,y_n(s))\, ds}\\
+&\xequal{!}& \witi{y}(0) + \bolm{\disp\int_{0}^{t} \disp\lim_{n\to \infty} f(s,y_n(s))\, ds} \\
+&=& \witi{y}(0) + \disp\int_{0}^{t} f(s,\witi{y}(s))\, ds
+\eeqn
+この際, \tf{極限と積分の順序交換}を行っているという問題点があり, $t$を固定し, $f(s,y_n(s)) \to f(s,\witi{y}(s))$ (uniformly on $s\in [0,t]$) を示す必要がある。
+\item[(c)] $\witi{y}(\omega) = \disp\lim_{n\to \infty}y_n(\omega) =\disp\lim_{n\to \infty} y_{n+1}(0) = \witi{y}(0)$
+\een
+(a) 一様有界性については$|y_n(t)| < M$によって明らかである。$R>\omega$を固定する。同程度連続性は次のことが言えれば良い。
+\beqn
+&&\forall t_0 \in [-R,R], \forall \epsilon>0, \exists \delta > 0, \forall n\geq 0, \\
+&&\parena{t\in[-R,R] かつ |t-t_0|< \delta \nara |y_n(t) - y_n(t_0)| < \epsilon}
+\eeqn
+ここで, 時刻周期性により, $f(t,x)$の$\mb{R}\times [-M,M]$における上限は$[0,\omega] \times [-M,M]$における上限と一致することに注意する。$[0,\omega]\times [-M,M]$については有界閉集合(コンパクト集合)であるから, 連続関数$|f|$はこの集合の上で最大値を取る。よって, $|f(t,x)| \leq C$ ($\forall (t,x)\in \mb{R}\times [-M,M]$) なるような定数$C>0$が存在する。各$t\in \mb{R}$, $n\geq 0$に対して$(t,y_n(t))\in \mb{R}\times [-M,M]$であることから,
+\[\abs{\dfrac{dy_n}{dt}(t)} = \abs{f(t,y_n(t))} \leq C\]
+を得る。ここから, $\{ y_n:[-R,R]\to \mb{R} \}$の同程度連続性は従う。実際, $t_0 \in [-R,R]$, $\epsilon > 0$として, $\delta = \dfrac{\epsilon}{C}$とおいて, $t\in [-R,R]$が$|t-t_0| < \delta$を満たしているときは常に,
+\beqn
+\abs{y_n(t) - y_n(t_0)} &\leq& \parena{\disp\sup_{s\in \mb{R}} \abs{y_n'(s)}} \abs{t-t_0}\quad (\mbox{平均値の定理})\\
+&\leq& C\delta = \epsilon
+\eeqn
+とできるからである。よって, Ascoli-Arzelaの定理によって, ある($R$に依存する)自然数列の部分列$\{ n^{(R)}_{k} \}_{k=1,2,\cdots}$が存在して, $\{ y_{n_{k}^{(R)}}: [-R,R]\to \mb{R} \}$は$\witi{y}|_{[-R,R]}$に一様収束する。けれども, $\{ y_n \}$にはもともと単調性があるので, 部分列を取ることなく$\{ y_n:[-R,R]\to \mb{R} \}$は$\witi{y}|_{[-R,R]}$に一様収束していると言うことができる。\\
+\\
+(b) $t\in \mb{R}$を固定する。問題点は$f(s,y_n(s))$が$[0,t]$上一様収束するかどうかである。このことは, $R=|t|$として次を示せば十分である:
+\[\forall \epsilon >0, \exists N, n\geq N \nara \disp\sup_{s\in [-R,R]} \abs{f(s,y_n(s)) - f(s,\witi{y}(s))} < \epsilon \]
+いま,$\epsilon > 0$を任意に取る。まず, $K:= [-R,R]\times [-M,M]$とおく。これは有界閉集合であり, $f$を$K$上の連続関数と考えたとき, $f$は$K$上一様連続である。すなわち, 2点$(s_1,x_1) \in K$ ($i=1,2$) の距離が$\delta$未満となるときは常に
+\[\abs{f(s_1,x_1) - f(s_2,x_2)} < \epsilon\]
+が満たされるようにできる。\par
+$y_n|_{[-R,R]}$は$\witi{y}|_{[-R,R]}$に一様収束するから, 十分大きい$N$を取ることで$n\geq N$であるときは常に$\abs{y_n(s) - \witi{y}(s)} \leq \delta$が成り立つようにできる。これは, $K$上の2点$(s,y_n(s))$, $(s,\witi{y}(s))$の距離が$\delta$未満であることを言うので,
+\[s\in [-R,R] のとき, \abs{ f(s,y_n(s)) - f(s,\witi{y}(s)) } \leq \epsilon ・・・(\ast)\]
+が成り立つ。したがって, $\epsilon > 0$をどのように取ったとしても, この手続きによって$N$を取れば$(\ast)$が成立するので$f(s,y_n(s)) \xrightarrow{n\to \infty} f(s,\witi{y}(s))$は一様収束である。これにより(b)にあるような極限と積分の順序交換が正当化され, すべての$t\in \mb{R}$に対して
+\[\witi{y}(t) = \witi{y}(0) + \disp\int_{0}^{t} f(s,\witi{y}(s))\, ds\]
+が成り立つことが示され, $\witi{y}:\mb{R} \to \mb{R}$は元の微分方程式の解であることが示された。
+\par
+以上のことと(c)から, 解の一意性条件を使うことによって, $\witi{y}(t) = \witi{y}(t+\omega)$が得られる($\witi{y}(t+\omega)$も元の微分方程式の解であることは(1)の議論と同様である)\par
+以上より, $\witi{y}:\mb{R}\to\mb{R}$は所望の$\omega$周期解である。
+\end{ans}

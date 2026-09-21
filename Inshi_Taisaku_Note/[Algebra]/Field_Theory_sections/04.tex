@@ -1,0 +1,98 @@
+\section{有限体}
+
+
+
+
+有限体について覚えておくべきことをまとめる.$\mb{F}_{p^{n}}$を$x^{p^{n}} - x$の$\mb{F}_{p}$上の最小分解体と定義する.
+\begin{prop}
+$K$は位数が有限の体とする.代数閉包$\Omega = \ovl{\mb{F}_{p}}$を一つ固定する.以下が成り立つ.
+\ben
+\item $K$の位数は素数の冪である.
+\item $L = \{ \alpha\in \Omega\mid \alpha^{p^{n}} = \alpha \}$は$x^{q}-x$の最小分解体である(したがって$\mb{F}_{p^{n}}$に同型である).
+\item $K$はある$\mb{F}_{p^{n}}$に同型である.
+\item $\mr{Frob}_{p^{n}}:\mb{F}_{p^{n}} \to \mb{F}_{p^{n}}$を$\mr{Frob}_{p^{n}}(x) = x^{p}$と定めると$\mr{Frob}_{p^{n}}$は体準同型である.これをFrobenius準同型という.
+\item $\mb{F}_{p^{n}}/\mb{F}_{p}$はガロア拡大であり, $\gal{\mb{F}_{p^{n}}/\mb{F}_{p}}\cong \mb{Z}/n\mb{Z}$である.そしてその生成元は$\mr{Frob}_{p^{n}}$である.
+\item $\mb{F}_{p^{n}}^{\times}$は位数$p^{n} - 1$の巡回群である.
+\item 有限体は完全体である.
+\een
+\end{prop}
+
+\prf (1):$K$の標数は素数$p$であり, これによって$K\supset \mb{F}_{p}$とみなせ, $[K:\mb{F}_{p}] = n$とすると$|K| = p^{n}$となる.\qed
+
+(2):$L$が体であることは容易.$L$は$\Omega$の$\mb{F}_{p}$を含む部分体である.$\mb{F}_{p}\subset F\subset \Omega$が$x^{q} - x$の最小分解体であるなら, $F$には$x^{q}-x$の根が含まれているので, $L\subset F$である.$L$自身体であるから, $L=F$でなければならない.
+
+(3):$K$の位数が$q=p^{n}$であるとする.$\mb{F}_{p}\subset K \subset \ovl{\mb{F}_{p}}$である.$L$と$K$の位数はいま$q$で等しい.$\mb{F}_{p}\subset L\subset \ovl{\mb{F}_{p}}$でもあるので, 任意の$x\in K$に対して$x^{q} = x$であることを示せば$K\subset L$かつ$|K| = |L|$が従うので$K=L$が得られる.$x^{q} = x$を満たすことについてだが, $K^{\times}$が位数$q-1$の群であることからLagrangeの定理によって$x^{q-1} - 1 = 0$なので直ちに得られる.\qed
+
+
+
+\subsection{有限体上の既約多項式}
+\begin{egprob}
+$\mb{F}_{3}$上の$2$次モニック既約多項式をすべて求めよ.
+\end{egprob}
+\begin{screen}
+意外にもこれには列挙以外に効率的な方法がある！この方法なら, 少し見つけてくるだけでよい.\tf{代数的な根がある$\mb{F}_{p^{n}}$に含まれてしまっているという統制のせいで, $\theta^{p^{n}} - \theta=0$という関係式が必ずあるのがポイントである.}
+\end{screen}
+\begin{egans}
+$f(x)$を二次モニック既約多項式として, $f(x)$の根$\theta$を取る.$\mb{F}_{3}(\theta) = \mb{F}_{9}$なので, $3^{2} = 9$より, $\theta^{9}-\theta = 0$である.よって$f(x)$は$x^{9}-x$の因数である.$x^{9}-x$は$x(x-1)(x+1)$で割り切れる.
+\[\dfrac{x^{9} - x}{x(x-1)(x+1)} = x^{6} + x^{4} + x^{2} + 1\]
+$f(x)$はこの右辺の因数になっているような2次多項式というわけである.\par
+さて, $x^2+1$が既約2次であることは簡単である.
+\[\dfrac{x^{6}+x^{4} + x^2+1}{x^2+1} = x^4 + 1\]
+$x^2-x-1$も既約2次なので
+\[x^{4} + 1 = (x^2-x-1)(x^2+x+2)\]
+以上より
+\[\bolm{x^2+1,\quad x^2-x-1,\quad x^2+x^1}\]
+\end{egans}
+
+
+
+
+\subsection{($\spadesuit$)純非分離拡大}
+
+
+
+
+
+
+\subsection{例題集}
+
+
+
+
+
+\begin{egprob}
+$f\in \mb{Z}[x]$の係数を$\bmod{p}$したものが$\mb{F}_{p}$上既約であるとき, $f$自身も$\mb{Q}$上既約であることが知られている(\cite{aoyukie}, 1.11節).一方でこの逆は成り立たない.$x^{4}+1$は既約であることが知られている.一方で,これを$\mb{F}_{p}$の多項式とみなしたものは常に可約であることを示す.
+
+$p=2$のときは$x^{4}+1=(x+1)^4$なのでよい.$p>2$とする.$p^2-1$は$8$の倍数なので$x^{p^{2} - 1} - 1$は$x^{8} - 1$で割り切れ, $x^{4}+1$で割り切れる.よって$x^{4}+1$の根はすべて$x^{p^2} - x$の根であるから, $x^{4}+1$の任意の根$\alpha$について拡大次数$[\mb{F}_{p}(\alpha):\mb{F}_{p}] \leq 2$が従う.これは$x^{4}+1$が可約であることを示している.\bbox
+\end{egprob}
+
+\begin{egprob} (京大H20数学I)\\
+$\ell$を素数とする.$\mb{F}_{p}$係数の$\ell$次既約モニック多項式の個数を求めよ.
+\end{egprob}
+
+
+
+
+\subsection{演習問題Part1} %雑多に
+\subsubsection{Level A}
+\begin{prob}
+$\mb{Q}$代数として$\mb{Q}(\sqrt[6]{2})$と$\mb{Q}(\sqrt[6]{2}\omega , \sqrt[6]{2}\ovl{\omega})$は同型ではないことを示せ.ただし, $\omega=(-1+\sqrt{-3})/2$.
+\end{prob}
+
+\subsubsection{Level B}
+
+\subsubsection{Level C}
+\begin{prob} (\cite{neukirch}練習問題, Stickelbergerの定理)\\
+代数体$K$について, その判別式を$d_K$とするとき, $d_K\equiv 0,1\pmod{4}$であることを証明せよ.
+\end{prob}
+
+
+\subsubsection{HINTS}
+{\small
+\begin{hint}
+$\mb{Q}$代数の定義は覚えているか? 体論の問題というより環論の問題である.
+\end{hint}
+
+}
+
+\newpage
