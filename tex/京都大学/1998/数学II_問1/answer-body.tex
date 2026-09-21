@@ -1,0 +1,86 @@
+\subsection*{問題}
+
+\begin{enumerate}
+  \item $\bigl(\mathbb{Z}[\omega]/(3)\bigr)^{\times}$ の位数を求めよ。
+  \item $\bigl(\mathbb{Z}[\omega]/(9)\bigr)^{\times}$ を有限Abel群の直和で表せ。
+\end{enumerate}
+
+\subsection*{答案}
+
+\begin{enumerate}
+  \item
+  $\mathbb{Z}[\omega]\simeq\mathbb{Z}[x]/(x^2+x+1)$ より、
+  \begin{align*}
+    \mathbb{Z}[\omega]/(3)
+      &\simeq \mathbb{F}_3[x]/(x^2+x+1) \\
+      &= \mathbb{F}_3[x]/(x-1)^2 \\
+      &\simeq \mathbb{F}_3[t]/(t^2).
+  \end{align*}
+  これは局所環なので、極大イデアル $(t)/(t^2)$ の外の元がすべて単元。
+  よって6個。
+
+  \item
+  \begin{align*}
+    \mathbb{Z}/9\mathbb{Z}[x]/(x^2+x+1)
+      &= \mathbb{Z}/9\mathbb{Z}[x]/\bigl((x-4)^2+3\bigr) \\
+      &\simeq \mathbb{Z}/9\mathbb{Z}[t]=A.
+  \end{align*}
+  （$t^2=-3$）の位数は81。
+
+  $\operatorname{nil}A\ni t,3,-3$ が分かるので、$\operatorname{nil}A$ がイデアルだから、
+  $a\in\mathbb{Z}/9\mathbb{Z}$、$b\in3\mathbb{Z}/9\mathbb{Z}$ に対して
+  \[
+    at+b\in\operatorname{nil}A
+  \]
+  が分かる。
+  逆に $at+b\in\operatorname{nil}A$ なら $b\in\operatorname{nil}A$ なので、
+  $b\in3\mathbb{Z}/9\mathbb{Z}$。
+
+  よって
+  \[
+    \#(\operatorname{nil}A)=27
+  \]
+  で、これらは単元ではない。
+
+  逆に $b\notin3\mathbb{Z}/9\mathbb{Z}$ で $at+b$ を考える。
+  \[
+    (at+b)(at-b)=a^2t^2-b^2=-3a^2-b^2
+      \notin3\mathbb{Z}/9\mathbb{Z}
+  \]
+  は単元なので、
+  \[
+    (at+b)(at-b)(-3a^2-b^2)^{-1}=1.
+  \]
+  よって $\bigl(\mathbb{Z}[\omega]/(9)\bigr)^{\times}$ は
+  $81-27=54$ 個の元を持つAbel群なので、構造定理より
+  \[
+    \mathbb{Z}/54\mathbb{Z},\qquad
+    \mathbb{Z}/3\mathbb{Z}\times\mathbb{Z}/18\mathbb{Z},\qquad
+    \mathbb{Z}/3\mathbb{Z}\times\mathbb{Z}/3\mathbb{Z}\times\mathbb{Z}/6\mathbb{Z}
+  \]
+  のどれかになる。
+
+  \begin{align*}
+    (at+b)^3
+      &=a^3(-3)t+3atb^2+b^3 \\
+      &=3(a-a^3)t+b^3.
+  \end{align*}
+  ここで
+  \[
+    a-a^3=-a(a-1)(a+1)
+  \]
+  は（連続する3整数の積ゆえ）必ず $3\mathbb{Z}/9\mathbb{Z}$ に属すので、
+  \[
+    (at+b)^3=b^3.
+  \]
+  よって
+  \[
+    (at+b)^6=b^6=1
+    \qquad\bigl(b\notin3\mathbb{Z}/9\mathbb{Z}\bigr).
+  \]
+  よって位数は高々6なので、
+  \[
+    \mathbb{Z}/3\mathbb{Z}\times\mathbb{Z}/3\mathbb{Z}\times\mathbb{Z}/6\mathbb{Z}
+  \]
+  が答え。
+\end{enumerate}
