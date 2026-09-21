@@ -1,0 +1,31 @@
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage[dvipdfmx,hidelinks]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{fancyhdr}
+
+\hypersetup{
+  pdftitle={大学院数学院試 答案集},
+  pdfauthor={},
+  bookmarksnumbered=true
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\leftmark}
+\fancyhead[RO]{\small\rightmark}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\setlength{\footskip}{18pt}
+
+\newcommand{\AnswerError}[2]{%
+  \textcolor{red}{#1}%
+  \footnote{\textcolor{red}{ChatGPTによるfootnote：#2}}%
+}
+
+\newcommand{\Unreadable}{%
+  \textcolor{red}{[判読不能]}%
+}
+
+% 答案ごとに脚注番号をリセットする。
+\newcommand{\BeginAnswer}{\setcounter{footnote}{0}}

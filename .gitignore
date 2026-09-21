@@ -1,0 +1,45 @@
+# TeX build products
+*.aux
+*.dvi
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.synctex.gz
+tex/**/answer.pdf
+/tex/main.pdf
+
+# Local TeX cache and rendered QA images
+.tex-cache/
+/tmp/
+
+# Private source material
+# The Notion export can contain private/admin pages, workspace IDs, page IDs,
+# comments, and files that are not intended for redistribution.
+/プライベート、シェア/
+
+# Unsorted source files remain local. Curated images under each answer's
+# source-images directory are intentionally public for transcription review.
+**/source-files/
+
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+service-account*.json
+
+# Personal editor and OS state
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,11 @@
+university: 名古屋大学
+year: 2003
+year_label: "2003"
+exam: 発展
+problem: "4"
+status: transcribed
+source_url: "https://www.math.nagoya-u.ac.jp/ja/admission/gs/download/exam-mc-2003s-2.pdf"
+source_images:
+  - source-images/001.jpeg
+notes:
+  - 原答案の結論部は、I の定義を繰り返す表記になっているため赤字注記した。

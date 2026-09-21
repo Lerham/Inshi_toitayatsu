@@ -1,0 +1,87 @@
+\[
+  \varphi\colon k[x,y] \longrightarrow k[t]
+\]
+を
+\[
+  \varphi(x)=t^3,\qquad \varphi(y)=t^2
+\]
+で定める。
+
+\[
+  \operatorname{Im}\varphi \simeq k[x,y]/\ker\varphi
+\]
+で、左辺は整域。
+なので、$\ker\varphi=(x^2-y^3)$ を示せばよい。
+
+さて、$(x^2-y^3)\subseteq\ker\varphi$ は自明。
+
+$F\in\ker\varphi$ としよう。
+\[
+  F(x,y)=\sum_{i\geq 0}^{n} f_i(y)x^i
+  \qquad (f_i(y)\in k[y])
+\]
+とおく。$I=(x^2-y^3)$ とする。
+
+$\bmod I$ で
+\[
+  x^{2k}\equiv y^{3k},\qquad
+  x^{2k+1}\equiv xy^{3k}.
+\]
+なので、$F$ の各項をこれで整理すると、
+\[
+  F\equiv g_0(y)+xg_1(y)
+\]
+という形になることが分る。
+
+よって、
+\[
+  F-g_0(y)-xg_1(y)\in(x^2-y^3).
+\]
+なので、$\varphi$ で送って
+\[
+  \underbrace{F(t^3,t^2)}_{0}-g_0(t^2)-t^3g_1(t^2)=0.
+\]
+したがって、
+\[
+  g_0(t^2)=-t^3g_1(t^2).
+\]
+$g_0\neq 0$ だと左辺は偶数次、右辺は奇数次でおかしいので、
+$g_0(t^2)=0$。このとき $g_1(t^2)=0$。
+
+よって $g_0=g_1=0$ in $k[y]$ なので、
+\[
+  F\equiv 0\pmod I.
+\]
+したがって $F\in I$。
+ゆえに
+\[
+  \AnswerError{I=(x^2-y^3)}{ここで $I=(x^2-y^3)$ はすでに定義されている。直前までの包含関係から得るべき結論は $\ker\varphi=I=(x^2-y^3)$ である。}
+\]
+で終わり。
+
+\subsection*{(2)}
+
+\[
+  k[x,y]/(x^2-y^3)\simeq\operatorname{Im}\varphi=k[t^2,t^3].
+\]
+\[
+  \operatorname{Frac}k[t^2,t^3]\ni\frac{t^3}{t^2}=:\alpha
+\]
+とする。$\alpha$ は
+\[
+  \alpha^2-t^2=0
+\]
+という $k[t^2,t^3]$ 係数の整等式をみたす。
+
+しかし、
+\[
+  \alpha=\frac{g(t^2,t^3)}{1}
+\]
+となるような $g$ は存在しない。
+実際、もしあれば（整域なので）
+\[
+  \alpha=\frac{g}{1}
+  \quad\Longleftrightarrow\quad
+  t^3=t^2g(t^2,t^3)
+\]
+より $\deg g=1$ だが、そんな $g\in k[t^2,t^3]$ はないので。
