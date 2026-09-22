@@ -44,6 +44,37 @@ right  = 6truemm]{geometry}
 \newtheorem{defn}[theo]{\textcolor{blue}{定義}}
 \newtheorem{eg}[theo]{例}
 \newtheorem{egprob}[theo]{例題}
+\tcbuselibrary{breakable,skins}
+\tcolorboxenvironment{eg}{
+  enhanced jigsaw,
+  breakable,
+  frame hidden,
+  colback=white,
+  borderline horizontal={0.4pt}{0pt}{black},
+  boxsep=0pt,
+  left=0pt,
+  right=0pt,
+  top=5pt,
+  bottom=5pt,
+  before skip=8pt,
+  after skip=8pt
+}
+\tcolorboxenvironment{egprob}{
+  enhanced jigsaw,
+  breakable,
+  colback=white,
+  colframe=black,
+  boxrule=0.4pt,
+  arc=0pt,
+  outer arc=0pt,
+  boxsep=0pt,
+  left=6pt,
+  right=6pt,
+  top=5pt,
+  bottom=5pt,
+  before skip=8pt,
+  after skip=8pt
+}
 \newtheorem{prac}[theo]{練習}
 \newtheorem{egans}{解答}[theo]
 \newtheorem{point}{Point}[theo]
