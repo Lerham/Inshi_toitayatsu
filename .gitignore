@@ -52,7 +52,8 @@ service-account*.json
 
 # Personal editor and OS state
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json
 .DS_Store
 Thumbs.db
 Desktop.ini
